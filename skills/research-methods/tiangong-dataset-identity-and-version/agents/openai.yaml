@@ -1,0 +1,4 @@
+interface:
+  display_name: "TianGong Dataset Identity"
+  short_description: "Verify TianGong dataset identity and version."
+  default_prompt: "Verify the exact TianGong dataset identity and version before use."

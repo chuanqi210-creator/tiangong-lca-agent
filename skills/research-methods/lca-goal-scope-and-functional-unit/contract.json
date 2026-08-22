@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lca-goal-scope-and-functional-unit",
+  "version": "1.0.0",
+  "title": "Establish LCA Goal, Scope, and Functional Unit",
+  "description": "Use when an LCA study lacks a fixed intended use, decision context, functional unit, reference flow, system boundary, geography, time scope, or allocation and cutoff basis.",
+  "applicability": {
+    "desired_artifacts": ["research_scope_contract"],
+    "semantic_roles": ["functional_unit", "reference_flow", "system_boundary", "intended_use", "allocation_rule", "cutoff_rule"],
+    "requirements": [],
+    "conflict_types": ["scope_conflict", "functional_unit_conflict"],
+    "target_object_kinds": ["FunctionalUnit", "SystemBoundary", "ProductSystem"]
+  },
+  "required_inputs": ["research_goal", "intended_use_or_explicit_gap"],
+  "expected_artifact": "research_scope_contract",
+  "accepted_state_delta": "scope_roles_resolved_or_typed_missing",
+  "capability_ids": ["tiangong.specification.methodology", "tiangong.specification.tidas-schema", "tiangong.skill.tidas-contract-context"],
+  "upstream_skill_ids": ["tidas-contract-context", "process-scope-statistics"],
+  "domain_rule_ids": ["lca.goal_scope.functional_unit", "lca.goal_scope.system_boundary"],
+  "source_lock_ids": ["tiangong.sdk.npm", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["functional_unit_is_quantified", "reference_flow_is_distinct", "scope_dimensions_are_explicit", "claim_ceiling_is_explicit"],
+  "failure_boundaries": ["user_owned_scope_choice_absent", "incompatible_scope_requirements"],
+  "forbidden": ["direct_project_record_write", "invent_functional_unit", "start_comparison_without_equivalence"],
+  "permission_effects": ["no_permission_expansion", "read_only_method_context"],
+  "resources": []
+}

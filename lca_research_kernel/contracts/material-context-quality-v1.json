@@ -1,0 +1,6 @@
+{
+  "contract": "lca_research_kernel.material_context_quality_policy/v1",
+  "minimum_citation_correctness": 1.0,
+  "minimum_dependency_coverage": 1.0,
+  "policy_id": "task-7-material-context-quality-v1"
+}

@@ -1,0 +1,35 @@
+{
+  "contract": "lca_research_kernel.semantic_context_evaluation/v1",
+  "evaluation_id": "d18-semantic-context-quality-v1",
+  "baseline_identity": "36eceef1-broad-material-empty-method-selector",
+  "candidate_identity": "d18-semantic-graph-skill-topology-runtime",
+  "scoring_scope": "context_method_topology_and_conclusion_boundary",
+  "metrics": [
+    "required_evidence_recall",
+    "context_precision",
+    "irrelevant_token_ratio",
+    "authoritative_path_coverage",
+    "source_version_correctness",
+    "skill_routing_accuracy",
+    "near_miss_rejection_accuracy",
+    "query_mode_accuracy",
+    "topology_accuracy",
+    "unnecessary_tool_selection_rate",
+    "answer_contract_validity",
+    "conclusion_boundary_compliance",
+    "cross_project_leakage_count",
+    "direct_candidate_promotion_count",
+    "case_specific_routing_count",
+    "deterministic_replay"
+  ],
+  "hard_invariants": {
+    "project_truth": "project_record_only",
+    "candidate_outputs": "never_promoted_by_benchmark",
+    "source_and_version": "required_for_every_selected_fact",
+    "cross_project_material": "forbidden",
+    "case_name_routing": "forbidden",
+    "model_calls": 0,
+    "tool_calls": 0
+  },
+  "interpretation_limit": "Acceptance proves deterministic context, Skill, topology, and conclusion-boundary improvement on the frozen fixture. It does not constitute human LCA expert validation or broad scientific coverage."
+}

@@ -1,0 +1,176 @@
+{
+  "contract": "lca_research_kernel.lca_explanation_knowledge_registry/v2",
+  "registry_id": "d18-lca-explanation-knowledge-2026-08-22",
+  "entries": [
+    {
+      "knowledge_id": "lca-rel:process-has-exchange",
+      "source_kind": "Process",
+      "relation": "has_exchange",
+      "target_kind": "Exchange",
+      "statement": "An LCA process is connected to its quantified inputs and outputs through exchanges.",
+      "renderings": {
+        "en": "An LCA process is connected to its quantified inputs and outputs through exchanges.",
+        "zh-CN": "LCA 过程通过交换与其定量输入和输出相连接。"
+      },
+      "knowledge_roles": [
+        "exchange",
+        "flow",
+        "process",
+        "lca_relationship",
+        "lca_concept"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-rel:process-has-exchange"
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:quantity-measured-in-unit",
+      "source_kind": "Quantity",
+      "relation": "measured_in",
+      "target_kind": "Unit",
+      "statement": "A reported quantity is interpreted together with its unit; the number alone does not define its LCA meaning.",
+      "renderings": {
+        "en": "A reported quantity is interpreted together with its unit; the number alone does not define its LCA meaning.",
+        "zh-CN": "报告的数量必须结合其单位解释；数值本身不能界定其 LCA 含义。"
+      },
+      "knowledge_roles": [
+        "amount",
+        "quantity",
+        "unit",
+        "source_value_explanation",
+        "lca_concept"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-rel:quantity-measured-in-unit"
+      }
+    },
+    {
+      "knowledge_id": "lca-rule:illustration-not-project-fact",
+      "source_kind": "Illustration",
+      "relation": "cannot_promote_to",
+      "target_kind": "ProjectFact",
+      "statement": "An illustrative example explains a method but is not evidence about the user's project and cannot be accepted as a project fact.",
+      "renderings": {
+        "en": "An illustrative example explains a method but is not evidence about the user's project and cannot be accepted as a project fact.",
+        "zh-CN": "说明性示例用于解释方法，但不是用户项目的证据，不能被接纳为项目事实。"
+      },
+      "knowledge_roles": [
+        "authority_boundary",
+        "illustrative_application_boundary",
+        "source_boundary"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "illustration_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-rule:illustration-not-project-fact"
+      }
+    },
+    {
+      "knowledge_id": "lca-example:generic-input-exchange",
+      "source_kind": "Illustration",
+      "relation": "illustrates",
+      "target_kind": "Exchange",
+      "statement": "In a hypothetical unit process, a named resource may be recorded as a quantified input exchange; the scenario only illustrates the Process–Exchange relationship and does not describe the user's project.",
+      "renderings": {
+        "en": "In a hypothetical unit process, a named resource may be recorded as a quantified input exchange; the scenario only illustrates the Process–Exchange relationship and does not describe the user's project.",
+        "zh-CN": "在一个假设的单元过程中，某项具名资源可以被记录为定量输入交换；该情景仅用于解释过程与交换的关系，不描述用户项目。"
+      },
+      "knowledge_roles": [
+        "illustrative_application_boundary",
+        "illustrative_application",
+        "lca_relationship",
+        "source_boundary"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "illustration_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-example:generic-input-exchange"
+      }
+    },
+    {
+      "knowledge_id": "lca-limit:selected-evidence-not-product-system",
+      "source_kind": "EvidenceSpan",
+      "relation": "limits",
+      "target_kind": "ProductSystem",
+      "statement": "The selected evidence span can support an explanation of that item, but it cannot by itself prove an unobserved product system or a stronger scientific conclusion.",
+      "renderings": {
+        "en": "The selected evidence span can support an explanation of that item, but it cannot by itself prove an unobserved product system or a stronger scientific conclusion.",
+        "zh-CN": "已选证据片段可支持对该条目的解释，但不能单独证明未观察到的产品系统或更强科学结论。"
+      },
+      "knowledge_roles": [
+        "evidence_limitation",
+        "source_boundary"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-limit:selected-evidence-not-product-system"
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:functional-unit-defines-comparison-basis",
+      "source_kind": "FunctionalUnit",
+      "relation": "defines_comparison_basis_for",
+      "target_kind": "ProductSystem",
+      "statement": "A functional unit states the quantified performance used as the common basis for relating inventory inputs and outputs and for making a comparison.",
+      "renderings": {
+        "en": "A functional unit states the quantified performance used as the common basis for relating inventory inputs and outputs and for making a comparison.",
+        "zh-CN": "功能单位规定用于关联清单输入输出并开展比较的共同量化性能基准。"
+      },
+      "knowledge_roles": [
+        "functional_unit",
+        "comparison_basis"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-rel:functional-unit-defines-comparison-basis"
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:system-boundary-scopes-product-system",
+      "source_kind": "SystemBoundary",
+      "relation": "scopes",
+      "target_kind": "ProductSystem",
+      "statement": "A system boundary scopes the product system by specifying which processes and life-cycle stages are included in or excluded from the study.",
+      "renderings": {
+        "en": "A system boundary scopes the product system by specifying which processes and life-cycle stages are included in or excluded from the study.",
+        "zh-CN": "系统边界通过规定研究纳入或排除的过程与生命周期阶段来界定产品系统范围。"
+      },
+      "knowledge_roles": [
+        "system_boundary",
+        "comparison_basis"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/lca-explanation-renderings-v2.json",
+        "sha256": "57b6829e28d2dcc6c6dba59d9d10ddf85725313d9dedfd7734fc13348723ac82",
+        "entry_id": "lca-rel:system-boundary-scopes-product-system"
+      }
+    }
+  ]
+}

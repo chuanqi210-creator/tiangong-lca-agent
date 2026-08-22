@@ -1,0 +1,23 @@
+{
+  "source": {
+    "key": "source key used by evidence references",
+    "title": "source short title",
+    "citation": "human-readable citation, preferably with page/table",
+    "url": "source URL or DOI when available"
+  },
+  "flow": {
+    "name": "candidate flow name",
+    "direction": "input or output",
+    "quantity": "numeric activity amount",
+    "unit": "original unit from evidence",
+    "category": "material, energy, product, emission, or waste",
+    "evidence": "source key"
+  },
+  "process": {
+    "name": "candidate process name",
+    "description": "brief technology/process description",
+    "inputs": "array of flow names",
+    "outputs": "array of flow names",
+    "evidence": "source key"
+  }
+}

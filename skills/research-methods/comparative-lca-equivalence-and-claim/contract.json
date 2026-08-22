@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "comparative-lca-equivalence-and-claim",
+  "version": "1.0.0",
+  "title": "Assess Comparative LCA Equivalence and Claims",
+  "description": "Use when two or more LCA alternatives are compared and equivalence of function, boundary, data quality, allocation, method, time, geography, uncertainty, or public comparative claim strength must be checked.",
+  "applicability": {
+    "desired_artifacts": ["comparative_claim_assessment"],
+    "semantic_roles": ["equivalent_functional_unit", "equivalent_system_boundary", "equivalent_method", "comparative_result", "comparative_uncertainty"],
+    "requirements": ["comparison"],
+    "conflict_types": ["comparison_basis_conflict", "functional_equivalence_conflict", "method_conflict"],
+    "target_object_kinds": ["FunctionalUnit", "SystemBoundary", "ProductSystem", "LCIAMethod", "Result"]
+  },
+  "required_inputs": ["two_or_more_accepted_result_refs", "intended_use", "equivalence_dimensions"],
+  "expected_artifact": "comparative_claim_assessment",
+  "accepted_state_delta": "comparison_equivalence_proven_or_claim_blocked",
+  "capability_ids": ["tiangong.specification.methodology", "tiangong.data.native-lcia-result-read", "tiangong.skill.lifecycleinventory-review"],
+  "upstream_skill_ids": ["lifecycleinventory-review", "process-scope-statistics"],
+  "domain_rule_ids": ["lca.comparison.functional_equivalence", "lca.comparison.common_method_basis", "lca.comparison.claim_ceiling"],
+  "source_lock_ids": ["tiangong.sdk.npm", "tiangong.cli.npm", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "computed", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["functional_equivalence_is_explicit", "scope_and_method_are_aligned", "uncertainty_cannot_reverse_unqualified_claim", "claim_ceiling_is_observed"],
+  "failure_boundaries": ["functional_equivalence_absent", "incompatible_method_or_boundary", "material_uncertainty_unresolved"],
+  "forbidden": ["direct_project_record_write", "name_as_functional_equivalence", "unsupported_public_superiority_claim", "silent_normalization"],
+  "permission_effects": ["no_permission_expansion", "accepted_result_read_only"],
+  "resources": []
+}

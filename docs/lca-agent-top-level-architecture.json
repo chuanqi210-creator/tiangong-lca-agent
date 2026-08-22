@@ -1,0 +1,778 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "lca_agent_top_level_architecture",
+  "status": "approved_top_level_architecture",
+  "approved_at": "2026-07-23T00:00:00+08:00",
+  "approval_scope": "product_identity_module_ownership_connections_authority_state_model_tool_evaluation_and_permission_boundaries",
+  "approval_evidence": {
+    "source": "user_explicit_approval",
+    "decision_sequence": [
+      "project_record_is_the_only_accepted_project_truth",
+      "top_level_architecture_approved"
+    ]
+  },
+  "language": "zh-CN",
+  "observed_at": "2026-07-23T00:00:00+08:00",
+  "scope": {
+    "included": [
+      "产品职责",
+      "顶层模块",
+      "模块连接",
+      "权威与状态边界",
+      "模型与工具边界",
+      "评测与权限边界",
+      "现有资产处置原则"
+    ],
+    "excluded": [
+      "具体框架选型",
+      "代码实现",
+      "现有执行任务恢复",
+      "正式架构替换",
+      "单一案例结果生产"
+    ]
+  },
+  "claim_ceiling": {
+    "external_patterns": "official_documentation_inspected_not_locally_reproduced",
+    "local_architecture": "approved_top_level_baseline_implementation_unverified",
+    "framework_selection": "not_decided"
+  },
+  "product": {
+    "id": "tiangong_native_lca_research_agent",
+    "definition": "面向LCA科研工作的自主Agent。用户提供研究目标、静态材料和约束；Agent调用可替换的大模型进行理解与判断，优先调用TianGong及其他受控工具获取权威数据和执行计算，持续推进到可审计的研究结果或边界清楚的受限结论。",
+    "primary_user": "需要完成或审核LCA科研工作的研究者",
+    "core_outcome": "auditable_lca_research_outcome_or_bounded_limitation",
+    "not_a": [
+      "通用科研聊天机器人",
+      "依赖单一模型能力的提示词包装",
+      "TianGong数据库的替代品",
+      "把所有LCA步骤写死的案例脚本集合",
+      "默认多Agent或默认Council系统"
+    ]
+  },
+  "input_policy": {
+    "user_input_form": "以静态、可版本化材料包作为一次研究运行的正式输入",
+    "missing_data_order": [
+      "识别影响当前结论的关键缺口",
+      "先询问用户是否持有缺失材料",
+      "用户没有时自主检索、计算或构造候选",
+      "候选数据不得静默升级为正式数据"
+    ],
+    "data_classes": [
+      {
+        "id": "official",
+        "meaning": "已被当前项目接受、具有明确来源与版本的正式数据"
+      },
+      {
+        "id": "candidate",
+        "meaning": "待核验、待选择或作为降级路线使用的数据"
+      },
+      {
+        "id": "assumption",
+        "meaning": "为了继续推演而显式提出、尚未被证据证实的假设"
+      },
+      {
+        "id": "computed",
+        "meaning": "由可复现计算从已标记输入推导出的数据"
+      },
+      {
+        "id": "missing",
+        "meaning": "尚不可获得且会限制结论的数据"
+      }
+    ]
+  },
+  "architecture_style": {
+    "id": "single_control_spine_with_typed_ports_and_cross_cutting_assurance",
+    "description": "一个研究指挥核心掌握推进权；模型、TianGong和其他工具通过可替换接口接入；LCA规则、项目事实和质量权限检查彼此独立。"
+  },
+  "modules": [
+    {
+      "id": "product_interface",
+      "kind": "product_boundary",
+      "name_zh": "研究入口与交付界面",
+      "owns": [
+        "研究委托的接收与澄清",
+        "输入材料快照",
+        "面向人的进度、问题和结果表达",
+        "最终交付包的呈现"
+      ],
+      "accepts": [
+        "研究目标",
+        "材料",
+        "约束",
+        "用户补充与决策"
+      ],
+      "produces": [
+        "版本化研究委托",
+        "必要的人类问题",
+        "可审计结果包或受限结论"
+      ],
+      "must_not": [
+        "自行承担LCA科学判断",
+        "把聊天内容直接写成正式项目事实",
+        "把内部模块暴露成用户必须管理的组织结构"
+      ]
+    },
+    {
+      "id": "research_orchestrator",
+      "kind": "control_core",
+      "name_zh": "研究指挥核心",
+      "owns": [
+        "把研究目标拆成当前任务",
+        "组装当前最小上下文",
+        "选择模型、规则和工具",
+        "推进、重试、降级、暂停与恢复",
+        "决定何时形成候选结果并送检",
+        "保持唯一当前路线"
+      ],
+      "accepts": [
+        "版本化研究委托",
+        "项目记录",
+        "LCA规则",
+        "模型建议",
+        "工具结果",
+        "评测反馈"
+      ],
+      "produces": [
+        "结构化模型请求",
+        "受控工具请求",
+        "候选项目变更",
+        "下一路线",
+        "交付候选"
+      ],
+      "must_not": [
+        "把自己的控制逻辑伪装成科学证据",
+        "绕过质量权限边界写入正式事实",
+        "因有Council能力而默认拆成多个Agent"
+      ]
+    },
+    {
+      "id": "lca_domain_kernel",
+      "kind": "domain_policy",
+      "name_zh": "LCA专业规则库",
+      "owns": [
+        "功能单位、系统边界、分配、情景和影响评价规则",
+        "证据类型和数据适用性规则",
+        "正式数据、候选数据、假设和缺失的分类规则",
+        "LCA论断允许范围",
+        "可复用的专业工作方法"
+      ],
+      "accepts": [
+        "标准与方法版本",
+        "TianGong规范",
+        "项目选定的方法约束"
+      ],
+      "produces": [
+        "规则查询结果",
+        "结构化检查条件",
+        "专业上下文片段",
+        "论断边界"
+      ],
+      "must_not": [
+        "保存动态项目事实",
+        "替代模型进行开放式推理",
+        "包含针对单一案例写死的完整执行脚本"
+      ]
+    },
+    {
+      "id": "model_gateway",
+      "kind": "replaceable_port",
+      "name_zh": "模型接口",
+      "owns": [
+        "GPT、Claude及后续模型的统一调用合同",
+        "结构化输入输出",
+        "模型能力差异适配",
+        "模型调用失败与切换"
+      ],
+      "accepts": [
+        "当前问题",
+        "最小上下文",
+        "可用工具说明",
+        "输出结构"
+      ],
+      "produces": [
+        "分析建议",
+        "工具调用建议",
+        "候选解释",
+        "结构化输出"
+      ],
+      "must_not": [
+        "直接执行有副作用的操作",
+        "直接写入正式项目事实",
+        "覆盖TianGong正式数据",
+        "把自身记忆当成项目权威"
+      ]
+    },
+    {
+      "id": "capability_gateway",
+      "kind": "replaceable_port",
+      "name_zh": "数据与工具接口",
+      "owns": [
+        "TianGong数据、规范与原生工具接入",
+        "检索、代码、计算和LCA工具接入",
+        "MCP及其他连接协议适配",
+        "工具能力发现、版本、超时、错误和返回结构",
+        "受控执行环境"
+      ],
+      "accepts": [
+        "已通过权限检查的工具请求",
+        "输入数据",
+        "运行限制"
+      ],
+      "produces": [
+        "带来源、版本和执行记录的工具结果",
+        "错误或不可用状态",
+        "可复现计算工件"
+      ],
+      "must_not": [
+        "决定研究目标",
+        "把任意MCP服务器自动视为权威来源",
+        "把脚本、设计稿或工具调用日志冒充计算结果",
+        "绕过研究指挥核心直接改变项目结论"
+      ]
+    },
+    {
+      "id": "project_record",
+      "kind": "truth_plane",
+      "name_zh": "项目事实与证据记录",
+      "owns": [
+        "当前研究目标与范围",
+        "正式数据、候选数据、假设和缺失项",
+        "来源、位置、版本、单位和变换",
+        "模型与计算工件",
+        "决策、风险、进度和下一路线",
+        "追加式事件与可恢复状态"
+      ],
+      "accepts": [
+        "通过接纳检查的项目变更",
+        "带溯源的证据和计算结果",
+        "用户明确决策"
+      ],
+      "produces": [
+        "可恢复项目状态",
+        "当前上下文工作集",
+        "审计轨迹",
+        "结果包所需事实"
+      ],
+      "must_not": [
+        "把未核验的模型文本自动升级为正式事实",
+        "把对话历史等同于项目状态",
+        "丢失原始值、单位、来源或转换链"
+      ]
+    },
+    {
+      "id": "assurance_boundary",
+      "kind": "cross_cutting_control",
+      "name_zh": "质量与权限边界",
+      "owns": [
+        "科学与工程规则检查",
+        "过程路线和最终结果双重评测",
+        "来源、单位、边界、可复现性和过度声明检查",
+        "工具副作用和人类授权策略",
+        "故障分类与重试上限",
+        "模型或工具异常的阻断与降级"
+      ],
+      "accepts": [
+        "模型建议",
+        "工具请求与结果",
+        "候选项目变更",
+        "候选最终结果",
+        "授权规则"
+      ],
+      "produces": [
+        "允许",
+        "拒绝",
+        "要求修订",
+        "降级路线",
+        "需要人类处理的少数事项"
+      ],
+      "must_not": [
+        "成为第二个研究指挥核心",
+        "用格式通过替代科学正确性",
+        "因低风险本地操作反复向用户索权"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "c01",
+      "from": "product_interface",
+      "to": "research_orchestrator",
+      "payload": "版本化研究委托",
+      "guard": "目标、输入材料和约束的身份可区分"
+    },
+    {
+      "id": "c02",
+      "from": "research_orchestrator",
+      "to": "project_record",
+      "payload": "读取当前事实并提交候选变更",
+      "guard": "写入必须经过assurance_boundary的接纳检查"
+    },
+    {
+      "id": "c03",
+      "from": "project_record",
+      "to": "research_orchestrator",
+      "payload": "当前最小事实集、风险和唯一下一路线",
+      "guard": "来源为可恢复项目记录而非对话记忆"
+    },
+    {
+      "id": "c04",
+      "from": "research_orchestrator",
+      "to": "lca_domain_kernel",
+      "payload": "当前专业问题和项目方法版本",
+      "guard": "只请求与当前任务有关的规则"
+    },
+    {
+      "id": "c05",
+      "from": "research_orchestrator",
+      "to": "model_gateway",
+      "payload": "任务、最小上下文、工具合同和输出结构",
+      "guard": "不得把全部仓库或全部历史无差别塞给模型"
+    },
+    {
+      "id": "c06",
+      "from": "model_gateway",
+      "to": "research_orchestrator",
+      "payload": "结构化建议或工具请求建议",
+      "guard": "模型输出始终为候选"
+    },
+    {
+      "id": "c07",
+      "from": "research_orchestrator",
+      "to": "assurance_boundary",
+      "payload": "拟执行工具请求",
+      "guard": "检查权限、数据分类和副作用"
+    },
+    {
+      "id": "c08",
+      "from": "assurance_boundary",
+      "to": "capability_gateway",
+      "payload": "获准的工具请求",
+      "guard": "权限范围、超时和结果合同已明确"
+    },
+    {
+      "id": "c09",
+      "from": "capability_gateway",
+      "to": "research_orchestrator",
+      "payload": "带溯源的结果或失败状态",
+      "guard": "工具结果不自动成为研究结论"
+    },
+    {
+      "id": "c10",
+      "from": "research_orchestrator",
+      "to": "assurance_boundary",
+      "payload": "候选项目变更或候选交付",
+      "guard": "同时检查过程路线与最终结果"
+    },
+    {
+      "id": "c11",
+      "from": "assurance_boundary",
+      "to": "project_record",
+      "payload": "通过接纳的事实、工件、风险和路线",
+      "guard": "保持数据分类、版本和来源"
+    },
+    {
+      "id": "c12",
+      "from": "research_orchestrator",
+      "to": "product_interface",
+      "payload": "必要问题、进度结论、结果包或受限结论",
+      "guard": "仅在用户真正持有答案或责任时提问"
+    }
+  ],
+  "authority_policy": {
+    "source_order": [
+      "项目明确选定且有版本的TianGong官方规范、数据和工具输出",
+      "项目提供并接受的正式材料",
+      "其他权威标准和一手来源",
+      "经标记的外部候选来源",
+      "显式假设"
+    ],
+    "tiangong_rule": "TianGong是项目第一权威。Agent跟随已采用的TianGong版本变化，不自行修改TianGong正式数据；超出其覆盖范围时只能增加候选证据、假设或受限结论。",
+    "acceptance_rule": "来源权威性、项目适用性和计算可复现性分别判断；任一工具或协议本身不授予数据权威地位。"
+  },
+  "autonomy_policy": {
+    "automatic": [
+      "本地读取、规划、实现、测试和状态整理",
+      "公开信息检索",
+      "无外部副作用的计算和分析",
+      "低风险可逆的候选工件生成",
+      "在既定研究目标内选择模型、工具、重试和降级路线"
+    ],
+    "human_required": [
+      "凭证或账号操作",
+      "付款",
+      "发布或对外写入",
+      "不可逆变更",
+      "主研究目标改变",
+      "证据不足却要形成强公开论断",
+      "只有用户掌握的关键事实或价值选择"
+    ],
+    "question_rule": "只有用户能提供答案、用户必须承担责任或不同选择会改变主目标时才暂停询问。"
+  },
+  "execution_strategies": [
+    {
+      "id": "single_agent_loop",
+      "default": true,
+      "use_when": "任务可由一个连续上下文稳定推进"
+    },
+    {
+      "id": "specialist_tool_call",
+      "default": false,
+      "use_when": "需要独立专业能力但不需要转移控制权"
+    },
+    {
+      "id": "council",
+      "default": false,
+      "use_when": "存在真实的多方案争议、需要独立反驳或盲审，并且预期收益高于协调成本",
+      "boundary": "Council只是research_orchestrator内部的可选策略，所有成员共享同一权限边界，结果仍需统一接纳。"
+    }
+  ],
+  "artifact_roles": {
+    "skills": "LCA专业规则或可复用工作方法的薄封装，不保存动态项目真相，也不承担耐久运行时职责",
+    "mcp": "capability_gateway下的连接协议之一，不是Agent本体、研究指挥核心或权威来源",
+    "cases": "评测夹具和回归样例，不是产品架构模块",
+    "scripts": "可执行工具或实验工件，只有真实运行并保存结果后才构成计算证据",
+    "council": "可选的推理与复核策略，不是默认顶层组织结构"
+  },
+  "research_flow": [
+    {
+      "order": 1,
+      "id": "frame",
+      "outcome": "形成明确的研究问题、功能单位、范围和完成口径"
+    },
+    {
+      "order": 2,
+      "id": "classify_inputs",
+      "outcome": "把材料分为正式、候选、假设、计算和缺失，并定位关键缺口"
+    },
+    {
+      "order": 3,
+      "id": "resolve_gaps",
+      "outcome": "按用户补充、TianGong、其他来源、显式假设或受限结论的顺序处理缺口"
+    },
+    {
+      "order": 4,
+      "id": "model_and_compute",
+      "outcome": "形成可追溯模型、执行真实计算并保存运行证据"
+    },
+    {
+      "order": 5,
+      "id": "evaluate",
+      "outcome": "同时检查研究路线、工具使用和最终结果"
+    },
+    {
+      "order": 6,
+      "id": "interpret_and_deliver",
+      "outcome": "给出支持范围明确的结论、风险、复现指针和下一项实际工作"
+    }
+  ],
+  "evaluation_contract": {
+    "trajectory_dimensions": [
+      "是否先确认研究问题和范围",
+      "是否正确区分正式、候选、假设、计算和缺失",
+      "是否优先使用TianGong且保留版本",
+      "是否选择了合适的模型和工具",
+      "是否发生越权、重复循环或无效等待",
+      "是否在阻塞时选择了合理降级路线"
+    ],
+    "outcome_dimensions": [
+      "LCA方法正确性",
+      "证据与数值可追溯性",
+      "单位、边界和过程关系一致性",
+      "真实计算与设计工件可区分",
+      "结论强度与证据匹配",
+      "可复现性",
+      "对研究者的实际可用性"
+    ],
+    "minimum_fixture_families": [
+      "完整材料正常路径",
+      "关键数据缺失",
+      "正式来源与候选来源冲突",
+      "TianGong暂无覆盖",
+      "工具失败或返回不完整",
+      "模型提出越权操作",
+      "两个模型判断不一致",
+      "已有模型与报告之间存在过度声明"
+    ],
+    "model_comparison_rule": "比较模型时固定研究委托、可用工具、TianGong版本、权限和评价规则，同时观察过程路线与最终结果；不把单次答案等同于Agent架构优越性。"
+  },
+  "architecture_alternatives": [
+    {
+      "id": "thin_model_centric_agent",
+      "summary": "以提示词、Skills和模型自主工具调用为中心，运行时很薄",
+      "benefits": [
+        "启动快",
+        "代码少",
+        "直接受益于模型升级"
+      ],
+      "risks": [
+        "项目事实容易混入对话",
+        "权限、恢复和评测不稳定",
+        "模型切换会改变产品行为"
+      ],
+      "decision": "rejected_as_product_core"
+    },
+    {
+      "id": "control_spine_ports_planes",
+      "summary": "一个指挥核心连接模型、工具、LCA规则和项目记录，质量权限横切所有写入与执行",
+      "benefits": [
+        "模型与工具可替换",
+        "TianGong权威边界清楚",
+        "可恢复、可审计、可评测",
+        "不会默认膨胀成多Agent平台"
+      ],
+      "risks": [
+        "需要先把合同和状态边界定义清楚",
+        "比纯提示词方案多一层工程"
+      ],
+      "decision": "approved_target_architecture"
+    },
+    {
+      "id": "workflow_graph_first_platform",
+      "summary": "把研究流程预先建成完整状态图或多Agent工作流平台",
+      "benefits": [
+        "确定性步骤清晰",
+        "暂停恢复和并发易于表达"
+      ],
+      "risks": [
+        "容易把未知的科研判断过早写死",
+        "可能重复建设现有运行时",
+        "案例分支会反向污染产品核心"
+      ],
+      "decision": "defer_until_runtime_evidence"
+    }
+  ],
+  "external_calibration": [
+    {
+      "id": "openai_agents_sdk",
+      "official_sources": [
+        "https://openai.github.io/openai-agents-python/agents/",
+        "https://openai.github.io/openai-agents-python/running_agents/",
+        "https://openai.github.io/openai-agents-python/tracing/"
+      ],
+      "observed_pattern": "Agent保存模型、指令、工具和可选运行行为；Runner掌握轮次、工具、护栏、交接和会话；模型提供者、工具、会话和追踪是独立接口。",
+      "transfer": [
+        "模型定义与执行循环分离",
+        "结构化输出、工具护栏和全程追踪",
+        "多Agent只是可选编排模式"
+      ],
+      "do_not_copy": [
+        "把manager或handoff设成默认结构",
+        "把供应商SDK直接当成产品领域架构"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "anthropic_managed_agents",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/managed-agents/overview",
+        "https://platform.claude.com/docs/en/managed-agents/tools",
+        "https://platform.claude.com/docs/en/managed-agents/permission-policies"
+      ],
+      "observed_pattern": "Agent、环境、会话和事件分开；模型只发出结构化工具请求，应用或环境执行；每类工具有明确自动执行或等待授权的策略。",
+      "transfer": [
+        "模型不直接产生外部副作用",
+        "会话可中断、恢复和追加事件",
+        "工具数量少而能力深，返回高信号结果",
+        "权限按工具能力而非每轮临时判断"
+      ],
+      "do_not_copy": [
+        "绑定托管平台的beta接口",
+        "把编码沙箱默认等同于LCA研究环境"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "google_adk",
+      "official_sources": [
+        "https://adk.dev/runtime/",
+        "https://adk.dev/sessions/",
+        "https://adk.dev/evaluate/"
+      ],
+      "observed_pattern": "运行时事件循环负责暂停与恢复；Session、临时State和跨会话Memory分开；评测同时覆盖过程路线和最终回答。",
+      "transfer": [
+        "项目事实、会话状态和长期知识分开",
+        "运行时可恢复",
+        "过程路线与最终结果双评测"
+      ],
+      "do_not_copy": [
+        "为了功能齐全而整体引入另一套平台",
+        "把会话记忆当成正式科研事实"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "langgraph",
+      "official_sources": [
+        "https://docs.langchain.com/oss/python/langgraph/overview"
+      ],
+      "observed_pattern": "LangGraph把自己定位为Agent编排之下的低层运行时，提供耐久执行、持久化、中断和人类介入，并允许确定性步骤与模型步骤混合。",
+      "transfer": [
+        "耐久执行属于运行时而非提示词",
+        "只把稳定、可判定的步骤写成确定性控制",
+        "长任务需要检查点与恢复"
+      ],
+      "do_not_copy": [
+        "先画完整图再寻找用户问题",
+        "把每个科研分支固化成节点",
+        "在无证据时引入新的运行时依赖"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "pydantic_ai",
+      "official_sources": [
+        "https://pydantic.dev/docs/ai/core-concepts/agent/",
+        "https://pydantic.dev/docs/ai/tools-toolsets/tools/",
+        "https://pydantic.dev/docs/ai/core-concepts/output/",
+        "https://pydantic.dev/docs/ai/evals/evals/"
+      ],
+      "observed_pattern": "Agent把指令、工具、依赖、模型和结构化输出组合起来，并对依赖、工具参数和最终输出提供类型约束与系统化评测。",
+      "transfer": [
+        "模型、工具和结果之间使用机器可检验合同",
+        "将运行依赖显式注入而不是藏进全局上下文",
+        "输出校验失败可进入修订而不是直接接纳"
+      ],
+      "do_not_copy": [
+        "让Python类型体系决定产品模块",
+        "在未比较现有Kernel能力前直接迁移框架"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "openhands_sdk",
+      "official_sources": [
+        "https://docs.openhands.dev/sdk/arch/overview",
+        "https://docs.openhands.dev/sdk/arch/sdk",
+        "https://docs.openhands.dev/sdk/arch/agent",
+        "https://docs.openhands.dev/sdk/arch/conversation"
+      ],
+      "observed_pattern": "核心SDK区分Agent推理循环、Conversation状态与生命周期、Tools、Workspace、Events和Security；Agent本身可以保持无状态，由Conversation承载执行。",
+      "transfer": [
+        "推理主体与持久会话分离",
+        "执行环境单独受控",
+        "安全检查位于行动执行之前"
+      ],
+      "do_not_copy": [
+        "编码Agent特有的文件和终端假设",
+        "把软件工程工作区直接映射成LCA项目模型"
+      ],
+      "inspection_status": "official_documentation_inspected"
+    },
+    {
+      "id": "model_context_protocol",
+      "official_sources": [
+        "https://modelcontextprotocol.io/docs/learn/architecture",
+        "https://modelcontextprotocol.io/specification/2025-06-18/architecture"
+      ],
+      "observed_pattern": "MCP只定义上下文交换协议。Host负责模型集成、授权、聚合和安全；Server提供工具、资源和提示，并不负责完整Agent运行。",
+      "transfer": [
+        "把外部能力放在标准连接接口后",
+        "Host保留权限和上下文控制",
+        "服务能力与数据权威性分开判断"
+      ],
+      "do_not_copy": [
+        "把MCP当成Agent本体",
+        "因为服务器可连接就默认其数据可信",
+        "把所有服务器工具一次性暴露给模型"
+      ],
+      "inspection_status": "official_documentation_inspected_protocol_version_2025-06-18"
+    }
+  ],
+  "existing_asset_disposition": [
+    {
+      "asset": "Research Kernel",
+      "candidate_role": "project_record与assurance_boundary的可复用实现来源",
+      "rule": "逐项验收后复用，不因已存在而保留全部代码"
+    },
+    {
+      "asset": "Research Director或Controller",
+      "candidate_role": "research_orchestrator的实现候选",
+      "rule": "只有符合新控制合同的部分进入主线；名称不构成复用理由"
+    },
+    {
+      "asset": "Council",
+      "candidate_role": "research_orchestrator内部可选策略",
+      "rule": "不作为默认架构，不形成第二套状态或权限系统"
+    },
+    {
+      "asset": "Skills",
+      "candidate_role": "lca_domain_kernel中的专业方法或capability_gateway中的薄适配",
+      "rule": "不得保存动态真相或重复耐久运行时"
+    },
+    {
+      "asset": "TianGong接入、版本和溯源能力",
+      "candidate_role": "capability_gateway与authority_policy的直接基础",
+      "rule": "优先保留，但需验证真实接口、版本和失败语义"
+    },
+    {
+      "asset": "LiFePO4、Freshwater、NEV、USLCI等案例资产",
+      "candidate_role": "evaluation_contract的候选夹具",
+      "rule": "不进入产品核心；不能证明新架构时继续冻结"
+    },
+    {
+      "asset": "Goal同步、CONTEXT投影和版本管理",
+      "candidate_role": "project_record的运行机制候选",
+      "rule": "属于支撑能力，不作为面向用户的产品价值"
+    }
+  ],
+  "machine_checks": [
+    {
+      "id": "one_control_core",
+      "expression": "count(modules[kind=control_core]) == 1"
+    },
+    {
+      "id": "one_truth_plane",
+      "expression": "count(modules[kind=truth_plane]) == 1"
+    },
+    {
+      "id": "no_model_direct_write",
+      "expression": "not exists(connections[from=model_gateway and to=project_record])"
+    },
+    {
+      "id": "no_tool_direct_write",
+      "expression": "not exists(connections[from=capability_gateway and to=project_record])"
+    },
+    {
+      "id": "tool_request_is_guarded",
+      "expression": "exists(connections[from=research_orchestrator and to=assurance_boundary]) and exists(connections[from=assurance_boundary and to=capability_gateway])"
+    },
+    {
+      "id": "accepted_write_is_guarded",
+      "expression": "exists(connections[from=assurance_boundary and to=project_record])"
+    },
+    {
+      "id": "council_not_default",
+      "expression": "execution_strategies[id=council].default == false"
+    },
+    {
+      "id": "mcp_is_not_core",
+      "expression": "artifact_roles.mcp contains capability_gateway"
+    },
+    {
+      "id": "exact_approved_status",
+      "expression": "status == approved_top_level_architecture"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d01_project_record_authority",
+      "question": "是否确认project_record是唯一被接纳的项目事实来源，而模型对话、Council讨论和工具原始返回都只是候选或证据输入？",
+      "status": "approved",
+      "decision": "project_record_is_the_only_accepted_project_truth",
+      "reason": "这是避免上下文污染、状态不对齐和模型切换导致事实漂移的根边界。"
+    },
+    {
+      "id": "d02_top_level_topology",
+      "question": "是否批准单一控制主线、可替换模型与工具接口、独立LCA规则、唯一项目事实记录和质量权限边界作为正式顶层架构？",
+      "status": "approved",
+      "decision": "single_control_spine_with_typed_ports_and_cross_cutting_assurance",
+      "reason": "该结构把模型判断、工具执行、专业规则、正式事实和接纳控制分开，同时保留连续自主推进。"
+    }
+  ],
+  "operational_transition": {
+    "current_implementation": "legacy_council_default_operational_baseline_pending_mapping",
+    "migration_rule": "现有实现不因架构批准而自动获得新模块身份；必须逐项映射并通过新合同后才能进入目标架构。",
+    "execution_rule": "在新的迁移Goal真实激活前，不恢复已暂停的案例执行或NEV路线。"
+  },
+  "next_action": "对现有代码做模块映射，形成保留、降级、冻结、删除与缺口清单，再制定迁移Goal；不先跑新的具体案例。"
+}

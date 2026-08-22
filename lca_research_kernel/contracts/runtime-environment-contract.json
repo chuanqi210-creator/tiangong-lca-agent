@@ -1,0 +1,67 @@
+{
+  "contract": "lca_research_kernel.runtime_environment_contract/v1",
+  "contract_id": "d18-tiangong-runtime-environment-closure",
+  "catalog": {
+    "path": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+    "file_sha256": "342e5f1f04453f1d656b60ecb9a1126f839f2b5dcb4a1772dfa1acd10e3e1baa",
+    "snapshot_sha256": "d2e4467bd07e0087e33dfbc8bf272cb1aaba44783f4df4c084e9cba9e6bb5fb3"
+  },
+  "source_lock": {
+    "path": "lca_research_kernel/contracts/tiangong-source-lock.json",
+    "file_sha256": "b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e"
+  },
+  "runtime_root": ".runtime/d18-tiangong-capabilities",
+  "readiness_statuses": [
+    "unverified",
+    "executable_verified",
+    "boundary_verified_nonlocal",
+    "inactive_verified"
+  ],
+  "executable_gates": [
+    "fixed_source_identity",
+    "runtime_presence",
+    "configuration_load",
+    "health_check",
+    "safe_call",
+    "restart_recovery"
+  ],
+  "boundary_gates": [
+    "responsibility_boundary",
+    "zero_effect",
+    "resume_route"
+  ],
+  "forbidden_operations": [
+    "research_case_execution",
+    "lca_calculation",
+    "lcia_calculation",
+    "external_write",
+    "publish",
+    "payment",
+    "irreversible_action"
+  ],
+  "completion_policy": {
+    "human_action_required": "boundary_verified_nonlocal",
+    "integrated": "executable_verified",
+    "conditional_runtime": "executable_verified",
+    "upstream_owned": "executable_verified",
+    "legacy_adapter_only": "inactive_verified",
+    "evaluation_fixture": "inactive_verified",
+    "parked": "inactive_verified",
+    "retired": "inactive_verified"
+  },
+  "evidence_policy": {
+    "accepted_kind": "real_runtime_probe",
+    "mock_kinds": [
+      "fake",
+      "fixture",
+      "metadata_only",
+      "mock",
+      "static_contract"
+    ],
+    "secrets_forbidden": true,
+    "raw_sensitive_output_forbidden": true,
+    "scientific_result_forbidden": true
+  },
+  "completion_next_route": "design-first-native-research-workflow-over-unified-capability-catalog",
+  "waiting_next_route": "verify-runtime-environment-after-user-collaboration"
+}

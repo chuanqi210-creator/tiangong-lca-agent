@@ -1,0 +1,561 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "d18_existing_system_mapping",
+  "status": "decision_grade_mapping_no_implementation_change",
+  "recorded_at": "2026-07-23T00:00:00+08:00",
+  "target_architecture": {
+    "path": "docs/lca-agent-top-level-architecture.json",
+    "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+    "decision": "D-18"
+  },
+  "repository_basis": {
+    "commit": "278c2d27f4fa800ac27d5cc61e5d7a2409acbc2b",
+    "worktree_state": "dirty_with_preexisting_user_and_paused_builder_changes",
+    "kernel_python_files": 120,
+    "kernel_python_lines": 137135,
+    "research_project_lines": 39270,
+    "research_project_public_and_private_methods": 208,
+    "cli_subcommands": 142,
+    "direct_model_provider_runtime_integrations_found": 0,
+    "codegraph_status": "unavailable_command_not_found",
+    "fallback_method": [
+      "bounded_file_inventory",
+      "exact_symbol_search",
+      "import_and_reference_counts",
+      "public_interface_inspection",
+      "test_cluster_inventory",
+      "targeted_source_read"
+    ]
+  },
+  "claim_ceiling": {
+    "supported": [
+      "source_structure_and_interfaces_were_inspected",
+      "existing_assets_are_mapped_as_candidates_not_accepted_target_modules",
+      "no_model_gateway_runtime_is_present_in_the_kernel",
+      "project_state_and_case_execution_are_strongly_coupled",
+      "research_director_is_hard_coupled_to_council_routing",
+      "case_specific_implementation_dominates_repository_volume_and_public_commands"
+    ],
+    "unsupported": [
+      "all_reusable_code_has_been_behaviorally_revalidated_against_D18",
+      "the_migration_plan_has_been_implemented",
+      "legacy_code_is_safe_to_delete_now",
+      "the_current_agent_is_already_model_provider_agnostic",
+      "the_existing_council_is_the_D18_orchestrator"
+    ]
+  },
+  "global_diagnosis": {
+    "summary": "项目已经积累了较强的事件、工件、溯源、TianGong接入、权限和大量LCA确定性能力，但这些能力被一个案例化的ResearchProject、142个CLI子命令和Council-default控制流包在一起。真正的模型接口、统一产品入口、通用LCA项目数据模型以及过程与结果双评测仍未形成。",
+    "strongest_existing_capabilities": [
+      "append_only_event_and_artifact_recording",
+      "content_addressing_idempotency_replay_and_recovery",
+      "TianGong_authority_version_and_read_only_adapter_behaviors",
+      "source_unit_transformation_and_gap_preservation",
+      "responsibility_and_side_effect_classification",
+      "case_level_deterministic_validation"
+    ],
+    "largest_architecture_gaps": [
+      "model_gateway",
+      "generic_research_orchestrator_not_bound_to_council",
+      "single_user_facing_product_interface",
+      "unified_LCA_project_fact_and_data_class_model",
+      "generic_trajectory_and_outcome_assurance",
+      "capability_gateway_that_hides_tool_and_case_specific_commands"
+    ],
+    "root_problem": "the_repository_contains_many_executors_but_not_yet_one_general_agent_runtime_seam"
+  },
+  "target_module_mapping": [
+    {
+      "target_module": "product_interface",
+      "readiness": "weak",
+      "disposition": "replace_public_surface_preserve_diagnostics",
+      "existing_assets": [
+        "agent/lca-project-controller.md",
+        "agent/lca-research-agent.md",
+        "lca_research_kernel/cli.py",
+        "skills/run-lca-research-project/SKILL.md",
+        "skills/evidence-to-tidas-lca/SKILL.md"
+      ],
+      "evidence": [
+        "lca_research_kernel/cli.py declares 142 subcommands",
+        "the run-lca-research-project Skill exposes lifecycle, Director, Council, experimental Council, TianGong authority and many case routes",
+        "the current Agent contract is still Council-default operational text"
+      ],
+      "retain": [
+        "human_and_machine_status_projection_idea",
+        "director_advance_as_one_entry_intent",
+        "static_material_package_intake_rules"
+      ],
+      "conflicts": [
+        "users_or_callers_can_see_too_many_internal_commands",
+        "public_surface_exposes_historical_topology",
+        "no_single_intake_run_status_result_contract"
+      ],
+      "required_interface": [
+        "start_research",
+        "supply_material_or_decision",
+        "read_status",
+        "read_result"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "research_orchestrator",
+      "readiness": "partial_but_wrong_default",
+      "disposition": "retain_intent_refactor_control_flow",
+      "existing_assets": [
+        "lca_research_kernel/research_director.py",
+        "lca_research_kernel/director_work_item.py",
+        "lca_research_kernel/workflow_registry.py",
+        "lca_research_kernel/director_acceptance.py",
+        "lca_research_kernel/workflow_acceptance.py",
+        "lca_research_kernel/workflow_clean_review.py"
+      ],
+      "evidence": [
+        "ResearchDirector exposes advance and run_until_boundary",
+        "ResearchDirector imports Council routing signals and replays Council state",
+        "ResearchDirector always compiles a Council agenda and routes through Council before work execution",
+        "workflow registry executes allowlisted ResearchProject methods rather than generic capability ports"
+      ],
+      "retain": [
+        "one_product_entry_intent",
+        "run_until_real_boundary",
+        "content_addressed_work_items",
+        "retry_replan_rollback_and_handoff_concepts",
+        "unique_next_route"
+      ],
+      "conflicts": [
+        "Council_is_mandatory_control_path",
+        "model_reasoning_is_not_a_first_class_step",
+        "capabilities_are_case_specific_ResearchProject_methods",
+        "orchestrator_reads_and_writes_through_a_large_concrete_project_class"
+      ],
+      "required_interface": [
+        "run_until_boundary(research_id)",
+        "resume(research_id, external_input)",
+        "select_next_action(project_view, domain_policy, available_capabilities)",
+        "submit_candidate_change(candidate)"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "lca_domain_kernel",
+      "readiness": "fragmented_partial",
+      "disposition": "retain_rules_consolidate_domain_model",
+      "existing_assets": [
+        "lca_research_kernel/scope.py",
+        "lca_research_kernel/scenario.py",
+        "lca_research_kernel/inventory.py",
+        "lca_research_kernel/performance.py",
+        "lca_research_kernel/identity.py",
+        "lca_research_kernel/evidence_intake.py",
+        "lca_research_kernel/evidence_candidate_ledger.py",
+        "lca_research_kernel/evidence_admission_transaction.py",
+        "lca_research_kernel/gap_analysis.py",
+        "lca_research_kernel/claim_matrix.py",
+        "lca_research_kernel/comparison_readiness.py",
+        "lca_research_kernel/static_material_intake.py",
+        "lca_research_kernel/static_material_gap_resolution.py",
+        "lca_research_kernel/stoichiometric_consistency.py"
+      ],
+      "evidence": [
+        "existing modules preserve source IDs, units, assumptions, missing fields and candidate statuses",
+        "static material intake distinguishes candidate_requires_confirmation and unusable_or_missing",
+        "gap resolution keeps user-supplied values as candidates and can close claims on missing input",
+        "inventory logic is strongly tied to the LiFePO4 route and fixed chemistry"
+      ],
+      "retain": [
+        "source_and_transformation_lineage",
+        "missing_data_narrows_claims",
+        "candidate_not_automatic_admission",
+        "unit_and_stoichiometric_checks",
+        "scope_scenario_inventory_and_claim_concepts"
+      ],
+      "conflicts": [
+        "no_single_domain_fact_schema_for_official_candidate_assumption_computed_missing",
+        "some_rules_are_embedded_in_case_specific_compilers",
+        "domain_rules_and_project_state_are_called_directly_from_ResearchProject"
+      ],
+      "required_interface": [
+        "classify_material",
+        "validate_goal_and_scope",
+        "evaluate_data_admissibility",
+        "validate_model_and_calculation",
+        "derive_claim_boundary"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "model_gateway",
+      "readiness": "missing",
+      "disposition": "build_new_seam",
+      "existing_assets": [],
+      "evidence": [
+        "no OpenAI, Anthropic, LiteLLM, Gemini or equivalent provider import or runtime call was found in lca_research_kernel",
+        "OPENAI and ANTHROPIC strings found in the kernel are secret-sanitization rules rather than model invocation",
+        "the current Director advances deterministic Council and workflow contracts without a provider-agnostic reasoning interface"
+      ],
+      "retain": [],
+      "conflicts": [
+        "the_product_is_currently_not_a_real_GPT_or_Claude_backed_agent_runtime",
+        "model_output_cannot_yet_be_forced_through_one_candidate_only_contract"
+      ],
+      "required_interface": [
+        "reason(request) -> structured_candidate",
+        "stream(request) -> model_events",
+        "capabilities() -> provider_features",
+        "normalize_error(error) -> retry_or_switch_signal"
+      ],
+      "required_adapters": [
+        "deterministic_fake_adapter_for_tests",
+        "OpenAI_adapter",
+        "Anthropic_adapter"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "capability_gateway",
+      "readiness": "partial_scattered",
+      "disposition": "retain_adapters_consolidate_port",
+      "existing_assets": [
+        "lca_research_kernel/tiangong_read_adapter.py",
+        "lca_research_kernel/tiangong_authority.py",
+        "lca_research_kernel/tiangong_capability_adoption.py",
+        "lca_research_kernel/tiangong_authority_transition.py",
+        "lca_research_kernel/tiangong_authority_workflow.py",
+        "lca_research_kernel/process_plan.py",
+        "lca_research_kernel/public_discovery.py",
+        "lca_research_kernel/source_expansion.py",
+        "lca_research_kernel/portable_runtime_closure.py"
+      ],
+      "evidence": [
+        "tiangong_read_adapter provides bounded read-only CLI and official ZIP inspection functions",
+        "tool execution and subprocess handling also appear throughout ResearchProject and case modules",
+        "the current workflow registry points to concrete ResearchProject method names",
+        "MCP is documented in Skills but is not a generic Kernel capability port"
+      ],
+      "retain": [
+        "TianGong_first_authority_and_exact_version_rules",
+        "read_only_capture_and_official_export_fallback",
+        "secret_hygiene",
+        "raw_output_and_execution_receipts",
+        "bounded_batches_and_failure_classification"
+      ],
+      "conflicts": [
+        "tool_contracts_are_spread_across_many_modules",
+        "tool_results_and_case_compilation_are_often_in_the_same_function",
+        "no_common_capability_discovery_timeout_error_or_result_envelope",
+        "MCP_and_native_tools_do_not_share_one_host_control_interface"
+      ],
+      "required_interface": [
+        "list_capabilities(context)",
+        "execute(capability_request) -> sourced_result",
+        "describe_authority(capability_id)",
+        "normalize_failure(error)"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "project_record",
+      "readiness": "strong_behavior_overgrown_module",
+      "disposition": "split_preserve_core_freeze_case_methods",
+      "existing_assets": [
+        "lca_research_kernel/project.py",
+        "lca_research_kernel/lifecycle.py",
+        "lca_research_kernel/lineage.py",
+        "outputs/council-default-lifecycle/research-events.jsonl",
+        "outputs/council-default-lifecycle/lifecycle-state.json",
+        "CONTEXT.md",
+        "tools/verify_project_state.py"
+      ],
+      "evidence": [
+        "ResearchProject is 39270 lines with 208 methods and is referenced from at least 84 code and test locations",
+        "project.py directly imports a large number of case, USLCI, Council and evidence modules",
+        "lifecycle.py is replayable but hard-codes Council-default product files, claims, finalizer gates and rollback",
+        "the package exports only ResearchProject from __init__.py"
+      ],
+      "retain": [
+        "append_only_event_store",
+        "artifact_registration_and_content_addressing",
+        "idempotency",
+        "projection_rebuild",
+        "replay_recovery_and_lineage",
+        "effect_metadata",
+        "machine_and_human_projection"
+      ],
+      "conflicts": [
+        "project_record_and_case_execution_share_one_class",
+        "state_module_imports_domain_and_case_compilers",
+        "lifecycle_contract_is_council_specific",
+        "the_interface_surface_is_too_large_to_be_a_deep_module"
+      ],
+      "required_interface": [
+        "open_or_create_project",
+        "read_current_project_view",
+        "append_accepted_change",
+        "register_artifact",
+        "rebuild_and_verify",
+        "read_audit_trail"
+      ],
+      "priority": "P0"
+    },
+    {
+      "target_module": "assurance_boundary",
+      "readiness": "partial_case_specific",
+      "disposition": "retain_permission_core_unify_evaluation",
+      "existing_assets": [
+        "lca_research_kernel/responsibility_boundary.py",
+        "lca_research_kernel/workflow_acceptance.py",
+        "lca_research_kernel/director_acceptance.py",
+        "lca_research_kernel/native_lcia_interpretation_evaluation.py",
+        "lca_research_kernel/minimum_comparison_model_acceptance.py",
+        "lca_research_kernel/minimum_comparison_lcia_acceptance.py",
+        "lca_research_kernel/minimum_comparison_final_acceptance.py",
+        "lca_research_kernel/council_acceptance.py",
+        "tests/test_responsibility_boundary.py"
+      ],
+      "evidence": [
+        "responsibility_boundary validates typed operation intents and separates proceed from prepared human handoff",
+        "acceptance and evaluation logic exists in several workflow, Council and case-specific modules",
+        "there is no one generic evaluator that scores trajectory and final LCA outcome together"
+      ],
+      "retain": [
+        "exact_action_side_effect_classification",
+        "secret_field_rejection",
+        "payload_hash_scope_and_resume_route",
+        "fail_closed_unknown_effects",
+        "deterministic_scientific_checks_where_stable"
+      ],
+      "conflicts": [
+        "evaluation_is_fragmented_by_case_and_topology",
+        "Council_finalizer_gates_are_not_generic_D18_assurance",
+        "format_and_scientific_acceptance_are_not_exposed_as_one_result"
+      ],
+      "required_interface": [
+        "authorize_action(operation_intent)",
+        "evaluate_candidate_change(candidate, project_view)",
+        "evaluate_trajectory(trace, expected_policy)",
+        "evaluate_outcome(outcome, lca_contract)",
+        "route_failure(failure)"
+      ],
+      "priority": "P0"
+    }
+  ],
+  "asset_cluster_disposition": [
+    {
+      "cluster": "council_default_and_research_council",
+      "path_patterns": [
+        "lca_research_kernel/council*.py",
+        "lca_research_kernel/research_council*.py",
+        "tests/test_council*.py",
+        "tests/test_research_council*.py"
+      ],
+      "observed_kernel_files": 15,
+      "disposition": "downgrade_and_freeze",
+      "target_role": "optional_orchestrator_strategy_and_historical_evaluation_fixture",
+      "rules": [
+        "not_default",
+        "cannot_own_project_truth",
+        "cannot_define_general_agent_interface",
+        "retain_history_and_rollback_until_migration_acceptance",
+        "extract_only_independent_review_or_debate_mechanisms_that_pass_D18_interfaces"
+      ]
+    },
+    {
+      "cluster": "uslci_case_chain",
+      "path_patterns": [
+        "lca_research_kernel/uslci*.py",
+        "tests/test_uslci*.py"
+      ],
+      "observed_kernel_files": 32,
+      "disposition": "freeze_as_case_fixture",
+      "target_role": "evaluation_fixture_and_source_of_bounded_tool_behaviors",
+      "rules": [
+        "no_new_feature_work",
+        "no_direct_import_into_new_orchestrator",
+        "retain_for_regression_until_generic_contract_replaces_it"
+      ]
+    },
+    {
+      "cluster": "lifepo4_minimum_comparison",
+      "path_patterns": [
+        "lca_research_kernel/minimum_comparison*.py",
+        "tests/test_minimum_comparison*.py",
+        "tests/test_lifepo4*.py"
+      ],
+      "observed_kernel_files": 7,
+      "disposition": "freeze_as_case_fixture",
+      "target_role": "evaluation_fixture_and_selected_domain_rule_source",
+      "rules": [
+        "extract_general_LCA_rules_only_after_case_independence_test",
+        "do_not_use_case_completion_as_agent_maturity_proof"
+      ]
+    },
+    {
+      "cluster": "native_lcia_workflow",
+      "path_patterns": [
+        "lca_research_kernel/native_lcia*.py",
+        "tests/test_native_lcia*.py"
+      ],
+      "observed_kernel_files": 4,
+      "disposition": "retain_as_evaluation_fixture_and_assurance_source",
+      "target_role": "outcome_evaluation_fixture",
+      "rules": [
+        "separate_general_unit_claim_and_source_rules_from_exact_case_workflow",
+        "do_not_register_as_general_capability_without_new_contract"
+      ]
+    },
+    {
+      "cluster": "TianGong_authority_and_adapters",
+      "path_patterns": [
+        "lca_research_kernel/tiangong*.py",
+        "tests/test_tiangong*.py"
+      ],
+      "observed_kernel_files": 10,
+      "disposition": "retain_and_consolidate",
+      "target_role": "capability_gateway_adapters_and_authority_policy",
+      "rules": [
+        "separate_authority_policy_from_transport",
+        "separate_raw_tool_result_from_accepted_project_fact",
+        "preserve_exact_version_and_source_bytes"
+      ]
+    },
+    {
+      "cluster": "legacy_skills_and_agent_prompts",
+      "path_patterns": [
+        "agent/lca-project-controller.md",
+        "agent/lca-research-agent.md",
+        "skills/run-lca-research-project/**",
+        "skills/evidence-to-tidas-lca/**"
+      ],
+      "disposition": "operational_legacy_and_delete_after_replacement",
+      "target_role": "thin_product_and_method_adapters_only",
+      "rules": [
+        "keep_last_operational_contract_until_new_interface_acceptance",
+        "archive_or_delete_prior_candidate_prompt_after_replacement",
+        "remove_case_command_catalog_from_default_user_path",
+        "do_not_store_project_truth_in_skills"
+      ]
+    },
+    {
+      "cluster": "historical_acceptance_and_outputs",
+      "path_patterns": [
+        "docs/*acceptance*.json",
+        "docs/*verification*.md",
+        "outputs/**"
+      ],
+      "disposition": "preserve_cold_evidence",
+      "target_role": "history_recovery_and_test_fixtures",
+      "rules": [
+        "never_rewrite_accepted_bytes",
+        "do_not_load_by_default",
+        "retain_by_pointer_and_hash"
+      ]
+    },
+    {
+      "cluster": "paused_static_material_gap_work",
+      "path_patterns": [
+        "lca_research_kernel/static_material_gap_resolution.py",
+        "tests/test_static_material_gap_resolution.py"
+      ],
+      "disposition": "freeze_uncommitted_pending_D18_mapping",
+      "target_role": "possible_lca_domain_kernel_input_policy",
+      "rules": [
+        "do_not_edit_or_run_as_current_builder_work",
+        "reuse_only_after_new_domain_contract_is_defined"
+      ]
+    }
+  ],
+  "delete_policy": {
+    "delete_now": [],
+    "reason": "旧资产仍承载历史验收、回滚、测试或尚未提取的通用行为；当前工作树还包含用户和暂停执行任务的改动。",
+    "delete_after_replacement_candidates": [
+      {
+        "asset": "agent/lca-research-agent.md",
+        "condition": "new_product_interface_agent_contract_is_accepted"
+      },
+      {
+        "asset": "case_specific_default_CLI_routes",
+        "condition": "generic_product_interface_and_capability_gateway_cover_diagnostics_and_recovery"
+      },
+      {
+        "asset": "Council_specific_default_routing_text_in_agent_and_skill",
+        "condition": "D18_orchestrator_is_operational_and_legacy_recovery_is_separate"
+      },
+      {
+        "asset": "case_methods_inside_ResearchProject",
+        "condition": "ProjectRecord_is_extracted_and_case_fixtures_call_capability_interfaces_instead"
+      }
+    ]
+  },
+  "priority_path": [
+    {
+      "order": 1,
+      "priority": "P0",
+      "outcome": "建立D18七个模块的机器接口，并从现有代码中抽出Project Record核心；旧行为保持可回滚。",
+      "why_first": "没有唯一、较小的状态接口，后续模型、工具和评测都会继续耦合到39270行ResearchProject。"
+    },
+    {
+      "order": 2,
+      "priority": "P0",
+      "outcome": "建立Model Gateway及fake/OpenAI/Anthropic adapters，让模型只能返回候选行动或候选事实。",
+      "why_first": "当前Kernel没有真实模型运行接口，无法证明它是所定义的Agent而不是确定性工作流集合。"
+    },
+    {
+      "order": 3,
+      "priority": "P0",
+      "outcome": "把Research Director从Council和具体ResearchProject方法中解耦，形成一个单入口连续循环。",
+      "why_first": "Council当前是强制路径，且Director不能通过统一接口选择模型与能力。"
+    },
+    {
+      "order": 4,
+      "priority": "P0",
+      "outcome": "统一LCA项目事实分类与Assurance接纳合同，覆盖正式、候选、假设、计算、缺失以及过程/结果双评测。",
+      "why_first": "这是防止模型、工具和对话直接污染正式项目事实的执行基础。"
+    },
+    {
+      "order": 5,
+      "priority": "P1",
+      "outcome": "把TianGong和其他工具收敛到Capability Gateway，并建立一个简单产品入口。",
+      "why_first": "完成后用户只提交研究委托，不再选择142个内部命令。"
+    },
+    {
+      "order": 6,
+      "priority": "P1",
+      "outcome": "将既有案例转成过程与结果评测夹具，验证缺失数据、来源冲突、工具失败、越权和模型分歧。",
+      "why_first": "用旧资产验证新合同，而不是让旧案例决定新架构。"
+    },
+    {
+      "order": 7,
+      "priority": "P2",
+      "outcome": "在单Agent路径稳定后再接MCP和可选Council策略。",
+      "why_first": "MCP和Council是扩展能力，不是Agent成立的前提。"
+    }
+  ],
+  "next_goal_candidate": {
+    "title": "D-18第一阶段：建立通用LCA Agent核心接口并完成非案例化最小闭环",
+    "objective": "在不删除历史资产、不恢复NEV案例执行的前提下，把已批准D-18架构落成可运行的最小核心：抽出唯一Project Record接口，建立Model Gateway与确定性fake adapter，建立Capability Gateway和Assurance接口，并让解耦Council的Research Orchestrator通过一个静态材料研究委托完成候选行动→受控工具结果→接纳或拒绝→项目记录→结果/受限结论的端到端闭环。",
+    "completion_criteria": [
+      "七个D18模块各有机器可校验的interface合同和所有权禁止项",
+      "ResearchProject的事件、工件、投影和恢复核心可通过小接口使用，新的Orchestrator不调用案例方法",
+      "Model Gateway至少有确定性fake adapter，并为OpenAI和Anthropic定义同一provider接口；无凭证测试不要求真实远端调用",
+      "模型输出、工具返回和Council结果不能直接写入Project Record",
+      "Research Orchestrator默认单Agent路径且不编译Council agenda",
+      "Capability Gateway至少包装一个TianGong只读能力和一个本地确定性能力",
+      "Assurance同时检查行动权限、项目变更和最终结果，并保留原因",
+      "一个通用静态材料夹具覆盖正常、缺失数据、工具失败和越权四条路径",
+      "现有Council、USLCI、LiFePO4和NEV资产保持冻结且回归不被破坏",
+      "make verify通过，D18专用检查证明入口、状态真相和禁止直写边界成立"
+    ],
+    "non_goals": [
+      "跑出新的新能源汽车或LCA科学结果",
+      "证明GPT优于Claude或Council优于单Agent",
+      "接入所有MCP服务器",
+      "删除历史案例和Council代码",
+      "重写TianGong能力"
+    ],
+    "first_forward_artifact": "D18模块interface合同、依赖规则和失败语义的机器包及checker",
+    "platform_state": "not_started_no_active_codex_goal_observed"
+  },
+  "next_route": "activate_D18_stage_1_goal_then_implement_machine_contracts_before_migrating_behavior"
+}

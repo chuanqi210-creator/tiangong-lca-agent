@@ -1,0 +1,55 @@
+{
+  "basis": {
+    "execution_lock_sha256": "00c432423754b3884d1722cfaaf7f38b13cf9817f0f46214c935e50969f1dd36",
+    "raw_tree_sha256": "786d6faed73d7675e49cdf89adf3fd0678b187169c6a285ce92c183627fa8dd7"
+  },
+  "contract": "lca_research_evaluation.evidence_layer_lock/v1",
+  "evidence": {
+    "candidate_count": 259,
+    "credential_values_recorded": false,
+    "external_writes": 0,
+    "failure_count": 11,
+    "grade_package": {
+      "path": "outputs/d18-performance-benchmark/final/grade-package.json",
+      "sha256": "7b3809b8f6acdd50cecd5f89c476851a5dcc590b8124c416dd04638996716e3a"
+    },
+    "raw_tree": {
+      "contract": "lca_research_evaluation.canonical_tree_identity/v1",
+      "file_count": 1170,
+      "tree_sha256": "786d6faed73d7675e49cdf89adf3fd0678b187169c6a285ce92c183627fa8dd7"
+    },
+    "run_count": 270,
+    "run_manifest": {
+      "manifest_sha256": "33e3c8d1a9600d8c5ad5970ae736e9a605caa72151c2e46304f67af6113bc695",
+      "path": "outputs/d18-performance-benchmark/final-runs/run-manifest.json",
+      "result_ref_count": 270,
+      "sha256": "1573baf5307767109a6a884a3ba8307b8c2c9d089d0327fd3c585f407e1ccfc6"
+    },
+    "run_manifest_sha256": "33e3c8d1a9600d8c5ad5970ae736e9a605caa72151c2e46304f67af6113bc695"
+  },
+  "inputs": [
+    {
+      "bytes": 12468,
+      "path": "lca_research_evaluation/grader.py",
+      "sha256": "fd9a72d66e5511128b5765dac0355b5afd18f394c4111479172c4c2b1ec81383"
+    },
+    {
+      "bytes": 11306,
+      "path": "lca_research_evaluation/metrics.py",
+      "sha256": "10141748e4e128effa90aca1825e6e1b583bbf6f7651e3dcb2738cfeaf16a55a"
+    },
+    {
+      "bytes": 7851,
+      "path": "lca_research_evaluation/model_grader.py",
+      "sha256": "bf4d0219b3b98e8be74cba5f623cd302daa408bf2fadf15d1bb328a1123e3909"
+    },
+    {
+      "bytes": 11296,
+      "path": "scripts/grade_lca_agent_benchmark.py",
+      "sha256": "a26dbcbc3af8396752a369358498569f9f87f70d1f4d7a8951c74845e690968e"
+    }
+  ],
+  "inputs_sha256": "db9b2899d53e09f0e569ff6b001dddec4bb2c5f7812d89ab6de010e6daa0081c",
+  "layer": "scoring",
+  "lock_sha256": "cb5b16008aa5a3835292d5d3c18d52c370939a24ec473509d9ca0e57478f553f"
+}

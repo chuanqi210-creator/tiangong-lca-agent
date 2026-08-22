@@ -1,0 +1,49 @@
+name: D-18 Public Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11.15"
+          cache: pip
+          cache-dependency-path: runtime/service-python/requirements.lock
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24.18.0"
+      - name: Install locked gitleaks
+        run: |
+          mkdir -p .tools
+          curl --fail --location --retry 3 \
+            --output /tmp/gitleaks.tar.gz \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
+          printf '%s  %s\n' \
+            'ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d' \
+            '/tmp/gitleaks.tar.gz' | sha256sum --check --strict
+          tar -xzf /tmp/gitleaks.tar.gz -C .tools gitleaks
+          test "$(.tools/gitleaks version)" = '8.18.4'
+      - name: Bootstrap locked runtimes
+        run: |
+          python scripts/bootstrap_service_runtime.py \
+            --root . --receipt /tmp/d18-service-runtime-health.json
+          corepack enable
+          corepack prepare pnpm@11.13.0 --activate
+          npm --prefix runtime/tiangong-node ci
+          pnpm --dir apps/web install --frozen-lockfile
+      - name: Verify clean public release
+        env:
+          PYTHONNOUSERSITE: "1"
+        run: make verify-public-release GITLEAKS=.tools/gitleaks

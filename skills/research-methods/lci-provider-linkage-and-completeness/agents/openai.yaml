@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCI Provider Completeness"
+  short_description: "Check provider links and inventory completeness."
+  default_prompt: "Audit provider linkage and LCI completeness without inventing connections."

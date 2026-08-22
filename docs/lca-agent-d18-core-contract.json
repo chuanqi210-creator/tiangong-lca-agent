@@ -1,0 +1,408 @@
+{
+  "contract": "lca_research_kernel.d18_core_architecture_contract/v1",
+  "status": "p0_control_spine_focused_and_repository_verified",
+  "basis": {
+    "top_level_architecture": {
+      "path": "docs/lca-agent-top-level-architecture.json",
+      "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5"
+    },
+    "existing_system_mapping": {
+      "path": "docs/lca-agent-d18-existing-system-mapping.json",
+      "sha256": "a3b87b8fa40660746b5940fd36a5a67ac8918dc0f13e6ff732301aa032819ee1"
+    },
+    "architecture_baseline_commit": "168a675",
+    "control_plane_baseline_commit": "2fac3bf",
+    "complex_revision": "f055155c782ae315bd2c68e7fd332b10f4b68596"
+  },
+  "modules": [
+    {
+      "id": "product_interface",
+      "kind": "product_boundary",
+      "owns": [
+        "研究委托的接收与澄清",
+        "输入材料快照",
+        "面向人的进度、问题和结果表达",
+        "最终交付包的呈现"
+      ],
+      "must_not": [
+        "自行承担LCA科学判断",
+        "把聊天内容直接写成正式项目事实",
+        "把内部模块暴露成用户必须管理的组织结构"
+      ],
+      "interface": [
+        "start_research",
+        "supply_material_or_decision",
+        "read_status",
+        "read_result"
+      ],
+      "implementation": {
+        "status": "contract_only",
+        "module_path": "lca_research_kernel/product_interface.py"
+      }
+    },
+    {
+      "id": "research_orchestrator",
+      "kind": "control_core",
+      "owns": [
+        "把研究目标拆成当前任务",
+        "组装当前最小上下文",
+        "选择模型、规则和工具",
+        "推进、重试、降级、暂停与恢复",
+        "决定何时形成候选结果并送检",
+        "保持唯一当前路线"
+      ],
+      "must_not": [
+        "把自己的控制逻辑伪装成科学证据",
+        "绕过质量权限边界写入正式事实",
+        "因有Council能力而默认拆成多个Agent"
+      ],
+      "interface": [
+        "run_until_boundary(research_id)",
+        "resume(research_id, external_input)",
+        "select_next_action(project_view, domain_policy, available_capabilities)",
+        "submit_candidate_change(candidate)"
+      ],
+      "implementation": {
+        "status": "implemented_focused_verified",
+        "module_path": "lca_research_kernel/research_orchestrator.py",
+        "sha256": "3cb67d55c344e445d357bd1be520343178e96435bf86163fb8f7493e1fb6ae6d",
+        "verification_test": "tests/test_research_orchestrator.py",
+        "verification_test_sha256": "78d0f1afb8dc2a819de30e02efe22da2d900877eb99894be19ab5195b72c6c14"
+      }
+    },
+    {
+      "id": "lca_domain_kernel",
+      "kind": "domain_policy",
+      "owns": [
+        "功能单位、系统边界、分配、情景和影响评价规则",
+        "证据类型和数据适用性规则",
+        "正式数据、候选数据、假设和缺失的分类规则",
+        "LCA论断允许范围",
+        "可复用的专业工作方法"
+      ],
+      "must_not": [
+        "保存动态项目事实",
+        "替代模型进行开放式推理",
+        "包含针对单一案例写死的完整执行脚本"
+      ],
+      "interface": [
+        "classify_material",
+        "validate_goal_and_scope",
+        "evaluate_data_admissibility",
+        "validate_model_and_calculation",
+        "derive_claim_boundary"
+      ],
+      "implementation": {
+        "status": "contract_only",
+        "module_path": "lca_research_kernel/lca_domain_kernel.py"
+      }
+    },
+    {
+      "id": "model_gateway",
+      "kind": "replaceable_port",
+      "owns": [
+        "GPT、Claude及后续模型的统一调用合同",
+        "结构化输入输出",
+        "模型能力差异适配",
+        "模型调用失败与切换"
+      ],
+      "must_not": [
+        "直接执行有副作用的操作",
+        "直接写入正式项目事实",
+        "覆盖TianGong正式数据",
+        "把自身记忆当成项目权威"
+      ],
+      "interface": [
+        "reason(request) -> structured_candidate",
+        "stream(request) -> model_events",
+        "capabilities() -> provider_features",
+        "normalize_error(error) -> retry_or_switch_signal"
+      ],
+      "implementation": {
+        "status": "implemented_focused_verified",
+        "module_path": "lca_research_kernel/model_gateway.py",
+        "sha256": "0298f4c492e2b09dab9a6ed370c2b88f9fca921bba1e0ebfa4175900b2b68319",
+        "verification_test": "tests/test_model_gateway.py",
+        "verification_test_sha256": "9a4538042c07f729fbf59b33e5a0d8af83f5beeb05c40bed28892b85191af5ce"
+      }
+    },
+    {
+      "id": "capability_gateway",
+      "kind": "replaceable_port",
+      "owns": [
+        "TianGong数据、规范与原生工具接入",
+        "检索、代码、计算和LCA工具接入",
+        "MCP及其他连接协议适配",
+        "工具能力发现、版本、超时、错误和返回结构",
+        "受控执行环境"
+      ],
+      "must_not": [
+        "决定研究目标",
+        "把任意MCP服务器自动视为权威来源",
+        "把脚本、设计稿或工具调用日志冒充计算结果",
+        "绕过研究指挥核心直接改变项目结论"
+      ],
+      "interface": [
+        "list_capabilities(context)",
+        "execute(capability_request) -> sourced_result",
+        "describe_authority(capability_id)",
+        "normalize_failure(error)"
+      ],
+      "implementation": {
+        "status": "contract_only",
+        "module_path": "lca_research_kernel/capability_gateway.py"
+      }
+    },
+    {
+      "id": "project_record",
+      "kind": "truth_plane",
+      "owns": [
+        "当前研究目标与范围",
+        "正式数据、候选数据、假设和缺失项",
+        "来源、位置、版本、单位和变换",
+        "模型与计算工件",
+        "决策、风险、进度和下一路线",
+        "追加式事件与可恢复状态"
+      ],
+      "must_not": [
+        "把未核验的模型文本自动升级为正式事实",
+        "把对话历史等同于项目状态",
+        "丢失原始值、单位、来源或转换链"
+      ],
+      "interface": [
+        "open_or_create_project",
+        "read_current_project_view",
+        "append_accepted_change",
+        "register_artifact",
+        "rebuild_and_verify",
+        "read_audit_trail"
+      ],
+      "implementation": {
+        "status": "implemented_focused_verified",
+        "module_path": "lca_research_kernel/project_record.py",
+        "sha256": "92463b1131eee262196cb14eaaafdd8e409e7b8e05dc8ab97ca4c203dad20129",
+        "verification_test": "tests/test_project_record_port.py",
+        "verification_test_sha256": "ef76d47a463f06913e8cdde555226defd69c4ade4b9da3e8aa96aea7b2c029f3"
+      }
+    },
+    {
+      "id": "assurance_boundary",
+      "kind": "cross_cutting_control",
+      "owns": [
+        "科学与工程规则检查",
+        "过程路线和最终结果双重评测",
+        "来源、单位、边界、可复现性和过度声明检查",
+        "工具副作用和人类授权策略",
+        "故障分类与重试上限",
+        "模型或工具异常的阻断与降级"
+      ],
+      "must_not": [
+        "成为第二个研究指挥核心",
+        "用格式通过替代科学正确性",
+        "因低风险本地操作反复向用户索权"
+      ],
+      "interface": [
+        "authorize_action(operation_intent)",
+        "evaluate_candidate_change(candidate, project_view)",
+        "evaluate_trajectory(trace, expected_policy)",
+        "evaluate_outcome(outcome, lca_contract)",
+        "route_failure(failure)"
+      ],
+      "implementation": {
+        "status": "contract_only",
+        "module_path": "lca_research_kernel/assurance.py"
+      }
+    }
+  ],
+  "dependency_rules": {
+    "accepted_project_record_writers": [
+      "assurance_boundary"
+    ],
+    "forbidden_direct_write_sources": [
+      "capability_gateway",
+      "model_gateway",
+      "optional_council_strategy"
+    ],
+    "model_output_status": "candidate_only",
+    "tool_output_status": "sourced_result_not_fact",
+    "edges": [
+      {
+        "from": "product_interface",
+        "to": "research_orchestrator",
+        "channel": "research_intake"
+      },
+      {
+        "from": "project_record",
+        "to": "research_orchestrator",
+        "channel": "project_view"
+      },
+      {
+        "from": "research_orchestrator",
+        "to": "lca_domain_kernel",
+        "channel": "policy_query"
+      },
+      {
+        "from": "research_orchestrator",
+        "to": "model_gateway",
+        "channel": "model_request"
+      },
+      {
+        "from": "model_gateway",
+        "to": "research_orchestrator",
+        "channel": "candidate"
+      },
+      {
+        "from": "research_orchestrator",
+        "to": "assurance_boundary",
+        "channel": "capability_request"
+      },
+      {
+        "from": "assurance_boundary",
+        "to": "capability_gateway",
+        "channel": "authorized_request"
+      },
+      {
+        "from": "capability_gateway",
+        "to": "research_orchestrator",
+        "channel": "sourced_result"
+      },
+      {
+        "from": "research_orchestrator",
+        "to": "assurance_boundary",
+        "channel": "candidate_change"
+      },
+      {
+        "from": "assurance_boundary",
+        "to": "project_record",
+        "channel": "accepted_change"
+      },
+      {
+        "from": "research_orchestrator",
+        "to": "product_interface",
+        "channel": "delivery"
+      }
+    ]
+  },
+  "failure_semantics": [
+    {
+      "layer": "prompt",
+      "code": "goal_contract_mismatch",
+      "result_status": "needs_goal_rebaseline",
+      "next_route": "restore-approved-goal-contract",
+      "may_promote_candidate_to_fact": false
+    },
+    {
+      "layer": "context",
+      "code": "source_or_projection_drift",
+      "result_status": "failed_closed",
+      "next_route": "rebuild-source-bound-context",
+      "may_promote_candidate_to_fact": false
+    },
+    {
+      "layer": "harness",
+      "code": "tool_or_contract_failure",
+      "result_status": "retry_or_degrade",
+      "next_route": "repair-or-switch-bounded-runtime",
+      "may_promote_candidate_to_fact": false
+    },
+    {
+      "layer": "loop",
+      "code": "no_progress_or_stale_route",
+      "result_status": "replan_or_park_branch",
+      "next_route": "select-next-evidence-bearing-action",
+      "may_promote_candidate_to_fact": false
+    },
+    {
+      "layer": "model",
+      "code": "provider_or_reasoning_failure",
+      "result_status": "retry_switch_or_bound_claim",
+      "next_route": "normalize-model-failure",
+      "may_promote_candidate_to_fact": false
+    }
+  ],
+  "frozen_assets": [
+    {
+      "cluster": "council_default_and_research_council",
+      "path_patterns": [
+        "lca_research_kernel/council*.py",
+        "lca_research_kernel/research_council*.py",
+        "tests/test_council*.py",
+        "tests/test_research_council*.py"
+      ],
+      "disposition": "downgrade_and_freeze"
+    },
+    {
+      "cluster": "uslci_case_chain",
+      "path_patterns": [
+        "lca_research_kernel/uslci*.py",
+        "tests/test_uslci*.py"
+      ],
+      "disposition": "freeze_as_case_fixture"
+    },
+    {
+      "cluster": "lifepo4_minimum_comparison",
+      "path_patterns": [
+        "lca_research_kernel/minimum_comparison*.py",
+        "tests/test_minimum_comparison*.py",
+        "tests/test_lifepo4*.py"
+      ],
+      "disposition": "freeze_as_case_fixture"
+    },
+    {
+      "cluster": "native_lcia_workflow",
+      "path_patterns": [
+        "lca_research_kernel/native_lcia*.py",
+        "tests/test_native_lcia*.py"
+      ],
+      "disposition": "retain_as_evaluation_fixture_and_assurance_source"
+    },
+    {
+      "cluster": "TianGong_authority_and_adapters",
+      "path_patterns": [
+        "lca_research_kernel/tiangong*.py",
+        "tests/test_tiangong*.py"
+      ],
+      "disposition": "retain_and_consolidate"
+    },
+    {
+      "cluster": "legacy_skills_and_agent_prompts",
+      "path_patterns": [
+        "agent/lca-project-controller.md",
+        "agent/lca-research-agent.md",
+        "skills/run-lca-research-project/**",
+        "skills/evidence-to-tidas-lca/**"
+      ],
+      "disposition": "operational_legacy_and_delete_after_replacement"
+    },
+    {
+      "cluster": "historical_acceptance_and_outputs",
+      "path_patterns": [
+        "docs/*acceptance*.json",
+        "docs/*verification*.md",
+        "outputs/**"
+      ],
+      "disposition": "preserve_cold_evidence"
+    },
+    {
+      "cluster": "paused_static_material_gap_work",
+      "path_patterns": [
+        "lca_research_kernel/static_material_gap_resolution.py",
+        "tests/test_static_material_gap_resolution.py"
+      ],
+      "disposition": "freeze_uncommitted_pending_D18_mapping"
+    }
+  ],
+  "claim_ceiling": {
+    "supported": [
+      "D18_module_boundaries_are_machine_bound",
+      "only_assurance_may_submit_accepted_Project_Record_changes",
+      "Project_Record_Model_Gateway_and_default_Research_Orchestrator_are_P0_verified"
+    ],
+    "unsupported": [
+      "D18_core_modules_are_implemented",
+      "D18_agent_is_operational",
+      "model_or_tool_outputs_are_formal_project_facts"
+    ]
+  },
+  "next_route": "implement-d18-lca-domain-kernel"
+}

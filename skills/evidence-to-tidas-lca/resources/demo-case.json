@@ -1,0 +1,72 @@
+{
+  "project": {
+    "title": "Lithium iron phosphate cathode demo",
+    "research_object": "LiFePO4 cathode material preparation",
+    "functional_unit": "1 kg LiFePO4 cathode material",
+    "system_boundary": "cradle-to-gate laboratory synthesis",
+    "geography": "China",
+    "time_period": "2020-2026"
+  },
+  "sources": [
+    {
+      "key": "paper-1",
+      "title": "Open literature demo source",
+      "citation": "Demo citation for competition prototype; replace with reviewed literature before final use.",
+      "url": "https://example.org/demo-paper"
+    }
+  ],
+  "flows": [
+    {
+      "name": "Electricity, medium voltage",
+      "direction": "input",
+      "quantity": 12.5,
+      "unit": "kWh",
+      "category": "energy",
+      "evidence": "paper-1"
+    },
+    {
+      "name": "Lithium carbonate",
+      "direction": "input",
+      "quantity": 0.42,
+      "unit": "kg",
+      "category": "material",
+      "evidence": "paper-1"
+    },
+    {
+      "name": "Iron phosphate",
+      "direction": "input",
+      "quantity": 0.98,
+      "unit": "kg",
+      "category": "material",
+      "evidence": "paper-1"
+    },
+    {
+      "name": "LiFePO4 cathode material",
+      "direction": "output",
+      "quantity": 1.0,
+      "unit": "kg",
+      "category": "product",
+      "evidence": "paper-1"
+    }
+  ],
+  "processes": [
+    {
+      "name": "LiFePO4 laboratory synthesis",
+      "description": "Demo solid-state synthesis route for competition prototype modeling.",
+      "inputs": [
+        "Electricity, medium voltage",
+        "Lithium carbonate",
+        "Iron phosphate"
+      ],
+      "outputs": [
+        "LiFePO4 cathode material"
+      ],
+      "evidence": "paper-1"
+    }
+  ],
+  "assumptions": [
+    "Demo values are placeholders and must be replaced by reviewed literature data.",
+    "The system boundary is cradle-to-gate and excludes battery assembly.",
+    "Allocation has not been applied because this demo has one reference product."
+  ]
+}

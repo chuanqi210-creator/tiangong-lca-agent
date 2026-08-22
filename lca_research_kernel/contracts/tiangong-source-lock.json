@@ -1,0 +1,126 @@
+{
+  "contract": "lca_research_kernel.source_lock/v1",
+  "lock_id": "tiangong-capability-infrastructure-2026-07-23",
+  "sources": [
+    {
+      "source_id": "lca.kernel.official-public-source",
+      "source_type": "static_artifact",
+      "owner": "LCA Research Agent",
+      "identity": "lca_research_kernel.official_public_source.OfficialPublicSourceCapability",
+      "version": "1.6.2",
+      "integrity": "sha256-2e2f9db01f6acd81edfe10c2ee375b787a21fbb4ac478d63de2189d888aa4f78",
+      "source_url": "repo://lca_research_kernel/official_public_source.py",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "lca.kernel.official-source-binding",
+      "source_type": "static_artifact",
+      "owner": "LCA Research Agent",
+      "identity": "lca_research_kernel.official_source_binding",
+      "version": "1.0.2",
+      "integrity": "sha256-7cce955a3a412b0802d5dc0a9bcf046fc75565a5c99a3477b54e9b2612df4d95",
+      "source_url": "repo://lca_research_kernel/official_source_binding.py",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "lca.kernel.official-public-source-index",
+      "source_type": "static_artifact",
+      "owner": "LCA Research Agent",
+      "identity": "lca_research_kernel.official_public_source_index",
+      "version": "2026-08-01.8",
+      "integrity": "sha256-b7b9d821a8082d25b7a194d5d354d9850ac16c43cc4c679763b08396e11cc8c0",
+      "source_url": "repo://lca_research_kernel/contracts/official-public-source-index.json",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "d18.architecture",
+      "source_type": "static_artifact",
+      "owner": "LCA Research Agent",
+      "identity": "docs/lca-agent-top-level-architecture.json",
+      "version": "16609ccb1943b7da960de75dd4667f04cb699d1b",
+      "integrity": "sha256-19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+      "source_url": "repo://docs/lca-agent-top-level-architecture.json",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "d18.permission-policy",
+      "source_type": "static_artifact",
+      "owner": "LCA Research Agent",
+      "identity": "lca_research_kernel/responsibility_boundary.py",
+      "version": "16609ccb1943b7da960de75dd4667f04cb699d1b",
+      "integrity": "sha256-496316d13903743c2adcb2dd5c30c628e01f3cfdf105d0209b665ef38a2051d6",
+      "source_url": "repo://lca_research_kernel/responsibility_boundary.py",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.skills.git",
+      "source_type": "git_object",
+      "owner": "TianGong",
+      "identity": "tiangong-lca/skills",
+      "version": "0f48f443b9b247b1ab7ef9f251b847c10003d955",
+      "integrity": "git-commit:0f48f443b9b247b1ab7ef9f251b847c10003d955",
+      "source_url": "https://github.com/tiangong-lca/skills",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.mcp.npm",
+      "source_type": "npm_package",
+      "owner": "TianGong",
+      "identity": "@tiangong-lca/mcp-server",
+      "version": "0.0.31",
+      "integrity": "sha512-NMFUET5EusnOcx4G7Ro8NY804NMnZiwIsHhLTqshx/zvLkIriweuwIkbdg6mJUMJ1EcoFz/r3ITcFWVDiPt45A==",
+      "source_url": "https://registry.npmjs.org/@tiangong-lca/mcp-server",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.cli.npm",
+      "source_type": "npm_package",
+      "owner": "TianGong",
+      "identity": "@tiangong-lca/cli",
+      "version": "0.0.29",
+      "integrity": "sha512-iee5B/rzTTZxI7XWxYZnyzcEp1r8jTKw6KBn8EcwEatGpzv1xw8XJdFKv+JQ15GFeV0uJSz5AJ/AGf5X+fQ6hg==",
+      "source_url": "https://registry.npmjs.org/@tiangong-lca/cli",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.sdk.npm",
+      "source_type": "npm_package",
+      "owner": "TianGong",
+      "identity": "@tiangong-lca/tidas-sdk",
+      "version": "0.1.45",
+      "integrity": "sha512-VJq1BJ62xNwSD/zQXHLMlq2016XpU56zF4Qc3okQ7nADNKrwi4Io1qaBtc5YRdvTeC9oT9hRHIFD6BQ5zWK1Xg==",
+      "source_url": "https://registry.npmjs.org/@tiangong-lca/tidas-sdk",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.tidas-tools.pypi",
+      "source_type": "python_package",
+      "owner": "TianGong",
+      "identity": "tidas-tools",
+      "version": "0.0.43",
+      "integrity": "sha256-b4f86fd2d7d0a78aa57da3b04383d0bc163980a55e9b788a40323a37926dd195",
+      "source_url": "https://pypi.org/project/tidas-tools/0.0.43/",
+      "adoption": "adopted"
+    },
+    {
+      "source_id": "tiangong.cli.historical-0.0.25",
+      "source_type": "npm_package",
+      "owner": "TianGong",
+      "identity": "@tiangong-lca/cli",
+      "version": "0.0.25",
+      "integrity": "sha512-27mgEaPpZIPqVCPiCLbxTMOBHaKUlh4FGqACaefObRJfytLyp5bqm9h5Sn482dTZFHkhi0a1eQKnwd5nJcrj5Q==",
+      "source_url": "https://registry.npmjs.org/@tiangong-lca/cli",
+      "adoption": "historical_replay"
+    },
+    {
+      "source_id": "local.evidence-to-tidas-skill.historical",
+      "source_type": "git_object",
+      "owner": "LCA Research Agent",
+      "identity": "skills/evidence-to-tidas-lca/SKILL.md",
+      "version": "16609ccb1943b7da960de75dd4667f04cb699d1b",
+      "integrity": "sha256-407bd547056d5112fb4d317078a0fde3ec8e2fbc83ec2ef0ae0f21388626fe12",
+      "source_url": "repo://skills/evidence-to-tidas-lca/SKILL.md",
+      "adoption": "historical_replay"
+    }
+  ]
+}

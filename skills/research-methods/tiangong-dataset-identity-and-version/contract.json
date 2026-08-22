@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "tiangong-dataset-identity-and-version",
+  "version": "1.0.0",
+  "title": "Verify TianGong Dataset Identity and Version",
+  "description": "Use when a TianGong Flow, Process, lifecycle model, LCIA method, or result must be identified, version-pinned, distinguished from a similarly named object, or checked for temporal supersession.",
+  "applicability": {
+    "desired_artifacts": ["dataset_identity_confirmation"],
+    "semantic_roles": ["dataset_identity", "dataset_version", "source_identity", "time_scope"],
+    "requirements": ["source_confirmation"],
+    "conflict_types": ["version_conflict", "identity_conflict", "temporal_conflict"],
+    "target_object_kinds": ["Flow", "Process", "Dataset", "DatasetVersion", "ProductSystem", "LCIAMethod"]
+  },
+  "required_inputs": ["target_object_kind", "identity_or_search_candidate", "study_time_scope"],
+  "expected_artifact": "dataset_identity_confirmation",
+  "accepted_state_delta": "official_identity_and_version_bound_or_gap_preserved",
+  "capability_ids": ["tiangong.data.flow-read", "tiangong.data.process-read", "tiangong.data.lifecyclemodel-read", "tiangong.skill.flow-hybrid-search", "tiangong.skill.process-hybrid-search", "tiangong.skill.lifecyclemodel-hybrid-search", "tiangong.evidence.source-evidence-contract"],
+  "upstream_skill_ids": ["flow-hybrid-search", "process-hybrid-search", "lifecyclemodel-hybrid-search", "source-evidence-dataset-development"],
+  "domain_rule_ids": ["tiangong.identity.exact_object", "tiangong.identity.version_temporal_fit"],
+  "source_lock_ids": ["tiangong.cli.npm", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["object_kind_matches", "official_id_is_exact", "version_is_preserved", "source_receipt_is_bound", "temporal_fit_is_stated"],
+  "failure_boundaries": ["credential_required", "official_identity_absent", "version_conflict_unresolved"],
+  "forbidden": ["direct_project_record_write", "name_only_identity", "infer_latest_version", "merge_similarly_named_objects"],
+  "permission_effects": ["no_permission_expansion", "tiangong_read_only"],
+  "resources": []
+}

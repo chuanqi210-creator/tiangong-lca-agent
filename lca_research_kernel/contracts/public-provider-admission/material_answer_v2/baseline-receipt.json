@@ -1,0 +1,32 @@
+{
+  "contract": "d18.public_model_profile_baseline_attestation/v1",
+  "model_observation": {
+    "completed_call_count": 1
+  },
+  "profile_id": "material_answer_v2",
+  "provider_id": "gemini",
+  "public_projection": {
+    "classification": "content_bound_sanitized_attestation_of_private_admission",
+    "contract": "d18.public_model_schema_profile_evidence_projection/v1",
+    "current_capacity_qualification_attested": false,
+    "private_evidence_published": false,
+    "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
+    "public_reexecution_performed": false,
+    "source_artifact_sha256s": {
+      "independent_review_sha256": "b83300f8baa2351e6fb53983194e284a7ec0436e01e1bcbb451b6130f3466992",
+      "probe_receipt_sha256": "7e33aa0ba3c1d3a2f6fe7207318946372d7064298993a570f9072ffbe651aa94",
+      "raw_acceptance_sha256": "c01e35832014cd2e906433f869f7afc2e33e2da2c66758ee55897057b69ae527",
+      "run_trace_sha256": "90b074bbbf8af8b4b8927bd87e33e795daeb011f3d4cf9ceaf102020430e3e32"
+    },
+    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
+    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7"
+  },
+  "run_trace_observation": {
+    "event_count": 2,
+    "external_write_count": 0,
+    "sealed_reference_read_count": 0
+  },
+  "scientific_result_count": 0,
+  "status": "accepted_bounded_blind_baseline",
+  "tool_request_count": 0
+}

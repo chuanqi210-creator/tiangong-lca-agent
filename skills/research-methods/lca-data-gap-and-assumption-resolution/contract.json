@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lca-data-gap-and-assumption-resolution",
+  "version": "1.0.0",
+  "title": "Resolve LCA Data Gaps and Assumptions",
+  "description": "Use when an LCA input, mapping, parameter, source, allocation choice, scenario value, or uncertainty field is missing and must be requested, sourced, estimated transparently, or left as a conclusion-limiting gap.",
+  "applicability": {
+    "desired_artifacts": ["data_gap_resolution"],
+    "semantic_roles": ["foreground_inventory_input", "background_inventory_input", "allocation_rule", "uncertainty_parameter", "missing_source", "user_owned_fact"],
+    "requirements": ["source_confirmation"],
+    "conflict_types": ["data_gap", "assumption_conflict", "source_conflict"],
+    "target_object_kinds": ["MissingDatum", "Assumption", "Exchange", "Calculation"]
+  },
+  "required_inputs": ["typed_missing_role", "affected_artifact", "responsibility_boundary"],
+  "expected_artifact": "data_gap_resolution",
+  "accepted_state_delta": "missing_roles_resolved_asked_assumed_or_bounded",
+  "capability_ids": ["official-public-source-read", "tiangong.evidence.source-evidence-contract", "tiangong.skill.source-evidence-dataset-development", "tiangong.skill.external-dataset-curated-import"],
+  "upstream_skill_ids": ["source-evidence-dataset-development", "external-dataset-curated-import"],
+  "domain_rule_ids": ["lca.data_gap.ownership", "lca.assumption.traceability", "lca.conclusion.gap_ceiling"],
+  "source_lock_ids": ["lca.kernel.official-public-source", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "assumption", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["gap_role_is_typed", "ownership_is_assigned", "transformation_is_traceable", "conclusion_effect_is_explicit"],
+  "failure_boundaries": ["user_owned_fact_absent", "no_authoritative_source", "assumption_would_change_product_identity"],
+  "forbidden": ["direct_project_record_write", "silent_default", "assumption_as_official", "unnecessary_user_question"],
+  "permission_effects": ["no_permission_expansion", "bounded_source_read_only"],
+  "resources": []
+}

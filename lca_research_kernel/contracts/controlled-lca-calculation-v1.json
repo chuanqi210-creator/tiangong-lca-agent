@@ -1,0 +1,139 @@
+{
+  "contract": "lca_research_kernel.controlled_lca_calculation/v1",
+  "status": "frozen_before_execution",
+  "selection": {
+    "strategy": "sha256_ascending_over_exact_process_and_method_refs",
+    "manual_candidate_order_allowed": false,
+    "eligible_candidates": [
+      {
+        "process_id": "648b9225-80f3-4483-88d2-37aef9ebaa73",
+        "version": "01.01.002",
+        "method_id": "6209b35f-9447-40b5-b68c-a1099e3674a0",
+        "method_version": "01.00.000",
+        "graph_id": "primary-aluminium-four-process-native-graph"
+      }
+    ],
+    "exclusions": [
+      {
+        "class": "historical_top_level_case",
+        "reason": "not eligible for the first real calculation blind fixture"
+      }
+    ]
+  },
+  "native_model": {
+    "execution_mode": "openlca_ipc",
+    "calculation_type": "UPSTREAM_ANALYSIS",
+    "root_process": {
+      "id": "7f673a16-5901-4834-bb69-207bbb20a67c",
+      "version": "01.01.002",
+      "reference_flow_id": "42ee4a90-48c3-4c67-a58b-cd3cd7a07f74",
+      "reference_amount": "1000",
+      "reference_unit": "kg"
+    },
+    "official_result_process": {
+      "id": "648b9225-80f3-4483-88d2-37aef9ebaa73",
+      "version": "01.01.002"
+    },
+    "unit_processes": [
+      {
+        "id": "e41a0ebc-04de-4e62-935e-8a62bdc3b3da",
+        "version": "01.01.003"
+      },
+      {
+        "id": "b3a96d2a-b106-43fa-bdaa-1eb7e787313f",
+        "version": "01.01.002"
+      },
+      {
+        "id": "7809411f-6555-4c64-bb58-be86813736d4",
+        "version": "01.01.003"
+      },
+      {
+        "id": "7f673a16-5901-4834-bb69-207bbb20a67c",
+        "version": "01.01.002"
+      }
+    ],
+    "provider_connections": [
+      {
+        "consumer_process_id": "b3a96d2a-b106-43fa-bdaa-1eb7e787313f",
+        "provider_process_id": "e41a0ebc-04de-4e62-935e-8a62bdc3b3da",
+        "flow_id": "12a47ad8-273c-44ed-b110-5e86e837f213"
+      },
+      {
+        "consumer_process_id": "7809411f-6555-4c64-bb58-be86813736d4",
+        "provider_process_id": "b3a96d2a-b106-43fa-bdaa-1eb7e787313f",
+        "flow_id": "429f2b7f-592a-434c-92e2-43a6b4859300"
+      },
+      {
+        "consumer_process_id": "7f673a16-5901-4834-bb69-207bbb20a67c",
+        "provider_process_id": "7809411f-6555-4c64-bb58-be86813736d4",
+        "flow_id": "adb275a4-36a5-4ba9-9a25-ef82ed3f110a"
+      }
+    ]
+  },
+  "impact_method": {
+    "id": "6209b35f-9447-40b5-b68c-a1099e3674a0",
+    "version": "01.00.000",
+    "name": "Climate change",
+    "reference_unit": "kg CO2 Equivalents",
+    "official_bundle_version": "1.2.4",
+    "official_bundle_commit": "d054b46fd99f8b981ffebe598f5d174da23dd0cd",
+    "official_factor_bundle_sha256": "3803be483b8b29060e031cdfe401f3c2ed02b68bcd6e0588fd467f9459d45139",
+    "official_factor_bundle_decompressed_sha256": "1f69c73ca45fd2f5a1379b6f91bb8886a85829adec317689b6039b6cc7066ba1",
+    "factors": [
+      {
+        "flow_id": "08a91e70-3ddc-11dd-923d-0050c2490048",
+        "flow_version": "03.00.004",
+        "direction": "OUTPUT",
+        "value": "1.0"
+      },
+      {
+        "flow_id": "08a91e70-3ddc-11dd-9610-0050c2490048",
+        "flow_version": "03.00.004",
+        "direction": "OUTPUT",
+        "value": "29.8"
+      }
+    ]
+  },
+  "numeric_tolerance": {
+    "absolute": "1e-9",
+    "relative": "1e-9",
+    "basis": "preexecution_ieee754_solver_tolerance"
+  },
+  "source_root": "outputs/tiangong-authority-following-second-case/catalog/export-f70744dccec84b29/exports/f70744dccec84b29",
+  "source_paths": [
+    "manifest.json",
+    "lifecyclemodels/648b9225-80f3-4483-88d2-37aef9ebaa73_01.01.001.json",
+    "processes/648b9225-80f3-4483-88d2-37aef9ebaa73_01.01.002.json",
+    "processes/e41a0ebc-04de-4e62-935e-8a62bdc3b3da_01.01.003.json",
+    "processes/b3a96d2a-b106-43fa-bdaa-1eb7e787313f_01.01.002.json",
+    "processes/7809411f-6555-4c64-bb58-be86813736d4_01.01.003.json",
+    "processes/7f673a16-5901-4834-bb69-207bbb20a67c_01.01.002.json",
+    "flows/12a47ad8-273c-44ed-b110-5e86e837f213_01.01.000.json",
+    "flows/429f2b7f-592a-434c-92e2-43a6b4859300_01.01.001.json",
+    "flows/adb275a4-36a5-4ba9-9a25-ef82ed3f110a_01.01.000.json",
+    "flows/42ee4a90-48c3-4c67-a58b-cd3cd7a07f74_01.01.000.json",
+    "flows/08a91e70-3ddc-11dd-923d-0050c2490048_03.00.004.json",
+    "flows/08a91e70-3ddc-11dd-924e-0050c2490048_03.00.004.json",
+    "flows/08a91e70-3ddc-11dd-93f7-0050c2490048_03.00.004.json",
+    "flows/08a91e70-3ddc-11dd-9610-0050c2490048_03.00.004.json",
+    "flows/419682fe-60fb-4b43-be89-bf2824b51104_00.00.002.json",
+    "flows/4d9a8790-3ddd-11dd-936e-0050c2490048_03.00.004.json",
+    "flows/f79d0f8f-2b0e-49cb-bed0-b1ea0fbd8625_01.00.004.json",
+    "flows/fe0acd60-3ddc-11dd-ab5f-0050c2490048_03.00.004.json",
+    "flows/fe0acd60-3ddc-11dd-ac48-0050c2490048_03.00.004.json",
+    "flowproperties/93a60a56-a3c8-11da-a746-0800200b9a66_03.00.003.json",
+    "unitgroups/93a60a57-a4c8-11da-a746-0800200c9a66_03.00.003.json"
+  ],
+  "method_source_paths": [
+    "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/lcia-method-unit-index.json",
+    "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/official-lcia-1.2.4/cache_manifest.json"
+  ],
+  "forbidden": {
+    "oracle_in_model_material": true,
+    "post_observation_tolerance": true,
+    "health_only_execution": true,
+    "manual_candidate_order": true,
+    "external_writes": true,
+    "scientific_result_publication": true
+  }
+}

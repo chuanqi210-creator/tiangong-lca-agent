@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lca-unit-flow-and-dimensional-check",
+  "version": "1.0.0",
+  "title": "Check LCA Units, Flows, and Dimensions",
+  "description": "Use when LCA flows, flow properties, units, unit groups, quantities, exchange directions, reference amounts, or conversions must be checked before inventory aggregation or impact calculation.",
+  "applicability": {
+    "desired_artifacts": ["unit_flow_validation"],
+    "semantic_roles": ["unit_equivalence", "flow_identity", "flow_property", "reference_amount", "conversion_factor"],
+    "requirements": ["calculation"],
+    "conflict_types": ["unit_conflict", "flow_identity_conflict", "dimension_conflict"],
+    "target_object_kinds": ["Flow", "Exchange", "FlowProperty", "Unit", "UnitGroup", "Quantity"]
+  },
+  "required_inputs": ["source_value_and_unit", "flow_identity", "flow_property"],
+  "expected_artifact": "unit_flow_validation",
+  "accepted_state_delta": "quantities_dimensionally_valid_or_conflict_preserved",
+  "capability_ids": ["tiangong.specification.tidas-schema", "tiangong.validation.tidas", "tiangong.tidas-tools.tidas-validate", "tiangong.skill.flow-governance-review"],
+  "upstream_skill_ids": ["flow-governance-review", "tidas-contract-context"],
+  "domain_rule_ids": ["lca.unit.dimension_compatibility", "lca.flow.exact_identity", "lca.calculation.preserve_original"],
+  "source_lock_ids": ["tiangong.sdk.npm", "tiangong.tidas-tools.pypi", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "computed", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["flow_identity_is_exact", "flow_property_matches", "unit_group_is_compatible", "transformation_chain_is_complete"],
+  "failure_boundaries": ["incompatible_dimension", "conversion_factor_absent", "ambiguous_flow_identity"],
+  "forbidden": ["direct_project_record_write", "cross_dimension_conversion", "discard_original_value", "name_only_flow_merge"],
+  "permission_effects": ["no_permission_expansion", "local_validation_only"],
+  "resources": []
+}

@@ -1,0 +1,1261 @@
+{
+  "basis": {
+    "basis_commit": "a0d6065df50a43e883190f2e0c9b0c8cdac9a3ca",
+    "legacy_freeze_sha256": "5816bbf97f4d1b0cc7667eb9f25aa4cdeb06d2541078dac855fa7560b06e1abf",
+    "migration_kind": "legacy_monolithic_freeze_to_evidence_dag"
+  },
+  "contract": "lca_research_evaluation.evidence_layer_lock/v1",
+  "evidence": {
+    "final_corpus_tree": {
+      "contract": "lca_research_evaluation.canonical_tree_identity/v1",
+      "file_count": 185,
+      "path": "outputs/d18-performance-benchmark/final-corpus",
+      "tree_sha256": "27edaa42477f093a1a67c730b963960202064b9fbc3c0575b03cf27c07998187"
+    }
+  },
+  "inputs": [
+    {
+      "bytes": 7947,
+      "path": "agent/lca-project-controller.md",
+      "sha256": "96044d0f49207b503ffb6d426530d672bf1fe9ad3da1bbdb53b6a7f3cc78446c"
+    },
+    {
+      "bytes": 1593,
+      "path": "agent/lca-research-agent.md",
+      "sha256": "5bd659c40cad23d4149685ae7a4989da1419ea805ab25768cc86cade2192ce68"
+    },
+    {
+      "bytes": 69,
+      "path": "lca_research_evaluation/__init__.py",
+      "sha256": "dd642dbb5ae3357f72b8db13e18b5a12f83a37f0665a3a65ecf3dab66983c01d"
+    },
+    {
+      "bytes": 17595,
+      "path": "lca_research_evaluation/calculation_fixture.py",
+      "sha256": "7d0063a38674b0ad71519a00623d59b6544b09878426297a898f1f11e073022e"
+    },
+    {
+      "bytes": 8162,
+      "path": "lca_research_evaluation/contracts.py",
+      "sha256": "6d2cbf0341c6e6c226c91fe59505a8bb796ed1f07a8a8d278b3ee65daf4531ba"
+    },
+    {
+      "bytes": 28172,
+      "path": "lca_research_evaluation/controlled_calculation.py",
+      "sha256": "fd7f6b5ee593676271752ede641e0a605153f28015cd844bae209dbc70ed7aa9"
+    },
+    {
+      "bytes": 19934,
+      "path": "lca_research_evaluation/corpus.py",
+      "sha256": "636af0001e3a8475b78cbe23cc5b5bc278d6acfc86222c4addfbc97e84efa216"
+    },
+    {
+      "bytes": 3371,
+      "path": "lca_research_evaluation/counterfactual.py",
+      "sha256": "c6971771c2cb4b0a18467821882350f94d2eb09aee9f8e52d6558f3e9acb9ebf"
+    },
+    {
+      "bytes": 4068,
+      "path": "lca_research_evaluation/d18_runner.py",
+      "sha256": "c034ba8ae88daeb62c636061bc8bfdba13c2b84e4f69a6e8b8cb1c9487f74fee"
+    },
+    {
+      "bytes": 4110,
+      "path": "lca_research_evaluation/diagnosis.py",
+      "sha256": "a473d0ba7ce88b931141366bf940c88278f3865325af933c30d5dd10cf576cef"
+    },
+    {
+      "bytes": 2293,
+      "path": "lca_research_evaluation/experiment.py",
+      "sha256": "ed3b4dc912a33b257638c0deef6ce2c8d8683b936accb3bebb00ad2e0a306f3f"
+    },
+    {
+      "bytes": 7418,
+      "path": "lca_research_evaluation/openai_agents_runner.py",
+      "sha256": "f44dbac22387df8b8d069817cad2031c5a5678ee4786fefaa7656665b66d6405"
+    },
+    {
+      "bytes": 15697,
+      "path": "lca_research_evaluation/raw_runner.py",
+      "sha256": "1166c620dd806ce88f1fd8fcb379d84467c5abeb7d76740bda21aeafde0155d8"
+    },
+    {
+      "bytes": 9267,
+      "path": "lca_research_evaluation/runner_types.py",
+      "sha256": "842d676475e4e13d0e27c2473fb28ea23c91f230cc501be294aa1a1ec1bdfa05"
+    },
+    {
+      "bytes": 28884,
+      "path": "lca_research_evaluation/stress.py",
+      "sha256": "13042ce0cb28c781f62239e86f795e1b924b22154b19f41d579edc086b976c2b"
+    },
+    {
+      "bytes": 141,
+      "path": "lca_research_kernel/__init__.py",
+      "sha256": "6b3efb0d0be3ddb194adad2c6586aff737b59741fe5f499d1a857fb15f2d810d"
+    },
+    {
+      "bytes": 101,
+      "path": "lca_research_kernel/__main__.py",
+      "sha256": "439bdb4dae29ed01e9a2633f350123e553d231b0fe93d95a9d65c84a9eda1565"
+    },
+    {
+      "bytes": 28558,
+      "path": "lca_research_kernel/acquisition_options.py",
+      "sha256": "841ff7cd0d4750a91611fb6a35ff07314b96773708a727734c47afdfc68038e6"
+    },
+    {
+      "bytes": 9634,
+      "path": "lca_research_kernel/agent_bootstrap.py",
+      "sha256": "78e9fa6b4f0c8790b9599a3b0ed1523b71a156039876c55f5bef1f319941d95f"
+    },
+    {
+      "bytes": 16244,
+      "path": "lca_research_kernel/architecture_semantics.py",
+      "sha256": "a557dfdf048f56e0bb01c2d38bd19a2cb13e1da6238a7eb45d02f1d8cd59be70"
+    },
+    {
+      "bytes": 10975,
+      "path": "lca_research_kernel/assurance.py",
+      "sha256": "24174d126ebbdca681cd21812b867aacbd94f68026a939fc48d7d344078f48cb"
+    },
+    {
+      "bytes": 34155,
+      "path": "lca_research_kernel/author_hosted_file_routes.py",
+      "sha256": "09f60fcd7781e4e50501729c95cbd8a1fc2a062e7afcec23463bcb4df240932a"
+    },
+    {
+      "bytes": 47735,
+      "path": "lca_research_kernel/author_institution_routes.py",
+      "sha256": "956a479da3a51d9ebdbb4869791eab6e6c434b2ac0453836713f79e1487111c4"
+    },
+    {
+      "bytes": 38662,
+      "path": "lca_research_kernel/capability_adapters.py",
+      "sha256": "12a7a9a8349afbb486642fe56ac6885d4c3d683e2fc18b09ece3c15d881a52e4"
+    },
+    {
+      "bytes": 9191,
+      "path": "lca_research_kernel/capability_catalog.py",
+      "sha256": "c1700abfb320f6673624d05d2be10d884953c808269d4d828f17e31fdd6783dd"
+    },
+    {
+      "bytes": 15889,
+      "path": "lca_research_kernel/capability_gateway.py",
+      "sha256": "1084fc8f0e2adec4ee20b8932047be6d4bdca39d789402e0a8ac07faac52d2e6"
+    },
+    {
+      "bytes": 6963,
+      "path": "lca_research_kernel/capability_infrastructure_acceptance.py",
+      "sha256": "abc40c5b0b085df2e39d298f06e10cf5e6993fbf38bcbc9aff9ad618fd0ad407"
+    },
+    {
+      "bytes": 4459,
+      "path": "lca_research_kernel/capability_infrastructure_clean_review.py",
+      "sha256": "ea84c1ff897cedf2375e15b203049f07b770a8d88a705743cea451414178d977"
+    },
+    {
+      "bytes": 6851,
+      "path": "lca_research_kernel/capability_infrastructure_project.py",
+      "sha256": "d37062379adb0e7cf734763785d9b2e7c1454e99e6f3cbb22022c3554c3166a3"
+    },
+    {
+      "bytes": 5383,
+      "path": "lca_research_kernel/capability_runtime.py",
+      "sha256": "00cbf7e7a8d298804db6b1dccd6a7b6a8ae8a4f198e03aa3e2ad9e8f3e559081"
+    },
+    {
+      "bytes": 22608,
+      "path": "lca_research_kernel/claim_matrix.py",
+      "sha256": "10dc7d2751a64e5b583387c6dbc9c3b173456a5b939410ebca186156ff396a85"
+    },
+    {
+      "bytes": 65145,
+      "path": "lca_research_kernel/cli.py",
+      "sha256": "11952e6f61437dc7d6a59bc99d67d0c11069707bee1ce0667ae96e010768a11c"
+    },
+    {
+      "bytes": 22991,
+      "path": "lca_research_kernel/comparison_readiness.py",
+      "sha256": "9010a41ed108b59a31610aa355ce35c6011530d8a3b0ae59db2e3ded2a154b60"
+    },
+    {
+      "bytes": 9125,
+      "path": "lca_research_kernel/complex_runtime_alignment.py",
+      "sha256": "40060910a6bbf38ed912d801f01daaeeec7e56782bc444191dc5eac087b00df8"
+    },
+    {
+      "bytes": 15784,
+      "path": "lca_research_kernel/context_assembler.py",
+      "sha256": "8367e37f1f2372e752ac8bbbd9609dfea872d6de6a6ebfda8c50e4ed2d05e688"
+    },
+    {
+      "bytes": 1148,
+      "path": "lca_research_kernel/contracts/agent-startup-manifest-v2.json",
+      "sha256": "2604a4297bc755b97e4e796aec835c2fc010fe02c880c0bf4b11ad4b20cdfb56"
+    },
+    {
+      "bytes": 1140,
+      "path": "lca_research_kernel/contracts/agent-startup-manifest.json",
+      "sha256": "61e28c1bb0c598dc8549f1f91d1cee8d43fbc4d9716b9f849b5328de061d06d9"
+    },
+    {
+      "bytes": 1446,
+      "path": "lca_research_kernel/contracts/controlled-evaluation-exclusions.json",
+      "sha256": "e37caeaff6612f21167d12c9c37c2907bb31b32267f7b52b1b6ca3bc2c3bd874"
+    },
+    {
+      "bytes": 5428,
+      "path": "lca_research_kernel/contracts/controlled-lca-calculation-v1.json",
+      "sha256": "39a0f522dd7a854f5cbe3cd8f691a2bfb5df70d8d62bc468fa38767b54fba387"
+    },
+    {
+      "bytes": 2442,
+      "path": "lca_research_kernel/contracts/controlled-research-evaluation-v1.json",
+      "sha256": "024b56f03e5d16241c77c038fddda6ded168d7ec6400f5592c31501468fca507"
+    },
+    {
+      "bytes": 8407,
+      "path": "lca_research_kernel/contracts/d18-runtime-architecture-semantics.json",
+      "sha256": "5995f698cb885f82a8551efe716cffe2ee2bef3dff836db0bbe04a63699e3016"
+    },
+    {
+      "bytes": 4002,
+      "path": "lca_research_kernel/contracts/model-provider-catalog.json",
+      "sha256": "7528377f11f2541b2f2adc61a4dc58157f75fbe436a6e5685bffb07e944428a4"
+    },
+    {
+      "bytes": 853,
+      "path": "lca_research_kernel/contracts/model-runtime-policy.json",
+      "sha256": "3d7d44f497bb59573bbfe0ff443971ecf5b1dcc685784f705ce5269bf77782f6"
+    },
+    {
+      "bytes": 3379,
+      "path": "lca_research_kernel/contracts/native-research-workflow-v1.json",
+      "sha256": "48a59413a86dd310ff1e61a71af0be4296380dcf3dd0e96a6b5a978bcad1f7b2"
+    },
+    {
+      "bytes": 7087,
+      "path": "lca_research_kernel/contracts/performance-parity-program-v1.json",
+      "sha256": "f9b8c08e3d2c1ee0125f11db8a059d0d2e8664660245c6a8d33b588522972133"
+    },
+    {
+      "bytes": 1563,
+      "path": "lca_research_kernel/contracts/project-execution-policy.json",
+      "sha256": "20d43fa4a69e4c61c1682ba9c2430c23b26bb6bd838926332f57bf1bc169503a"
+    },
+    {
+      "bytes": 3551,
+      "path": "lca_research_kernel/contracts/qingxiaoda-openai-compat-v1.json",
+      "sha256": "677f14fc2fd762fdc9bba4d339c04fe887d489df2d2023968370137e34908a74"
+    },
+    {
+      "bytes": 2106,
+      "path": "lca_research_kernel/contracts/runtime-environment-contract.json",
+      "sha256": "adb232ab579948bdb5276ddc9f3d57f8eef506df53572ed861f57db41ff659b7"
+    },
+    {
+      "bytes": 77996,
+      "path": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+      "sha256": "9ed0a374665646f19a9684da98902230b6ba18a0f8c596d2f4742c26adedd451"
+    },
+    {
+      "bytes": 3905,
+      "path": "lca_research_kernel/contracts/tiangong-source-lock.json",
+      "sha256": "cf50659c85be1e677fe7053b15c008c879f6ff9557971c5337203a1c69f9b237"
+    },
+    {
+      "bytes": 4522,
+      "path": "lca_research_kernel/controlled_evaluation_clean_review.py",
+      "sha256": "7022e72b1add10dccd18b694161980bd1344d85deb5947d59322980aaf1fd3f2"
+    },
+    {
+      "bytes": 27696,
+      "path": "lca_research_kernel/controlled_evaluation_fixture.py",
+      "sha256": "ac675d7ed18e6cdc77c056172668baf9b19b343d303644c1a9833d8678ff4218"
+    },
+    {
+      "bytes": 27371,
+      "path": "lca_research_kernel/controlled_evaluation_grader.py",
+      "sha256": "bf36c2487d0117b79ed85891ef3cd91a3c8a8b6e943791a3cd1483ae0be89fc9"
+    },
+    {
+      "bytes": 36821,
+      "path": "lca_research_kernel/controlled_research_evaluation.py",
+      "sha256": "5bf34f15588f6e92dc75d2afda02af00cf6a3db9b96599e62080c973703e05a2"
+    },
+    {
+      "bytes": 49152,
+      "path": "lca_research_kernel/council_acceptance.py",
+      "sha256": "9a4a60fb37b20c783dc8a186c87e3cf8878deb89c8db0aa85015fe4ed856253c"
+    },
+    {
+      "bytes": 52271,
+      "path": "lca_research_kernel/council_default_contract.py",
+      "sha256": "2c5b63039db87285f79f10a754ecc8cc38cfb44bfbc862539a1f1c6db5f66c34"
+    },
+    {
+      "bytes": 70134,
+      "path": "lca_research_kernel/council_project.py",
+      "sha256": "3586a08f857a6c8e59e6229bc99275185ffd14051ec93e740d395a92701aa2c1"
+    },
+    {
+      "bytes": 62019,
+      "path": "lca_research_kernel/council_runtime.py",
+      "sha256": "9fbd268df1a69cd4b54400ac508120baea06e3b7edcbb5290b7ae99fa57ed63f"
+    },
+    {
+      "bytes": 27204,
+      "path": "lca_research_kernel/d18_architecture.py",
+      "sha256": "5e358f41265c1e75fa5f901b9ec580b6e78f55470fdc1024190f1962b152921c"
+    },
+    {
+      "bytes": 17852,
+      "path": "lca_research_kernel/d18_system_acceptance.py",
+      "sha256": "f9d89210b28d1e60d16f5929164e6e88e7a87eaebfc3d7337247dfe17a3e7df3"
+    },
+    {
+      "bytes": 25652,
+      "path": "lca_research_kernel/director_acceptance.py",
+      "sha256": "a31861344bfc2414f8ce2d838ae0b49f8d55c02e8396c03972ecef1c923fcdb1"
+    },
+    {
+      "bytes": 23127,
+      "path": "lca_research_kernel/director_work_item.py",
+      "sha256": "5ba4af4d344c68de9adbc08e95b65aec5dfd78b16b47ddad60c209e37605e24b"
+    },
+    {
+      "bytes": 16705,
+      "path": "lca_research_kernel/energy_sensitivity.py",
+      "sha256": "0c80884928bdb5b81913410c3f81c82eb0a1e2bfc3a1fbb015ccb406e472c125"
+    },
+    {
+      "bytes": 19153,
+      "path": "lca_research_kernel/entity_authoring.py",
+      "sha256": "ce894ce49f865ccc3807dffd3f659ac40c61827263e04b0c27729cb8a2be6a4f"
+    },
+    {
+      "bytes": 6282,
+      "path": "lca_research_kernel/evaluation_fixture.py",
+      "sha256": "34db00dbbcb0c2a2c2b75864147a2e9121e1a4ff1afe335b8fecb275d01eb4be"
+    },
+    {
+      "bytes": 22116,
+      "path": "lca_research_kernel/evidence_acquisition.py",
+      "sha256": "265603d6fcb7658a62f3469e9667d24a81c4ff8171592eab04d36739fc17f9b1"
+    },
+    {
+      "bytes": 25336,
+      "path": "lca_research_kernel/evidence_admission_transaction.py",
+      "sha256": "143340956411544a32c30719667280b4ae9d6429aba3eef9d59c8a72c754139b"
+    },
+    {
+      "bytes": 35824,
+      "path": "lca_research_kernel/evidence_candidate_ledger.py",
+      "sha256": "7a96f397a0995c525f084c9c33e66b077655b5740e614a8253dc3eacb6f3382b"
+    },
+    {
+      "bytes": 31019,
+      "path": "lca_research_kernel/evidence_intake.py",
+      "sha256": "98741240190b33d71f39f0f423aefe9250a593496ecd57f1b64b53618bc479db"
+    },
+    {
+      "bytes": 18558,
+      "path": "lca_research_kernel/execution_environment.py",
+      "sha256": "95bc007fec79abae35fccd7db21db33a24ca7dab46f1ee1c931963b984ce749d"
+    },
+    {
+      "bytes": 15555,
+      "path": "lca_research_kernel/gap_analysis.py",
+      "sha256": "96e95d6d1d6baf6b8dc3f96ba032c9d944c51b99c9035dbbced8e922f772a815"
+    },
+    {
+      "bytes": 9291,
+      "path": "lca_research_kernel/identity.py",
+      "sha256": "caa1cdc890bbc5a43856fa409ab889f5366ed77a861909f0f880d44c63ef8743"
+    },
+    {
+      "bytes": 31732,
+      "path": "lca_research_kernel/inventory.py",
+      "sha256": "0093d91e5f77324984b28fe9f6a4c2925aa5772820261a7e55b0a0a44dc51df1"
+    },
+    {
+      "bytes": 28156,
+      "path": "lca_research_kernel/korean_source_routes.py",
+      "sha256": "580205f14e00e52992070021533c314e6a6303569ca7777edc62ced1be4bfceb"
+    },
+    {
+      "bytes": 21659,
+      "path": "lca_research_kernel/lca_domain_kernel.py",
+      "sha256": "e98fad1240ad1e29c36abe2bed36eae205b972121fc7efdf093d35a14446468d"
+    },
+    {
+      "bytes": 33903,
+      "path": "lca_research_kernel/lifecyclemodel_assembly_plan.py",
+      "sha256": "d08047dfba763ba49b41c45719c743bd3fe413a50a3cf17fd0a221997ef9941c"
+    },
+    {
+      "bytes": 34970,
+      "path": "lca_research_kernel/lifecyclemodel_shell.py",
+      "sha256": "a67bf5b1de0dbbd17d54fb9c9feee7f8b8db44d8627a8b8cdc33f87104a64655"
+    },
+    {
+      "bytes": 15739,
+      "path": "lca_research_kernel/lineage.py",
+      "sha256": "63f562e127519332cbe3f4481424d217be66187a584a2fd296caec86547de228"
+    },
+    {
+      "bytes": 9103,
+      "path": "lca_research_kernel/material_gap_closure.py",
+      "sha256": "c5d44968f4284b92dc936a8f72fb5eba7a17e5c716ce2171a551c25f81300162"
+    },
+    {
+      "bytes": 11624,
+      "path": "lca_research_kernel/minimum_comparison_final_acceptance.py",
+      "sha256": "41e7edb92cae84546ce1e4b0912aae970c59729de66cf89faf7dd0bc3df40bdd"
+    },
+    {
+      "bytes": 35870,
+      "path": "lca_research_kernel/minimum_comparison_final_package.py",
+      "sha256": "0302d002936906dbdbf4d33589d98adfb6fdc32b894df2d8611ffade439450cb"
+    },
+    {
+      "bytes": 51582,
+      "path": "lca_research_kernel/minimum_comparison_graph.py",
+      "sha256": "00e8bdd9ec5495d430946106a3537411e817775611840c5cf491459db98ec19b"
+    },
+    {
+      "bytes": 66769,
+      "path": "lca_research_kernel/minimum_comparison_lcia.py",
+      "sha256": "2aa92ce05b4c46f402cecdeba0da8056349dae9f2883c9d3eab4df7c7a25ca72"
+    },
+    {
+      "bytes": 10597,
+      "path": "lca_research_kernel/minimum_comparison_lcia_acceptance.py",
+      "sha256": "86e0d0fc7231ef0b69d971758182868968aa133e8dff9749a4c9027a9aaac2dc"
+    },
+    {
+      "bytes": 103694,
+      "path": "lca_research_kernel/minimum_comparison_model.py",
+      "sha256": "1a4ea9424a0c899691c747b9a5e67cfc0bf16a77d4aa2f43b7db1bb68050c9c5"
+    },
+    {
+      "bytes": 11050,
+      "path": "lca_research_kernel/minimum_comparison_model_acceptance.py",
+      "sha256": "ba5045db2688e1157086dfb6675cf5bb62613cc94722960f6c17c40b6b810197"
+    },
+    {
+      "bytes": 59511,
+      "path": "lca_research_kernel/model_execution_package.py",
+      "sha256": "bee637a4024f23e1a044178c81039155ee1cf7837c84b2a1af4c325dab7ff26b"
+    },
+    {
+      "bytes": 38484,
+      "path": "lca_research_kernel/model_gateway.py",
+      "sha256": "2b3082aab5d3804bb9efca32ad3daa5bbed5d7fdd889826cef4571ff33fb8ba7"
+    },
+    {
+      "bytes": 50927,
+      "path": "lca_research_kernel/model_package_replay.py",
+      "sha256": "187f90cd3abe6bec06baad27354eefeba797c35e7ab98a902c0f2151df9e1287"
+    },
+    {
+      "bytes": 32238,
+      "path": "lca_research_kernel/model_provider_adapters.py",
+      "sha256": "b729053abd88e87470a691d48312fff24ae929b306cc565b63beb326201d5e5d"
+    },
+    {
+      "bytes": 5363,
+      "path": "lca_research_kernel/model_provider_admission.py",
+      "sha256": "18df3a823a445a4075086bb184b42378681cdc5a4a2c5cbdbdf4069b44f04647"
+    },
+    {
+      "bytes": 6428,
+      "path": "lca_research_kernel/model_provider_catalog.py",
+      "sha256": "614a204c1aae8b97934816737459530650f3777c1ff127f9d9e4dcf450349ed1"
+    },
+    {
+      "bytes": 14168,
+      "path": "lca_research_kernel/model_runtime.py",
+      "sha256": "098f280660145cd78ebb2b0b995d5e83370441aa28de4c5cf94cbf50bf6cabc2"
+    },
+    {
+      "bytes": 26975,
+      "path": "lca_research_kernel/native_lcia_generalization_acceptance.py",
+      "sha256": "08edb1cd1f1aead74d1c13c063f4b23ef22140f2622e90ec6803b1f638a755e5"
+    },
+    {
+      "bytes": 14690,
+      "path": "lca_research_kernel/native_lcia_interpretation.py",
+      "sha256": "8711d2db0ea46148f9b800a46b6f4d4a8b8000c6c740a0c8c25bfdd0daa78b10"
+    },
+    {
+      "bytes": 10932,
+      "path": "lca_research_kernel/native_lcia_interpretation_evaluation.py",
+      "sha256": "9a3729010d12d6473cf5dd659eec8769f7dd183d74d3e344b8f5f08bdf29a8d3"
+    },
+    {
+      "bytes": 26630,
+      "path": "lca_research_kernel/native_lcia_interpretation_workflow.py",
+      "sha256": "c75ec76bbe985f43bc9973361a10d6368d2192556f88240ed935c3fb7a2aac3d"
+    },
+    {
+      "bytes": 8470,
+      "path": "lca_research_kernel/native_research_workflow.py",
+      "sha256": "58b25e3690809fff8a92f47b5405e2ffa8e2795bd8f4f97895d7c46bb9ef1874"
+    },
+    {
+      "bytes": 17555,
+      "path": "lca_research_kernel/performance.py",
+      "sha256": "351930db8e6c7353b34dbb7399b4a51e5ae225a11c12090264a4a2f468480201"
+    },
+    {
+      "bytes": 45915,
+      "path": "lca_research_kernel/portable_runtime_closure.py",
+      "sha256": "37c78beef55575c2dc6c17168a260c5de78cfc0ce5cca037e84356de32246277"
+    },
+    {
+      "bytes": 23146,
+      "path": "lca_research_kernel/process_plan.py",
+      "sha256": "11e235e5b80a29c06015d6eccadfffc2b58cd67443c3246e765b52e16804b1e5"
+    },
+    {
+      "bytes": 13953,
+      "path": "lca_research_kernel/product_interface.py",
+      "sha256": "8a41e3c1a15a29ba77e8fce122664f370a0cea35ffce84c1ffe711017dabb994"
+    },
+    {
+      "bytes": 1927621,
+      "path": "lca_research_kernel/project.py",
+      "sha256": "d667beefce2d11443f130538193402d98f9171833be989ddecf862fd9f718dad"
+    },
+    {
+      "bytes": 27100,
+      "path": "lca_research_kernel/project_record.py",
+      "sha256": "43882593c64a1e6e094af2d99287c61066543a963c6ddeb0f51455ad52f092a1"
+    },
+    {
+      "bytes": 37241,
+      "path": "lca_research_kernel/provider_candidate_resolution.py",
+      "sha256": "ba282c12d7417f09e61d595aa6126f61b70739d9f3f149ce9a9aaa6801d22837"
+    },
+    {
+      "bytes": 52098,
+      "path": "lca_research_kernel/provider_evidence_requirements.py",
+      "sha256": "4e0af177c06ba848681f89351f21f81c2d13b1dc41f002e820bc0a12a56c01ac"
+    },
+    {
+      "bytes": 43989,
+      "path": "lca_research_kernel/provider_network_gap.py",
+      "sha256": "7e43f4a56a76830d0d1a0cb8fc9ef38b4e6b3380b4edd1985c44bc934fc46bfb"
+    },
+    {
+      "bytes": 24932,
+      "path": "lca_research_kernel/public_discovery.py",
+      "sha256": "b63bb2db591216906ae8a90bc8341057108737c7f2a9bf1056fcdf6e54fd602c"
+    },
+    {
+      "bytes": 33906,
+      "path": "lca_research_kernel/record_export_probe.py",
+      "sha256": "f59fa55258cfa0875f878d64ce4b72fc297161999940aaa3906dd332c6cda6b3"
+    },
+    {
+      "bytes": 22630,
+      "path": "lca_research_kernel/reference_integration.py",
+      "sha256": "0d2ab58decab97d0781918f61e0f79badf4f81ee443b4dbc3e1462e442c15978"
+    },
+    {
+      "bytes": 17266,
+      "path": "lca_research_kernel/replacement_dry_run.py",
+      "sha256": "5f12e359d28740d533cd4cca4e2e2f867ec307616b6ff276a0db7ef7f1bbb4a2"
+    },
+    {
+      "bytes": 22736,
+      "path": "lca_research_kernel/replacement_map.py",
+      "sha256": "bde11fdac53db89a7fd08a44d0b3482cda9e51ebfabd6215c85a5f81dc44d854"
+    },
+    {
+      "bytes": 58451,
+      "path": "lca_research_kernel/research_council_benchmark.py",
+      "sha256": "8d4a3005115d412586e8e8d452d95e6d58bb1177ffceb25b656c53dfc7298a8c"
+    },
+    {
+      "bytes": 52418,
+      "path": "lca_research_kernel/research_council_benchmark_assets.py",
+      "sha256": "b63a0cc360a4bf0268b8c7c6d6c7e1ef92238beb856474b82dab13839bdf13ca"
+    },
+    {
+      "bytes": 42994,
+      "path": "lca_research_kernel/research_council_benchmark_portfolio.py",
+      "sha256": "2f68468f1a3973001ede7ec070057e62d5cc424bfb6cc7ae69a3f39af6223006"
+    },
+    {
+      "bytes": 54718,
+      "path": "lca_research_kernel/research_council_benchmark_portfolio_workflow.py",
+      "sha256": "3a651f23e9c0071f2bf6c64b382400a1a8c2e285463711c2a4a9d2a5daadba2f"
+    },
+    {
+      "bytes": 12874,
+      "path": "lca_research_kernel/research_council_contracts.py",
+      "sha256": "dfdce11abbc3b7717bd3a7b7a8117de23adf3dde304c044af34aac47b7de106f"
+    },
+    {
+      "bytes": 52534,
+      "path": "lca_research_kernel/research_council_evaluation.py",
+      "sha256": "f17b37b7af3caf9a8f10e4bfd653f717ede07b663684581d28d43ff5ae39cb68"
+    },
+    {
+      "bytes": 28767,
+      "path": "lca_research_kernel/research_council_portfolio.py",
+      "sha256": "da392873dd089323949b2d636b2ac1e3811a75d9dc290bbc57329becbb8c0fab"
+    },
+    {
+      "bytes": 66282,
+      "path": "lca_research_kernel/research_council_positive_benchmark.py",
+      "sha256": "7b744a440df9ca4b97163bd19f6b4811b55811522cc341fc12d70bffa64efd48"
+    },
+    {
+      "bytes": 30352,
+      "path": "lca_research_kernel/research_council_provider_closure_audit.py",
+      "sha256": "47001eec3745f24a18a0b2515b755e6977a0613a0839f61eae047c6685451301"
+    },
+    {
+      "bytes": 69009,
+      "path": "lca_research_kernel/research_council_workflow.py",
+      "sha256": "665dbf33e3e0144c3ae8cfdcc8c8f50e3bcfd827ed379cf0886b06de27c706e2"
+    },
+    {
+      "bytes": 55044,
+      "path": "lca_research_kernel/research_director.py",
+      "sha256": "8fac20116d8a1551a8d5af552d738b860f3696088c1cbc18c1596b702141eab2"
+    },
+    {
+      "bytes": 62354,
+      "path": "lca_research_kernel/research_orchestrator.py",
+      "sha256": "c5a15f1561aa27ab402605e444e0c261965a120b4b25da158a80d61b1ba35f00"
+    },
+    {
+      "bytes": 28838,
+      "path": "lca_research_kernel/residual_output.py",
+      "sha256": "5440226708460d8661ee0f2c86e5188b6a3378499829ec79fdeabf056bedd28c"
+    },
+    {
+      "bytes": 12287,
+      "path": "lca_research_kernel/responsibility_boundary.py",
+      "sha256": "496316d13903743c2adcb2dd5c30c628e01f3cfdf105d0209b665ef38a2051d6"
+    },
+    {
+      "bytes": 68230,
+      "path": "lca_research_kernel/resulting_process_dry_run.py",
+      "sha256": "a30b77d5ce258e4c743b92f4f137e3823a876b42be81b467f69adf1577c0f468"
+    },
+    {
+      "bytes": 10160,
+      "path": "lca_research_kernel/run_control.py",
+      "sha256": "d50e793ebf27e9a2389c04769be80b7e57093a5c1e79f5ec2dbf5882f3508893"
+    },
+    {
+      "bytes": 8847,
+      "path": "lca_research_kernel/run_trace.py",
+      "sha256": "285d4446231dfa6c17a84a5752fc6e760157e95a6386775f00992098badaf3af"
+    },
+    {
+      "bytes": 5790,
+      "path": "lca_research_kernel/runtime_bootstrap.py",
+      "sha256": "a9d1697e196c94d7b9a4054f6b4f1c4a5e8be5207bf6f3511b2d341fc788b41d"
+    },
+    {
+      "bytes": 4646,
+      "path": "lca_research_kernel/runtime_core_acceptance.py",
+      "sha256": "25161db8ca452c1b2dbc38d523c70108bbeac33afa4b0dcdeb646f8c03246c9a"
+    },
+    {
+      "bytes": 6894,
+      "path": "lca_research_kernel/runtime_core_clean_review.py",
+      "sha256": "6f886d039f350fdeca2a772c435fd860c3e6c9c2c88d92501cf3a955a93ab625"
+    },
+    {
+      "bytes": 4439,
+      "path": "lca_research_kernel/runtime_core_evaluation.py",
+      "sha256": "9b8299c8eac4e6e6b82739da8e1d9faacb0b7d110887e589f83dca340910e101"
+    },
+    {
+      "bytes": 10475,
+      "path": "lca_research_kernel/runtime_environment.py",
+      "sha256": "a586422044685f6f8de614c7bb6c66989d525af7a3e2ffb2fedc446ffcce4579"
+    },
+    {
+      "bytes": 6004,
+      "path": "lca_research_kernel/runtime_environment_clean_review.py",
+      "sha256": "6470b36e3af5ad5c52fa3b1e10683911b1e62816c8d6d4d831b7739fecaace41"
+    },
+    {
+      "bytes": 10259,
+      "path": "lca_research_kernel/runtime_environment_health.py",
+      "sha256": "bb06ea7cb675d6a63da9c79cb2957acf25d7efa3a4c849597b4ceceaf7a033a3"
+    },
+    {
+      "bytes": 5880,
+      "path": "lca_research_kernel/runtime_health.py",
+      "sha256": "12ff966ae6f537af323aff0e8cee6e41abc616da1773654b41e17d7221cc8eb6"
+    },
+    {
+      "bytes": 31541,
+      "path": "lca_research_kernel/scenario.py",
+      "sha256": "a59813ca90c641e1f8bda0a69d7419f94d89072ab24453cfcf11f59cd3f9df68"
+    },
+    {
+      "bytes": 18173,
+      "path": "lca_research_kernel/scope.py",
+      "sha256": "f22ad56d53cf322176acbd2a0bf154fc702886f3c6c234261acf92f4354ad62b"
+    },
+    {
+      "bytes": 30354,
+      "path": "lca_research_kernel/source_expansion.py",
+      "sha256": "87be48fb20a20028d7e3bc573e893f51f476f5a80808d3902120b7bd78047b68"
+    },
+    {
+      "bytes": 13468,
+      "path": "lca_research_kernel/static_material_intake.py",
+      "sha256": "7b0c7cc5d444d4b7c4bc50ac081ed1a0c46d639f4bd67d9e742fe4b509588c42"
+    },
+    {
+      "bytes": 18411,
+      "path": "lca_research_kernel/stoichiometric_consistency.py",
+      "sha256": "24c855802654af6553d68f1ec3e6b38bec180ad1ec2e6b7da8c05ee0d684ae0c"
+    },
+    {
+      "bytes": 14943,
+      "path": "lca_research_kernel/tiangong_authority.py",
+      "sha256": "505d74357aa367829d5feac369ce3879690fd8e8b4b6dbe647be8c131fa06589"
+    },
+    {
+      "bytes": 14325,
+      "path": "lca_research_kernel/tiangong_authority_transition.py",
+      "sha256": "a9e15c023541f8d29badcb481c041fbc062fb431445f71c2e6a65c800ea2fdc1"
+    },
+    {
+      "bytes": 50195,
+      "path": "lca_research_kernel/tiangong_authority_workflow.py",
+      "sha256": "d434b8adc603691158463f05b6256bab33967785760d8d3bcf318e63d08eabf0"
+    },
+    {
+      "bytes": 17981,
+      "path": "lca_research_kernel/tiangong_capability_adoption.py",
+      "sha256": "5ce984e871089f71b1c05c36a4267e1ff42fa5f4119755b05a9b17dc2e715c79"
+    },
+    {
+      "bytes": 17447,
+      "path": "lca_research_kernel/tiangong_capability_inventory.py",
+      "sha256": "2d26d7ed92dcaccc4041d063e37a5889e2ba0722e050a20a405642e7b79f722a"
+    },
+    {
+      "bytes": 28976,
+      "path": "lca_research_kernel/tiangong_lifecyclemodel_surface_capture.mjs",
+      "sha256": "162be64a5795296723be1c1f199dd231f3ae2adc65fa80326c8b87b8b9c0b08b"
+    },
+    {
+      "bytes": 24167,
+      "path": "lca_research_kernel/tiangong_native_case.py",
+      "sha256": "2815f36149e7a9ee0d5167018876574a6ee926b8f91c9c71669748e402489050"
+    },
+    {
+      "bytes": 13605,
+      "path": "lca_research_kernel/tiangong_open_data_selection.py",
+      "sha256": "7e6105942141a5a6ae8ba43fa40e7d5bc22a6d492f69fd50dc1f4fddd9d66e9c"
+    },
+    {
+      "bytes": 53176,
+      "path": "lca_research_kernel/tiangong_public_result_screening.py",
+      "sha256": "21acce14d79e28910527729fafb9d0454e9c66acee7295c6ed13618d21482800"
+    },
+    {
+      "bytes": 34416,
+      "path": "lca_research_kernel/tiangong_read_adapter.py",
+      "sha256": "6d452872e5bb2286cc0e0efe6b6ee53a393b6e0f06ef95b290023da4b4bb78c2"
+    },
+    {
+      "bytes": 21463,
+      "path": "lca_research_kernel/tiangong_reference_lookup_capture.mjs",
+      "sha256": "958e2aaf62be80fccd1aad1e5b6c671443927ea2008c6440ec76aa67d61f084f"
+    },
+    {
+      "bytes": 20980,
+      "path": "lca_research_kernel/tiangong_second_case_acceptance.py",
+      "sha256": "153aa15f831b487160c70de4e4dcc380fe8ea062ced2bccdf1e0c40340585abe"
+    },
+    {
+      "bytes": 22402,
+      "path": "lca_research_kernel/tiangong_second_case_package.py",
+      "sha256": "b1a5fb6af24ccebff3852841698c40d107acf21ef15e10b6aa4d1c3f9ccf03df"
+    },
+    {
+      "bytes": 41131,
+      "path": "lca_research_kernel/uslci_background_inventory_integration.py",
+      "sha256": "6758b83138e25cba94069e7b46b2f50e2ccc808c5d5e50c494bb1acd1cd40477"
+    },
+    {
+      "bytes": 17659,
+      "path": "lca_research_kernel/uslci_current_breadth_closure.py",
+      "sha256": "dcc4a16667e8aa3251c31db881a5843901f7ae97b441c56781f90e04b7259c8e"
+    },
+    {
+      "bytes": 26976,
+      "path": "lca_research_kernel/uslci_depth_4_layer_closure.py",
+      "sha256": "43eb67ac70fedb35df1a38881ccc44e689c8a50cef0279e3f73b05c003cbd885"
+    },
+    {
+      "bytes": 25362,
+      "path": "lca_research_kernel/uslci_depth_4_provider_batch.py",
+      "sha256": "a0fe50b7131ac42a910c75b6926df999341234d1213f3c5113568f03ec282e5e"
+    },
+    {
+      "bytes": 26842,
+      "path": "lca_research_kernel/uslci_depth_4_provider_continuation.py",
+      "sha256": "628d58d278fed95c425ebff984143601ca56a013986fa7a6c64368642203e440"
+    },
+    {
+      "bytes": 35338,
+      "path": "lca_research_kernel/uslci_elementary_flow_native_qa_harness.py",
+      "sha256": "99def5dfe30f10070b781dca77c03955a36fe7b7d8ac49dfa0b2b9f94ce89825"
+    },
+    {
+      "bytes": 75813,
+      "path": "lca_research_kernel/uslci_flow_authoring_bulk_batch_native_gates.py",
+      "sha256": "c355b466bb62fc87b99e24ff7ec404ecad005fb454a676581641e3b10ca449f5"
+    },
+    {
+      "bytes": 77168,
+      "path": "lca_research_kernel/uslci_flow_authoring_bulk_batch_saved_plans.py",
+      "sha256": "756836ee90de747a2e845f35b813577e4152d6f0a99f107ca83d9147ce580d75"
+    },
+    {
+      "bytes": 78212,
+      "path": "lca_research_kernel/uslci_flow_authoring_bulk_batch_supports.py",
+      "sha256": "1457af92cdf0d2d03302ec56085e234bd4ab366b0091c024ab25e7bdae00934e"
+    },
+    {
+      "bytes": 35555,
+      "path": "lca_research_kernel/uslci_flow_authoring_canary_native_gates.py",
+      "sha256": "6ca6c9669bf881766570fec9beb8b08b4e179f186b36306fecd1e2bf62cd482a"
+    },
+    {
+      "bytes": 37049,
+      "path": "lca_research_kernel/uslci_flow_authoring_canary_saved_plans.py",
+      "sha256": "9f477c6c173c6f6371c50b8ac520bace8eddf8bbffa57f39c6129761980ff0b8"
+    },
+    {
+      "bytes": 48060,
+      "path": "lca_research_kernel/uslci_flow_authoring_canary_supports.py",
+      "sha256": "ff0405c2a91355bdd243c9260b3ec2e493899825ed91f72c62e0b01b421b6156"
+    },
+    {
+      "bytes": 36715,
+      "path": "lca_research_kernel/uslci_flow_authoring_corpus_closure.py",
+      "sha256": "2efbb6e5525d97757d7634aee068e09274da843f6a1dab09ba2b3998c886f627"
+    },
+    {
+      "bytes": 42611,
+      "path": "lca_research_kernel/uslci_flow_authoring_corpus_release_canary.py",
+      "sha256": "d11393b24fbe5dd34475b7b0dc7dba42b02a19bd4be19f7cc18ca13a01cc03af"
+    },
+    {
+      "bytes": 23892,
+      "path": "lca_research_kernel/uslci_flow_authoring_corpus_release_plan.py",
+      "sha256": "d7c029945779fd354f60d8ce298e2797dc712cc28ef711f42eeea95cd8d7cdc9"
+    },
+    {
+      "bytes": 52870,
+      "path": "lca_research_kernel/uslci_flow_authoring_plan.py",
+      "sha256": "5a6c562101d829ae95e756a84b900fc1bd3f378a953d1b72b6e7e5670be62619"
+    },
+    {
+      "bytes": 43158,
+      "path": "lca_research_kernel/uslci_flow_identity_resolution_batch.py",
+      "sha256": "a6c51e826c42309350c3f794ad76d8c08e0c05a6955110b0a98ea98cc506b97f"
+    },
+    {
+      "bytes": 51430,
+      "path": "lca_research_kernel/uslci_flow_identity_resolution_plan.py",
+      "sha256": "1889449f8645b4beb0dbbe8b243ad934139fbbf84704db9594e82fc917829e87"
+    },
+    {
+      "bytes": 16430,
+      "path": "lca_research_kernel/uslci_generation_closure.py",
+      "sha256": "de0226bd71a200bba789666e5677be7058fe463044a5ea48cdb1d57dde81c3ae"
+    },
+    {
+      "bytes": 33527,
+      "path": "lca_research_kernel/uslci_native_slice_preflight_batch.py",
+      "sha256": "3ab4f95da6ce28416ff00e6459a2badabec7172f053a9335a9cc77265daa012c"
+    },
+    {
+      "bytes": 20316,
+      "path": "lca_research_kernel/uslci_native_slice_preflight_continuation.py",
+      "sha256": "a921540b80d3cb5840c3bf4a48cb475cc81986b41cbb130cd40dc6d1317712c3"
+    },
+    {
+      "bytes": 31012,
+      "path": "lca_research_kernel/uslci_native_slice_preflight_plan.py",
+      "sha256": "74b479ce97a35e8fe1cb2597cde31780bf39ecc7410810c0a62867f3724db499"
+    },
+    {
+      "bytes": 43297,
+      "path": "lca_research_kernel/uslci_native_slice_process_action_execution.py",
+      "sha256": "ce3ccd4647072a4f05503d3588007bc1215f93ac7472e3e9b5ba5e8de370d683"
+    },
+    {
+      "bytes": 48061,
+      "path": "lca_research_kernel/uslci_provider_normalization.py",
+      "sha256": "7617554f097bce7e6294ebaf20d8c2e132b69a042bd943b842125774f8ce69e9"
+    },
+    {
+      "bytes": 44111,
+      "path": "lca_research_kernel/uslci_provider_probe.py",
+      "sha256": "c0b03f84e8c5330494cb0aa08341281e5c8595eafdb57263c93ed2b44e28f49c"
+    },
+    {
+      "bytes": 57219,
+      "path": "lca_research_kernel/uslci_reference_flow_authoring_execution.py",
+      "sha256": "792d56de9ce20d957b94a4121b34002209c6fce37c1484105b6a3e1ed601afa8"
+    },
+    {
+      "bytes": 52732,
+      "path": "lca_research_kernel/uslci_reference_flow_authoring_plan.py",
+      "sha256": "0479767ff17f83b08d7e53b2072208dcfed46e169d203e92da540c86da39709c"
+    },
+    {
+      "bytes": 42661,
+      "path": "lca_research_kernel/uslci_reference_flow_dependent_process_action_recompile.py",
+      "sha256": "fd376a0df6c1e3d8651fe881661b9d84f7b06397c712923d6467759e93a2f2a7"
+    },
+    {
+      "bytes": 28453,
+      "path": "lca_research_kernel/uslci_reference_flow_resolution.py",
+      "sha256": "e7d8f8a086c775c47d1fa6d088f2614fcf66d3848d7b2217ad9d66c02e18d669"
+    },
+    {
+      "bytes": 17084,
+      "path": "lca_research_kernel/uslci_unit_provider_batch.py",
+      "sha256": "cc534676bef27c430138f4717edf95295bc127307c3818fc67396f69631be03c"
+    },
+    {
+      "bytes": 17383,
+      "path": "lca_research_kernel/uslci_unit_provider_batch_2.py",
+      "sha256": "a72671d36274189d10ed3b8243ce55cd135d2179d8e70261715da2c332a4a936"
+    },
+    {
+      "bytes": 23164,
+      "path": "lca_research_kernel/uslci_unit_provider_continuation.py",
+      "sha256": "c7e3ca9db39be2c54d8ab264dd7b6eca814c21bd89eec3c350472cb29581594e"
+    },
+    {
+      "bytes": 20732,
+      "path": "lca_research_kernel/workflow_acceptance.py",
+      "sha256": "022dfdc4f543ba823b20e8ef77162c43cc7f18cd91ce5ba9e056ec8d07a854bb"
+    },
+    {
+      "bytes": 14520,
+      "path": "lca_research_kernel/workflow_clean_review.py",
+      "sha256": "ca3eb429e89fac6fa613a5eb883e3f110deddb2ef59b9df686c1c4c49c169a9a"
+    },
+    {
+      "bytes": 29719,
+      "path": "lca_research_kernel/workflow_registry.py",
+      "sha256": "4f3fd75d3bbc84823adf04c5a398e7de1378e5fdf5a78cdc1e7808a8cda0ca74"
+    },
+    {
+      "bytes": 57,
+      "path": "runtime/evaluation-python/requirements.in",
+      "sha256": "0e71af574238bba1ea3293f75c3363a171e9398d923b311dece87bb8e72aa9b3"
+    },
+    {
+      "bytes": 68520,
+      "path": "runtime/evaluation-python/requirements.lock",
+      "sha256": "3dc904fc295543dabe4682882c1ce911ab0a4ebe5e293514f46b24c49f08e615"
+    },
+    {
+      "bytes": 1549,
+      "path": "runtime/evaluation-python/source-lock.json",
+      "sha256": "3340edd5e6148b113a5fd6f2e21bdb865ce2041b5c0a475601fb9c6ba5701ec7"
+    },
+    {
+      "bytes": 55,
+      "path": "runtime/model-python/requirements.in",
+      "sha256": "ea94ae8c24bcc7409e7b9b4a93d9cc9026439df47bc0cbc67bb1929ef82eee90"
+    },
+    {
+      "bytes": 54696,
+      "path": "runtime/model-python/requirements.lock",
+      "sha256": "07a2f7a591ddeec6902fb1a9115fa1fb3113d6ad53359b55fd7c083f67ef0d97"
+    },
+    {
+      "bytes": 1638,
+      "path": "runtime/model-python/source-lock.json",
+      "sha256": "d74c38fd7b635d792202e21103b24920c58e5b7d1ee597bfe8c25d8e5dc96fce"
+    },
+    {
+      "bytes": 101811,
+      "path": "runtime/tiangong-node/package-lock.json",
+      "sha256": "58e6cb7fb2dbc7dd1790084dbb213040935241a4f92163c93d3f27a91979ee6d"
+    },
+    {
+      "bytes": 405,
+      "path": "runtime/tiangong-node/package.json",
+      "sha256": "16a5094443dfca41078e2db6878562af01d5546d5e8226a11fcf22583ae633a7"
+    },
+    {
+      "bytes": 2588,
+      "path": "runtime/tiangong-node/probe-mcp-openlca.mjs",
+      "sha256": "dd4ea7069ed3177c97abf8aef8ef5120272e4bd99b835d2a682f026e77f468b4"
+    },
+    {
+      "bytes": 6950,
+      "path": "runtime/tiangong-node/probe-mcp.mjs",
+      "sha256": "b2984c91e34de5896f39f452ea9dbd28b599b3665608a4816acaba83830a5be7"
+    },
+    {
+      "bytes": 1470,
+      "path": "runtime/tiangong-node/probe-openlca.mjs",
+      "sha256": "79467cf0953927f61f411d2105de877ccbdd9e88f7bbb17bd5bcd92e003626f6"
+    },
+    {
+      "bytes": 846,
+      "path": "runtime/tiangong-node/probe-tidas-sdk.mjs",
+      "sha256": "e6f38771097087d990177038ef9dd71587573e52a2d4b1dbbf9b41f6abbaaa24"
+    },
+    {
+      "bytes": 8876,
+      "path": "runtime/tiangong-node/run-openlca-calculation.mjs",
+      "sha256": "15f46c5d95295255b88954576d797435cd430562ea1c74234ad4dc75c32002c1"
+    },
+    {
+      "bytes": 20,
+      "path": "runtime/tiangong-python/requirements.in",
+      "sha256": "dd206f16c9014aa393e8541044bcdc6dd5714f4165524d80d53042cba6433402"
+    },
+    {
+      "bytes": 37259,
+      "path": "runtime/tiangong-python/requirements.lock",
+      "sha256": "c85b39adbacf2174374f1d0f668f5eedfc7725a93dbe7627cc009e1c9e8297eb"
+    },
+    {
+      "bytes": 3369,
+      "path": "runtime/tiangong-runtime-source-lock.json",
+      "sha256": "b35d8dcb1b8f156964b3c634e92adf5e739a9cd74e4cbd738b245166750c64f3"
+    },
+    {
+      "bytes": 12351,
+      "path": "runtime/tiangong-skills/remote-git-blobs.tsv",
+      "sha256": "5ffcfa30b3a1797bd67ea4cd94afb5629bb563df654f1770fe16ffe4c3ba101e"
+    },
+    {
+      "bytes": 7360,
+      "path": "scripts/accept_runtime_environment.py",
+      "sha256": "0386889192ebdba36fd8b9887c93fe8cfe4a19a6becacbc35f05aa26d837ff87"
+    },
+    {
+      "bytes": 1316,
+      "path": "scripts/accept_tiangong_capability_infrastructure.py",
+      "sha256": "d56970636bb92e312c3d395af2cc0c32337a33859aa02d758075116ac4ba37ad"
+    },
+    {
+      "bytes": 5801,
+      "path": "scripts/bootstrap_evaluation_runtime.py",
+      "sha256": "35bf03e69a856ef52274624e8fa8befa659958de218e9ef4522e437b6bc365ea"
+    },
+    {
+      "bytes": 5639,
+      "path": "scripts/bootstrap_model_runtime.py",
+      "sha256": "958d61b4e09557b207410ab05a100836ddaf74f44eb6e74e44b3c128d70202ab"
+    },
+    {
+      "bytes": 10976,
+      "path": "scripts/bootstrap_service_runtime.py",
+      "sha256": "233d0a06ca146b1a692dffc92195a5cbcffe12eaa9c825ef9e7426be59a665d0"
+    },
+    {
+      "bytes": 13608,
+      "path": "scripts/bootstrap_tiangong_runtime.py",
+      "sha256": "af7e42c37d1d88c048537300d5e1928e8ee0c4e79c09fb1ee61b658724342d25"
+    },
+    {
+      "bytes": 1091,
+      "path": "scripts/build_controlled_calculation_fixture.py",
+      "sha256": "12c81a4206c9d40d1dc861bf38aefe6c999f6f7e54305432b8628f8422869bf5"
+    },
+    {
+      "bytes": 2097,
+      "path": "scripts/build_controlled_evaluation_fixture.py",
+      "sha256": "dbf99e963e7222ca688ad99c4b8b2bb1d3fa55835f95922bcf5fd6fdf010ea8f"
+    },
+    {
+      "bytes": 1921,
+      "path": "scripts/build_lca_agent_benchmark.py",
+      "sha256": "9b2c4aec42e1e49c62b5da9537c8f11449a1418e725aea0eb1429bf2accf8d61"
+    },
+    {
+      "bytes": 8931,
+      "path": "scripts/build_runtime_core_readiness.py",
+      "sha256": "33f3ab1fb7c8c18673d55edb94c4752e50a422eb6aff8fc06b11bf1f409aa82e"
+    },
+    {
+      "bytes": 3547,
+      "path": "scripts/build_tiangong_capability_catalog.py",
+      "sha256": "786016179f0961fede5919e17d1092d4bad18f59d88be2d472c1f55878d7a752"
+    },
+    {
+      "bytes": 1241,
+      "path": "scripts/check_controlled_evaluation_complete.py",
+      "sha256": "e83db6c27b939008981de9678ca9b10cfe0263fb09bc505769079f7710fbefd5"
+    },
+    {
+      "bytes": 1763,
+      "path": "scripts/check_controlled_evaluation_recovery.py",
+      "sha256": "d60c3329f0564b782d321fcc8c058b37ab976bb3d5423bdbf870c47acdb8015b"
+    },
+    {
+      "bytes": 17961,
+      "path": "scripts/check_controlled_lca_calculation.py",
+      "sha256": "a0dbe8ad5932417a0a9962a7931334e38d73f67c90cb386e7549ca70eb4cc2db"
+    },
+    {
+      "bytes": 2989,
+      "path": "scripts/check_d18_service.py",
+      "sha256": "59d8fdac9cf6f5a5b87739b8ffddcf01efc7ce73f174208587e9da2fc7b8fd8a"
+    },
+    {
+      "bytes": 24159,
+      "path": "scripts/check_tiangong_runtime.py",
+      "sha256": "f19666795fe69541a7a5ed05bfb071419ef48474ceb75e357fe1946feefce737"
+    },
+    {
+      "bytes": 16739,
+      "path": "scripts/grade_controlled_research_evaluation.py",
+      "sha256": "b77842e44035a73770cc39a01fcd6fa24c962c99ac80e074e699628f5a8c5490"
+    },
+    {
+      "bytes": 5707,
+      "path": "scripts/install_locked_tiangong_skills.py",
+      "sha256": "4f53df35062c294b76260b67d926ab38ede8aaf9589a7fb7f90accd655bc0e6b"
+    },
+    {
+      "bytes": 4357,
+      "path": "scripts/load_test_d18_service.py",
+      "sha256": "1e44d00f98bdac2dcd5832e203de121929d1d59941f07cebf599e792d9f5f123"
+    },
+    {
+      "bytes": 13970,
+      "path": "scripts/probe_model_providers.py",
+      "sha256": "640ad9e53df85635b01fb4bd6579b8a3c7f21ba1b6ba229900a090cb234ba69e"
+    },
+    {
+      "bytes": 3648,
+      "path": "scripts/review_model_provider_probes.py",
+      "sha256": "2c633a2d4c674ed9f64a663b4afbf3a6541bcf4be235d24970da86347d7e3074"
+    },
+    {
+      "bytes": 1907,
+      "path": "scripts/review_tiangong_capability_infrastructure.py",
+      "sha256": "5f897bb9a66a85cb6cfc4a3df3942020d094c8be5f1bcacd4d431b0db4ef98d3"
+    },
+    {
+      "bytes": 14002,
+      "path": "scripts/run_controlled_lca_calculation.py",
+      "sha256": "c95663daf74b10321d959152d83fbecb86c42d46cdd7d34d4de5807194fcc0f4"
+    },
+    {
+      "bytes": 5046,
+      "path": "scripts/run_controlled_research_evaluation.py",
+      "sha256": "f03f65afdfe02dfdc42254cc10f818b8bb6765674c1eb61673abf1775ce73444"
+    },
+    {
+      "bytes": 21634,
+      "path": "scripts/run_d18_performance_program.py",
+      "sha256": "8f0e448843191ac476f25a7f44646f13ca018f8e5816a751f1ea7c2a7a782ddf"
+    },
+    {
+      "bytes": 2149,
+      "path": "scripts/run_d18_stress_evaluation.py",
+      "sha256": "547daa651397cc6fc914225ec5533643255a25fa1d2f1dfe7bc0f5ace454611f"
+    },
+    {
+      "bytes": 900,
+      "path": "scripts/verify_tiangong_capability_infrastructure.py",
+      "sha256": "eb8be1c5590c320e7b5a9fa5b0dd430fcc0942736110845632ed3ba8c1d37505"
+    },
+    {
+      "bytes": 3782,
+      "path": "skills/evidence-to-tidas-lca/SKILL.md",
+      "sha256": "407bd547056d5112fb4d317078a0fde3ec8e2fbc83ec2ef0ae0f21388626fe12"
+    },
+    {
+      "bytes": 272,
+      "path": "skills/evidence-to-tidas-lca/agents/openai.yaml",
+      "sha256": "26f29f1a70e6b9f6f3a235ac3a962d37ecbc6b183b6f58293bfa4bd806ef36b1"
+    },
+    {
+      "bytes": 1230,
+      "path": "skills/evidence-to-tidas-lca/references/input-case-schema.md",
+      "sha256": "ebb11fb1abffb553d8e80644d6c125bba6085c3f4e9005e36c01e1b5ad071120"
+    },
+    {
+      "bytes": 1092,
+      "path": "skills/evidence-to-tidas-lca/references/tiangong-integration.md",
+      "sha256": "abeca434394c8b8da8aa620f401dba90b68736a3d92f6790e524dc799032aed9"
+    },
+    {
+      "bytes": 1047,
+      "path": "skills/evidence-to-tidas-lca/references/tidas-entity-guidance.md",
+      "sha256": "375ecb77496b29058889b55f5abc9587baf5e33d85f55f5a567b55dcf896b1ac"
+    },
+    {
+      "bytes": 1968,
+      "path": "skills/evidence-to-tidas-lca/resources/demo-case.json",
+      "sha256": "aa8ae75d45c1e60632ce8dba4067467f399475d37a8f49e98a511b7d73c05d85"
+    },
+    {
+      "bytes": 716,
+      "path": "skills/evidence-to-tidas-lca/resources/field-mapping.json",
+      "sha256": "dab0eb4ec7fa98c825a8a5b5cbfd267d30c1534e567b0928c64a7b755d60619d"
+    },
+    {
+      "bytes": 12882,
+      "path": "skills/evidence-to-tidas-lca/scripts/build_lca_package.py",
+      "sha256": "c17d4032017d44f558dbcade828bcce44180a1b784d410790db7ab8832ec81ff"
+    },
+    {
+      "bytes": 325,
+      "path": "skills/evidence-to-tidas-lca/templates/data-quality.md",
+      "sha256": "45846bcaaf55f420636198b6117a5fb87802903c2ff6b4ac454224cbb0d94eba"
+    },
+    {
+      "bytes": 219,
+      "path": "skills/evidence-to-tidas-lca/templates/goal-and-scope.md",
+      "sha256": "96e55abb6dc0cbdd2c3fac68c3cef339c1e72a237b470970a63fee07707101bb"
+    },
+    {
+      "bytes": 229,
+      "path": "skills/evidence-to-tidas-lca/templates/lca-report.md",
+      "sha256": "3dd92dfc1201042128442cd8534cd59885da33f5f22f1f0debd1da1b2b7cfac5"
+    },
+    {
+      "bytes": 4685,
+      "path": "skills/run-lca-research-project/SKILL.md",
+      "sha256": "931658e20a56962a05c5c6dd948a5f9b9db1c42431637533cf225c5f2eff01c8"
+    },
+    {
+      "bytes": 257,
+      "path": "skills/run-lca-research-project/agents/openai.yaml",
+      "sha256": "2f2b61d50c57aad56c247de678db1cd93854569048d72a222470ceeaa2c5e299"
+    },
+    {
+      "bytes": 41012,
+      "path": "skills/run-lca-research-project/references/state-contract.md",
+      "sha256": "ebf19c8000d8ec8b8b09290c2e6b23ec0c6cd78ac74324e4db5de5a2aec84c66"
+    }
+  ],
+  "inputs_sha256": "5152a8d294df9f0ab495aed90544a6f4039a94847f681e1337f483e424499cf0",
+  "layer": "execution",
+  "lock_sha256": "68007534c86bc9d279c5710959b34a65ce598015dbe0e10a5f682a7f99f3f3dc"
+}

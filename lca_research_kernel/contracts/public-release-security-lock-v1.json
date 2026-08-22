@@ -1,0 +1,31 @@
+{
+  "contract": "d18.public_release_security_lock/v1",
+  "gitleaks": {
+    "repository": "https://github.com/gitleaks/gitleaks",
+    "tag": "v8.18.4",
+    "commit": "02808f45d038526bfcceebcbf6421c1047997ff9",
+    "assets": {
+      "darwin-arm64": {
+        "name": "gitleaks_8.18.4_darwin_arm64.tar.gz",
+        "sha256": "a480d8593acd8215b22402cf0f3f88b01dcd3610c63b5391db640f7767e62104",
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_darwin_arm64.tar.gz"
+      },
+      "darwin-x86_64": {
+        "name": "gitleaks_8.18.4_darwin_x64.tar.gz",
+        "sha256": "1a69e5666b13cd374889cbcb1939ed1573b63b551251283d5d2329a53cf58e2f",
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_darwin_x64.tar.gz"
+      },
+      "linux-aarch64": {
+        "name": "gitleaks_8.18.4_linux_arm64.tar.gz",
+        "sha256": "bf5f7f466ebfade1296c8bd32cf7d3f592c2aa78836aa9980ffbe2cadca7a861",
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_arm64.tar.gz"
+      },
+      "linux-x86_64": {
+        "name": "gitleaks_8.18.4_linux_x64.tar.gz",
+        "sha256": "ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d",
+        "url": "https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz"
+      }
+    },
+    "required_canary": "github-pat"
+  }
+}

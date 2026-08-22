@@ -1,0 +1,68 @@
+{
+  "contract": "lca_research_kernel.research_materials_policy/v1",
+  "capacity": {
+    "generic_file_max_bytes": 104857600,
+    "direct_upload_max_bytes": 16777216,
+    "multipart_part_bytes": 8388608,
+    "batch_file_count": 10,
+    "batch_max_bytes": 524288000,
+    "project_max_bytes": 5368709120,
+    "image_max_bytes": 26214400,
+    "image_max_pixels": 40000000,
+    "pdf_max_pages": 500,
+    "pdf_vision_max_pages": 100,
+    "archive_extracted_max_bytes": 524288000,
+    "archive_member_count": 1000,
+    "archive_ratio_max": 100,
+    "archive_nesting_depth": 1,
+    "extracted_model_token_ceiling": 2000000
+  },
+  "processing_modes": [
+    "full_context",
+    "focused_retrieval",
+    "structured_document_parse",
+    "tabular_parse",
+    "ocr_or_vision",
+    "audio_transcription",
+    "archive_manifest",
+    "lca_native_import",
+    "metadata_only"
+  ],
+  "allowed_types": {
+    "text/plain": [".txt", ".md"],
+    "application/json": [".json"],
+    "application/xml": [".xml"],
+    "text/html": [".html", ".htm"],
+    "text/csv": [".csv"],
+    "text/tab-separated-values": [".tsv"],
+    "application/pdf": [".pdf"],
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation": [".pptx"],
+    "application/vnd.ms-excel": [".xls"],
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+    "image/png": [".png"],
+    "image/jpeg": [".jpg", ".jpeg"],
+    "image/webp": [".webp"],
+    "image/tiff": [".tif", ".tiff"],
+    "image/heic": [".heic"],
+    "audio/mpeg": [".mp3"],
+    "audio/wav": [".wav"],
+    "audio/mp4": [".m4a"],
+    "application/zip": [".zip"],
+    "application/octet-stream": [".zolca"]
+  },
+  "archive_limits": {
+    "compressed_max_bytes": 104857600,
+    "extracted_max_bytes": 524288000,
+    "member_count": 1000,
+    "ratio_max": 100,
+    "nesting_depth": 1
+  },
+  "preview_ceilings": {
+    "text_characters": 20000,
+    "spreadsheet_rows": 200,
+    "spreadsheet_columns": 50,
+    "thumbnail_edge_pixels": 1600,
+    "pdf_render_pages": 20
+  }
+}

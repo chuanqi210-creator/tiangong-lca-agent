@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "contract": "lca_research_kernel.controlled_evaluation_exclusions/v1",
+  "policy": "exclude_prior_top_level_cases_evaluations_and_product_routes",
+  "explicit_exact_refs": [
+    {
+      "label": "freshwater_authority_case",
+      "process_exact_ref": "69605c09-e319-4e53-8d5f-c944c763c808@01.01.001"
+    },
+    {
+      "label": "native_lcia_electricity_canary",
+      "process_exact_ref": "012fc8f6-9a30-4d98-9b03-34ddec3a6f10@01.01.002"
+    },
+    {
+      "label": "photovoltaic_access_probe",
+      "process_exact_ref": "c1982139-9f0e-4357-99d6-f3e2edfc6fe4@01.01.001"
+    },
+    {
+      "label": "primary_aluminium_access_probe",
+      "process_exact_ref": "648b9225-80f3-4483-88d2-37aef9ebaa73@01.01.000"
+    }
+  ],
+  "negative_asset_sources": [
+    "outputs/research-council-benchmark/research-council-benchmark/portfolio/terminal-1f446b41b453469f/source-tree/inputs/negative_assets.json"
+  ],
+  "historical_public_result_directories": [
+    "outputs/research-council-benchmark/qualification/reads/copper/public-results",
+    "outputs/research-council-benchmark/qualification/reads/wastewater/public-results",
+    "outputs/research-council-benchmark/qualification/reads/truck/public-results",
+    "outputs/research-council-benchmark/qualification/reads/truck/articulated-valid-pair/public-results"
+  ],
+  "forbidden_route_vocabulary": [
+    "nev",
+    "lifepo4",
+    "freshwater",
+    "uslci",
+    "council"
+  ]
+}

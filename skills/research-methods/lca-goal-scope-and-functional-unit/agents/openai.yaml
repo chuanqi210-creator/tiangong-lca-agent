@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCA Goal and Scope"
+  short_description: "Structure goal, scope, and functional unit."
+  default_prompt: "Establish an evidence-bound LCA goal, scope, and functional unit."

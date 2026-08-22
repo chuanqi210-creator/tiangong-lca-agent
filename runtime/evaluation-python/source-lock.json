@@ -1,0 +1,45 @@
+{
+  "contract": "lca_research_evaluation.evaluation_runtime_source_lock/v1",
+  "lock_id": "d18-performance-evaluation-python-2026-07-24",
+  "python": {
+    "minor": "3.11",
+    "tested_version": "3.11.15",
+    "requires": ">=3.11,<3.12"
+  },
+  "requirements": {
+    "input_path": "runtime/evaluation-python/requirements.in",
+    "input_sha256": "0e71af574238bba1ea3293f75c3363a171e9398d923b311dece87bb8e72aa9b3",
+    "lock_path": "runtime/evaluation-python/requirements.lock",
+    "lock_sha256": "b602bae9c4b044a24f7bce6cb72e02fd427865439ee67bd9cad4661487959798",
+    "resolver": "uv pip compile --python-version 3.11 --generate-hashes"
+  },
+  "model_runtime_source_lock": {
+    "path": "runtime/model-python/source-lock.json",
+    "sha256": "3a4b3829d7eaeba79b1acad163157ff87ea5fcc94d440f453646c92f190362c7"
+  },
+  "packages": {
+    "openai-agents": {
+      "distribution": "openai-agents",
+      "version": "0.18.3",
+      "official_registry": "https://pypi.org/project/openai-agents/0.18.3/",
+      "wheel_filename": "openai_agents-0.18.3-py3-none-any.whl",
+      "wheel_sha256": "c6ed971fdeb34d39a9931787bd3960c1e84dc5d7345705794cc5cab8a1158d07"
+    },
+    "openai": {
+      "distribution": "openai",
+      "version": "2.47.0",
+      "source_lock_path": "runtime/model-python/source-lock.json",
+      "wheel_sha256": "b3a1a7ad974092427ccb46d89f8852bdb67866680bcabeecc3ff5a3fdd71b15b"
+    },
+    "zai-sdk": {
+      "distribution": "zai-sdk",
+      "version": "0.2.3",
+      "source_lock_path": "runtime/model-python/source-lock.json",
+      "wheel_sha256": "f8d6417f8cff58d5b6cba5c27577ee55aa817ae825c6c88fe883f6f6f9265d90"
+    }
+  },
+  "floating_versions_forbidden": true,
+  "live_checkout_forbidden": true,
+  "product_runtime_import_forbidden": true,
+  "evaluation_lab_only": true
+}

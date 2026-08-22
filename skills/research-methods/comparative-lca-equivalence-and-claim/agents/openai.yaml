@@ -1,0 +1,4 @@
+interface:
+  display_name: "Comparative LCA Claims"
+  short_description: "Check equivalence before comparative claims."
+  default_prompt: "Assess comparative LCA equivalence and bound the permitted claim."

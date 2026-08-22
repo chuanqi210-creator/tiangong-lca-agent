@@ -1,0 +1,252 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * 设计 token 体系（蓝本：palot "Cortex" 中性灰主题）
+ * 单一深色主题，不做亮暗切换；dark: 变体恒为真，
+ * 使组件中 dark: 前缀的样式（代码块 Shiki 深色、按钮底色等）始终生效。
+ */
+@custom-variant dark (&);
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-diff-addition: var(--diff-addition);
+  --color-diff-addition-foreground: var(--diff-addition-foreground);
+  --color-diff-deletion: var(--diff-deletion);
+  --color-diff-deletion-foreground: var(--diff-deletion-foreground);
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-mono:
+    ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.375rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/*
+ * 深色主题：Cortex 中性灰阶 + 青绿点缀（向原 Terminal Instrument
+ * 的磷光青绿 #3fe0a5 致意，略调深以保证在 accent 底色上的对比度）。
+ */
+:root {
+  --radius: 0.75rem;
+
+  /* Motion — 命名缓动曲线 */
+  --ease-enter: cubic-bezier(0.19, 1, 0.22, 1); /* aggressive decelerate — dialogs, overlays */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* standard ease-out */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1); /* Material-style default */
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1); /* slight overshoot — toasts, popovers */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.2s;
+  --duration-relaxed: 0.3s;
+
+  --background: #181818;
+  --foreground: #ffffff;
+  --card: #212121;
+  --card-foreground: #ffffff;
+  --popover: #282828;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #0d0d0d;
+  --secondary: #212121;
+  --secondary-foreground: #ffffff;
+  --muted: #282828;
+  --muted-foreground: #afafaf;
+  --accent: #282828;
+  --accent-foreground: #ffffff;
+  --destructive: #fa423e;
+  --destructive-foreground: #ffffff;
+  --border: #2e2e2e;
+  --input: #2e2e2e;
+  --ring: #2fbf8f; /* 青绿点缀（自 #3fe0a5 调深） */
+  --chart-1: #3fd9a4;
+  --chart-2: #40c977;
+  --chart-3: #ff8549;
+  --chart-4: #ad7bf9;
+  --chart-5: #ffd240;
+  --sidebar: #0d0d0d;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #0d0d0d;
+  --sidebar-accent: #0e2a20; /* 深青绿 */
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2e2e2e;
+  --sidebar-ring: #2fbf8f;
+
+  /* Diff colors */
+  --diff-addition: #40c977;
+  --diff-addition-foreground: #40c977;
+  --diff-deletion: #ff6764;
+  --diff-deletion-foreground: #ff6764;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss03" 1, "rlig" 1, "calt" 1;
+  }
+  code,
+  kbd,
+  samp,
+  pre {
+    font-feature-settings: "ss01" 1;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--ring) 35%, transparent);
+    color: var(--foreground);
+  }
+}
+
+/* 滚动条：全局细滚动条 + 按需工具类
+ * 全局默认:      细滚动条、透明轨道
+ * .scrollbar-auto: 静止时隐藏，hover 时显现
+ * .scrollbar-none: 完全隐藏 */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--ring);
+  }
+
+  .scrollbar-auto {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color var(--duration-fast, 0.15s);
+  }
+  .scrollbar-auto:hover {
+    scrollbar-color: var(--border) transparent;
+  }
+  .scrollbar-auto:active {
+    scrollbar-color: var(--ring) transparent;
+  }
+  .scrollbar-auto::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-auto::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: background-color var(--duration-fast, 0.15s);
+  }
+  .scrollbar-auto:hover::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+  }
+  .scrollbar-auto:hover::-webkit-scrollbar-thumb:hover {
+    background-color: var(--ring);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 加载 shimmer：渐变扫过裁剪到文字
+ * 用法：<span class="loading-shimmer">思考中…</span> */
+@layer components {
+  .loading-shimmer {
+    --shimmer-base: var(--muted-foreground);
+    --shimmer-contrast: rgba(255, 255, 255, 0.75);
+    background: var(--shimmer-base)
+      linear-gradient(
+        to right,
+        var(--shimmer-base) 0%,
+        var(--shimmer-contrast) 40%,
+        var(--shimmer-contrast) 60%,
+        var(--shimmer-base) 100%
+      );
+    background-size: 50% 200%;
+    background-position: -100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: loading-shimmer 2s infinite;
+    display: inline-block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loading-shimmer {
+      animation: none;
+      -webkit-text-fill-color: var(--muted-foreground);
+      background: none;
+    }
+  }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}

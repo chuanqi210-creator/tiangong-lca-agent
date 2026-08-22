@@ -1,0 +1,345 @@
+{
+  "contract": "lca_research_kernel.d18_runtime_architecture_semantics/v1",
+  "contract_id": "d18-production-runtime-architecture-semantics-2026-07-23",
+  "architecture_ref": {
+    "path": "docs/lca-agent-top-level-architecture.json",
+    "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+    "semantic_fingerprint": "291bd8a6b2572a9e8d4e026634a6e86f1b7df0951394b6e2d8bf6328201a3ce8"
+  },
+  "ownership": {
+    "architecture_semantics": "research_orchestrator",
+    "accepted_project_truth": "project_record",
+    "accepted_write_gate": "assurance_boundary",
+    "official_lca_authority": "TianGong"
+  },
+  "selection_policy": {
+    "basis": "state_transition_and_responsibility",
+    "requires_expected_state_change": true,
+    "requires_bounded_alternatives": true,
+    "provider_name_is_not_priority": true,
+    "keyword_match_is_not_selection": true,
+    "case_identity_is_not_selection": true,
+    "hidden_reasoning_is_forbidden": true
+  },
+  "modules": [
+    {
+      "id": "product_interface",
+      "kind": "product_boundary",
+      "architecture_projection_sha256": "83be12771fe14a13ec3f869761ae6436233e34b620e6460d29cf1d5a185d4036",
+      "purpose": [
+        "freeze research intake",
+        "present bounded status and delivery"
+      ],
+      "triggers": [
+        "new research intake",
+        "user-owned fact or responsibility boundary",
+        "accepted result delivery"
+      ],
+      "inputs": [
+        "research objective",
+        "source-bound materials",
+        "constraints",
+        "user decisions"
+      ],
+      "artifacts": [
+        "versioned research intake",
+        "bounded human question",
+        "auditable result or limitation"
+      ],
+      "forbidden": [
+        "perform LCA judgment",
+        "write chat text as accepted fact",
+        "expose internal routing"
+      ],
+      "dependencies": [
+        "research_orchestrator",
+        "project_record"
+      ],
+      "failure_boundaries": [
+        "invalid intake",
+        "missing user-owned fact",
+        "human responsibility action"
+      ]
+    },
+    {
+      "id": "research_orchestrator",
+      "kind": "control_core",
+      "architecture_projection_sha256": "3e4f1080120595599fe951ae011367e1e49ce663b6a19e74fc82650a30f3052e",
+      "purpose": [
+        "select the next state-changing activity",
+        "advance retry pause resume and recovery",
+        "maintain one next route"
+      ],
+      "triggers": [
+        "accepted project state changed",
+        "candidate or tool result arrived",
+        "recoverable failure observed"
+      ],
+      "inputs": [
+        "Project Record view",
+        "LCA domain rules",
+        "model candidates",
+        "sourced capability results",
+        "Assurance decisions"
+      ],
+      "artifacts": [
+        "ArchitectureDecisionFrame",
+        "model request",
+        "authorized capability request",
+        "candidate change",
+        "unique next route"
+      ],
+      "forbidden": [
+        "manufacture evidence",
+        "bypass Assurance",
+        "default to Council",
+        "select by provider case or keyword"
+      ],
+      "dependencies": [
+        "project_record",
+        "lca_domain_kernel",
+        "model_gateway",
+        "capability_gateway",
+        "assurance_boundary"
+      ],
+      "failure_boundaries": [
+        "no observable state change",
+        "no-progress loop",
+        "budget exhausted",
+        "bounded external responsibility"
+      ]
+    },
+    {
+      "id": "lca_domain_kernel",
+      "kind": "domain_policy",
+      "architecture_projection_sha256": "c23b56534a469661b5746631c68fb76c937a4d2d70f205104678b39aa1401eca",
+      "purpose": [
+        "supply stable LCA rules",
+        "classify data and evidence",
+        "bound scientific claims"
+      ],
+      "triggers": [
+        "goal and scope need validation",
+        "data admissibility is disputed",
+        "candidate result needs scientific checks"
+      ],
+      "inputs": [
+        "adopted standards",
+        "TianGong specifications",
+        "project method version"
+      ],
+      "artifacts": [
+        "domain rule fragment",
+        "deterministic check",
+        "claim ceiling"
+      ],
+      "forbidden": [
+        "store dynamic project state",
+        "perform open-ended model reasoning",
+        "embed a case workflow"
+      ],
+      "dependencies": [
+        "project_record"
+      ],
+      "failure_boundaries": [
+        "method version absent",
+        "functional unit or boundary unresolved",
+        "evidence insufficient"
+      ]
+    },
+    {
+      "id": "model_gateway",
+      "kind": "replaceable_port",
+      "architecture_projection_sha256": "0a94c505427c4a7c7b713f92601520f8e346cfee32ef35c22413e04684d570e4",
+      "purpose": [
+        "normalize model reasoning and tool suggestions",
+        "stream structured candidate events",
+        "switch eligible providers on bounded failure"
+      ],
+      "triggers": [
+        "open scientific judgment is required",
+        "candidate explanation is required"
+      ],
+      "inputs": [
+        "current problem",
+        "minimum source-bound context",
+        "allowed tool descriptions",
+        "output schema"
+      ],
+      "artifacts": [
+        "candidate-only structured output",
+        "candidate tool request",
+        "provider execution receipt"
+      ],
+      "forbidden": [
+        "perform external effects",
+        "write accepted project truth",
+        "override TianGong",
+        "use model memory as authority"
+      ],
+      "dependencies": [
+        "research_orchestrator",
+        "assurance_boundary"
+      ],
+      "failure_boundaries": [
+        "credentials unavailable",
+        "rate limited",
+        "timeout",
+        "invalid structure",
+        "circuit open"
+      ]
+    },
+    {
+      "id": "capability_gateway",
+      "kind": "replaceable_port",
+      "architecture_projection_sha256": "ea70301aab04889ceb36d3f16e9751470f5fd5651c31b71d7d01019c5dc32adc",
+      "purpose": [
+        "execute authorized TianGong and local capabilities",
+        "normalize protocol and tool failures",
+        "preserve source version and run evidence"
+      ],
+      "triggers": [
+        "an authorized capability can create the expected project-state delta"
+      ],
+      "inputs": [
+        "authorized capability request",
+        "source-bound input",
+        "execution limits"
+      ],
+      "artifacts": [
+        "sourced result not fact",
+        "failure receipt",
+        "reproducible execution artifact"
+      ],
+      "forbidden": [
+        "choose research goals",
+        "treat MCP as authority",
+        "promote output to accepted fact",
+        "widen permissions"
+      ],
+      "dependencies": [
+        "assurance_boundary",
+        "project_record"
+      ],
+      "failure_boundaries": [
+        "source drift",
+        "schema drift",
+        "permission denied",
+        "transport failure",
+        "tool timeout"
+      ]
+    },
+    {
+      "id": "project_record",
+      "kind": "truth_plane",
+      "architecture_projection_sha256": "1c42c4f1ba4fe77d8d9fd1544bafbbc4a5caa8555312cdb18741115be06f74eb",
+      "purpose": [
+        "store the sole accepted project truth",
+        "preserve provenance and recovery",
+        "materialize the current project view"
+      ],
+      "triggers": [
+        "Assurance accepts a candidate change",
+        "a content-bound artifact is registered",
+        "a lifecycle transition is accepted"
+      ],
+      "inputs": [
+        "Assurance acceptance",
+        "source-bound fact or artifact",
+        "user decision"
+      ],
+      "artifacts": [
+        "append-only event",
+        "replayable projection",
+        "audit trail",
+        "Run Trace reference"
+      ],
+      "forbidden": [
+        "auto-admit model text",
+        "equate conversation with state",
+        "drop source unit version or transformation"
+      ],
+      "dependencies": [
+        "assurance_boundary"
+      ],
+      "failure_boundaries": [
+        "event mutation",
+        "artifact drift",
+        "idempotency conflict",
+        "projection mismatch"
+      ]
+    },
+    {
+      "id": "assurance_boundary",
+      "kind": "cross_cutting_control",
+      "architecture_projection_sha256": "a248ce9ebf77f3391a27e56e984d1bb21c2a53b5b03d44b47a57b6dfc376e53c",
+      "purpose": [
+        "authorize effects",
+        "evaluate trajectory and outcome",
+        "accept reject revise or bound candidates"
+      ],
+      "triggers": [
+        "before any capability effect",
+        "before any accepted project write",
+        "before result delivery"
+      ],
+      "inputs": [
+        "operation intent",
+        "candidate change",
+        "trajectory trace",
+        "candidate outcome",
+        "responsibility policy"
+      ],
+      "artifacts": [
+        "authorization",
+        "acceptance or rejection",
+        "degraded route",
+        "content-addressed human handoff"
+      ],
+      "forbidden": [
+        "become a second orchestrator",
+        "treat schema validity as scientific validity",
+        "request human approval for safe local work"
+      ],
+      "dependencies": [
+        "lca_domain_kernel",
+        "project_record"
+      ],
+      "failure_boundaries": [
+        "unknown effect",
+        "unsupported claim",
+        "forbidden action",
+        "invalid source or unit"
+      ]
+    }
+  ],
+  "frame_contract": {
+    "contract": "lca_research_kernel.architecture_decision_frame/v1",
+    "required_fields": [
+      "contract",
+      "decision_id",
+      "goal_ref",
+      "project_state_ref",
+      "current_problem",
+      "selected_modules",
+      "selected_capabilities",
+      "architecture_principles",
+      "expected_state_change",
+      "acceptance_conditions",
+      "permission_boundary",
+      "claim_ceiling",
+      "alternatives",
+      "auditable_reason",
+      "selection_basis",
+      "next_route",
+      "frame_sha256"
+    ],
+    "forbidden_fields": [
+      "chain_of_thought",
+      "hidden_reasoning",
+      "internal_monologue",
+      "scratchpad"
+    ],
+    "maximum_reason_characters": 700
+  }
+}

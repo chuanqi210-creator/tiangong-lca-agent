@@ -1,0 +1,34 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lci-provider-linkage-and-completeness",
+  "version": "1.0.0",
+  "title": "Verify LCI Provider Linkage and Completeness",
+  "description": "Use when technosphere exchanges, default Providers, Process connections, lifecycle-model links, reference products, or inventory completeness must be verified without inventing upstream supply relations.",
+  "applicability": {
+    "desired_artifacts": ["provider_completeness_report"],
+    "semantic_roles": ["provider_relation", "technosphere_exchange", "reference_flow", "lifecyclemodel_connection"],
+    "requirements": ["source_confirmation"],
+    "conflict_types": ["provider_conflict", "inventory_completeness_conflict"],
+    "target_object_kinds": ["Process", "Exchange", "Provider", "ProductSystem"]
+  },
+  "required_inputs": ["process_identity_and_version", "exchange_inventory", "provider_relation_source"],
+  "expected_artifact": "provider_completeness_report",
+  "accepted_state_delta": "provider_dependencies_covered_or_typed_missing",
+  "capability_ids": ["tiangong.data.process-read", "tiangong.data.lifecyclemodel-read", "tiangong.skill.lifecycleinventory-review", "tiangong.skill.lifecyclemodel-recursive-orchestrator", "tiangong.validation.tidas"],
+  "upstream_skill_ids": ["lifecycleinventory-review", "lifecyclemodel-recursive-orchestrator", "process-hybrid-search"],
+  "domain_rule_ids": ["lci.exchange.typed_direction", "lci.provider.exact_relation", "lci.completeness.coverage"],
+  "source_lock_ids": ["tiangong.cli.npm", "tiangong.skills.git", "tiangong.sdk.npm"],
+  "output_classifications": ["candidate_only", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["all_technosphere_inputs_classified", "provider_identity_is_exact", "connection_location_is_correct", "coverage_denominator_is_explicit"],
+  "failure_boundaries": ["official_provider_relation_absent", "credential_required", "exchange_identity_conflict"],
+  "forbidden": ["direct_project_record_write", "invent_provider_link", "name_similarity_as_connection", "process_note_as_provider_relation"],
+  "permission_effects": ["no_permission_expansion", "tiangong_read_only"],
+  "resources": [
+    {
+      "resource_id": "provider-relationship-evidence-checklist",
+      "path": "skills/research-methods/lci-provider-linkage-and-completeness/resources/provider-relationship-evidence-checklist.md",
+      "sha256": "e230cfbe9bd7f7d803667262af23c06ff67f418babcbe3d7f2720fbe8658fa0f"
+    }
+  ]
+}

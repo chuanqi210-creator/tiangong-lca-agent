@@ -1,0 +1,46 @@
+{
+  "contract": "lca_research_kernel.research_problem_signature_registry/v1",
+  "signature_contract": "lca_research_kernel.research_problem_signature/v1",
+  "expected_state_change_contract": "lca_research_kernel.expected_state_change/v1",
+  "query_modes": [
+    "exact_identity",
+    "local_entity",
+    "dependency_path",
+    "temporal_version",
+    "global_structure",
+    "exploratory_drift"
+  ],
+  "required_signature_fields": [
+    "contract",
+    "project_id",
+    "generation",
+    "desired_artifact",
+    "target_object_kinds",
+    "exact_node_ids",
+    "accepted_roles",
+    "required_evidence_roles",
+    "missing_roles",
+    "requirements",
+    "conflict_types",
+    "claim_ceiling",
+    "independent_evidence_dimensions",
+    "completion_predicates",
+    "query_mode",
+    "signature_sha256"
+  ],
+  "selection_precedence": [
+    "temporal_conflict",
+    "global_structure",
+    "unknown_target",
+    "dependency_coverage",
+    "exact_identity_confirmation",
+    "local_entity"
+  ],
+  "forbidden_selection_inputs": [
+    "case_name",
+    "provider_priority",
+    "raw_keyword_route",
+    "conversation_recency"
+  ],
+  "similarity_effect": "candidate_seed_only_never_evidence"
+}

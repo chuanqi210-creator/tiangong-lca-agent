@@ -1,0 +1,223 @@
+{
+  "contract": "lca_research_kernel.lca_explanation_rendering_source/v2",
+  "source_id": "d18-governed-lca-explanations-2026-08-22",
+  "authority_status": "product_governed_calibration",
+  "scope": "generic_lca_explanation_not_tiangong_identity_or_project_fact",
+  "upstream_sources": [
+    {
+      "source_id": "openlca2-official-manual",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/processes/tab_inputs_outputs.html",
+      "version": "accessed-2026-08-16",
+      "evidence_status": "external_conceptual_calibration_only"
+    },
+    {
+      "source_id": "us-epa-lca-principles-and-practice",
+      "source_type": "official_web",
+      "owner": "United States Environmental Protection Agency",
+      "locator": "https://nepis.epa.gov/Exe/ZyPDF.cgi/P1000L86.PDF?Dockey=P1000L86.PDF",
+      "version": "EPA/600/R-06/060",
+      "evidence_status": "external_conceptual_calibration_only"
+    },
+    {
+      "source_id": "d18-product-authority-boundary",
+      "source_type": "repository_contract",
+      "owner": "LCA Research Agent",
+      "locator": "docs/lca-agent-top-level-architecture.json",
+      "version": "sha256:19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+      "evidence_status": "adopted_product_contract"
+    }
+  ],
+  "entries": [
+    {
+      "knowledge_id": "lca-rel:process-has-exchange",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "openlca2-official-manual"
+      ],
+      "source_support": [
+        {
+          "source_id": "openlca2-official-manual",
+          "location": "Inputs/Outputs > opening paragraph",
+          "original_excerpt": "A process encompasses all the inputs and outputs associated with an operation.",
+          "excerpt_sha256": "489341eb8d2649250c3bf76de49308db966cab6b6b5d5fe2fb3a244f081fa7b0"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "An LCA process is connected to its quantified inputs and outputs through exchanges.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "LCA 过程通过交换与其定量输入和输出相连接。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:quantity-measured-in-unit",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "openlca2-official-manual"
+      ],
+      "source_support": [
+        {
+          "source_id": "openlca2-official-manual",
+          "location": "Inputs/Outputs > Unit",
+          "original_excerpt": "Units are assigned to the flows based on the flow property defined in the Flow properties tab.",
+          "excerpt_sha256": "c628b270a799c14cf808df569a4db911e1278d5dcd84c26e4b3df522046348e4"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "A reported quantity is interpreted together with its unit; the number alone does not define its LCA meaning.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "报告的数量必须结合其单位解释；数值本身不能界定其 LCA 含义。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-rule:illustration-not-project-fact",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "d18-product-authority-boundary"
+      ],
+      "source_support": [
+        {
+          "source_id": "d18-product-authority-boundary",
+          "location": "/input_policy/data_classes/1/meaning",
+          "original_excerpt": "待核验、待选择或作为降级路线使用的数据",
+          "excerpt_sha256": "40828b0ce8d4c68bd8a8a2bd044776fc82b9f9755384102a056dd0d923ea36c3"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "An illustrative example explains a method but is not evidence about the user's project and cannot be accepted as a project fact.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "说明性示例用于解释方法，但不是用户项目的证据，不能被接纳为项目事实。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-example:generic-input-exchange",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "openlca2-official-manual",
+        "d18-product-authority-boundary"
+      ],
+      "source_support": [
+        {
+          "source_id": "openlca2-official-manual",
+          "location": "Inputs/Outputs > Flow",
+          "original_excerpt": "Product, elementary, and waste flows can be added as inputs or outputs to the process.",
+          "excerpt_sha256": "77319d361cfdaeb27705a443ece5d5843378548e5e5a53770dc2d292722b0df8"
+        },
+        {
+          "source_id": "d18-product-authority-boundary",
+          "location": "/input_policy/data_classes/1/meaning",
+          "original_excerpt": "待核验、待选择或作为降级路线使用的数据",
+          "excerpt_sha256": "40828b0ce8d4c68bd8a8a2bd044776fc82b9f9755384102a056dd0d923ea36c3"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "In a hypothetical unit process, a named resource may be recorded as a quantified input exchange; the scenario only illustrates the Process–Exchange relationship and does not describe the user's project.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "在一个假设的单元过程中，某项具名资源可以被记录为定量输入交换；该情景仅用于解释过程与交换的关系，不描述用户项目。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-limit:selected-evidence-not-product-system",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "d18-product-authority-boundary"
+      ],
+      "source_support": [
+        {
+          "source_id": "d18-product-authority-boundary",
+          "location": "/claim_ceiling/local_architecture",
+          "original_excerpt": "approved_top_level_baseline_implementation_unverified",
+          "excerpt_sha256": "0e9f6bded6b748e52789ae7cc339a9583cda38d5048f148d5ab3c195cff89d93"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "The selected evidence span can support an explanation of that item, but it cannot by itself prove an unobserved product system or a stronger scientific conclusion.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "已选证据片段可支持对该条目的解释，但不能单独证明未观察到的产品系统或更强科学结论。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:functional-unit-defines-comparison-basis",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "us-epa-lca-principles-and-practice"
+      ],
+      "source_support": [
+        {
+          "source_id": "us-epa-lca-principles-and-practice",
+          "location": "PDF page 87 (printed page 79), Glossary > Functional Unit",
+          "original_excerpt": "The unit of comparison that assures that the products being compared provide an equivalent level of function or service.",
+          "excerpt_sha256": "0c2123b234b0a56d690a12574e4f03ca2a5337082ba4ac9206338507536763e8"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "A functional unit states the quantified performance used as the common basis for relating inventory inputs and outputs and for making a comparison.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "功能单位规定用于关联清单输入输出并开展比较的共同量化性能基准。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:system-boundary-scopes-product-system",
+      "source_language": "en",
+      "authority_status": "product_governed_calibration",
+      "upstream_source_ids": [
+        "us-epa-lca-principles-and-practice"
+      ],
+      "source_support": [
+        {
+          "source_id": "us-epa-lca-principles-and-practice",
+          "location": "PDF page 22 (printed page 14), Define the Scope of the Study",
+          "original_excerpt": "In setting system boundaries, the analyst must decide where the analysis will be limited and be very clear about the reasons.",
+          "excerpt_sha256": "174b9888199914f4387edf05484a48dcd8b16aebf350bc5169a8d0036aa65dcb"
+        }
+      ],
+      "renderings": {
+        "en": {
+          "text": "A system boundary scopes the product system by specifying which processes and life-cycle stages are included in or excluded from the study.",
+          "transformation": "product_governed_synthesis"
+        },
+        "zh-CN": {
+          "text": "系统边界通过规定研究纳入或排除的过程与生命周期阶段来界定产品系统范围。",
+          "transformation": "product_governed_translation"
+        }
+      }
+    }
+  ]
+}

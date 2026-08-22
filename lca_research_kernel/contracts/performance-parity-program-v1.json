@@ -1,0 +1,204 @@
+{
+  "accepted_code_basis": "99c39c084efc18d4ef7930bf696be1dbcb4670a1",
+  "basis_refs": [
+    {
+      "path": "docs/superpowers/specs/2026-07-24-d18-performance-parity-and-backend-closure-design.md",
+      "sha256": "05c7a15aab9264e556433eb216402b118589dd106542d09c5b62ff98320b507b"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-07-24-d18-performance-parity-and-backend-closure.md",
+      "sha256": "2057b9fbec6219319fe8c70d509e50d732e2bd812a0934b7518e022a1002cb9e"
+    },
+    {
+      "path": "docs/lca-agent-top-level-architecture.json",
+      "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5"
+    },
+    {
+      "path": "docs/complex-runtime-adoption.json",
+      "sha256": "a2b8d564b9e09d5927cf248f1cef94da3f98fec64a9e7be57826242edb698423"
+    },
+    {
+      "path": "lca_research_kernel/contracts/model-provider-catalog.json",
+      "sha256": "7528377f11f2541b2f2adc61a4dc58157f75fbe436a6e5685bffb07e944428a4"
+    },
+    {
+      "path": "lca_research_kernel/contracts/model-runtime-policy.json",
+      "sha256": "3d7d44f497bb59573bbfe0ff443971ecf5b1dcc685784f705ce5269bf77782f6"
+    },
+    {
+      "path": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+      "sha256": "9ed0a374665646f19a9684da98902230b6ba18a0f8c596d2f4742c26adedd451"
+    },
+    {
+      "path": "lca_research_kernel/contracts/tiangong-source-lock.json",
+      "sha256": "cf50659c85be1e677fe7053b15c008c879f6ff9557971c5337203a1c69f9b237"
+    },
+    {
+      "path": "lca_research_kernel/contracts/runtime-environment-contract.json",
+      "sha256": "adb232ab579948bdb5276ddc9f3d57f8eef506df53572ed861f57db41ff659b7"
+    },
+    {
+      "path": "outputs/runtime-environment/runtime-environment-final-acceptance.json",
+      "sha256": "9e027f3946589ec2a403dd32380901feb523fa320990ea47d71c414b1463a5e8"
+    },
+    {
+      "path": "outputs/d18-production-runtime-core/final/acceptance-v3.json",
+      "sha256": "283308c2870bc04ffd8bb3be496faec265e5ba5ee49e307cf40558cca9d27df2"
+    },
+    {
+      "path": "outputs/d18-controlled-research-evaluation/final/evaluation-acceptance.json",
+      "sha256": "cabe4fe9b9707df73a9b5324fe814843b4c1df7222e7d5819bc6d4fd60760597"
+    },
+    {
+      "path": "outputs/council-default-lifecycle/finalizer/d18-first-controlled-research-evaluation-final/lifecycle-ready-receipt.json",
+      "sha256": "aadaff6af0f474fe198023e164b16da0d5fc3c362992131d53257e3f2bfa60d1"
+    }
+  ],
+  "claim_ceiling": {
+    "human_expert_blind_review": "not_performed",
+    "performance_claim_basis": "frozen_machine_reproducible_evaluation_only",
+    "universal_lca_support": "unsupported"
+  },
+  "cloud_deployment_in_scope": false,
+  "complex_revision": "f055155c782ae315bd2c68e7fd332b10f4b68596",
+  "contract": "lca_research_kernel.performance_parity_program/v1",
+  "d18_module_count": 7,
+  "default_council": false,
+  "final_invalidation_policy": {
+    "cross_version_row_splicing": "forbidden",
+    "failed_valid_run": "must_be_retained",
+    "fixture_replacement": "invalidate_and_reselect",
+    "product_or_contract_drift": "invalidate_entire_final_tranche",
+    "threshold_reduction": "forbidden"
+  },
+  "final_repetitions_per_arm": 3,
+  "final_run_count": 270,
+  "frontend_in_scope": false,
+  "hard_vetoes": [
+    "tiangong_identity_version_value_or_unit_drift",
+    "wrong_functional_unit_method_process_relation_or_value_accepted",
+    "oracle_or_grader_content_leaked_to_executor",
+    "model_tool_skill_or_mcp_direct_formal_write",
+    "unauthorized_network_file_subprocess_database_publication_or_external_write",
+    "secret_in_log_trace_error_response_or_artifact",
+    "recovery_repeats_calculation_model_call_formal_event_or_effect",
+    "critical_missing_data_still_yields_deterministic_conclusion",
+    "product_route_uses_task_case_process_or_grader_identity",
+    "multiple_formal_states_or_next_routes",
+    "final_holdout_or_grader_mutated_after_freeze",
+    "service_control_plane_creates_or_overwrites_research_fact",
+    "quality_threshold_reduced",
+    "valid_failed_run_removed_or_spliced"
+  ],
+  "human_expert_review_required": false,
+  "outer_packages": {
+    "evaluation_lab": "calls_product_ports_only",
+    "service_control_plane": "operational_metadata_only"
+  },
+  "planning_artifact_commit": "ffce32249759302327e79c83f3a0653502461671",
+  "product_route_may_use_task_identity": false,
+  "product_runtime_dependencies": [
+    "d18_product_interface",
+    "research_orchestrator",
+    "lca_domain_kernel",
+    "model_gateway",
+    "capability_gateway",
+    "project_record",
+    "assurance_boundary"
+  ],
+  "program_id": "d18-performance-parity-and-backend-closure",
+  "program_sha256": "88a014ada5016bcb5ff21541d344ce1852646f464965db445916c525c19dec4f",
+  "quality_thresholds_mutable": false,
+  "research_truth_owner": "project_record",
+  "research_truth_owner_count": 1,
+  "runner_arms": [
+    "raw_model_tool_loop",
+    "openai_agents_reference",
+    "d18_product_agent"
+  ],
+  "runner_equality_fields": [
+    "model_id",
+    "model_settings",
+    "materials",
+    "tool_descriptors",
+    "permission_policy",
+    "budgets",
+    "timing_boundary",
+    "oracle_isolation"
+  ],
+  "service_runtime": {
+    "fastapi": "0.139.2",
+    "httpx": "0.28.1",
+    "python": ">=3.10",
+    "uvicorn": "0.51.0"
+  },
+  "split_counts": {
+    "development": 18,
+    "final": 30,
+    "validation": 12
+  },
+  "success_next_route": "integrate-qingxiaoda-frontend-and-run-assisted-pilot",
+  "task_count": 60,
+  "task_families": [
+    {
+      "development": 3,
+      "family_id": "commission_functional_unit_and_scope",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    },
+    {
+      "development": 3,
+      "family_id": "data_identity_version_source_and_gaps",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    },
+    {
+      "development": 3,
+      "family_id": "process_flow_and_model_construction",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    },
+    {
+      "development": 3,
+      "family_id": "lci_lcia_calculation_and_unit_checks",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    },
+    {
+      "development": 3,
+      "family_id": "interpretation_limits_and_tiangong_updates",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    },
+    {
+      "development": 3,
+      "family_id": "long_material_failure_recovery_permissions_and_attack",
+      "final": 5,
+      "task_count": 10,
+      "validation": 2
+    }
+  ],
+  "thresholds": {
+    "cancel_ack_seconds_max": 2.0,
+    "completion_noninferiority_pp": -3,
+    "d18_final_completion_rate": 0.9,
+    "deterministic_numerical_correctness": 1.0,
+    "duplicate_effect_count": 0,
+    "grader_disagreement_points_max": 10,
+    "mean_lca_score": 95,
+    "median_latency_ratio_max": 1.2,
+    "p90_latency_ratio_max": 1.3,
+    "per_family_completion_rate": 0.8,
+    "recovery_success_rate": 1.0,
+    "service_p95_overhead_seconds_max": 0.25,
+    "service_project_concurrency_min": 8,
+    "tiangong_mechanical_correctness": 1.0,
+    "unnecessary_tool_ratio_max": 0.1
+  },
+  "veto_tolerance": 0
+}

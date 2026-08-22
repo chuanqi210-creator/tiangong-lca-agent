@@ -1,0 +1,106 @@
+{
+  "contract": "lca_research_kernel.runtime_source_lock/v1",
+  "lock_id": "d18-tiangong-runtime-environment-2026-07-23",
+  "runtime_root": ".runtime/d18-tiangong-capabilities",
+  "sources": [
+    {
+      "source_id": "host.node",
+      "kind": "host_runtime",
+      "identity": "node",
+      "version": "24.18.0",
+      "integrity": "version-output:v24.18.0",
+      "source_url": "host://node",
+      "install": {
+        "mode": "host_command",
+        "command": "node"
+      }
+    },
+    {
+      "source_id": "host.npm",
+      "kind": "host_runtime",
+      "identity": "npm",
+      "version": "11.16.0",
+      "integrity": "version-output:11.16.0",
+      "source_url": "host://npm",
+      "install": {
+        "mode": "host_command",
+        "command": "npm"
+      }
+    },
+    {
+      "source_id": "host.python",
+      "kind": "host_runtime",
+      "identity": "python",
+      "version": "3.12.13",
+      "integrity": "version-output:Python 3.12.13",
+      "source_url": "host://python3.12",
+      "install": {
+        "mode": "host_command",
+        "command": "python3.12"
+      }
+    },
+    {
+      "source_id": "host.uv",
+      "kind": "host_runtime",
+      "identity": "uv",
+      "version": "0.11.25",
+      "integrity": "version-output:uv 0.11.25",
+      "source_url": "host://uv",
+      "install": {
+        "mode": "host_command",
+        "command": "uv"
+      }
+    },
+    {
+      "source_id": "runtime.node-lock",
+      "kind": "npm_lock",
+      "identity": "runtime/tiangong-node/package-lock.json",
+      "version": "lockfile-v3",
+      "integrity": "sha256-96490af8f1339b8c0b40fbe806674cb8d8da4914739f2de4274674d22e88cc36",
+      "source_url": "repo://runtime/tiangong-node/package-lock.json",
+      "install": {
+        "mode": "npm_ci",
+        "manifest": "runtime/tiangong-node/package.json",
+        "lock": "runtime/tiangong-node/package-lock.json"
+      }
+    },
+    {
+      "source_id": "runtime.python-lock",
+      "kind": "python_lock",
+      "identity": "runtime/tiangong-python/requirements.lock",
+      "version": "tidas-tools-0.0.43",
+      "integrity": "sha256-c85b39adbacf2174374f1d0f668f5eedfc7725a93dbe7627cc009e1c9e8297eb",
+      "source_url": "repo://runtime/tiangong-python/requirements.lock",
+      "install": {
+        "mode": "uv_sync",
+        "requirements": "runtime/tiangong-python/requirements.lock"
+      }
+    },
+    {
+      "source_id": "runtime.tiangong-skills",
+      "kind": "git_object_manifest",
+      "identity": "tiangong-lca/skills",
+      "version": "0f48f443b9b247b1ab7ef9f251b847c10003d955",
+      "integrity": "sha256-5ffcfa30b3a1797bd67ea4cd94afb5629bb563df654f1770fe16ffe4c3ba101e",
+      "source_url": "https://github.com/tiangong-lca/skills",
+      "install": {
+        "mode": "raw_git_files",
+        "manifest": "runtime/tiangong-skills/remote-git-blobs.tsv"
+      }
+    },
+    {
+      "source_id": "runtime.openlca",
+      "kind": "dmg",
+      "identity": "openLCA",
+      "version": "2.6.2",
+      "integrity": "sha256-3c6b91203cecb734f0c488ebd8e9cca660245f6e827d0add96805b7b32321e25",
+      "source_url": "https://share.greendelta.com/index.php/s/oeXokWrthjwC9z4/download",
+      "install": {
+        "mode": "dmg_app",
+        "app": "openLCA.app",
+        "download_name": "openLCA_macOS_x64_2.6.2.complete.dmg",
+        "bytes": 460313539
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCIA Method and Calculation"
+  short_description: "Select and run a compatible LCIA method."
+  default_prompt: "Select a source-bound LCIA method and produce a controlled calculation candidate."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run LCA Research Project"
+  short_description: "Run durable TianGong-native LCA research projects"
+  default_prompt: "Use $run-lca-research-project to start, resume, or inspect an auditable TianGong-native LCA research project."

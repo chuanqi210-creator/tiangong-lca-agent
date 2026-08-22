@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCA Unit and Flow Check"
+  short_description: "Validate flow identity, units, and dimensions."
+  default_prompt: "Check LCA flow identity, unit compatibility, and transformations."

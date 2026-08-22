@@ -1,0 +1,25 @@
+{
+  "contract": "lca_research_kernel.agent_startup_manifest/v1",
+  "manifest_id": "d18-tiangong-capability-infrastructure-2026-07-23",
+  "product_contract": {
+    "path": "docs/lca-agent-top-level-architecture.json",
+    "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+    "semantic_fingerprint": "291bd8a6b2572a9e8d4e026634a6e86f1b7df0951394b6e2d8bf6328201a3ce8"
+  },
+  "capability_catalog": {
+    "path": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+    "sha256": "ad6cc59090f0a4ac3ba68027346616a4805599580f48b06aabe0b597f3d0a208"
+  },
+  "source_lock": {
+    "path": "lca_research_kernel/contracts/tiangong-source-lock.json",
+    "sha256": "b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e"
+  },
+  "permission_policy": {
+    "path": "lca_research_kernel/responsibility_boundary.py",
+    "sha256": "496316d13903743c2adcb2dd5c30c628e01f3cfdf105d0209b665ef38a2051d6"
+  },
+  "architecture_semantics": {
+    "path": "lca_research_kernel/contracts/d18-runtime-architecture-semantics.json",
+    "sha256": "5995f698cb885f82a8551efe716cffe2ee2bef3dff836db0bbe04a63699e3016"
+  }
+}

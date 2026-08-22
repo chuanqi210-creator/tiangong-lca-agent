@@ -1,0 +1,30 @@
+{
+  "contract": "lca_research_kernel.model_schema_profile_admission_review/v1",
+  "status": "passed",
+  "profile_id": "research_turn_semantics_v1",
+  "provider_id": "gemini",
+  "schema_sha256": "5f2e77043405c3060d8eb82b62b35b798ba1eecea9f3d006737f7445817f9a70",
+  "probe_receipt_sha256": "dccfbfacb0042e750eddb4462bef754b6ba88084c47bd13c37dd6d94e19cfe8b",
+  "p1": 0,
+  "p2": 0,
+  "external_effects": 0,
+  "findings": [],
+  "review_context": "content-bound sanitized attestation of accepted private admission; not a public real-call reexecution",
+  "public_projection": {
+    "contract": "d18.public_model_schema_profile_evidence_projection/v1",
+    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
+    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7",
+    "source_artifact_sha256s": {
+      "probe_receipt_sha256": "f0ab37e0f74fefc6b297840cdccf8e886c5baec7b8f30bc3dae7481a9deb0c2e",
+      "independent_review_sha256": "fc4de6949271118e80f848c4dd9a4ab297c2b3144fd856e8f19d061e67d9aaae",
+      "raw_acceptance_sha256": "49b79e7e510bc0e8a47457443868a94b9ff0c749686587fdf603dee91ca7608d",
+      "run_trace_sha256": "083b91b37441b0196fc2fd880a959eab03f1d3e47379a3bdd2efff5b679aab4d"
+    },
+    "classification": "content_bound_sanitized_attestation_of_private_admission",
+    "public_reexecution_performed": false,
+    "private_evidence_published": false,
+    "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
+    "current_capacity_qualification_attested": false
+  },
+  "review_sha256": "c076c6ffe7ccf5e3bf2733c0e167afb7999a1413220ddb987ce6eb19dbb45cd5"
+}

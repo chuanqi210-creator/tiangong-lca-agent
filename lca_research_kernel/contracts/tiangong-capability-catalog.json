@@ -1,0 +1,2051 @@
+{
+  "capabilities": [
+    {
+      "adapter_id": "official_public_source",
+      "allowed_use": [
+        "bounded_credential_free_official_source_read"
+      ],
+      "authority_tier": "official_public_source",
+      "availability": "available_public_remote",
+      "capability_id": "official-public-source-read",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "public_credential_free",
+      "disposition": "integrated",
+      "effect": "external_read",
+      "entrypoint": "OfficialPublicSourceCapability.execute",
+      "forbidden_claims": [
+        "sourced_result_is_accepted_fact",
+        "unscanned_industry_summary_is_complete"
+      ],
+      "idempotency": "content_addressed_request_and_source_receipt",
+      "input_contract": "official_public_source_request/v1",
+      "kind": "evidence",
+      "next_route": "return-content-bound-official-source-candidate",
+      "output_contract": "official_public_source_content/v1",
+      "provider": "LCA Research Kernel",
+      "recovery_route": "return-bounded-source-gap",
+      "responsibility_tags": [
+        "credential_free_external_read"
+      ],
+      "retry_policy": {
+        "max_attempts": 2,
+        "retryable_codes": [
+          "official_source_timeout",
+          "official_source_rate_limited",
+          "official_source_transport_failure"
+        ]
+      },
+      "source_lock_id": "lca.kernel.official-public-source",
+      "supersedes": [],
+      "timeout_seconds": 20,
+      "transport": "bounded_https",
+      "verification": {
+        "evidence": "tests/test_official_public_source.py",
+        "kind": "executable_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.build.lifecyclemodel",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_write",
+      "entrypoint": [
+        "tiangong-lca",
+        "lifecyclemodel",
+        "auto-build"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.build.lifecyclemodel.input/v1",
+      "kind": "build",
+      "next_route": "return-tiangong-build-lifecyclemodel-source-bound-result",
+      "output_contract": "tiangong.build.lifecyclemodel.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-build-lifecyclemodel-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.build.process",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_write",
+      "entrypoint": [
+        "tiangong-lca",
+        "process",
+        "auto-build"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.build.process.input/v1",
+      "kind": "build",
+      "next_route": "return-tiangong-build-process-source-bound-result",
+      "output_contract": "tiangong.build.process.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-build-process-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.calculation.openlca-ipc",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "OpenLCA_Impact_Assessment_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.calculation.openlca-ipc.input/v1",
+      "kind": "calculation",
+      "next_route": "return-tiangong-calculation-openlca-ipc-source-bound-result",
+      "output_contract": "tiangong.calculation.openlca-ipc.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-calculation-openlca-ipc-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "tiangong.read-only",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tiangong_data",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.data.flow-read",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "get",
+        "flow"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.data.flow-read.input/v1",
+      "kind": "data",
+      "next_route": "return-tiangong-data-flow-read-source-bound-result",
+      "output_contract": "tiangong.data.flow-read.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-data-flow-read-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "tiangong.read-only",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tiangong_data",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.data.lifecyclemodel-read",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "get",
+        "lifecyclemodel"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.data.lifecyclemodel-read.input/v1",
+      "kind": "data",
+      "next_route": "return-tiangong-data-lifecyclemodel-read-source-bound-result",
+      "output_contract": "tiangong.data.lifecyclemodel-read.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-data-lifecyclemodel-read-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "tiangong.read-only",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tiangong_native_result",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.data.native-lcia-result-read",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "result",
+        "read"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.data.native-lcia-result-read.input/v1",
+      "kind": "data",
+      "next_route": "return-tiangong-data-native-lcia-result-read-source-bound-result",
+      "output_contract": "tiangong.data.native-lcia-result-read.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-data-native-lcia-result-read-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "tiangong.read-only",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tiangong_data",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.data.process-read",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "get",
+        "process"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.data.process-read.input/v1",
+      "kind": "data",
+      "next_route": "return-tiangong-data-process-read-source-bound-result",
+      "output_contract": "tiangong.data.process-read.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-data-process-read-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.evidence.source-evidence-contract",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "source-evidence-dataset-development/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.evidence.source-evidence-contract.input/v1",
+      "kind": "evidence",
+      "next_route": "return-tiangong-evidence-source-evidence-contract-source-bound-result",
+      "output_contract": "tiangong.evidence.source-evidence-contract.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-evidence-source-evidence-contract-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "mcp.prompt",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.prompt.openlca",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "openlca",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.prompt.openlca.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-prompt-openlca-source-bound-result",
+      "output_contract": "tiangong.mcp.prompt.openlca.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-prompt-openlca-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/prompts/lca_calculation.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.resource",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.resource.guidence-for-lca-calculation",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "Guidence for LCA calculation",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.resource.guidence-for-lca-calculation.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-resource-guidence-for-lca-calculation-source-bound-result",
+      "output_contract": "tiangong.mcp.resource.guidence-for-lca-calculation.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-resource-guidence-for-lca-calculation-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/resources/lca_calculation.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.database-crud-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": "Database_CRUD_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.database-crud-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-database-crud-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.database-crud-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-database-crud-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/db_crud.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.get-glad-dataset-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "local_read",
+      "entrypoint": "Get_GLAD_Dataset_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.get-glad-dataset-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-get-glad-dataset-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.get-glad-dataset-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-get-glad-dataset-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/glad_dataset_search.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.tool.lca-calculation-guidance-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "LCA_Calculation_Guidance_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.lca-calculation-guidance-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-lca-calculation-guidance-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.lca-calculation-guidance-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-lca-calculation-guidance-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/lca_calculation_guidance.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.tool.openlca-impact-assessment-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "OpenLCA_Impact_Assessment_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.openlca-impact-assessment-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-openlca-impact-assessment-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.openlca-impact-assessment-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-openlca-impact-assessment-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/openlca_ipc_lcia.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.tool.openlca-list-lcia-methods-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "OpenLCA_List_LCIA_Methods_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.openlca-list-lcia-methods-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-openlca-list-lcia-methods-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.openlca-list-lcia-methods-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-openlca-list-lcia-methods-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/openlca_ipc_lcia_methods_list.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.tool.openlca-list-system-processes-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "OpenLCA_List_System_Processes_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.openlca-list-system-processes-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-openlca-list-system-processes-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.openlca-list-system-processes-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-openlca-list-system-processes-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/openlca_ipc_system_processes_list.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.search-flows-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "local_read",
+      "entrypoint": "Search_Flows_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.search-flows-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-search-flows-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.search-flows-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-search-flows-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/flow_hybrid_search.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.search-glad-datasets-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "local_read",
+      "entrypoint": "Search_GLAD_Datasets_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.search-glad-datasets-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-search-glad-datasets-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.search-glad-datasets-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-search-glad-datasets-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/glad_dataset_search.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.search-life-cycle-models-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "local_read",
+      "entrypoint": "Search_Life_Cycle_Models_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.search-life-cycle-models-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-search-life-cycle-models-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.search-life-cycle-models-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-search-life-cycle-models-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/life_cycle_model_hybrid_search.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.mcp.tool.search-processes-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "local_read",
+      "entrypoint": "Search_Processes_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.search-processes-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-search-processes-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.search-processes-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-search-processes-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/process_hybrid_search.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "mcp.tool",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_transport_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.mcp.tool.tidas-data-validate-tool",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": "Tidas_Data_Validate_Tool",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.mcp.tool.tidas-data-validate-tool.input/v1",
+      "kind": "mcp_tool",
+      "next_route": "return-tiangong-mcp-tool-tidas-data-validate-tool-source-bound-result",
+      "output_contract": "tiangong.mcp.tool.tidas-data-validate-tool.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-mcp-tool-tidas-data-validate-tool-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.mcp.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "mcp",
+      "verification": {
+        "evidence": "external/tiangong/tiangong-lca-mcp/src/tools/tidas_data_validation.ts",
+        "kind": "static_mcp_registration"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.native.cli-contract",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "--help"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.native.cli-contract.input/v1",
+      "kind": "native_tool",
+      "next_route": "return-tiangong-native-cli-contract-source-bound-result",
+      "output_contract": "tiangong.native.cli-contract.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-native-cli-contract-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "static.tidas-sdk",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.native.tidas-sdk",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": "@tiangong-lca/tidas-sdk",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.native.tidas-sdk.input/v1",
+      "kind": "native_tool",
+      "next_route": "return-tiangong-native-tidas-sdk-source-bound-result",
+      "output_contract": "tiangong.native.tidas-sdk.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-native-tidas-sdk-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.sdk.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.current-account-dataset-review",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "current-account-dataset-review/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.current-account-dataset-review.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-current-account-dataset-review-source-bound-result",
+      "output_contract": "tiangong.skill.current-account-dataset-review.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-current-account-dataset-review-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "351f88db00a33d62b49207f0b053b2d4e1a172ebcdeb1f269736f47077e8967a",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.skill.dataset-rls-maintenance",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": "dataset-rls-maintenance/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.dataset-rls-maintenance.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-dataset-rls-maintenance-source-bound-result",
+      "output_contract": "tiangong.skill.dataset-rls-maintenance.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-dataset-rls-maintenance-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "89e9a7cff744fa7684dfc163f72748192337c714dca628c8ff4490b13a0a0492",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.skill.embedding-ft",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": "embedding-ft/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.embedding-ft.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-embedding-ft-source-bound-result",
+      "output_contract": "tiangong.skill.embedding-ft.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-embedding-ft-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "51e348c136760b0959b52ea8671bac001f8341395716660b0d0a49cd419ba983",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.external-dataset-curated-import",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "external-dataset-curated-import/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.external-dataset-curated-import.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-external-dataset-curated-import-source-bound-result",
+      "output_contract": "tiangong.skill.external-dataset-curated-import.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-external-dataset-curated-import-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "429d3bbf8d1e79ea63e68b2b871748ff91424638faa9a0a2d4a733bcec3740e0",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.flow-governance-review",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "flow-governance-review/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.flow-governance-review.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-flow-governance-review-source-bound-result",
+      "output_contract": "tiangong.skill.flow-governance-review.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-flow-governance-review-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "b11d13608659d7907c91bccea9977d76a61eb9b8cbc3bbbdd587a53179984e94",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.flow-hybrid-search",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "flow-hybrid-search/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.flow-hybrid-search.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-flow-hybrid-search-source-bound-result",
+      "output_contract": "tiangong.skill.flow-hybrid-search.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-flow-hybrid-search-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "47d4c7170f0724772a19dba0645aa0bd660e04a2b4b249370378f4e261285003",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.skill.lca-publish-executor",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": "lca-publish-executor/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lca-publish-executor.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lca-publish-executor-source-bound-result",
+      "output_contract": "tiangong.skill.lca-publish-executor.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lca-publish-executor-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "13bb91f20f1ef2e80f0691bda362efcaac6056ca27d4f925c8d6649442698a24",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.lifecycleinventory-review",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "lifecycleinventory-review/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lifecycleinventory-review.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lifecycleinventory-review-source-bound-result",
+      "output_contract": "tiangong.skill.lifecycleinventory-review.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lifecycleinventory-review-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "d9bc4ef0c9f9069d83e74641ee071a5ae9e2ce33feb0784416a1281a67021ab2",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.lifecyclemodel-automated-builder",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "lifecyclemodel-automated-builder/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lifecyclemodel-automated-builder.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lifecyclemodel-automated-builder-source-bound-result",
+      "output_contract": "tiangong.skill.lifecyclemodel-automated-builder.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lifecyclemodel-automated-builder-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "b973396a77189ca3cad7d8a3ecf8e179c7489328f88e4d7fa62f5833beec5faa",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.lifecyclemodel-hybrid-search",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "lifecyclemodel-hybrid-search/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lifecyclemodel-hybrid-search.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lifecyclemodel-hybrid-search-source-bound-result",
+      "output_contract": "tiangong.skill.lifecyclemodel-hybrid-search.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lifecyclemodel-hybrid-search-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "982634fc23240bb86e48cc1c6fe96d1e7433cf638615b6ac6bf69ff9935d363f",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.lifecyclemodel-recursive-orchestrator",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "lifecyclemodel-recursive-orchestrator/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lifecyclemodel-recursive-orchestrator.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lifecyclemodel-recursive-orchestrator-source-bound-result",
+      "output_contract": "tiangong.skill.lifecyclemodel-recursive-orchestrator.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lifecyclemodel-recursive-orchestrator-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "a7ce792d984c685a302980a10fd930bea506b2c7d1e89e3ab4d38c4c10552e18",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.lifecyclemodel-resulting-process-builder",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "lifecyclemodel-resulting-process-builder/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.lifecyclemodel-resulting-process-builder.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-lifecyclemodel-resulting-process-builder-source-bound-result",
+      "output_contract": "tiangong.skill.lifecyclemodel-resulting-process-builder.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-lifecyclemodel-resulting-process-builder-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "865aadcc00ef81a0aae1162e76a9839aead7e26e51be16cfd2217479df449fa4",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.process-automated-builder",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "process-automated-builder/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.process-automated-builder.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-process-automated-builder-source-bound-result",
+      "output_contract": "tiangong.skill.process-automated-builder.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-process-automated-builder-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "4a33e33317c8394167f1cc6d2ad9527e7ac4253e2be72930ea4ec796df16412d",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.process-dedup-review",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "process-dedup-review/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.process-dedup-review.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-process-dedup-review-source-bound-result",
+      "output_contract": "tiangong.skill.process-dedup-review.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-process-dedup-review-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "16062550f0e17fee5c3557d5cbc14519d87358535cbf1a33c965738e5b6c5066",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.process-hybrid-search",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "process-hybrid-search/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.process-hybrid-search.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-process-hybrid-search-source-bound-result",
+      "output_contract": "tiangong.skill.process-hybrid-search.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-process-hybrid-search-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "0f0dddf6418963012820676d618aae70a5233856b585b8298621bbcfba6ca7ec",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.process-scope-statistics",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "process-scope-statistics/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.process-scope-statistics.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-process-scope-statistics-source-bound-result",
+      "output_contract": "tiangong.skill.process-scope-statistics.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-process-scope-statistics-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "49387f94aad47c0ccbccc6b05a5db2389dbbfdf7543a30b5d665951961ee3d82",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.source-evidence-dataset-development",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "source-evidence-dataset-development/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.source-evidence-dataset-development.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-source-evidence-dataset-development-source-bound-result",
+      "output_contract": "tiangong.skill.source-evidence-dataset-development.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-source-evidence-dataset-development-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "36318136eb93095fdab5c9dd59606a64addbe69908b8d3cff630208e0d1cca84",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.skill.tiangong-lca-remote-ops",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": "tiangong-lca-remote-ops/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.tiangong-lca-remote-ops.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-tiangong-lca-remote-ops-source-bound-result",
+      "output_contract": "tiangong.skill.tiangong-lca-remote-ops.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-tiangong-lca-remote-ops-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "d0d55a4be253e74e6d6eecfcaddc46459019673f7c8fce5b86f5d7d72217c535",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.tidas-bilingual-transcreation",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "tidas-bilingual-transcreation/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.tidas-bilingual-transcreation.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-tidas-bilingual-transcreation-source-bound-result",
+      "output_contract": "tiangong.skill.tidas-bilingual-transcreation.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-tidas-bilingual-transcreation-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "3f62c3ce79a7a146a5672031a80c4d5993b09cdeb5c6e3ca8296e9b8d3b26570",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.tidas-contract-context",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "tidas-contract-context/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.tidas-contract-context.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-tidas-contract-context-source-bound-result",
+      "output_contract": "tiangong.skill.tidas-contract-context.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-tidas-contract-context-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "db1c400786087a88b41009d2634aa9a1f38b41e23211b2d301c9372f9dfb37bb",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "skill.metadata",
+      "allowed_use": [
+        "stateless_professional_method"
+      ],
+      "authority_tier": "official_workflow_policy",
+      "availability": "available_public_remote",
+      "capability_id": "tiangong.skill.tidas-data-import",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "upstream_owned",
+      "effect": "local_read",
+      "entrypoint": "tidas-data-import/SKILL.md",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.skill.tidas-data-import.input/v1",
+      "kind": "skill",
+      "next_route": "return-tiangong-skill-tidas-data-import-source-bound-result",
+      "output_contract": "tiangong.skill.tidas-data-import.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-skill-tidas-data-import-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.skills.git",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "54f2306988386bc47d7a88e38ee4c63cf7826059ed72e76e92b88be2036ed469",
+        "kind": "skill_frontmatter"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "requires_runtime",
+      "capability_id": "tiangong.specification.context-pack",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "conditional_runtime",
+      "effect": "local_read",
+      "entrypoint": [
+        "tiangong-lca",
+        "dataset",
+        "context-pack"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.specification.context-pack.input/v1",
+      "kind": "specification",
+      "next_route": "return-tiangong-specification-context-pack-source-bound-result",
+      "output_contract": "tiangong.specification.context-pack.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-specification-context-pack-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.cli.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "static.tidas-sdk",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tidas_methodology",
+      "availability": "available_local",
+      "capability_id": "tiangong.specification.methodology",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": "methodology",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.specification.methodology.input/v1",
+      "kind": "specification",
+      "next_route": "return-tiangong-specification-methodology-source-bound-result",
+      "output_contract": "tiangong.specification.methodology.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-specification-methodology-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.sdk.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "static.tidas-sdk",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tidas_ruleset",
+      "availability": "available_local",
+      "capability_id": "tiangong.specification.runtime-ruleset",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": "runtime-ruleset",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.specification.runtime-ruleset.input/v1",
+      "kind": "specification",
+      "next_route": "return-tiangong-specification-runtime-ruleset-source-bound-result",
+      "output_contract": "tiangong.specification.runtime-ruleset.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-specification-runtime-ruleset-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.sdk.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "static.tidas-sdk",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_tidas_specification",
+      "availability": "available_local",
+      "capability_id": "tiangong.specification.tidas-schema",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": "schema",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.specification.tidas-schema.input/v1",
+      "kind": "specification",
+      "next_route": "return-tiangong-specification-tidas-schema-source-bound-result",
+      "output_contract": "tiangong.specification.tidas-schema.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-specification-tidas-schema-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.sdk.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.tidas-tools.tidas-convert",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_write",
+      "entrypoint": [
+        "tidas-convert"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.tidas-tools.tidas-convert.input/v1",
+      "kind": "native_tool",
+      "next_route": "return-tiangong-tidas-tools-tidas-convert-source-bound-result",
+      "output_contract": "tidas_tools.convert:main",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-tidas-tools-tidas-convert-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.tidas-tools.pypi",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "requires_credential",
+      "capability_id": "tiangong.tidas-tools.tidas-export",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "user_provisioned_identity_required",
+      "disposition": "human_action_required",
+      "effect": "external_write",
+      "entrypoint": [
+        "tidas-export"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.tidas-tools.tidas-export.input/v1",
+      "kind": "native_tool",
+      "next_route": "return-tiangong-tidas-tools-tidas-export-source-bound-result",
+      "output_contract": "tidas_tools.export:main",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-tidas-tools-tidas-export-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.tidas-tools.pypi",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.tidas-tools.tidas-import",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_write",
+      "entrypoint": [
+        "tidas-import"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.tidas-tools.tidas-import.input/v1",
+      "kind": "native_tool",
+      "next_route": "return-tiangong-tidas-tools-tidas-import-source-bound-result",
+      "output_contract": "tidas_tools.import_lca.cli:main",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-tidas-tools-tidas-import-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.tidas-tools.pypi",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "subprocess.argv",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.tidas-tools.tidas-validate",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_write",
+      "entrypoint": [
+        "tidas-validate"
+      ],
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.tidas-tools.tidas-validate.input/v1",
+      "kind": "validation",
+      "next_route": "return-tiangong-tidas-tools-tidas-validate-source-bound-result",
+      "output_contract": "tidas_tools.validate:main",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-tidas-tools-tidas-validate-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.tidas-tools.pypi",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_process",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    },
+    {
+      "adapter_id": "static.tidas-sdk",
+      "allowed_use": [
+        "source_bound_capability_execution"
+      ],
+      "authority_tier": "official_native_tool",
+      "availability": "available_local",
+      "capability_id": "tiangong.validation.tidas",
+      "contract": "lca_research_kernel.capability_descriptor/v1",
+      "credential_policy": "none",
+      "disposition": "integrated",
+      "effect": "local_read",
+      "entrypoint": "validate",
+      "forbidden_claims": [
+        "tool_or_protocol_identity_confers_scientific_acceptance"
+      ],
+      "idempotency": "same_input_and_source_lock",
+      "input_contract": "tiangong.validation.tidas.input/v1",
+      "kind": "validation",
+      "next_route": "return-tiangong-validation-tidas-source-bound-result",
+      "output_contract": "tiangong.validation.tidas.output/v1",
+      "provider": "TianGong",
+      "recovery_route": "repair-tiangong-validation-tidas-adapter",
+      "responsibility_tags": [],
+      "retry_policy": {
+        "max_attempts": 1,
+        "retryable_codes": []
+      },
+      "source_lock_id": "tiangong.sdk.npm",
+      "supersedes": [],
+      "timeout_seconds": 30,
+      "transport": "local_file",
+      "verification": {
+        "evidence": "tests/test_tiangong_capability_inventory.py",
+        "kind": "metadata_contract"
+      }
+    }
+  ],
+  "catalog_id": "tiangong-capability-infrastructure-2026-07-23",
+  "contract": "lca_research_kernel.capability_catalog/v1",
+  "source_lock_id": "tiangong-capability-infrastructure-2026-07-23"
+}

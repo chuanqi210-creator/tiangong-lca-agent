@@ -1,0 +1,110 @@
+{
+  "contract": "qingxiaoda_openai_compatibility/v1",
+  "product_boundary": "service_control_plane_only",
+  "source_documents": [
+    {
+      "path": "docs/superpowers/specs/2026-07-24-d18-performance-parity-and-backend-closure-design.md",
+      "sha256": "05c7a15aab9264e556433eb216402b118589dd106542d09c5b62ff98320b507b"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-07-24-d18-performance-parity-and-backend-closure.md",
+      "sha256": "2057b9fbec6219319fe8c70d509e50d732e2bd812a0934b7518e022a1002cb9e"
+    }
+  ],
+  "authentication": {
+    "scheme": "Bearer",
+    "missing_or_invalid_status": 401,
+    "production_scope": "exact_project_token",
+    "cross_project_status": 403,
+    "credential_source": "project_token_file_not_process_arguments"
+  },
+  "endpoints": [
+    "GET /v1/models",
+    "POST /v1/chat/completions",
+    "POST /v1/jobs",
+    "GET /v1/jobs/{job_id}",
+    "GET /v1/research/{project_id}/jobs/latest",
+    "POST /v1/jobs/{job_id}/continuations",
+    "POST /v1/jobs/{job_id}/inputs",
+    "GET /v1/jobs/{job_id}/result",
+    "POST /v1/jobs/{job_id}/cancel",
+    "POST /v1/jobs/{job_id}/resume",
+    "GET /v1/jobs/{job_id}/events",
+    "GET /v1/files/{artifact_id}",
+    "GET /health/live",
+    "GET /health/ready",
+    "GET /metrics"
+  ],
+  "request": {
+    "model": {
+      "required": false,
+      "accepted_missing_values": ["missing", "null", "empty"]
+    },
+    "stream": {
+      "type": "json_boolean",
+      "default": false
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "roles": ["system", "user", "assistant"],
+    "content_parts": [
+      "text",
+      "image_url.url",
+      "input_audio.url+format",
+      "file.url_or_file_id+filename"
+    ],
+    "base64_content": "forbidden"
+  },
+  "response": {
+    "finish_reasons": ["stop", "length", "tool_calls", "content_filter"],
+    "usage": "always_required",
+    "sse_order": [
+      "role",
+      "content_or_reasoning",
+      "stop_with_usage_and_final_attachments",
+      "[DONE]"
+    ],
+    "attachments_location": "final_only_x_soda.attachments"
+    ,
+    "protocol_probe": {
+      "contract": "d18.protocol_probe/v1",
+      "purpose": "qingxiaoda_connection_capability_handshake_only",
+      "exact_request": {
+        "messages": [{"role": "user", "content": "hi"}],
+        "stream": true,
+        "max_tokens": 1,
+        "model": "missing_empty_or_configured",
+        "research_id": "missing_or_chat_plus_24_lower_hex",
+        "session_id": null,
+        "materials": []
+      },
+      "response": "sse_ok_with_release_identity",
+      "project_record": "must_not_create_or_mutate",
+      "near_matches": "normal_research_runtime"
+    },
+    "job_sse": {
+      "sequence": "strictly_increasing",
+      "resume": "after_query_or_last_event_id",
+      "heartbeat": "required"
+    }
+  },
+  "security": {
+    "input_url_scheme": "https",
+    "input_url_hosts": "configured_allowlist_only",
+    "reject_url_credentials": true,
+    "reject_private_link_local_loopback_reserved": true,
+    "redirects_revalidated": true,
+    "download_byte_cap_required": true,
+    "mime_match_required": true,
+    "output_requires_project_record_registration": "scientific_and_research_outputs_only_protocol_probe_excluded",
+    "hidden_reasoning_exposure": "forbidden",
+    "secret_exposure": "forbidden"
+  },
+  "truth_boundary": {
+    "project_record": "sole_scientific_truth",
+    "service_database": "operational_metadata_and_content_refs_only",
+    "service_result": "read_only_projection_of_accepted_project_record_artifact"
+  }
+}

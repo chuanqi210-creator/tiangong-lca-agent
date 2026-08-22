@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lca-result-interpretation-and-hotspot",
+  "version": "1.0.0",
+  "title": "Interpret LCA Results and Hotspots",
+  "description": "Use when accepted inventory or LCIA results must be interpreted, contribution drivers identified, sensitivity and completeness considered, or decision-relevant hotspots explained without overstating causality.",
+  "applicability": {
+    "desired_artifacts": ["result_interpretation"],
+    "semantic_roles": ["contribution_result", "hotspot", "sensitivity_result", "uncertainty_result", "coverage_limitation"],
+    "requirements": [],
+    "conflict_types": ["result_scope_conflict", "hotspot_robustness_conflict"],
+    "target_object_kinds": ["Calculation", "Indicator", "ImpactCategory", "Result", "Limitation"]
+  },
+  "required_inputs": ["accepted_result_ref", "functional_unit_ref", "method_and_scope_ref"],
+  "expected_artifact": "result_interpretation",
+  "accepted_state_delta": "supported_contributions_interpreted_or_claim_bounded",
+  "capability_ids": ["tiangong.data.native-lcia-result-read", "tiangong.calculation.openlca-ipc", "tiangong.skill.lifecycleinventory-review"],
+  "upstream_skill_ids": ["lifecycleinventory-review"],
+  "domain_rule_ids": ["lca.interpretation.common_basis", "lca.interpretation.hotspot_not_causality", "lca.interpretation.coverage_ceiling"],
+  "source_lock_ids": ["tiangong.cli.npm", "tiangong.mcp.npm", "tiangong.skills.git"],
+  "output_classifications": ["candidate_only", "computed", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["result_basis_is_common", "contribution_denominator_is_explicit", "coverage_limitations_are_included", "claim_strength_matches_evidence"],
+  "failure_boundaries": ["accepted_result_absent", "incomparable_result_basis", "material_coverage_gap"],
+  "forbidden": ["direct_project_record_write", "hotspot_as_causal_proof", "hide_bounded_result", "compare_incompatible_results"],
+  "permission_effects": ["no_permission_expansion", "accepted_result_read_only"],
+  "resources": []
+}

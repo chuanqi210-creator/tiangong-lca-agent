@@ -1,0 +1,14 @@
+.git
+.gitignore
+.runtime
+outputs
+**/.venv
+**/__pycache__
+**/*.pyc
+**/credentials.json
+**/*.credentials.json
+**/*-credentials.json
+**/*.env
+**/*.key
+**/*.pem
+runtime/service-python/health.json

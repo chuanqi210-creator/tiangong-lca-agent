@@ -1,0 +1,233 @@
+{
+  "contract": "lca_research_kernel.domain_rule_registry/v1",
+  "registry_id": "d18-lca-domain-rules-2026-08-22",
+  "version": "1.0.0",
+  "project_truth": "project_record_only",
+  "rules": [
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.assumption.traceability",
+      "version": "1.0.0",
+      "title": "Assumption traceability",
+      "statement": "Every assumption retains its source, transformation, affected claim, and replacement condition.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.calculation.preserve_original",
+      "version": "1.0.0",
+      "title": "Preserve original values",
+      "statement": "A calculation retains every original value and unit separately from normalized or computed values.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.claim.exact_evidence_binding",
+      "version": "1.0.0",
+      "title": "Exact claim evidence binding",
+      "statement": "Every scientific claim binds the smallest sufficient accepted evidence locators and their content identities.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.claim.method_scope_ceiling",
+      "version": "1.0.0",
+      "title": "Method and scope claim ceiling",
+      "statement": "A conclusion cannot exceed the accepted method, system boundary, evidence coverage, and uncertainty basis.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "claim_ceiling"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.claim.permission_boundary",
+      "version": "1.0.0",
+      "title": "Permission boundary",
+      "statement": "Evidence access or protocol connectivity never grants authority to write, publish, pay, or change accepted project truth.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.comparison.claim_ceiling",
+      "version": "1.0.0",
+      "title": "Comparative claim ceiling",
+      "statement": "A comparative preference is prohibited when functional equivalence, boundary, method, coverage, or uncertainty remains non-equivalent.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "claim_ceiling"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.comparison.common_method_basis",
+      "version": "1.0.0",
+      "title": "Common method basis",
+      "statement": "Compared alternatives use the same LCIA method, indicator definitions, temporal basis, and characterization coverage or disclose the mismatch.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.comparison.functional_equivalence",
+      "version": "1.0.0",
+      "title": "Functional equivalence",
+      "statement": "Compared alternatives provide an explicitly equivalent function, functional unit, reference flow, and system boundary.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.conclusion.gap_ceiling",
+      "version": "1.0.0",
+      "title": "Data gap claim ceiling",
+      "statement": "Unresolved material data gaps lower the conclusion to the strongest explicitly bounded statement supported by remaining evidence.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "claim_ceiling"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.data_gap.ownership",
+      "version": "1.0.0",
+      "title": "Data gap ownership",
+      "statement": "A missing datum identifies whether it is user-owned, source-researchable, tool-computable, or unavailable before routing.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.flow.exact_identity",
+      "version": "1.0.0",
+      "title": "Exact flow identity",
+      "statement": "Flow matching preserves exact flow, flow-property, unit-group, direction, provider, and version identities rather than names alone.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.goal_scope.functional_unit",
+      "version": "1.0.0",
+      "title": "Functional unit completeness",
+      "statement": "A functional unit states the quantified function, amount, unit, performance conditions, and reference flow required by the intended use.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.goal_scope.system_boundary",
+      "version": "1.0.0",
+      "title": "System boundary completeness",
+      "statement": "A system boundary declares included life-cycle stages, exclusions, cut-off rules, allocation, geography, time, and technology scope.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.interpretation.common_basis",
+      "version": "1.0.0",
+      "title": "Interpretation basis",
+      "statement": "Result interpretation retains the functional unit, boundary, inventory coverage, LCIA method, scenario, and calculation version that produced the result.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.interpretation.coverage_ceiling",
+      "version": "1.0.0",
+      "title": "Interpretation coverage ceiling",
+      "statement": "Missing exchanges, processes, impact categories, or sensitivity coverage lower the interpretation claim ceiling.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "claim_ceiling"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.interpretation.hotspot_not_causality",
+      "version": "1.0.0",
+      "title": "Hotspot is not causality",
+      "statement": "A contribution hotspot is an accounting contribution within the modeled system and is not by itself a causal effect or intervention outcome.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "claim_ceiling"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lca.unit.dimension_compatibility",
+      "version": "1.0.0",
+      "title": "Dimensional compatibility",
+      "statement": "A conversion or aggregation is permitted only when flow properties and physical dimensions are compatible and the conversion factor is source-bound.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lci.completeness.coverage",
+      "version": "1.0.0",
+      "title": "Inventory completeness coverage",
+      "statement": "Inventory completeness reports covered and unresolved exchanges, providers, reference flows, cut-offs, and recursion boundaries.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lci.exchange.typed_direction",
+      "version": "1.0.0",
+      "title": "Typed exchange direction",
+      "statement": "Every inventory exchange retains its input or output direction, quantitative reference status, flow type, amount, and unit.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lci.provider.exact_relation",
+      "version": "1.0.0",
+      "title": "Exact provider relation",
+      "statement": "A provider link binds an exact producing process and product or waste flow relation with version and quantitative-reference semantics.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lcia.calculation.tool_only_numeric",
+      "version": "1.0.0",
+      "title": "Tool-only numeric LCIA",
+      "statement": "Formal LCIA numeric results require an accepted deterministic calculation receipt; a model may explain but may not invent the calculation.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "mechanical_precondition"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lcia.characterization.coverage",
+      "version": "1.0.0",
+      "title": "Characterization coverage",
+      "statement": "LCIA results disclose inventory flows without characterization factors, excluded categories, regionalization gaps, and method-version coverage.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "lcia.method.intended_use_fit",
+      "version": "1.0.0",
+      "title": "LCIA method intended-use fit",
+      "statement": "An LCIA method is selected by intended use, covered indicators, geography, time, inventory compatibility, and required claim type.",
+      "source_lock_ids": ["tiangong.skills.git"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "tiangong.identity.exact_object",
+      "version": "1.0.0",
+      "title": "Exact TianGong object identity",
+      "statement": "A TianGong claim binds the official object kind, UUID, version, provider, unit, and native source identity observed by an authorized capability.",
+      "source_lock_ids": ["tiangong.cli.npm", "tiangong.sdk.npm"],
+      "enforcement": "assurance_check"
+    },
+    {
+      "contract": "lca_research_kernel.domain_rule/v1",
+      "rule_id": "tiangong.identity.version_temporal_fit",
+      "version": "1.0.0",
+      "title": "TianGong version and temporal fit",
+      "statement": "A TianGong object version is admissible only when its validity, update relation, and temporal representativeness fit the research state.",
+      "source_lock_ids": ["tiangong.cli.npm", "tiangong.sdk.npm"],
+      "enforcement": "assurance_check"
+    }
+  ]
+}

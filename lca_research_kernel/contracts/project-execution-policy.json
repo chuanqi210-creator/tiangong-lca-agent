@@ -1,0 +1,79 @@
+{
+  "contract": "lca_research_kernel.project_execution_policy/v1",
+  "policy_id": "d18-production-project-execution-v1",
+  "file_rules": {
+    "read_roots": [
+      "inputs",
+      "artifacts"
+    ],
+    "write_roots": [
+      "artifacts",
+      "tmp"
+    ]
+  },
+  "network_rules": {
+    "external_read_hosts": [
+      "api.anthropic.com",
+      "api.openai.com",
+      "api.tiangong.earth",
+      "climate.ec.europa.eu",
+      "data.europa.eu",
+      "ec.europa.eu",
+      "eur-lex.europa.eu",
+      "generativelanguage.googleapis.com",
+      "lca.tiangong.earth",
+      "open.bigmodel.cn",
+      "taxation-customs.ec.europa.eu",
+      "127.0.0.1",
+      "localhost"
+    ],
+    "external_write_hosts": []
+  },
+  "subprocess_rules": {
+    "allowed_executables": [
+      "runtime/model-python/.venv/bin/python",
+      ".runtime/d18-tiangong-capabilities/bin/tiangong-lca",
+      ".runtime/d18-tiangong-capabilities/python/bin/tidas-validate",
+      ".runtime/d18-tiangong-capabilities/openlca/openLCA.app/Contents/Eclipse/jre/Contents/Home/bin/java"
+    ],
+    "environment_allowlist": [
+      "LANG",
+      "LC_ALL",
+      "PATH"
+    ]
+  },
+  "service_rules": {
+    "TianGong": [
+      "read_only"
+    ],
+    "OpenLCA": [
+      "health",
+      "list",
+      "calculate_isolated"
+    ],
+    "MCP": [
+      "tools/list",
+      "resources/list",
+      "prompts/list",
+      "tools/call:read_only"
+    ]
+  },
+  "effect_rules": {
+    "autonomous": [
+      "local_read",
+      "local_write",
+      "external_read"
+    ],
+    "human_owned": [
+      "credentials",
+      "payment",
+      "publication",
+      "external_write",
+      "irreversible"
+    ]
+  },
+  "output_rules": {
+    "max_bytes": 65536,
+    "secrets_forbidden": true
+  }
+}

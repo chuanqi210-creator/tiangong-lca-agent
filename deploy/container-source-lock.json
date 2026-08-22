@@ -1,0 +1,42 @@
+{
+  "contract": "d18_service_container_source_lock/v1",
+  "base_image": {
+    "name": "docker.io/library/python",
+    "tag": "3.11.15-slim",
+    "digest": "sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+    "media_type": "application/vnd.oci.image.index.v1+json",
+    "verified_from": "https://registry-1.docker.io/v2/library/python/manifests/3.11.15-slim",
+    "verified_at": "2026-07-24T10:45:00Z"
+  },
+  "requirements_lock": {
+    "path": "runtime/service-python/requirements.lock",
+    "sha256": "c70eca0aedfa982b997d0f8349789c1a74d6826684c5a7966acea4e135d19bc5"
+  },
+  "system_packages": {
+    "libseccomp2": {
+      "version": "2.6.0-2",
+      "library_soname": "libseccomp.so.2",
+      "runtime_version": "2.6.0",
+      "registry": "https://packages.debian.org/trixie/libseccomp2",
+      "artifacts": {
+        "amd64": {
+          "debian_architecture": "amd64",
+          "filename": "libseccomp2_2.6.0-2_amd64.deb",
+          "registry": "https://packages.debian.org/trixie/libseccomp2",
+          "sha256": "89d5138e05fb6a86b9afd8b54dc0fb4b14f4c27c05e6c5f767c2132bdf808531"
+        },
+        "arm64": {
+          "debian_architecture": "arm64",
+          "filename": "libseccomp2_2.6.0-2_arm64.deb",
+          "registry": "https://packages.debian.org/trixie/libseccomp2",
+          "sha256": "013d0af0444177960d5899f4673e35d492f31edfc40cb8d5a82bb56147ab2e35"
+        }
+      }
+    }
+  },
+  "policy": {
+    "non_root_required": true,
+    "secret_in_build_context_forbidden": true,
+    "floating_base_forbidden": true
+  }
+}

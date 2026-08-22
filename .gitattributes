@@ -1,0 +1,7 @@
+# Content-addressed public-source payloads are immutable binary evidence.
+outputs/**/official-public-source-cache/objects/*.bin binary
+outputs/**/*.bin binary
+
+# Synthetic document fixtures are binary parser inputs, including PDF xref rows
+# whose required trailing spaces are part of the file format.
+tests/fixtures/materials/ordinary/*.pdf binary

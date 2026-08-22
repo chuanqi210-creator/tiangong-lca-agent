@@ -1,0 +1,22 @@
+# Public release build outputs
+__pycache__/
+*.py[cod]
+.tools/
+.venv/
+runtime/*/.venv/
+runtime/*/node_modules/
+apps/web/node_modules/
+apps/web/.next/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Only the versioned public OpenAPI contract is source-controlled.
+outputs/*
+!outputs/d18-service/
+outputs/d18-service/*
+!outputs/d18-service/integration/
+outputs/d18-service/integration/*
+!outputs/d18-service/integration/openapi-v1.json

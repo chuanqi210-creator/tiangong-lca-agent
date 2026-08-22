@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCA Data Gap Resolution"
+  short_description: "Resolve or bound LCA data gaps and assumptions."
+  default_prompt: "Classify and resolve an LCA data gap with explicit assumptions and limits."

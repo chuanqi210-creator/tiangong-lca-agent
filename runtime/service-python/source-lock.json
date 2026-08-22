@@ -1,0 +1,96 @@
+{
+  "contract": "lca_research_service.runtime_source_lock/v1",
+  "lock_id": "d18-production-service-python-2026-07-24",
+  "python": {
+    "minor": "3.11",
+    "requires": ">=3.10",
+    "bootstrap_candidates": [
+      "python3.11",
+      "python3.12"
+    ]
+  },
+  "requirements": {
+    "input_path": "runtime/service-python/requirements.in",
+    "input_sha256": "81c748bc857532121c667b904673fbafe241a3f215f7b0b25e8e306d6ba532d0",
+    "lock_path": "runtime/service-python/requirements.lock",
+    "lock_sha256": "c70eca0aedfa982b997d0f8349789c1a74d6826684c5a7966acea4e135d19bc5",
+    "resolver": "uv pip compile --python-version 3.11 --generate-hashes",
+    "resolved_package_count": 46
+  },
+  "model_runtime_source_lock": {
+    "path": "runtime/model-python/source-lock.json",
+    "sha256": "3a4b3829d7eaeba79b1acad163157ff87ea5fcc94d440f453646c92f190362c7"
+  },
+  "packages": {
+    "fastapi": {
+      "version": "0.139.2",
+      "license": "MIT",
+      "official_registry": "https://pypi.org/project/fastapi/0.139.2/",
+      "wheel_filename": "fastapi-0.139.2-py3-none-any.whl",
+      "wheel_sha256": "b9ad015a835173d59865e2f5d8296fbc2b317bf56a2ba1a5bfbdd03de2fd4b1c"
+    },
+    "uvicorn": {
+      "version": "0.51.0",
+      "license": "BSD-3-Clause",
+      "official_registry": "https://pypi.org/project/uvicorn/0.51.0/",
+      "wheel_filename": "uvicorn-0.51.0-py3-none-any.whl",
+      "wheel_sha256": "5d38af6cd620f2ae3849fb44fd4879e0890aa1febe8d47eb355fb45d93fe6a5b"
+    },
+    "httpx": {
+      "version": "0.28.1",
+      "license": "BSD-3-Clause",
+      "official_registry": "https://pypi.org/project/httpx/0.28.1/",
+      "wheel_filename": "httpx-0.28.1-py3-none-any.whl",
+      "wheel_sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"
+    }
+  },
+  "model_sdk_versions": {
+    "openai": "2.47.0",
+    "google-genai": "2.13.0",
+    "anthropic": "0.118.0",
+    "zai-sdk": "0.2.3"
+  },
+  "adoption_policy": {
+    "floating_versions_forbidden": true,
+    "live_checkout_forbidden": true,
+    "silent_upgrade_forbidden": true,
+    "credentials_in_lock_forbidden": true
+  },
+  "parser_packages": {
+    "pypdf": {
+      "version": "6.15.0",
+      "license": "BSD-3-Clause",
+      "official_registry": "https://pypi.org/project/pypdf/6.15.0/",
+      "wheel_filename": "pypdf-6.15.0-py3-none-any.whl",
+      "wheel_sha256": "14e001d6504822cb1ca9c7ed9a69bccb320f59b320730f55af804361abe4d5ee"
+    },
+    "Pillow": {
+      "version": "12.3.0",
+      "license": "MIT-CMU",
+      "official_registry": "https://pypi.org/project/Pillow/12.3.0/",
+      "wheel_filename": "pillow-12.3.0-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_sha256": "37d6d0a00072fd2948eb22bce7e1475f34569d90c87c59f7a2ec59541b77f7a6"
+    },
+    "python-docx": {
+      "version": "1.2.0",
+      "license": "MIT",
+      "official_registry": "https://pypi.org/project/python-docx/1.2.0/",
+      "wheel_filename": "python_docx-1.2.0-py3-none-any.whl",
+      "wheel_sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7"
+    },
+    "python-pptx": {
+      "version": "1.0.2",
+      "license": "MIT",
+      "official_registry": "https://pypi.org/project/python-pptx/1.0.2/",
+      "wheel_filename": "python_pptx-1.0.2-py3-none-any.whl",
+      "wheel_sha256": "160838e0b8565a8b1f67947675886e9fea18aa5e795db7ae531606d68e785cba"
+    },
+    "openpyxl": {
+      "version": "3.1.5",
+      "license": "MIT",
+      "official_registry": "https://pypi.org/project/openpyxl/3.1.5/",
+      "wheel_filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+      "wheel_sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+    }
+  }
+}

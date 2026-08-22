@@ -1,0 +1,153 @@
+{
+  "contract": "d18_core_lca_quality_efficiency/v1",
+  "status": "frozen_before_execution",
+  "identity": {
+    "code_basis": "6d4becd8ce260117054a60f9fe39ccb7cabdfd96",
+    "d18_architecture_ref": {
+      "path": "docs/lca-agent-top-level-architecture.json",
+      "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5"
+    },
+    "design_ref": {
+      "path": "docs/superpowers/specs/2026-08-01-d18-core-lca-quality-efficiency-design.md",
+      "sha256": "b4b470af52f28dfda24de01468d3ab0d2278859b49e42b2c9b683727899a52ee"
+    },
+    "plan_ref": {
+      "path": "docs/superpowers/plans/2026-08-01-d18-core-lca-quality-efficiency.md",
+      "sha256": "1a31e029c06fec2c21034de41bc02bd7c88676b7c7cc984fe4661269f25a5375"
+    },
+    "complex_runtime": {
+      "working_tree_object": "9a9d28ce82a633ed2e915650633941adafa5fda4",
+      "base_commit": "0a78df64bfe57e416aa228c7d62728fbe82375fd",
+      "manifest_sha256": "4f2c96a81621319a9da1092e6106e9ae33b93bde3d9f357b2e8ff8572ec998a7",
+      "archive_sha256": "f06a55dfddb5af65dfae0aabb0295c29587af55b62b67882bbffca1999fb2214"
+    }
+  },
+  "wip_limit": 1,
+  "primary_closure_path": [
+    "compile_goal_scope",
+    "bind_authoritative_inputs",
+    "validate_tidas_inputs",
+    "execute_deterministic_calculation",
+    "compose_scientific_interpretation",
+    "assure_and_accept",
+    "measure_quality_first_efficiency"
+  ],
+  "executable_edges": [
+    {
+      "edge_id": "goal_scope_compilation",
+      "input_contract": "research_commission_plus_project_state",
+      "output_contract": "goal_scope_fu_boundary_stage_use",
+      "acceptance_predicate": "complete_source_bound_and_non_contradictory"
+    },
+    {
+      "edge_id": "tiangong_data_binding",
+      "input_contract": "exact_identity_version_source",
+      "output_contract": "source_bound_lca_inputs",
+      "acceptance_predicate": "hash_version_provider_and_original_unit_exact"
+    },
+    {
+      "edge_id": "tidas_validation",
+      "input_contract": "source_bound_lca_inputs",
+      "output_contract": "validated_tidas_candidate",
+      "acceptance_predicate": "versioned_validation_receipt_and_zero_silent_correction"
+    },
+    {
+      "edge_id": "lci_lcia_calculation",
+      "input_contract": "validated_inputs_plus_method",
+      "output_contract": "deterministic_calculation_result",
+      "acceptance_predicate": "method_unit_formula_hash_and_tolerance_exact"
+    },
+    {
+      "edge_id": "scientific_interpretation",
+      "input_contract": "result_boundary_uncertainty",
+      "output_contract": "candidate_only_interpretation",
+      "acceptance_predicate": "source_bound_claim_ceiling_preserved"
+    },
+    {
+      "edge_id": "assurance_acceptance",
+      "input_contract": "candidate_evidence_policy",
+      "output_contract": "accepted_rejected_or_bounded",
+      "acceptance_predicate": "permission_checked_content_addressed_exactly_once"
+    },
+    {
+      "edge_id": "quality_first_efficiency",
+      "input_contract": "accepted_execution_trace",
+      "output_contract": "efficiency_receipt",
+      "acceptance_predicate": "all_quality_gates_pass_before_metrics"
+    }
+  ],
+  "fixture_sources": {
+    "calculation_manifest": {
+      "path": "outputs/d18-controlled-calculation-v2/fixture-manifest.json",
+      "sha256": "2e3bd62489858eff60ac6af21cd240e1344266262a61eaba0f3c0fd057870514"
+    },
+    "interpretation_contract_manifest": {
+      "path": "outputs/d18-controlled-research-evaluation/fixture-manifest.json",
+      "sha256": "2258f45b777ce8c6a639fbbc0c62324e51278f9430f6f22cb22878c59141d43c"
+    },
+    "oracle_policy": "grader_only_not_model_visible"
+  },
+  "branch_roles": {
+    "complete": "primary_path",
+    "missing": "bounded_scenario",
+    "failure_recovery": "robustness"
+  },
+  "quality_gates": [
+    "goal_scope_fu_boundary_stage_use_complete",
+    "tiangong_identity_version_source_provider_exact",
+    "units_methods_and_numbers_exact",
+    "missing_data_prevents_complete_conclusion",
+    "candidate_outputs_cannot_bypass_assurance",
+    "project_record_replay_and_exactly_once_acceptance",
+    "zero_forbidden_effects_and_secrets",
+    "case_neutral_product_routing",
+    "clean_review_p1_zero_p2_zero",
+    "full_repository_verification_passed"
+  ],
+  "evidence_dag": {
+    "locks": {
+      "execution_lock": {
+        "inputs": ["product_code", "model_visible_context", "tools", "permissions", "runtime", "fixture"]
+      },
+      "scoring_lock": {
+        "inputs": ["oracle", "checker", "thresholds", "aggregation"]
+      },
+      "acceptance_lock": {
+        "inputs": ["clean_harness", "secret_effect_scan", "replay", "lifecycle", "claims"]
+      }
+    },
+    "rerun_routes": [
+      "rerun_affected_execution",
+      "regrade_existing_traces",
+      "rerun_clean_acceptance",
+      "rebuild_report_only",
+      "no_evidence_invalidation",
+      "unknown_change_fail_closed"
+    ],
+    "reuse_requires_content_addressed_receipt": true
+  },
+  "failure_layers": {
+    "prompt_failure": "repair_prompt_contract_only_for_real_goal_change",
+    "context_failure": "repair_source_and_context_contract",
+    "harness_failure": "repair_runtime_harness_without_scientific_route_change",
+    "loop_failure": "close_park_change_route_or_reset_appetite",
+    "model_limitation": "bounded_provider_switch_or_limited_conclusion"
+  },
+  "effect_policy": {
+    "allowed": ["local_read", "local_write"],
+    "forbidden": ["credential_disclosure", "external_write", "publication", "payment", "database_mutation", "irreversible_action"]
+  },
+  "beat_routes": [
+    "qualify-core-lca-evaluation-harness",
+    "close-complete-core-lca-thin-slice",
+    "exercise-missing-and-recovery-boundaries",
+    "measure-quality-first-efficiency-and-clean-accept"
+  ],
+  "terminal_next_routes": [
+    "run-first-user-lca-commission-through-core-quality-contract"
+  ],
+  "claim_ceiling": {
+    "supported": ["one_controlled_core_lca_path_meets_the_frozen_contract"],
+    "unsupported": ["universal_lca_generalization", "provider_superiority", "fixture_equals_customer_delivery", "strong_public_scientific_claim"]
+  }
+}

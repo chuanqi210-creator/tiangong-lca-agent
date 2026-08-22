@@ -1,0 +1,98 @@
+{
+  "contract": "lca_research_kernel.lca_explanation_knowledge_registry/v1",
+  "registry_id": "d18-lca-explanation-knowledge-2026-08-15",
+  "entries": [
+    {
+      "knowledge_id": "lca-rel:process-has-exchange",
+      "source_kind": "Process",
+      "relation": "has_exchange",
+      "target_kind": "Exchange",
+      "statement": "An LCA process is connected to its quantified inputs and outputs through exchanges.",
+      "knowledge_roles": [
+        "exchange",
+        "flow",
+        "process",
+        "lca_relationship",
+        "lca_concept"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/research-semantic-graph-v1.json",
+        "sha256": "617a4b1d78130e1741277d9692b2eabd8c169aea1b01c14d6f9077a74b836185"
+      }
+    },
+    {
+      "knowledge_id": "lca-rel:quantity-measured-in-unit",
+      "source_kind": "Quantity",
+      "relation": "measured_in",
+      "target_kind": "Unit",
+      "statement": "A reported quantity is interpreted together with its unit; the number alone does not define its LCA meaning.",
+      "knowledge_roles": [
+        "amount",
+        "quantity",
+        "unit",
+        "source_value_explanation",
+        "lca_concept"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "claim_ceiling": "method_explanation_only",
+      "source_ref": {
+        "path": "lca_research_kernel/contracts/research-semantic-graph-v1.json",
+        "sha256": "617a4b1d78130e1741277d9692b2eabd8c169aea1b01c14d6f9077a74b836185"
+      }
+    },
+    {
+      "knowledge_id": "lca-rule:illustration-not-project-fact",
+      "source_kind": "Illustration",
+      "relation": "cannot_promote_to",
+      "target_kind": "ProjectFact",
+      "statement": "An illustrative example explains a method but is not evidence about the user's project and cannot be accepted as a project fact.",
+      "knowledge_roles": [
+        "authority_boundary",
+        "illustrative_application_boundary",
+        "source_boundary"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "claim_ceiling": "illustration_only",
+      "source_ref": {
+        "path": "docs/superpowers/specs/2026-08-15-d18-research-intelligence-quality-runtime-design.md",
+        "sha256": "d1a8801b3da6c68d882d305a551087ca30dba1053498f0cf5dd9b8fa7b20cb62"
+      }
+    },
+    {
+      "knowledge_id": "lca-example:water-input-exchange",
+      "source_kind": "Illustration",
+      "relation": "illustrates",
+      "target_kind": "Exchange",
+      "statement": "在一个假设的清洗工序中，水可以作为输入交换被记录；该情景仅用于解释 Process–Exchange 关系，不描述用户项目。",
+      "knowledge_roles": [
+        "illustrative_application_boundary",
+        "lca_relationship"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "claim_ceiling": "illustration_only",
+      "source_ref": {
+        "path": "docs/superpowers/specs/2026-08-15-d18-research-intelligence-quality-runtime-design.md",
+        "sha256": "d1a8801b3da6c68d882d305a551087ca30dba1053498f0cf5dd9b8fa7b20cb62"
+      }
+    },
+    {
+      "knowledge_id": "lca-limit:selected-row-not-product-system",
+      "source_kind": "EvidenceSpan",
+      "relation": "limits",
+      "target_kind": "ProductSystem",
+      "statement": "已选来源行可支持对该条目的解释，但不能单独证明未观察到的产品系统或更强科学结论。",
+      "knowledge_roles": [
+        "evidence_limitation",
+        "source_boundary"
+      ],
+      "authority": "governed_lca_domain_knowledge",
+      "claim_ceiling": "limitation_only",
+      "source_ref": {
+        "path": "docs/superpowers/specs/2026-08-15-d18-research-intelligence-quality-runtime-design.md",
+        "sha256": "d1a8801b3da6c68d882d305a551087ca30dba1053498f0cf5dd9b8fa7b20cb62"
+      }
+    }
+  ]
+}

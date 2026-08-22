@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "contract": "lca_research_kernel.controlled_research_evaluation_contract/v1",
+  "baseline_commit": "a0062a58fa6ea73a02227a72e3afe5aa1a8225f6",
+  "commission": "基于所提供的 TianGong 官方材料，判断这些材料是否足以形成一份限定范围的环境影响解读。若足够，形成有来源、有单位、有边界的候选解读；若不足，指出阻止结论成立的关键缺口。不得自行修改或补造 TianGong 数据。",
+  "authority_order": [
+    "d18_machine_architecture",
+    "project_record_projection",
+    "accepted_runtime_baseline",
+    "tiangong_official_fixed_data",
+    "historical_case_cold_evidence"
+  ],
+  "fixture_sources": {
+    "bound_result_directory": "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/provider-ranked-batch-0000-bound-results",
+    "process_rows": "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/provider-ranked-batch-0000-processes/exact-process-rows.json",
+    "flow_rows": "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/provider-ranked-batch-0000-flow-metadata/exact-flow-rows.json",
+    "method_unit_index": "outputs/tiangong-authority-following-second-case/catalog/public-result-root-screening/lcia-method-unit-index.json"
+  },
+  "required_material_fields": [
+    "process_identity",
+    "functional_unit",
+    "reference_flow",
+    "method_results",
+    "source_refs"
+  ],
+  "required_method_result_count": 25,
+  "selection_algorithm": "sha256-ready-receipt-colon-process-exact-ref/v1",
+  "counterfactual_hidden_field_order": [
+    "functional_unit",
+    "impact_units"
+  ],
+  "branches": [
+    "complete_material",
+    "missing_critical_field",
+    "interruption_recovery"
+  ],
+  "provider_policy": {
+    "required_route_status": "active_verified",
+    "primary_route_count": 1,
+    "parallel_provider_comparison": false
+  },
+  "claim_ceiling": "candidate_only",
+  "allowed_effects": [
+    "local_read",
+    "local_write",
+    "credentialed_model_read_only"
+  ],
+  "forbidden_effects": [
+    "database_write",
+    "publication",
+    "external_write",
+    "payment",
+    "irreversible",
+    "lca_calculation_trigger"
+  ],
+  "terminal_routes": [
+    "run-first-controlled-native-lca-calculation-evaluation",
+    "repair-d18-runtime-core-from-controlled-evaluation",
+    "establish-held-out-tiangong-evaluation-fixture"
+  ]
+}

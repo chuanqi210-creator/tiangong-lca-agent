@@ -1,0 +1,3 @@
+display_name: Evidence to TIDAS LCA
+short_description: Build auditable TIDAS LCA drafts.
+default_prompt: Use this skill to turn papers, lab notes, BOMs, and process descriptions into a TIDAS-compatible LCA model draft with evidence, assumptions, and validation artifacts.

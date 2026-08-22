@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lcia-method-selection-and-calculation",
+  "version": "1.0.0",
+  "title": "Select an LCIA Method and Run a Controlled Calculation",
+  "description": "Use when an accepted inventory needs a compatible LCIA method, impact category, characterization mapping, calculation run, or calculation receipt, including cases where the required method or runtime is unavailable.",
+  "applicability": {
+    "desired_artifacts": ["lcia_calculation_result"],
+    "semantic_roles": ["characterization_factor", "lcia_method", "impact_category", "inventory_result", "calculation_receipt"],
+    "requirements": ["calculation"],
+    "conflict_types": ["method_conflict", "characterization_gap", "impact_unit_conflict"],
+    "target_object_kinds": ["LCIAMethod", "ImpactCategory", "Indicator", "Calculation", "ProductSystem"]
+  },
+  "required_inputs": ["accepted_inventory_ref", "intended_use", "requested_indicator_or_method_rule"],
+  "expected_artifact": "lcia_calculation_result",
+  "accepted_state_delta": "lcia_candidate_calculated_or_method_runtime_gap_preserved",
+  "capability_ids": ["tiangong.calculation.openlca-ipc", "tiangong.mcp.tool.openlca-impact-assessment-tool", "tiangong.mcp.tool.openlca-list-lcia-methods-tool", "tiangong.data.native-lcia-result-read", "tiangong.specification.methodology"],
+  "upstream_skill_ids": ["lifecycleinventory-review", "tidas-contract-context"],
+  "domain_rule_ids": ["lcia.method.intended_use_fit", "lcia.characterization.coverage", "lcia.calculation.tool_only_numeric"],
+  "source_lock_ids": ["tiangong.mcp.npm", "tiangong.cli.npm", "tiangong.sdk.npm"],
+  "output_classifications": ["candidate_only", "computed", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["method_identity_is_exact", "inventory_hash_is_bound", "calculation_receipt_is_valid", "coverage_and_units_are_reported"],
+  "failure_boundaries": ["compatible_method_absent", "calculation_runtime_unavailable", "characterization_gap_material"],
+  "forbidden": ["direct_project_record_write", "model_generated_numeric_lcia", "uncharacterized_as_zero", "cross_version_category_merge"],
+  "permission_effects": ["no_permission_expansion", "bounded_local_tool_execution"],
+  "resources": []
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCA Evidence Audit"
+  short_description: "Audit claim, evidence, and conclusion boundaries."
+  default_prompt: "Audit LCA evidence bindings and the strength of each conclusion."

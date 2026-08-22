@@ -1,0 +1,14 @@
+{
+  "name": "d18-tiangong-capability-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exact local runtime for the D-18 TianGong capability environment.",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@tiangong-lca/cli": "0.0.29",
+    "@tiangong-lca/mcp-server": "0.0.31",
+    "@tiangong-lca/tidas-sdk": "0.1.45",
+    "olca-ipc": "2.6.2"
+  }
+}

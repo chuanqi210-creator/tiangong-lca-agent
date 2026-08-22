@@ -1,0 +1,4 @@
+interface:
+  display_name: "LCA Result Interpretation"
+  short_description: "Interpret results and identify supported hotspots."
+  default_prompt: "Interpret accepted LCA results and identify evidence-supported hotspots."

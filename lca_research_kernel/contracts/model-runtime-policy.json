@@ -1,0 +1,37 @@
+{
+  "contract": "lca_research_kernel.model_runtime_policy/v1",
+  "policy_id": "d18-production-model-runtime-multi-provider-v2",
+  "source_lock": {
+    "path": "runtime/model-python/source-lock.json"
+  },
+  "provider_catalog": {
+    "path": "lca_research_kernel/contracts/model-provider-catalog.json"
+  },
+  "retry": {
+    "max_attempts_per_route": 2,
+    "base_delay_ms": 250,
+    "rate_limit_default_delay_ms": 15000,
+    "retryable_codes": [
+      "provider_timeout",
+      "rate_limited",
+      "provider_failure",
+      "invalid_provider_output",
+      "provider_server_error",
+      "provider_transport_error"
+    ],
+    "same_route_non_retryable_codes": [
+      "provider_precondition_failed"
+    ]
+  },
+  "circuit_breaker": {
+    "failure_threshold": 2,
+    "cooldown_seconds": 30
+  },
+  "output_policy": {
+    "classification": "candidate_only",
+    "project_record_direct_write": false,
+    "provider_reported_model_required": true,
+    "secret_persistence_forbidden": true,
+    "hidden_reasoning_persistence_forbidden": true
+  }
+}

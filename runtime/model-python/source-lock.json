@@ -1,0 +1,52 @@
+{
+  "contract": "lca_research_kernel.model_runtime_source_lock/v1",
+  "lock_id": "d18-production-model-python-multi-provider-2026-07-31",
+  "python_compatibility": ">=3.10",
+  "python": {
+    "requires": ">=3.10",
+    "bootstrap_candidates": [
+      "python3.11",
+      "python3.12"
+    ]
+  },
+  "requirements_lock": {
+    "path": "runtime/model-python/requirements.lock",
+    "sha256": "e174bb5f96c256372927a0b8f42c5d2b5b715f419051134cb9a59e902577feb6",
+    "resolver": "uv pip compile --python-version 3.11 --generate-hashes"
+  },
+  "sdk_sources": {
+    "anthropic": {
+      "distribution": "anthropic",
+      "official_registry": "https://pypi.org/project/anthropic/0.118.0/",
+      "version": "0.118.0",
+      "wheel_sha256": "524d835869b8e374510b3bcc552e28dbdafc035a61d63fc0088c4035286ef8fe"
+    },
+    "google-genai": {
+      "distribution": "google-genai",
+      "official_registry": "https://pypi.org/project/google-genai/2.13.0/",
+      "official_source": "https://github.com/googleapis/python-genai",
+      "version": "2.13.0",
+      "wheel_filename": "google_genai-2.13.0-py3-none-any.whl",
+      "wheel_sha256": "e1fd408db6864ac12f23eb7634df670934020c918112f4f886e5609d26dd92d3"
+    },
+    "openai": {
+      "distribution": "openai",
+      "official_registry": "https://pypi.org/project/openai/2.47.0/",
+      "version": "2.47.0",
+      "wheel_sha256": "b3a1a7ad974092427ccb46d89f8852bdb67866680bcabeecc3ff5a3fdd71b15b"
+    },
+    "zai-sdk": {
+      "distribution": "zai-sdk",
+      "official_registry": "https://pypi.org/project/zai-sdk/0.2.3/",
+      "version": "0.2.3",
+      "wheel_filename": "zai_sdk-0.2.3-py3-none-any.whl",
+      "wheel_sha256": "f8d6417f8cff58d5b6cba5c27577ee55aa817ae825c6c88fe883f6f6f9265d90"
+    }
+  },
+  "adoption_policy": {
+    "floating_versions_forbidden": true,
+    "live_checkout_forbidden": true,
+    "silent_upgrade_forbidden": true,
+    "candidate_only_until_explicit_adoption": true
+  }
+}

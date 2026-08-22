@@ -1,0 +1,41 @@
+{
+  "contract": "lca_research_kernel.agent_startup_manifest/v1",
+  "manifest_id": "d18-tidas-object-graph-slices-2026-08-22",
+  "product_contract": {
+    "path": "docs/lca-agent-top-level-architecture.json",
+    "sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+    "semantic_fingerprint": "291bd8a6b2572a9e8d4e026634a6e86f1b7df0951394b6e2d8bf6328201a3ce8"
+  },
+  "capability_catalog": {
+    "path": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+    "sha256": "450ab910ab3c7bac45af9b0dce7cdb64ef7a6e1febc058548f65d999c55a0da7"
+  },
+  "source_lock": {
+    "path": "lca_research_kernel/contracts/tiangong-source-lock.json",
+    "sha256": "b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e"
+  },
+  "permission_policy": {
+    "path": "lca_research_kernel/responsibility_boundary.py",
+    "sha256": "496316d13903743c2adcb2dd5c30c628e01f3cfdf105d0209b665ef38a2051d6"
+  },
+  "architecture_semantics": {
+    "path": "lca_research_kernel/contracts/d18-runtime-architecture-semantics.json",
+    "sha256": "adadb88a2dcace93c832e5b5552a15350f48813c0567949fc378a0eaa8b23f51"
+  },
+  "semantic_graph_contract": {
+    "path": "lca_research_kernel/contracts/research-semantic-graph-v1.json",
+    "sha256": "ee1b38f5de1c2d04ad0226148f83daf01f72811acd825b1d862edefba961dbf1"
+  },
+  "research_skill_registry": {
+    "path": "lca_research_kernel/contracts/research-skill-registry.json",
+    "sha256": "56e1d38dc5853183f269d765cc119bc90efd8ecab9db5e65f086a08c97c0cde8"
+  },
+  "governed_lca_knowledge": {
+    "path": "lca_research_kernel/contracts/lca-explanation-knowledge-v2.json",
+    "sha256": "abff814fabb858d894ce3f80a08cbd656eee50be02dddbe7518f81e6bb83bbbe"
+  },
+  "domain_rule_registry": {
+    "path": "lca_research_kernel/contracts/domain-rule-registry.json",
+    "sha256": "2604512ddc05a5cb3437e3de9774886d4901bba1971c576fe664cbce7047e9c4"
+  }
+}

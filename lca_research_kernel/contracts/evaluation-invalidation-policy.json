@@ -1,0 +1,321 @@
+{
+  "allowed_routes": [
+    "rerun_full_execution",
+    "regrade_existing_traces",
+    "rerun_clean_acceptance",
+    "rebuild_report_only",
+    "no_evidence_invalidation",
+    "unknown_change_fail_closed"
+  ],
+  "contract": "lca_research_evaluation.evidence_invalidation_policy/v1",
+  "evidence_graph": {
+    "acceptance": [
+      "claim"
+    ],
+    "execution": [
+      "raw_evidence"
+    ],
+    "raw_evidence": [
+      "scoring"
+    ],
+    "report": [
+      "claim"
+    ],
+    "scoring": [
+      "acceptance"
+    ]
+  },
+  "policy_id": "d18-evidence-dag-v1",
+  "policy_sha256": "99a38f1af7c4152549be1bb71942ab8ff4d54dcefd4a0b745121c92274053a97",
+  "rules": [
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_kernel/contracts/evaluation-invalidation-policy.json"
+      },
+      "priority": 300,
+      "rule_id": "invalidation-policy-control",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "lca_research_kernel/contracts/evaluation-"
+      },
+      "priority": 250,
+      "rule_id": "evidence-lock-control",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_kernel/research_council_benchmark_portfolio_acceptance.py"
+      },
+      "priority": 250,
+      "rule_id": "clean-review-harness",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_kernel/lifecycle.py"
+      },
+      "priority": 250,
+      "rule_id": "lifecycle-finalizer",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_evaluation/evidence_dag.py"
+      },
+      "priority": 250,
+      "rule_id": "evidence-dag-checker",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_evaluation/finalizer.py"
+      },
+      "priority": 250,
+      "rule_id": "performance-acceptance-finalizer",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "scripts/finalize_d18_performance_backend.py"
+      },
+      "priority": 250,
+      "rule_id": "acceptance-finalizer-cli",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "scripts/check_d18_evidence_invalidation.py"
+      },
+      "priority": 250,
+      "rule_id": "evidence-dag-cli",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "outputs/d18-performance-benchmark/final/grade-package.json"
+      },
+      "priority": 250,
+      "rule_id": "generated-scoring-package",
+      "stage": "scoring"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "outputs/d18-performance-benchmark/final/"
+      },
+      "priority": 220,
+      "rule_id": "generated-acceptance-evidence",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "outputs/d18-performance-benchmark/final-corpus/"
+      },
+      "priority": 220,
+      "rule_id": "frozen-model-visible-corpus",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "outputs/d18-performance-benchmark/final-runs/final/"
+      },
+      "priority": 220,
+      "rule_id": "immutable-raw-run-evidence",
+      "stage": "raw_evidence"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "outputs/d18-service/"
+      },
+      "priority": 220,
+      "rule_id": "generated-service-acceptance",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "outputs/council-default-lifecycle/"
+      },
+      "priority": 220,
+      "rule_id": "generated-lifecycle-acceptance",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "CONTEXT.md"
+      },
+      "priority": 220,
+      "rule_id": "hot-state-projection",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "tests/"
+      },
+      "priority": 240,
+      "rule_id": "verification-tests",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "lca_research_service/"
+      },
+      "priority": 220,
+      "rule_id": "service-control-plane",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "runtime/service-python/"
+      },
+      "priority": 220,
+      "rule_id": "service-runtime-environment",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "deploy/"
+      },
+      "priority": 220,
+      "rule_id": "container-environment",
+      "stage": "acceptance"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_evaluation/grader.py"
+      },
+      "priority": 220,
+      "rule_id": "deterministic-grader",
+      "stage": "scoring"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_evaluation/metrics.py"
+      },
+      "priority": 220,
+      "rule_id": "metric-aggregation",
+      "stage": "scoring"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "lca_research_evaluation/model_grader.py"
+      },
+      "priority": 220,
+      "rule_id": "isolated-model-grader",
+      "stage": "scoring"
+    },
+    {
+      "match": {
+        "type": "exact",
+        "value": "scripts/grade_lca_agent_benchmark.py"
+      },
+      "priority": 220,
+      "rule_id": "grader-cli",
+      "stage": "scoring"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "agent/"
+      },
+      "priority": 100,
+      "rule_id": "agent-product-contract",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "skills/"
+      },
+      "priority": 100,
+      "rule_id": "skill-product-adapters",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "lca_research_kernel/"
+      },
+      "priority": 100,
+      "rule_id": "research-kernel-runtime",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "lca_research_evaluation/"
+      },
+      "priority": 100,
+      "rule_id": "evaluation-execution-runtime",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "runtime/model-python/"
+      },
+      "priority": 100,
+      "rule_id": "model-runtime-environment",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "runtime/evaluation-python/"
+      },
+      "priority": 100,
+      "rule_id": "evaluation-runtime-environment",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "runtime/tiangong-"
+      },
+      "priority": 100,
+      "rule_id": "tiangong-runtime-environment",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "scripts/"
+      },
+      "priority": 100,
+      "rule_id": "execution-script",
+      "stage": "execution"
+    },
+    {
+      "match": {
+        "type": "prefix",
+        "value": "docs/"
+      },
+      "priority": 50,
+      "rule_id": "human-report-or-design",
+      "stage": "report"
+    }
+  ],
+  "unknown_change_route": "unknown_change_fail_closed"
+}

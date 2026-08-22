@@ -1,0 +1,142 @@
+{
+  "contract": "lca_agent_capability_infrastructure/v1",
+  "status": "adopted",
+  "product": {
+    "product_id": "tiangong-native-lca-research-agent",
+    "architecture_decision": "D-18",
+    "project_truth": "Project Record",
+    "official_authority": "TianGong",
+    "public_entry": "lca_research_kernel.product_interface.ProductInterface"
+  },
+  "startup_binding": {
+    "contract": "lca_research_kernel.agent_startup_manifest/v1",
+    "pointer": "lca_research_kernel/contracts/agent-startup-manifest-v2.json",
+    "sha256": "669dff9b3e5666c48a6a7c4f51948e95d6c1920fc22ee21e876506440c875a86",
+    "bypass_policy": "fail_closed"
+  },
+  "catalog": {
+    "pointer": "lca_research_kernel/contracts/tiangong-capability-catalog.json",
+    "sha256": "450ab910ab3c7bac45af9b0dce7cdb64ef7a6e1febc058548f65d999c55a0da7",
+    "semantic_snapshot_sha256": "d2e4467bd07e0087e33dfbc8bf272cb1aaba44783f4df4c084e9cba9e6bb5fb3",
+    "capability_count": 54,
+    "unclassified_count": 0,
+    "by_kind": {
+      "build": 2,
+      "calculation": 1,
+      "data": 4,
+      "evidence": 2,
+      "mcp_tool": 13,
+      "native_tool": 5,
+      "skill": 21,
+      "specification": 4,
+      "validation": 2
+    },
+    "by_disposition": {
+      "conditional_runtime": 9,
+      "human_action_required": 15,
+      "integrated": 10,
+      "upstream_owned": 20
+    }
+  },
+  "source_lock": {
+    "pointer": "lca_research_kernel/contracts/tiangong-source-lock.json",
+    "sha256": "b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e",
+    "floating_versions": 0,
+    "candidate_upgrade_policy": "diff_only_until_assurance_acceptance",
+    "historical_replay_policy": "immutable"
+  },
+  "inventory": {
+    "pointer": "outputs/tiangong-capability-infrastructure/inventory/official-capability-observation.json",
+    "sha256": "dd6981c0386f59ec4f77473364a214da3bb5bbdd589a23daa7b17ee670e30080",
+    "scope": "official capability surfaces, not individual business-data records",
+    "source_root_role": "discovery_copy_not_authority",
+    "all_discovered_items_disposed": true
+  },
+  "active_surfaces": {
+    "controller": {
+      "pointer": "agent/lca-project-controller.md",
+      "sha256": "96044d0f49207b503ffb6d426530d672bf1fe9ad3da1bbdb53b6a7f3cc78446c",
+      "disposition": "integrated",
+      "state_policy": "stable_contract_only"
+    },
+    "skill": {
+      "pointer": "skills/run-lca-research-project/SKILL.md",
+      "sha256": "931658e20a56962a05c5c6dd948a5f9b9db1c42431637533cf225c5f2eff01c8",
+      "disposition": "integrated",
+      "state_policy": "stateless_thin_adapter"
+    }
+  },
+  "legacy_surfaces": {
+    "evidence_to_tidas_lca": {
+      "pointer": "skills/evidence-to-tidas-lca/SKILL.md",
+      "git_object": "16609ccb1943b7da960de75dd4667f04cb699d1b:skills/evidence-to-tidas-lca/SKILL.md",
+      "sha256": "407bd547056d5112fb4d317078a0fde3ec8e2fbc83ec2ef0ae0f21388626fe12",
+      "disposition": "legacy_adapter_only",
+      "allowed_use": "immutable replay and bounded diagnostic reference",
+      "forbidden_claim": "active product entry or D-18 architecture authority",
+      "mutation_policy": "do_not_modify_live_dirty_bytes"
+    },
+    "low_level_commands": {
+      "pointer": "lca_research_kernel/cli.py",
+      "disposition": "legacy_adapter_only",
+      "allowed_use": "diagnostic, recovery, and immutable replay",
+      "forbidden_claim": "default caller-facing product route"
+    }
+  },
+  "execution_path": [
+    "catalog_lookup",
+    "assurance_authorization",
+    "adapter_execution",
+    "result_normalization",
+    "assurance_recording",
+    "project_record"
+  ],
+  "result_classification": "sourced_result_not_fact",
+  "failure_policy": {
+    "bounded_retry_only": [
+      "transient_transport",
+      "timeout"
+    ],
+    "fail_closed": [
+      "capability_unavailable",
+      "credentials_required",
+      "permission_denied",
+      "source_drift",
+      "schema_drift",
+      "invalid_result",
+      "policy_violation"
+    ]
+  },
+  "effects_observed": {
+    "credentials_used": 0,
+    "external_writes": 0,
+    "irreversible_actions": 0,
+    "native_calculations": 0,
+    "payments": 0,
+    "publications": 0,
+    "research_cases": 0
+  },
+  "claim_ceiling": {
+    "supported_now": [
+      "D-18 startup binding is mechanically enforced",
+      "the adopted catalog covers the observed official capability surfaces",
+      "catalog-executable capabilities use the unified guarded runtime",
+      "active Agent and Skill surfaces are case-agnostic and state-thin"
+    ],
+    "unsupported": [
+      "all registered capabilities are executable in the current environment",
+      "the Agent supports every LCA workflow",
+      "conditional calculation readiness proves a completed calculation",
+      "any capability combination or organizational topology is superior"
+    ]
+  },
+  "recovery": {
+    "catalog_rebuild": "python3 scripts/build_tiangong_capability_catalog.py --source-lock lca_research_kernel/contracts/tiangong-source-lock.json --catalog lca_research_kernel/contracts/tiangong-capability-catalog.json --check",
+    "accepted_history_policy": "append_only",
+    "candidate_upgrade_policy": "emit catalog candidate diff without adoption"
+  },
+  "final_acceptance": {
+    "status": "lifecycle_finalizer_authoritative",
+    "pointer": "outputs/council-default-lifecycle/finalizer/d18-capability-infrastructure-final/lifecycle-ready-receipt.json"
+  }
+}

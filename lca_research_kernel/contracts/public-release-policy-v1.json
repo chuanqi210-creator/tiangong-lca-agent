@@ -1,0 +1,178 @@
+{
+  "contract": "d18.public_release_policy/v1",
+  "classes": [
+    "public_source",
+    "public_synthetic_fixture",
+    "public_doc",
+    "private_evidence",
+    "third_party_review",
+    "forbidden_secret"
+  ],
+  "known_top_level": [
+    ".dockerignore",
+    ".gitattributes",
+    ".github",
+    ".gitignore",
+    ".superpowers",
+    "AGENTS.md",
+    "CONTEXT.md",
+    "Makefile",
+    "agent",
+    "apps",
+    "cases",
+    "deploy",
+    "docs",
+    "lca_research_evaluation",
+    "lca_research_kernel",
+    "lca_research_service",
+    "outputs",
+    "runtime",
+    "scripts",
+    "skills",
+    "tests",
+    "tools"
+  ],
+  "public_root_files": [
+    ".dockerignore",
+    ".gitattributes"
+  ],
+  "public_output_exact": [
+    "outputs/d18-service/integration/openapi-v1.json"
+  ],
+  "public_source_prefixes": [
+    "lca_research_kernel/",
+    "lca_research_service/",
+    "lca_research_evaluation/",
+    "scripts/",
+    "skills/",
+    "tools/",
+    "deploy/"
+  ],
+  "public_docs": [
+    "docs/lca-agent-top-level-architecture.json",
+    "docs/lca-agent-top-level-architecture.md",
+    "docs/research-kernel-architecture.md",
+    "docs/lca-agent-capability-infrastructure.json",
+    "docs/lca-agent-capability-infrastructure.md",
+    "docs/lca-agent-d18-core-contract.json",
+    "docs/lca-agent-d18-existing-system-mapping.json"
+  ],
+  "synthetic_fixture_prefixes": [
+    "tests/fixtures/materials/archives/"
+  ],
+  "synthetic_fixture_suffixes": [
+    ".csv",
+    ".hex",
+    ".json",
+    ".jsonld",
+    ".md",
+    ".spold",
+    ".xml"
+  ],
+  "generated_private_prefixes": [
+    "outputs/",
+    ".superpowers/",
+    "apps/web/.next/",
+    "apps/web/node_modules/",
+    "runtime/evaluation-python/.venv/",
+    "runtime/model-python/.venv/",
+    "runtime/service-python/.venv/",
+    "runtime/tiangong-node/node_modules/"
+  ],
+  "private_prefixes": [
+    ".github/",
+    "agent/",
+    "cases/",
+    "docs/superpowers/",
+    "public-release/",
+    "tests/fixtures/"
+  ],
+  "private_exact": [
+    "AGENTS.md",
+    "CONTEXT.md",
+    ".gitignore",
+    "apps/web/.env.local.example",
+    "apps/web/AGENTS.md",
+    "apps/web/CLAUDE.md",
+    "apps/web/tests/proxy.test.ts",
+    "deploy/service.env.example",
+    "lca_research_evaluation/stress.py",
+    "lca_research_kernel/contracts/evaluation-acceptance-lock.json",
+    "lca_research_kernel/research_council_positive_benchmark.py",
+    "scripts/build_repository_test_evidence.py"
+  ],
+  "forbidden_exact_names": [
+    ".env",
+    ".env.local",
+    ".env.production",
+    "credentials.json",
+    "id_rsa",
+    "session-cookie"
+  ],
+  "forbidden_suffixes": [
+    ".key",
+    ".p12",
+    ".pem",
+    ".pfx"
+  ],
+  "third_party_suffixes": [
+    ".bin",
+    ".docx",
+    ".gz",
+    ".html",
+    ".ico",
+    ".jpg",
+    ".pdf",
+    ".png",
+    ".pptx",
+    ".tar",
+    ".wav",
+    ".xlsx",
+    ".zip"
+  ],
+  "frontend_public_prefixes": [
+    "apps/web/src/",
+    "apps/web/scripts/",
+    "apps/web/tests/"
+  ],
+  "frontend_public_exact": [
+    "apps/web/.gitignore",
+    "apps/web/eslint.config.mjs",
+    "apps/web/next-env.d.ts",
+    "apps/web/next.config.ts",
+    "apps/web/package.json",
+    "apps/web/pnpm-lock.yaml",
+    "apps/web/pnpm-workspace.yaml",
+    "apps/web/postcss.config.mjs",
+    "apps/web/public/material-hash.worker.js",
+    "apps/web/README.md",
+    "apps/web/tsconfig.json"
+  ],
+  "runtime_public_prefixes": [
+    "runtime/"
+  ],
+  "public_test_exact": [
+    "tests/test_architecture_semantics.py",
+    "tests/test_assurance_boundary.py",
+    "tests/test_capability_gateway.py",
+    "tests/test_context_assembler.py",
+    "tests/test_d18_architecture_contract.py",
+    "tests/test_execution_environment.py",
+    "tests/test_material_citation_assurance.py",
+    "tests/test_material_source_contracts.py",
+    "tests/test_model_gateway.py",
+    "tests/test_model_provider_catalog.py",
+    "tests/test_model_runtime_bootstrap.py",
+    "tests/test_model_runtime_configuration.py",
+    "tests/test_model_runtime_policy.py",
+    "tests/test_product_interface.py",
+    "tests/test_project_record_port.py",
+    "tests/test_research_orchestrator.py",
+    "tests/test_semantic_context.py",
+    "tests/test_service_archive_inspection.py",
+    "tests/test_service_input_artifacts.py",
+    "tests/test_service_material_processing.py",
+    "tests/test_service_material_store.py",
+    "tests/test_service_release_manifest.py"
+  ]
+}

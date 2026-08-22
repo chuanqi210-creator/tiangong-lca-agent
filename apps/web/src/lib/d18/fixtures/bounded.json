@@ -1,0 +1,1 @@
+{"contract":"lca_research_service.fixture/v1","job":{"input_ref":null,"job_id":"35fb4f92-f912-57a2-b538-3e87b8838236","recovery_count":0,"request_ref":{"sha256":"0a9e2737095b7f433e4fe669efd0119a1d14393e699c1692e80d58bf8178660d"},"state_ref":{"sha256":"524f8f634250266584346dbe6fd4cf8f347b24b315fb3aa6209fa47c4506c9db"},"status":"bounded"},"scenario":"bounded"}

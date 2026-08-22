@@ -1,0 +1,309 @@
+{
+  "contract": "lca_research_kernel.model_provider_catalog/v1",
+  "catalog_id": "d18-model-providers-openai-gemini-anthropic-zhipu-2026-07-31",
+  "source_lock": {
+    "path": "runtime/model-python/source-lock.json"
+  },
+  "admission_states": [
+    "adapter_ready_not_verified",
+    "active_verified",
+    "suspended"
+  ],
+  "schema_profiles": {
+    "generic_source_candidate_v1": {
+      "contract": "lca_research_kernel.model_schema_profile/v1",
+      "profile_id": "generic_source_candidate_v1",
+      "schema_sha256": "eda75023eff1441311bb9b595681f017cc47cf7b2876a514ec2e0825d2144bf5"
+    },
+    "material_answer_v2": {
+      "contract": "lca_research_kernel.model_schema_profile/v1",
+      "profile_id": "material_answer_v2",
+      "schema_sha256": "f7a97863a5947d98828ee84162fce07282719a9ca2a01e55539b7ac268f3b2f7"
+    },
+    "research_turn_intent_v2": {
+      "contract": "lca_research_kernel.model_schema_profile/v1",
+      "profile_id": "research_turn_intent_v2",
+      "schema_sha256": "f12b9a9152c3aedff216a87561be385d289eca87678c18e1bbf3124d4e26593a"
+    },
+    "research_turn_semantics_v1": {
+      "contract": "lca_research_kernel.model_schema_profile/v1",
+      "profile_id": "research_turn_semantics_v1",
+      "schema_sha256": "5f2e77043405c3060d8eb82b62b35b798ba1eecea9f3d006737f7445817f9a70"
+    }
+  },
+  "runtime_profiles": {
+    "anthropic-messages-prompted-json-v1": {
+      "contract": "lca_research_kernel.model_provider_runtime_profile/v1",
+      "profile_id": "anthropic-messages-prompted-json-v1",
+      "provider_id": "anthropic",
+      "structured_output_mode": "prompted_json",
+      "json_schema_transformer": "identity-v1",
+      "supports_tools": true,
+      "supports_streaming": true,
+      "thinking_control": "provider_default",
+      "semantic_authority": "local_exact_schema_then_kernel_assurance"
+    },
+    "gemini-generate-content-json-schema-subset-v1": {
+      "contract": "lca_research_kernel.model_provider_runtime_profile/v1",
+      "profile_id": "gemini-generate-content-json-schema-subset-v1",
+      "provider_id": "gemini",
+      "structured_output_mode": "native_json_schema_subset",
+      "json_schema_transformer": "gemini-supported-keywords-v1",
+      "supports_tools": true,
+      "supports_streaming": true,
+      "thinking_control": "explicit_level_optional",
+      "semantic_authority": "local_exact_schema_then_kernel_assurance"
+    },
+    "openai-responses-native-json-schema-v1": {
+      "contract": "lca_research_kernel.model_provider_runtime_profile/v1",
+      "profile_id": "openai-responses-native-json-schema-v1",
+      "provider_id": "openai",
+      "structured_output_mode": "native_json_schema",
+      "json_schema_transformer": "exact-oneof-to-anyof-v1",
+      "supports_tools": true,
+      "supports_streaming": true,
+      "thinking_control": "provider_default",
+      "semantic_authority": "local_exact_schema_then_kernel_assurance"
+    },
+    "zhipu-chat-json-object-v1": {
+      "contract": "lca_research_kernel.model_provider_runtime_profile/v1",
+      "profile_id": "zhipu-chat-json-object-v1",
+      "provider_id": "zhipu",
+      "structured_output_mode": "json_object_prompted_schema",
+      "json_schema_transformer": "identity-v1",
+      "supports_tools": true,
+      "supports_streaming": true,
+      "thinking_control": "profile_guarded_optional",
+      "semantic_authority": "local_exact_schema_then_kernel_assurance"
+    }
+  },
+  "current_validation_gate": [
+    "openai",
+    "gemini",
+    "zhipu"
+  ],
+  "providers": [
+    {
+      "provider_id": "openai",
+      "route_id": "openai-production",
+      "runtime_profile_id": "openai-responses-native-json-schema-v1",
+      "adapter_type": "openai_official_sdk",
+      "sdk_distribution": "openai",
+      "sdk_version": "2.47.0",
+      "credential_binding": {
+        "kind": "environment",
+        "name": "OPENAI_API_KEY"
+      },
+      "model_binding": {
+        "kind": "environment",
+        "name": "OPENAI_MODEL_ID"
+      },
+      "network_host": "api.openai.com",
+      "base_url": "https://api.openai.com/v1",
+      "priority": 10,
+      "capabilities": {
+        "structured_output": true,
+        "streaming": true,
+        "tool_requests": true,
+        "generic_source_candidate_v1": false,
+        "material_answer_v2": false,
+        "research_turn_intent_v2": false,
+        "research_turn_semantics_v1": false,
+        "context_limit_class": "provider_configured"
+      },
+      "capability_verified_evidence": {},
+      "admission_state": "active_verified",
+      "current_validation_required": true,
+      "future_activation_slot": false,
+      "probe_eligible": true,
+      "active_verified_evidence": [
+        {
+          "admitted_from_catalog_sha256": "20796f20e4720e04d367113bf7efa252dee8b841a109ae42de69eb5110889516",
+          "independent_review_sha256": "550031f1a4aa6681666e30a21d63d28428c170c81d4999fb3094decd6a64d708",
+          "probe_receipt_sha256": "90b279027a98a0350c8681c033c444c707d57f85a965f6951cd1f6d5105c6231"
+        }
+      ]
+    },
+    {
+      "provider_id": "gemini",
+      "route_id": "gemini-production",
+      "runtime_profile_id": "gemini-generate-content-json-schema-subset-v1",
+      "adapter_type": "gemini_official_sdk",
+      "sdk_distribution": "google-genai",
+      "sdk_version": "2.13.0",
+      "credential_binding": {
+        "kind": "environment",
+        "name": "GEMINI_API_KEY"
+      },
+      "model_binding": {
+        "kind": "environment",
+        "name": "GEMINI_MODEL_ID"
+      },
+      "network_host": "generativelanguage.googleapis.com",
+      "base_url": "https://generativelanguage.googleapis.com",
+      "priority": 20,
+      "capabilities": {
+        "structured_output": true,
+        "streaming": true,
+        "tool_requests": true,
+        "generic_source_candidate_v1": true,
+        "material_answer_v2": true,
+        "research_turn_intent_v2": true,
+        "research_turn_semantics_v1": true,
+        "context_limit_class": "provider_configured"
+      },
+      "capability_verified_evidence": {
+        "generic_source_candidate_v1": {
+          "schema_sha256": "eda75023eff1441311bb9b595681f017cc47cf7b2876a514ec2e0825d2144bf5",
+          "probe_receipt": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/profile-receipt.json",
+            "sha256": "629055b00217a646bd8b9268852922f531cb1ed8e09c33b0da03670aa3a8f105"
+          },
+          "independent_review": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/independent-review.json",
+            "sha256": "22d01cabfe02e510bc0dd042cdad71e739bd2dca82cd4373fd1c11f9d24b738b"
+          }
+        },
+        "material_answer_v2": {
+          "schema_sha256": "f7a97863a5947d98828ee84162fce07282719a9ca2a01e55539b7ac268f3b2f7",
+          "probe_receipt": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/material_answer_v2/profile-receipt.json",
+            "sha256": "cce6148de28561e2ea669d1445a9265f7de49e2b33ffd8a7524821447176e2b0"
+          },
+          "independent_review": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/material_answer_v2/independent-review.json",
+            "sha256": "4ddd8f67b991b66ecadf1f53e64c52cbd3b6175a3df338d6d1830c4c1edf4076"
+          }
+        },
+        "research_turn_intent_v2": {
+          "schema_sha256": "f12b9a9152c3aedff216a87561be385d289eca87678c18e1bbf3124d4e26593a",
+          "probe_receipt": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/profile-receipt.json",
+            "sha256": "f9f541beed4b9175fa8e153a73678a28f68ed844a5b2a64171e876aeb5a2d32c"
+          },
+          "independent_review": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/independent-review.json",
+            "sha256": "62d830735b756601cdb6d2bf6320b168700160e7c1514e73a51a09973228334f"
+          }
+        },
+        "research_turn_semantics_v1": {
+          "schema_sha256": "5f2e77043405c3060d8eb82b62b35b798ba1eecea9f3d006737f7445817f9a70",
+          "probe_receipt": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_semantics_v1/profile-receipt.json",
+            "sha256": "f9ed497e0adbe96d528d5470493ac0da344b897f0754570c0a3cdad8e7a92895"
+          },
+          "independent_review": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_semantics_v1/independent-review.json",
+            "sha256": "4ff03a3dad432aaa665be581f777cb145b57760b3bd0ec89482efbfe150a5bbf"
+          }
+        }
+      },
+      "admission_state": "active_verified",
+      "current_validation_required": true,
+      "future_activation_slot": false,
+      "probe_eligible": true,
+      "active_verified_evidence": [
+        {
+          "admitted_from_catalog_sha256": "20796f20e4720e04d367113bf7efa252dee8b841a109ae42de69eb5110889516",
+          "independent_review_sha256": "0df531bf25ae9cd18b7bef169596d77be98ec4462bd80863d11004671147f8f5",
+          "probe_receipt_sha256": "4857e420e1054e6fc70a4f90af43dd8fd8ea6f5e93093b651c5344074e896ca9"
+        }
+      ]
+    },
+    {
+      "provider_id": "anthropic",
+      "route_id": "anthropic-production",
+      "runtime_profile_id": "anthropic-messages-prompted-json-v1",
+      "adapter_type": "anthropic_official_sdk",
+      "sdk_distribution": "anthropic",
+      "sdk_version": "0.118.0",
+      "credential_binding": {
+        "kind": "environment",
+        "name": "ANTHROPIC_API_KEY"
+      },
+      "model_binding": {
+        "kind": "environment",
+        "name": "ANTHROPIC_MODEL_ID"
+      },
+      "network_host": "api.anthropic.com",
+      "base_url": "https://api.anthropic.com",
+      "priority": 30,
+      "capabilities": {
+        "structured_output": true,
+        "streaming": true,
+        "tool_requests": true,
+        "generic_source_candidate_v1": false,
+        "material_answer_v2": false,
+        "research_turn_intent_v2": false,
+        "research_turn_semantics_v1": false,
+        "context_limit_class": "provider_configured"
+      },
+      "capability_verified_evidence": {},
+      "admission_state": "adapter_ready_not_verified",
+      "current_validation_required": false,
+      "future_activation_slot": true,
+      "probe_eligible": true,
+      "active_verified_evidence": []
+    },
+    {
+      "provider_id": "zhipu",
+      "route_id": "zhipu-production",
+      "runtime_profile_id": "zhipu-chat-json-object-v1",
+      "adapter_type": "zhipu_official_sdk",
+      "sdk_distribution": "zai-sdk",
+      "sdk_version": "0.2.3",
+      "credential_binding": {
+        "kind": "macos_keychain",
+        "service": "codex-zhipu-api",
+        "account": "current_user"
+      },
+      "model_binding": {
+        "kind": "catalog_default_with_environment_override",
+        "environment": "ZHIPU_MODEL_ID",
+        "default": "glm-5.2"
+      },
+      "network_host": "open.bigmodel.cn",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/",
+      "priority": 40,
+      "capabilities": {
+        "structured_output": true,
+        "streaming": true,
+        "tool_requests": true,
+        "generic_source_candidate_v1": false,
+        "material_answer_v2": false,
+        "research_turn_intent_v2": false,
+        "research_turn_semantics_v1": false,
+        "context_limit_class": "provider_configured"
+      },
+      "capability_verified_evidence": {},
+      "admission_state": "active_verified",
+      "current_validation_required": true,
+      "future_activation_slot": false,
+      "probe_eligible": true,
+      "active_verified_evidence": [
+        {
+          "admitted_from_catalog_sha256": "2a999bffc6b433b2beeec2b97d10fc4dd5d2eac642eacaf550d6c13cec65e818",
+          "independent_review_sha256": "09cbc6ba223750675ecb63482d9eb95240584bba53ab8301000ace13228c6b00",
+          "probe_receipt_sha256": "1e4a6a658efa30ce5f5eb0c22f27f9e8848afbe3c6ad0c6ffe8c115dc09cb9c3"
+        }
+      ]
+    }
+  ],
+  "admission_policy": {
+    "production_requires_active_verified": true,
+    "verification_probe_requires_adapter_ready": true,
+    "exact_source_lock_required": true,
+    "capability_contract_required": true,
+    "capacity_qualification_compatible_catalog_sha256s": [
+      "b6baca5f216c55ec7e1af3bd779f832e984bcb30a81427bb922691415538bf8a"
+    ],
+    "real_no_side_effect_probe_required": true,
+    "independent_acceptance_required": true,
+    "unverified_provider_blocks_unrelated_current_gate": false
+  },
+  "output_policy": {
+    "classification": "candidate_only",
+    "project_record_direct_write": false,
+    "secret_persistence_forbidden": true
+  }
+}

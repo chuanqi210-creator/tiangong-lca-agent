@@ -1,0 +1,254 @@
+{
+  "contract": "lca_research_kernel.official_public_source_index/v1",
+  "index_id": "eu-official-lca-and-cbam-sources-2026-08-01",
+  "authority": "official_EU_primary_sources",
+  "sources": [
+    {
+      "source_id": "eu-reg-2023-956-consolidated",
+      "title": "Regulation (EU) 2023/956, consolidated 20 October 2025",
+      "declared_version": "2025-10-20-consolidated",
+      "url": "https://eur-lex.europa.eu/eli/reg/2023/956/2025-10-20/eng",
+      "retrieval_urls": [
+        "https://publications.europa.eu/resource/cellar/a61c0d38-bf6a-11f0-a612-01aa75ed71a1.0007.02/DOC_1"
+      ],
+      "authority": "EUR-Lex consolidated legal text",
+      "legal_status": "in_force_consolidated_documentation",
+      "applicable_time": "definitive CBAM regime from 2026",
+      "topics": [
+        "scope",
+        "CN codes",
+        "authorised CBAM declarant",
+        "declaration",
+        "certificate surrender",
+        "default values",
+        "actual emissions",
+        "verification",
+        "third-country operator",
+        "registry",
+        "Annex I",
+        "Annex II"
+      ],
+      "parse_hints": [
+        "Article 2 scope",
+        "Article 6 CBAM declaration",
+        "Article 8 verification",
+        "Article 10 registration of operators and installations",
+        "Article 22 surrender of CBAM certificates",
+        "Annex I list of goods and greenhouse gases",
+        "Annex II goods for which only direct emissions are to be taken into account"
+      ]
+    },
+    {
+      "source_id": "eu-reg-2025-2083",
+      "title": "Regulation (EU) 2025/2083 amending CBAM",
+      "declared_version": "2025/2083",
+      "url": "https://eur-lex.europa.eu/eli/reg/2025/2083/oj/eng",
+      "authority": "Official Journal and EUR-Lex",
+      "legal_status": "binding_amendment",
+      "applicable_time": "entered into force 20 October 2025 with staged dates",
+      "topics": [
+        "2026 definitive regime",
+        "authorisation",
+        "declaration deadline",
+        "certificate surrender deadline",
+        "de minimis threshold",
+        "certificate purchase timing"
+      ],
+      "parse_hints": [
+        "30 September",
+        "application for the status of authorised CBAM declarant",
+        "purchase of CBAM certificates"
+      ]
+    },
+    {
+      "source_id": "eu-ir-2025-2547",
+      "title": "Commission Implementing Regulation (EU) 2025/2547",
+      "declared_version": "2025/2547",
+      "url": "https://eur-lex.europa.eu/eli/reg_impl/2025/2547/oj/eng",
+    "retrieval_urls": [
+      "https://publications.europa.eu/resource/cellar/128503d5-defb-11f0-8439-01aa75ed71a1.0006.03/DOC_1"
+    ],
+      "authority": "Official Journal and EUR-Lex",
+      "legal_status": "binding_implementing_regulation",
+      "applicable_time": "applies from 1 January 2026",
+      "topics": [
+        "embedded emissions",
+        "actual values",
+        "default values",
+        "system boundaries",
+        "production process",
+        "functional unit",
+        "precursors",
+        "electricity",
+        "monitoring plan",
+        "operator emissions report"
+      ],
+      "parse_hints": [
+        "functional unit",
+        "production process",
+        "precursor",
+        "monitoring plan",
+        "A.5. Monitoring plan",
+        "operator emissions report"
+      ]
+    },
+    {
+      "source_id": "eu-ir-2025-2546",
+      "title": "Commission Implementing Regulation (EU) 2025/2546 on verification of declared embedded emissions",
+      "declared_version": "2025/2546",
+      "url": "https://eur-lex.europa.eu/eli/reg_impl/2025/2546/oj/eng",
+      "retrieval_urls": [
+        "https://publications.europa.eu/resource/cellar/b7fc3a8f-df00-11f0-8439-01aa75ed71a1.0006.03/DOC_1"
+      ],
+      "authority": "Official Journal and EUR-Lex",
+      "legal_status": "binding_implementing_regulation",
+      "applicable_time": "applies from 1 January 2026",
+      "topics": [
+        "verification of declared embedded emissions",
+        "physical site visits",
+        "virtual site visits",
+        "verification risk",
+        "operator emissions report",
+        "precursor data verification"
+      ],
+      "parse_hints": [
+        "Article 2 physical site visits",
+        "Article 3 conditions for virtual site visit or waiver",
+        "2.5. Data verification of precursors",
+        "operator emissions report"
+      ]
+    },
+    {
+      "source_id": "eu-dr-2025-2551",
+      "title": "Commission Delegated Regulation (EU) 2025/2551",
+      "declared_version": "2025/2551",
+      "url": "https://eur-lex.europa.eu/eli/reg_del/2025/2551/oj/eng",
+      "authority": "Official Journal and EUR-Lex",
+      "legal_status": "binding_delegated_regulation",
+      "applicable_time": "definitive-regime accreditation and verification",
+      "topics": [
+        "verification",
+        "accredited verifier",
+        "independence",
+        "impartiality",
+        "conflict of interest",
+        "verification report"
+      ],
+      "parse_hints": [
+        "independence and impartiality",
+        "conflict of interest",
+        "verification report"
+      ]
+    },
+    {
+      "source_id": "ec-cbam-certificate-price",
+      "title": "Price of CBAM certificates",
+      "declared_version": "source-index-2026-07-31",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/price-cbam-certificates_en",
+      "authority": "European Commission DG TAXUD",
+      "legal_status": "official_operational_publication",
+      "applicable_time": "current published CBAM certificate prices",
+      "topics": [
+        "certificate price",
+        "quarterly price",
+        "weekly price",
+        "2026 Q1",
+        "2026 Q2"
+      ],
+      "parse_hints": [
+        "2026 quarterly CBAM certificate prices",
+        "Q1",
+        "Q2"
+      ]
+    },
+    {
+      "source_id": "ec-cbam-verification",
+      "title": "Verification of CBAM emissions",
+      "declared_version": "source-index-2026-07-31",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-verification_en",
+      "authority": "European Commission DG TAXUD",
+      "legal_status": "official_guidance_and_current_state",
+      "applicable_time": "current verification and accreditation guidance",
+      "topics": [
+        "verification",
+        "accredited verifier",
+        "accreditation",
+        "verification bodies",
+        "state of play"
+      ],
+      "parse_hints": [
+        "accredited CBAM verifiers",
+        "accreditation",
+        "state of play"
+      ]
+    },
+    {
+      "source_id": "ec-cbam-registry",
+      "title": "CBAM Registry and Reporting",
+      "declared_version": "source-index-2026-07-31",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-registry-and-reporting_en",
+      "authority": "European Commission DG TAXUD",
+      "legal_status": "official_operational_guidance",
+      "applicable_time": "definitive registry from 2026",
+      "topics": [
+        "CBAM registry",
+        "third-country operator",
+        "installation registration",
+        "reporting",
+        "data sharing"
+      ],
+      "parse_hints": [
+        "third country operators",
+        "installation registration",
+        "CBAM registry"
+      ]
+    },
+    {
+      "source_id": "ec-cbam-communication-and-news",
+      "title": "CBAM Communication and News",
+      "declared_version": "source-index-2026-08-01",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-communication-and-news_en",
+      "authority": "European Commission DG TAXUD",
+      "legal_status": "official_communication_index",
+      "applicable_time": "current Commission communication, FAQs and official downloads",
+      "topics": [
+        "FAQ",
+        "communication template",
+        "operator data sharing",
+        "scope",
+        "customs",
+        "declaration deadline",
+        "certificate surrender",
+        "default values",
+        "actual values"
+      ],
+      "parse_hints": [
+        "communication template",
+        "frequently asked questions",
+        "30 September 2027",
+        "default values"
+      ]
+    },
+    {
+      "source_id": "ec-cbam-legislation-guidance",
+      "title": "CBAM Legislation and Guidance",
+      "declared_version": "source-index-2026-07-31",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-legislation-and-guidance_en",
+      "authority": "European Commission DG TAXUD",
+      "legal_status": "official_guidance_index",
+      "applicable_time": "current legislation, guidance and official downloads",
+      "topics": [
+        "legislation",
+        "guidance",
+        "default values",
+        "implementing regulation",
+        "delegated regulation"
+      ],
+      "parse_hints": [
+        "legislation",
+        "guidance documents",
+        "default values"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "contract": "lca_research_kernel.interaction_route_policy/v1",
+  "route_ids": [
+    "direct_answer",
+    "targeted_source",
+    "deterministic_tool",
+    "research_loop",
+    "project_followup",
+    "awaiting_user_data",
+    "human_action_required",
+    "temporarily_unavailable"
+  ],
+  "interaction_kinds": [
+    "initial",
+    "project_followup",
+    "resume"
+  ],
+  "depth_routes": {
+    "direct": "direct_answer",
+    "targeted_source": "targeted_source",
+    "deterministic_tool": "deterministic_tool",
+    "independent_review": "research_loop",
+    "parallel_research_optional": "research_loop"
+  },
+  "boundary_routes": {
+    "awaiting_user_data": "awaiting_user_data",
+    "human_action_required": "human_action_required",
+    "model_unavailable": "temporarily_unavailable",
+    "provider_capacity_deferred": "temporarily_unavailable",
+    "runtime_failure": "temporarily_unavailable",
+    "capability_unavailable": "temporarily_unavailable"
+  },
+  "forbidden_request_fields": [
+    "case_name",
+    "keywords",
+    "provider_name",
+    "question_id",
+    "task_text"
+  ],
+  "invariants": {
+    "project_record_is_only_accepted_truth": true,
+    "route_requires_expected_state_change": true,
+    "caller_selects_no_route": true,
+    "case_keyword_provider_routing_forbidden": true,
+    "exactly_one_next_route": true
+  }
+}

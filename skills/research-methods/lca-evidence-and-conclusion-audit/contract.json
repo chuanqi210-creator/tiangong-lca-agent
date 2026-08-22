@@ -1,0 +1,28 @@
+{
+  "contract": "lca_research_kernel.research_skill/v1",
+  "skill_id": "lca-evidence-and-conclusion-audit",
+  "version": "1.0.0",
+  "title": "Audit LCA Evidence and Conclusion Boundaries",
+  "description": "Use when an LCA answer, report, result, recommendation, limitation, or public claim needs a final audit of source identity, calculations, units, scope, version, provenance, permissions, and conclusion strength.",
+  "applicability": {
+    "desired_artifacts": ["evidence_conclusion_audit"],
+    "semantic_roles": ["claim_evidence_binding", "source_evidence", "calculation_receipt", "limitation", "release_decision"],
+    "requirements": ["source_confirmation"],
+    "conflict_types": ["claim_evidence_conflict", "conclusion_strength_conflict", "source_version_conflict"],
+    "target_object_kinds": ["Claim", "EvidenceSpan", "Calculation", "Limitation", "Result"]
+  },
+  "required_inputs": ["candidate_claims", "accepted_fact_and_artifact_refs", "claim_ceiling"],
+  "expected_artifact": "evidence_conclusion_audit",
+  "accepted_state_delta": "claims_source_bound_reduced_or_rejected",
+  "capability_ids": ["tiangong.evidence.source-evidence-contract", "tiangong.skill.source-evidence-dataset-development", "tiangong.skill.lifecycleinventory-review", "tiangong.validation.tidas"],
+  "upstream_skill_ids": ["source-evidence-dataset-development", "lifecycleinventory-review", "tidas-contract-context"],
+  "domain_rule_ids": ["lca.claim.exact_evidence_binding", "lca.claim.method_scope_ceiling", "lca.claim.permission_boundary"],
+  "source_lock_ids": ["tiangong.skills.git", "tiangong.sdk.npm"],
+  "output_classifications": ["candidate_only", "missing"],
+  "outcomes": ["complete_candidate", "bounded", "failed"],
+  "acceptance_checks": ["every_material_claim_has_path", "numeric_claim_has_calculation_and_unit", "scope_and_version_apply", "conclusion_does_not_exceed_ceiling"],
+  "failure_boundaries": ["claim_evidence_path_absent", "calculation_receipt_invalid", "permission_or_release_boundary"],
+  "forbidden": ["direct_project_record_write", "invent_evidence_link", "style_only_audit", "raise_claim_strength"],
+  "permission_effects": ["no_permission_expansion", "read_only_audit"],
+  "resources": []
+}
