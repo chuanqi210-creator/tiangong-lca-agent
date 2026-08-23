@@ -286,18 +286,42 @@ class AssuranceBoundary:
             for locator_id in candidate_ids
             if locator_id in locator_hashes
         }
+        claims = model_candidate.get("claims")
+        citation_not_applicable = (
+            typed_answer
+            and assessment["status"] == "passed"
+            and isinstance(claims, list)
+            and bool(claims)
+            and all(
+                isinstance(claim, Mapping)
+                and claim.get("claim_kind")
+                in {
+                    "governed_method_explanation",
+                    "illustrative_non_project_example",
+                    "limitation",
+                }
+                for claim in claims
+            )
+            and candidate_id_values == []
+            and claim_bindings == []
+            and answer_locator_ids == []
+            and model_candidate.get("scientific_source_sha256s") == []
+        )
         citation_correctness = (
             1.0
-            if candidate_ids_unique
-            and candidate_ids
-            and candidate_ids.issubset(selected_ids)
-            and exact_claim_bindings
-            # One selected locator may correctly support multiple claims.
-            and set(bound_ids) == candidate_ids
-            and Counter(answer_locator_ids) == Counter(bound_ids)
-            and set(model_candidate.get("scientific_source_sha256s") or [])
-            == expected_hashes
-            and len(expected_hashes) == len(candidate_ids)
+            if citation_not_applicable
+            or (
+                candidate_ids_unique
+                and candidate_ids
+                and candidate_ids.issubset(selected_ids)
+                and exact_claim_bindings
+                # One selected locator may correctly support multiple claims.
+                and set(bound_ids) == candidate_ids
+                and Counter(answer_locator_ids) == Counter(bound_ids)
+                and set(model_candidate.get("scientific_source_sha256s") or [])
+                == expected_hashes
+                and len(expected_hashes) == len(candidate_ids)
+            )
             else 0.0
         )
         thresholds = {
@@ -311,7 +335,11 @@ class AssuranceBoundary:
             "citation_correctness": citation_correctness,
             "basis": {
                 "dependency_roles": "verified_evidence_unit_semantic_roles",
-                "citations": "claim_locator_and_content_hash_binding",
+                "citations": (
+                    "not_applicable_governed_knowledge_only"
+                    if citation_not_applicable
+                    else "claim_locator_and_content_hash_binding"
+                ),
             },
             "thresholds": thresholds,
             "status": (
@@ -418,10 +446,12 @@ class AssuranceBoundary:
             prior_result=prior_result,
         )
         repository_root = Path(__file__).resolve().parents[1]
-        expected_knowledge = GovernedLCAKnowledge.load(repository_root).select(
+        expected_knowledge = GovernedLCAKnowledge.load(
+            repository_root
+        ).resolve_turn_slice(
             authoritative_frame,
             response_language=authoritative_response_language,
-        )
+        )["slice"]["entries"]
         if list(governed_knowledge) != expected_knowledge:
             raise ValueError("typed material answer knowledge drifted")
         return (

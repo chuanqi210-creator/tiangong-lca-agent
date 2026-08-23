@@ -392,6 +392,68 @@ def evaluate_candidate_change(
             and assessment.get("contract")
             == "lca_research_kernel.direct_answer_assessment/v1"
         )
+        material_answer_assessment = (
+            isinstance(assessment, Mapping)
+            and assessment.get("contract")
+            in {
+                "lca_research_kernel.material_answer_assessment/v1",
+                "lca_research_kernel.material_answer_assessment/v2",
+            }
+        )
+        admissible_material = (
+            assessment.get("admissible_candidate")
+            if material_answer_assessment
+            else None
+        )
+        governed_only_material_result = (
+            isinstance(result, Mapping)
+            and material_answer_assessment
+            and assessment.get("status") == "passed"
+            and assessment.get("claim_ceiling") == "method_explanation_only"
+            and isinstance(admissible_material, Mapping)
+            and admissible_material.get("claim_ceiling")
+            == "method_explanation_only"
+            and admissible_material.get("citation_ids") == []
+            and admissible_material.get("citations") == []
+            and admissible_material.get("source_basis") == []
+            and admissible_material.get("scientific_source_sha256s") == []
+            and isinstance(admissible_material.get("claims"), list)
+            and bool(admissible_material["claims"])
+            and all(
+                isinstance(claim, Mapping)
+                and claim.get("claim_kind")
+                in {
+                    "governed_method_explanation",
+                    "illustrative_non_project_example",
+                    "limitation",
+                }
+                for claim in admissible_material["claims"]
+            )
+            and all(
+                result.get(field) == admissible_material.get(field)
+                for field in {
+                    "status",
+                    "answer",
+                    "bounded_conclusion",
+                    "claims",
+                    "claim_citation_bindings",
+                    "citation_ids",
+                    "scientific_source_sha256s",
+                    "official_object_ids",
+                    "values",
+                    "claim_ceiling",
+                    "citations",
+                    "source_basis",
+                    "limitations",
+                    "missing_facts",
+                    "resume_conditions",
+                    "computed_values",
+                }
+            )
+            and isinstance(assessment.get("answer_quality"), Mapping)
+            and assessment["answer_quality"].get("status") == "passed"
+            and assessment["answer_quality"].get("disposition") == "accept"
+        )
         tiangong_native_result = (
             isinstance(assessment, Mapping)
             and assessment.get("contract")
@@ -629,10 +691,17 @@ def evaluate_candidate_change(
                 "formal_limited_result_accepted",
             }
             or result.get("claim_ceiling")
-            not in {
-                "source_bounded_interpretation",
-                "calculation_structure_only",
-            }
+            not in (
+                {
+                    "source_bounded_interpretation",
+                    "calculation_structure_only",
+                }
+                | (
+                    {"method_explanation_only"}
+                    if governed_only_material_result
+                    else set()
+                )
+            )
         ):
             errors.append("accepted_result_exceeded_candidate_boundary")
         if not direct_explanation and not tiangong_native_result and (
@@ -653,10 +722,7 @@ def evaluate_candidate_change(
             and isinstance(result, Mapping)
             and isinstance(assessment, Mapping)
         ):
-            material_answer = assessment.get("contract") in {
-                "lca_research_kernel.material_answer_assessment/v1",
-                "lca_research_kernel.material_answer_assessment/v2",
-            }
+            material_answer = material_answer_assessment
             formal_fields = {
                 "status": "formal_result_status",
                 "claim_ceiling": "formal_claim_ceiling",
@@ -674,7 +740,10 @@ def evaluate_candidate_change(
             ):
                 errors.append("accepted_result_domain_projection_drifted")
             source_basis = result.get("source_basis")
-            if not isinstance(source_basis, list) or not source_basis:
+            if (
+                not isinstance(source_basis, list)
+                or (not source_basis and not governed_only_material_result)
+            ):
                 errors.append("accepted_result_source_basis_invalid")
             claim_classes = result.get("claim_classifications")
             if not material_answer and (

@@ -665,6 +665,63 @@ class ModelRuntimePolicyTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(primary.calls, 1)
 
+    def test_failed_request_restart_continues_durable_attempt_identity(self):
+        from lca_research_kernel.model_gateway import (
+            ModelGateway,
+            ModelGatewayError,
+        )
+
+        configured = policy()
+        configured["routes"] = [configured["routes"][0]]
+        configured["circuit_breaker"]["failure_threshold"] = 99
+        first_adapter = ScriptedAdapter(
+            "z-adapter",
+            [
+                ModelGatewayError(
+                    "provider_transport_error",
+                    "temporary transport failure",
+                    retryable=True,
+                    next_route="retry-or-switch-model-provider",
+                ),
+                ModelGatewayError(
+                    "provider_transport_error",
+                    "temporary transport failure",
+                    retryable=True,
+                    next_route="retry-or-switch-model-provider",
+                ),
+            ],
+        )
+        first = ModelGateway(
+            {"z-adapter": first_adapter},
+            policy=configured,
+            clock=lambda: "2026-08-23T12:00:00Z",
+            sleep=lambda _: None,
+        )
+
+        with self.assertRaises(ModelGatewayError):
+            first.reason(request(), trace=self.trace)
+
+        restarted_adapter = ScriptedAdapter(
+            "z-adapter", [{"status": "recovered"}]
+        )
+        restarted = ModelGateway(
+            {"z-adapter": restarted_adapter},
+            policy=configured,
+            clock=lambda: "2026-08-23T12:01:00Z",
+            sleep=lambda _: None,
+        )
+        candidate = restarted.reason(request(), trace=self.trace)
+
+        requested_attempts = [
+            event["payload"]["attempt"]
+            for event in self.trace.events()
+            if event["event_type"] == "research.run.model.requested"
+        ]
+        self.assertEqual(candidate["output"], {"status": "recovered"})
+        self.assertEqual(first_adapter.calls, 2)
+        self.assertEqual(restarted_adapter.calls, 1)
+        self.assertEqual(requested_attempts, [1, 2, 3])
+
     def test_ineligible_adapter_and_invalid_reported_model_fail_closed(self):
         from lca_research_kernel.model_gateway import ModelGateway, ModelGatewayError
 

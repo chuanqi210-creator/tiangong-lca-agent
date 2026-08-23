@@ -473,6 +473,42 @@ def _temporary_private_inputs(root: Path, inputs: Mapping[str, bytes]):
         _remove_private_projection_inputs(root, paths)
 
 
+def _validate_projected_model_runtime(root: Path) -> None:
+    """Validate a release projection with the code from that projection.
+
+    Public releases can intentionally project an older accepted product baseline.
+    Importing the mutable private worktree's loader would couple that immutable
+    baseline to later provider-profile additions and make a valid old release
+    fail validation for the wrong contract generation.
+    """
+
+    environment = dict(os.environ)
+    environment["PYTHONPATH"] = str(root)
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            "-c",
+            (
+                "from pathlib import Path; "
+                "from lca_research_kernel.model_runtime import "
+                "load_model_runtime_contract; "
+                "load_model_runtime_contract(Path('.'))"
+            ),
+        ],
+        cwd=root,
+        env=environment,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip().splitlines()
+        suffix = detail[-1] if detail else "unknown validation failure"
+        raise ValueError(f"projected model runtime is invalid: {suffix}")
+
+
 def _public_schema_witness(profile_id: str) -> dict[str, object]:
     if profile_id == "generic_source_candidate_v1":
         return {
@@ -614,10 +650,8 @@ def project_public_provider_admission(
                 if previous != payload:
                     raise ValueError("provider evidence path is content-ambiguous")
 
-    from lca_research_kernel.model_runtime import load_model_runtime_contract
-
     with _temporary_private_inputs(root, private_inputs):
-        load_model_runtime_contract(root)
+        _validate_projected_model_runtime(root)
 
     admission_root = root / "lca_research_kernel/contracts/public-provider-admission"
     if admission_root.exists() or admission_root.is_symlink():
@@ -790,7 +824,7 @@ def project_public_provider_admission(
             },
         }
     _write_public_json(catalog_path, catalog)
-    load_model_runtime_contract(root)
+    _validate_projected_model_runtime(root)
 
 
 def rebind_sanitized_public_contracts(staging_root: Path) -> None:

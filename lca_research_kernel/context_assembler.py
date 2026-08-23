@@ -947,7 +947,7 @@ class ContextAssembler:
         if (
             not isinstance(value, Mapping)
             or value.get("contract")
-            != "lca_research_kernel.semantic_context_plan/v1"
+            != "lca_research_kernel.semantic_context_plan/v2"
         ):
             raise ValueError("semantic context plan contract is unsupported")
         normalized = deepcopy(dict(value))
@@ -988,6 +988,8 @@ class ContextAssembler:
                 raise ValueError(f"semantic context plan {key} is invalid")
         knowledge_ids = normalized["selected_governed_knowledge_ids"]
         knowledge_rows = normalized["selected_governed_knowledge"]
+        knowledge_query = normalized.get("domain_knowledge_query")
+        knowledge_slice = normalized.get("domain_knowledge_slice")
         if (
             any(not isinstance(item, str) or not item for item in knowledge_ids)
             or len(knowledge_ids) != len(set(knowledge_ids))
@@ -1000,6 +1002,27 @@ class ContextAssembler:
             != sorted(knowledge_ids)
         ):
             raise ValueError("semantic context governed knowledge selection drifted")
+        if not isinstance(knowledge_query, Mapping) or not isinstance(
+            knowledge_slice, Mapping
+        ):
+            raise ValueError("semantic context domain knowledge slice is absent")
+        query_without_sha = deepcopy(dict(knowledge_query))
+        query_sha256 = query_without_sha.pop("query_sha256", None)
+        slice_without_sha = deepcopy(dict(knowledge_slice))
+        slice_sha256 = slice_without_sha.pop("slice_sha256", None)
+        if (
+            query_sha256 != _sha256(query_without_sha)
+            or slice_sha256 != _sha256(slice_without_sha)
+            or knowledge_slice.get("query_sha256") != query_sha256
+            or knowledge_slice.get("selected_knowledge_ids") != knowledge_ids
+            or [
+                row.get("knowledge_id")
+                for row in knowledge_slice.get("entries", [])
+                if isinstance(row, Mapping)
+            ]
+            != knowledge_ids
+        ):
+            raise ValueError("semantic context domain knowledge slice drifted")
         decision = normalized.get("material_use_decision")
         locators = project_view.get("evidence_locators") or {}
         if not isinstance(locators, Mapping):

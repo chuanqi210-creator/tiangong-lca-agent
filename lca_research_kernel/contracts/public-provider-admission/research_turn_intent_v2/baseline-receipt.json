@@ -18,8 +18,8 @@
       "raw_acceptance_sha256": "2e72dbb3911a5fb0cb0d862aad8775eb18aae867e1b2d1bfaf5832fa96edd7c2",
       "run_trace_sha256": "43a96425aa5e034c930a6fb293acc9eb30bb56ffa84386af9a3c0434ff57ab39"
     },
-    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
-    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7"
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3"
   },
   "run_trace_observation": {
     "event_count": 2,

@@ -1,0 +1,387 @@
+{
+  "contract": "lca_research_kernel.lca_knowledge_pack/v1",
+  "pack_id": "d18-lca-foundations-and-tidas-relations",
+  "version": "2026-08-23.1",
+  "status": "active",
+  "scope": "Generic LCA model structure, evidence limits, and TianGong/TIDAS identity relations; no project facts or database completeness claims.",
+  "authority_status": "product_governed_calibration",
+  "claim_ceiling": "method_explanation_only",
+  "license_policy": "External sources are linked with minimal excerpts only unless an explicit reusable license is recorded; repository contracts remain private product-owned evidence.",
+  "sources": [
+    {
+      "source_id": "openlca2-product-systems",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/prod_sys/index.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "openlca2-model-graph",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/prod_sys/model_graph.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "openlca2-lcia-methods",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/lcia_methods/index.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "openlca2-data-quality",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/advanced_top/data_quality",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "openlca2-model-validation",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/validation.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "d18-semantic-graph-contract",
+      "source_type": "repository_contract",
+      "owner": "LCA Research Agent",
+      "locator": "lca_research_kernel/contracts/research-semantic-graph-v1.json",
+      "version": "sha256:ee1b38f5de1c2d04ad0226148f83daf01f72811acd825b1d862edefba961dbf1",
+      "integrity": "sha256:ee1b38f5de1c2d04ad0226148f83daf01f72811acd825b1d862edefba961dbf1",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "adopted_product_contract",
+      "license_status": "project_owned_contract",
+      "redistribution_scope": "repository_contract_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca", "tidas_native"]
+      }
+    },
+    {
+      "source_id": "d18-product-authority-boundary-v1",
+      "source_type": "repository_contract",
+      "owner": "LCA Research Agent",
+      "locator": "docs/lca-agent-top-level-architecture.json",
+      "version": "sha256:19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+      "integrity": "sha256:19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "adopted_product_contract",
+      "license_status": "project_owned_contract",
+      "redistribution_scope": "repository_contract_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca", "tidas_native"]
+      }
+    },
+    {
+      "source_id": "tiangong-source-lock",
+      "source_type": "repository_contract",
+      "owner": "LCA Research Agent",
+      "locator": "lca_research_kernel/contracts/tiangong-source-lock.json",
+      "version": "sha256:b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e",
+      "integrity": "sha256:b56605c0e4bc15ab0f6a687db2bc5115fbc4215f6b28aba7e58af3114bf79e6e",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "adopted_product_contract",
+      "license_status": "project_owned_contract",
+      "redistribution_scope": "repository_contract_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["tidas_native"]
+      }
+    },
+    {
+      "source_id": "tiangong-tidas-sdk",
+      "source_type": "official_package",
+      "owner": "TianGong",
+      "locator": "https://github.com/tiangong-lca/tidas-sdk",
+      "version": "0.1.45",
+      "integrity": "sha512-VJq1BJ62xNwSD/zQXHLMlq2016XpU56zF4Qc3okQ7nADNKrwi4Io1qaBtc5YRdvTeC9oT9hRHIFD6BQ5zWK1Xg==",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "official_identity_and_version_metadata",
+      "license_status": "MIT",
+      "redistribution_scope": "source_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["tidas_native"]
+      }
+    }
+  ],
+  "entries": [
+    {
+      "knowledge_id": "lca-rel:product-system-contains-process",
+      "source_kind": "ProductSystem",
+      "relation": "contains_process",
+      "target_kind": "Process",
+      "statement": "A product system contains connected processes whose linked flows form the modeled life-cycle network.",
+      "renderings": {
+        "en": "A product system contains connected processes whose linked flows form the modeled life-cycle network.",
+        "zh-CN": "产品系统包含相互连接的过程，这些过程通过流的链接构成被建模的生命周期网络。"
+      },
+      "knowledge_roles": ["product_system", "process", "model_structure", "lca_relationship"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["openlca2-product-systems", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-product-systems", "location": "Product Systems > opening paragraph", "support_kind": "minimal_excerpt", "support_value": "In openLCA a product system is a set of processes connected by flows", "support_sha256": "3596340d5201a85b6a9e8fc5bc5f3e29e349dcca26fe9afa885a9acf50925b4c"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/contains_process", "support_kind": "structured_contract_projection", "support_value": "LifecycleModel|ProductSystem -> contains_process -> Process", "support_sha256": "aa53569e65819e1fb31e0c5e6dab264ba1075b0ae51e726bfb15e333b371cd23"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:exchange-references-flow",
+      "source_kind": "Exchange",
+      "relation": "references_flow",
+      "target_kind": "Flow",
+      "statement": "An exchange is a quantified input or output occurrence that references a flow; the flow identity and the exchange amount play different roles.",
+      "renderings": {
+        "en": "An exchange is a quantified input or output occurrence that references a flow; the flow identity and the exchange amount play different roles.",
+        "zh-CN": "交换是引用某个流的定量输入或输出记录；流的身份与交换的数量承担不同作用。"
+      },
+      "knowledge_roles": ["exchange", "flow", "amount", "lca_relationship"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["openlca2-model-graph", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-model-graph", "location": "Model graph > opening paragraph", "support_kind": "minimal_excerpt", "support_value": "It shows the interconnections of the product system's processes and flows", "support_sha256": "579a6156c7a85345e4b5cc7a963146ac60ddcab2f52fc4e42dfa97f3090c9568"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/references_flow", "support_kind": "structured_contract_projection", "support_value": "Exchange -> references_flow -> Flow", "support_sha256": "4cacafad50298e6a8e488acecf0dafa1761cec95171caeaacf4614f40fc08b0f"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:exchange-provided-by-provider",
+      "source_kind": "Exchange",
+      "relation": "provided_by",
+      "target_kind": "Provider",
+      "statement": "A provider link identifies which process or dataset supplies an exchange; an unlinked exchange leaves part of the supply-chain model unresolved.",
+      "renderings": {
+        "en": "A provider link identifies which process or dataset supplies an exchange; an unlinked exchange leaves part of the supply-chain model unresolved.",
+        "zh-CN": "Provider 链接标识由哪个过程或数据集供应该交换；未链接的交换会使供应链模型的一部分仍未解析。"
+      },
+      "knowledge_roles": ["exchange", "provider", "provider_linkage", "model_structure", "lca_relationship"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["openlca2-model-graph", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-model-graph", "location": "Model graph > Search providers", "support_kind": "minimal_excerpt", "support_value": "It shows the interconnections of the product system's processes and flows", "support_sha256": "579a6156c7a85345e4b5cc7a963146ac60ddcab2f52fc4e42dfa97f3090c9568"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/provided_by", "support_kind": "structured_contract_projection", "support_value": "Exchange|Process|Dataset -> provided_by -> Provider|Process|Dataset", "support_sha256": "eb0472f27d3a6bd71fcba631b002a54460868a1a065a785248a820f2c07a569e"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:flow-has-property",
+      "source_kind": "Flow",
+      "relation": "has_property",
+      "target_kind": "FlowProperty",
+      "statement": "A flow property defines the quantity dimension used to express a flow and connects it to a compatible unit group.",
+      "renderings": {
+        "en": "A flow property defines the quantity dimension used to express a flow and connects it to a compatible unit group.",
+        "zh-CN": "流属性定义表达该流所用的量纲，并把它连接到兼容的单位组。"
+      },
+      "knowledge_roles": ["flow", "flow_property", "unit", "quantity", "lca_relationship"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/has_property", "support_kind": "structured_contract_projection", "support_value": "domain -> has_property -> FlowProperty", "support_sha256": "0e6561ac906dfbc389e83553b82959201f492bcd0e7f2e757c2ad5ae8f17a4bb"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:lcia-method-contains-impact-category",
+      "source_kind": "LCIAMethod",
+      "relation": "contains_impact_category",
+      "target_kind": "ImpactCategory",
+      "statement": "An LCIA method groups impact categories whose characterization models translate inventory flows into category indicators.",
+      "renderings": {
+        "en": "An LCIA method groups impact categories whose characterization models translate inventory flows into category indicators.",
+        "zh-CN": "LCIA 方法组织多个影响类别，各类别的表征模型把清单流转换为类别指标。"
+      },
+      "knowledge_roles": ["lcia_method", "impact_category", "characterization", "lca_relationship"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["openlca2-lcia-methods", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-lcia-methods", "location": "LCIA methods > opening paragraph", "support_kind": "minimal_excerpt", "support_value": "These methods analyse the data from the inventory phase and translate it into meaningful indicators.", "support_sha256": "8a211ffe93e9e6b53378504391eb996795c2268ab55d327b714a223bf4a98b44"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/contains_impact_category", "support_kind": "structured_contract_projection", "support_value": "LCIAMethod -> contains_impact_category -> ImpactCategory", "support_sha256": "fb67d1b221d68b965a50bf2f5d9fc7cc75613f8f79cf0459c844751949fc069e"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:lcia-method-has-applicability",
+      "source_kind": "LCIAMethod",
+      "relation": "has_applicability",
+      "target_kind": "ApplicabilityScope",
+      "statement": "An LCIA method or category must be interpreted within its recorded geographic, temporal, technological, and methodological applicability.",
+      "renderings": {
+        "en": "An LCIA method or category must be interpreted within its recorded geographic, temporal, technological, and methodological applicability.",
+        "zh-CN": "LCIA 方法或影响类别必须在其记录的地域、时间、技术和方法适用范围内解释。"
+      },
+      "knowledge_roles": ["lcia_method", "impact_category", "applicability", "evidence_limitation"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["openlca2-data-quality", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-data-quality", "location": "Data Quality > opening paragraph", "support_kind": "minimal_excerpt", "support_value": "data quality is defined as fitness for purpose.", "support_sha256": "81c2fe29f4a40c277cdcbbc6586893c656d1b45aaae22f6d2c1bb931785bd200"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/has_applicability", "support_kind": "structured_contract_projection", "support_value": "LifecycleModel|Process|Flow|LCIAMethod|ImpactCategory -> has_applicability -> ApplicabilityScope", "support_sha256": "6473861f222957c7e0b30241ec26f6148e885202a088ecce98927e356e46d306"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:calculation-derived-from-evidence",
+      "source_kind": "Calculation",
+      "relation": "derived_from",
+      "target_kind": "EvidenceSpan",
+      "statement": "A calculation result is derived from identified input values, units, transformations, and method choices; the expression alone is not sufficient provenance.",
+      "renderings": {
+        "en": "A calculation result is derived from identified input values, units, transformations, and method choices; the expression alone is not sufficient provenance.",
+        "zh-CN": "计算结果必须追溯到已识别的输入值、单位、变换和方法选择；只有算式本身并不构成充分溯源。"
+      },
+      "knowledge_roles": ["calculation", "transformation", "calculation_explanation", "source_boundary"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["d18-semantic-graph-contract", "d18-product-authority-boundary-v1"],
+      "source_support": [
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/derived_from", "support_kind": "structured_contract_projection", "support_value": "evidence|project|domain -> derived_from -> evidence|project|domain", "support_sha256": "2bae0a31d4b3139450d289b36e1d3bcdad94571903e74c0c312b9913984b069b"},
+        {"source_id": "d18-product-authority-boundary-v1", "location": "/authority_policy/tiangong_rule", "support_kind": "minimal_excerpt", "support_value": "TianGong是项目第一权威。Agent跟随已采用的TianGong版本变化，不自行修改TianGong正式数据；超出其覆盖范围时只能增加候选证据、假设或受限结论。", "support_sha256": "c4574bc8684951d521897ef55e156d4e347c58573217aceb1601d08ccfe86547"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:evidence-qualifies-dataset-applicability",
+      "source_kind": "EvidenceSpan",
+      "relation": "qualifies",
+      "target_kind": "Dataset",
+      "statement": "Evidence about data quality qualifies where and when a dataset is fit for the study; it does not make the dataset universally representative.",
+      "renderings": {
+        "en": "Evidence about data quality qualifies where and when a dataset is fit for the study; it does not make the dataset universally representative.",
+        "zh-CN": "数据质量证据用于限定数据集在何地、何时适合该研究；它不会使该数据集自动具有普遍代表性。"
+      },
+      "knowledge_roles": ["data_quality", "applicability", "geography", "time", "technology", "evidence_limitation"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["openlca2-data-quality", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-data-quality", "location": "Data Quality > Results", "support_kind": "minimal_excerpt", "support_value": "data quality is defined as fitness for purpose.", "support_sha256": "81c2fe29f4a40c277cdcbbc6586893c656d1b45aaae22f6d2c1bb931785bd200"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/qualifies", "support_kind": "structured_contract_projection", "support_value": "evidence|project|domain -> qualifies -> evidence|project|domain", "support_sha256": "d4d38b5974dc951d5fb0f11acd318dace5b31e3e3988ba892b52027b279a6dc9"}
+      ]
+    },
+    {
+      "knowledge_id": "lca-rel:limitation-limits-result",
+      "source_kind": "Limitation",
+      "relation": "limits",
+      "target_kind": "Result",
+      "statement": "A material uncertainty or sensitivity finding limits the strength of a result when plausible changes can alter the conclusion.",
+      "renderings": {
+        "en": "A material uncertainty or sensitivity finding limits the strength of a result when plausible changes can alter the conclusion.",
+        "zh-CN": "当合理的变化可能改变结论时，实质性不确定性或敏感性发现会限制结果的结论强度。"
+      },
+      "knowledge_roles": ["uncertainty_and_limit", "sensitivity_analysis", "evidence_limitation", "conclusion_boundary"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["openlca2-model-validation", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "openlca2-model-validation", "location": "Sensitivity checks and uncertainty analysis", "support_kind": "minimal_excerpt", "support_value": "The sensitivity check examines how robust the results are", "support_sha256": "b9b92d07b515d318d9971475d89e33bc0d7e4093f0c6f4b0e9675cfc3d946751"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/limits", "support_kind": "structured_contract_projection", "support_value": "Limitation|MissingDatum|Conflict -> limits -> project|evidence|domain|method", "support_sha256": "abea5b0a07478af2add33054425a3d176b11ef50a309d7380a2de49881efcbcb"}
+      ]
+    },
+    {
+      "knowledge_id": "tiangong-rel:dataset-has-version",
+      "source_kind": "Dataset",
+      "relation": "has_version",
+      "target_kind": "DatasetVersion",
+      "statement": "A TianGong/TIDAS dataset reference must retain exact dataset and version identity; a name-only match is not authoritative.",
+      "renderings": {
+        "en": "A TianGong/TIDAS dataset reference must retain exact dataset and version identity; a name-only match is not authoritative.",
+        "zh-CN": "TianGong/TIDAS 数据集引用必须保留精确的数据集与版本身份；仅按名称匹配不具备权威性。"
+      },
+      "knowledge_roles": ["tidas_dataset", "dataset_version", "version", "authority_boundary"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca", "tidas_native"]},
+      "upstream_source_ids": ["tiangong-source-lock", "tiangong-tidas-sdk", "d18-product-authority-boundary-v1", "d18-semantic-graph-contract"],
+      "source_support": [
+        {"source_id": "tiangong-source-lock", "location": "/sources[source_id=tiangong.sdk.npm]", "support_kind": "structured_contract_projection", "support_value": "@tiangong-lca/tidas-sdk@0.1.45", "support_sha256": "c25edc018d7cc1a84d4797f883adfd34ba87cb50ae1660e098af8ef5a18bc425"},
+        {"source_id": "tiangong-tidas-sdk", "location": "README > TIDAS SDKs", "support_kind": "minimal_excerpt", "support_value": "A multi-language SDK repository for TIDAS (TianGong Life Cycle Assessment data format)", "support_sha256": "7f732000def494e0a831b57305a4440966689c068b1b9b19db678781ba9c2519"},
+        {"source_id": "d18-product-authority-boundary-v1", "location": "/authority_policy/tiangong_rule", "support_kind": "minimal_excerpt", "support_value": "TianGong是项目第一权威。Agent跟随已采用的TianGong版本变化，不自行修改TianGong正式数据；超出其覆盖范围时只能增加候选证据、假设或受限结论。", "support_sha256": "c4574bc8684951d521897ef55e156d4e347c58573217aceb1601d08ccfe86547"},
+        {"source_id": "d18-semantic-graph-contract", "location": "/edge_registry/has_version", "support_kind": "structured_contract_projection", "support_value": "Dataset -> has_version -> DatasetVersion", "support_sha256": "b7be9d8b65652adbb8c64aa12806a6be8590000214f6a1103eb96ed0b108dd92"}
+      ]
+    }
+  ]
+}

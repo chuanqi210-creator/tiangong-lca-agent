@@ -21,6 +21,10 @@ PUBLIC_RELEASE_CONTRACT = "public-release-manifest/v1"
 _POINTER_CONTRACT = "d18.current_product_readiness_release/v1"
 _RECEIPT_CONTRACT = "d18.product_readiness_release_receipt/v1"
 _PUBLICATION_RECEIPT_CONTRACT = "d18.publication_receipt/v1"
+_CLEAN_PUBLIC_RELEASE_REVIEW_CONTRACT = "d18.clean_public_release_review/v1"
+_FIVE_JOURNEY_ACCEPTANCE_CONTRACT = (
+    "lca_research_kernel.five_journey_product_readiness_acceptance/v1"
+)
 _EXPECTED_JOURNEYS = {
     "direct_no_material_explanation",
     "medium_material_explanation",
@@ -275,7 +279,8 @@ def _historical_readiness_pointer(
     ):
         raise ValueError("accepted Product Readiness binding is invalid")
     matches: set[Path] = set()
-    for event in _read_lifecycle_events(repository_root):
+    events = _read_lifecycle_events(repository_root)
+    for event in events:
         if event.get("event_type") != "research.lifecycle.beat_accepted":
             continue
         payload = event.get("payload")
@@ -317,6 +322,77 @@ def _historical_readiness_pointer(
         ):
             raise ValueError("accepted Product Readiness history drifted")
         matches.add(pointer_path)
+    if not matches:
+        for event in events:
+            if event.get("event_type") != "research.lifecycle.beat_accepted":
+                continue
+            payload = event.get("payload")
+            artifact = (
+                payload.get("accepted_artifact")
+                if isinstance(payload, Mapping)
+                else None
+            )
+            relative = artifact.get("path") if isinstance(artifact, Mapping) else None
+            if not isinstance(relative, str) or Path(relative).suffix != ".json":
+                continue
+            artifact_path = (repository_root / relative).resolve()
+            try:
+                artifact_path.relative_to(repository_root)
+            except ValueError as error:
+                raise ValueError(
+                    "accepted lifecycle artifact escaped repository"
+                ) from error
+            if not artifact_path.is_file() or artifact_path.is_symlink():
+                continue
+            try:
+                acceptance = json.loads(artifact_path.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+                continue
+            if (
+                not isinstance(acceptance, Mapping)
+                or acceptance.get("contract") != _FIVE_JOURNEY_ACCEPTANCE_CONTRACT
+            ):
+                continue
+            if artifact.get("sha256") != _file_sha256(artifact_path):
+                raise ValueError("accepted Product Readiness history drifted")
+            source = acceptance.get("accepted_source")
+            readiness = acceptance.get("product_readiness_release")
+            if (
+                acceptance.get("status") != "accepted"
+                or not isinstance(source, Mapping)
+                or not isinstance(readiness, Mapping)
+                or source.get("release_id") != release_id
+                or readiness.get("receipt_sha256") != receipt_sha256
+            ):
+                continue
+            receipt_relative = readiness.get("receipt_path")
+            if (
+                not isinstance(receipt_relative, str)
+                or not receipt_relative
+                or Path(receipt_relative).is_absolute()
+            ):
+                raise ValueError("accepted Product Readiness receipt path is invalid")
+            receipt_path = (repository_root / receipt_relative).resolve()
+            try:
+                receipt_path.relative_to(repository_root)
+            except ValueError as error:
+                raise ValueError(
+                    "accepted Product Readiness receipt escaped repository"
+                ) from error
+            if (
+                not receipt_path.is_file()
+                or receipt_path.is_symlink()
+                or readiness.get("receipt_file_sha256") != _file_sha256(receipt_path)
+            ):
+                raise ValueError("accepted Product Readiness receipt drifted")
+            pointer_path = receipt_path.parents[3] / "current-release.json"
+            pointer, _, _ = _load_readiness_basis(pointer_path)
+            if (
+                pointer.get("release_id") != release_id
+                or pointer.get("receipt_sha256") != receipt_sha256
+            ):
+                raise ValueError("accepted Product Readiness history drifted")
+            matches.add(pointer_path)
     if len(matches) != 1:
         raise ValueError("accepted Product Readiness history is not unique")
     return matches.pop()
@@ -355,7 +431,50 @@ def _authoritative_pointer(
         raise ValueError("accepted lifecycle state drifted")
     if artifact_path.name == "product-readiness-release.json":
         return artifact_path.parents[3] / "current-release.json"
-    publication_paths: set[Path] = set()
+    current_acceptance = _read_json_file(
+        artifact_path,
+        "accepted lifecycle artifact is unavailable",
+        "accepted lifecycle artifact is invalid",
+    )
+    readiness = current_acceptance.get("product_readiness_release")
+    accepted_source = current_acceptance.get("accepted_source")
+    if (
+        current_acceptance.get("contract") == _FIVE_JOURNEY_ACCEPTANCE_CONTRACT
+        and current_acceptance.get("status") == "accepted"
+        and isinstance(readiness, Mapping)
+        and isinstance(accepted_source, Mapping)
+        and accepted_source.get("release_id") == binding.get("release_id")
+        and readiness.get("receipt_sha256") == binding.get("receipt_sha256")
+    ):
+        receipt_relative = readiness.get("receipt_path")
+        if (
+            not isinstance(receipt_relative, str)
+            or not receipt_relative
+            or Path(receipt_relative).is_absolute()
+        ):
+            raise ValueError("accepted Product Readiness receipt path is invalid")
+        receipt_path = (repository_root / receipt_relative).resolve()
+        try:
+            receipt_path.relative_to(repository_root)
+        except ValueError as error:
+            raise ValueError(
+                "accepted Product Readiness receipt escaped repository"
+            ) from error
+        if (
+            not receipt_path.is_file()
+            or receipt_path.is_symlink()
+            or readiness.get("receipt_file_sha256") != _file_sha256(receipt_path)
+        ):
+            raise ValueError("accepted Product Readiness receipt drifted")
+        pointer_path = receipt_path.parents[3] / "current-release.json"
+        pointer, _, _ = _load_readiness_basis(pointer_path)
+        if (
+            pointer.get("release_id") != binding.get("release_id")
+            or pointer.get("receipt_sha256") != binding.get("receipt_sha256")
+        ):
+            raise ValueError("accepted Product Readiness basis drifted")
+        return pointer_path
+    latest_accepted_artifacts: dict[str, Mapping[str, Any]] = {}
     for event in events:
         if event.get("event_type") != "research.lifecycle.beat_accepted":
             continue
@@ -372,12 +491,15 @@ def _authoritative_pointer(
         )
         if not isinstance(relative, str):
             continue
+        latest_accepted_artifacts[relative] = historical_artifact
+    publication_paths: set[Path] = set()
+    for relative, historical_artifact in latest_accepted_artifacts.items():
         candidate = (repository_root / relative).resolve()
         try:
             candidate.relative_to(repository_root)
         except ValueError as error:
             raise ValueError("accepted lifecycle artifact escaped repository") from error
-        if candidate.name != "publication-receipt-v2.json":
+        if candidate.name not in {"clean-review.json", "publication-receipt-v2.json"}:
             continue
         if (
             not candidate.is_file()
@@ -385,6 +507,46 @@ def _authoritative_pointer(
             or historical_artifact.get("sha256") != _file_sha256(candidate)
         ):
             raise ValueError("accepted publication history drifted")
+        publication_ref: Mapping[str, Any] | None = None
+        if candidate.name == "clean-review.json":
+            review = _read_json_file(
+                candidate,
+                "accepted clean review is unavailable",
+                "accepted clean review is invalid",
+            )
+            publication_ref = review.get("publication_receipt")
+            receipt_relative = (
+                publication_ref.get("path")
+                if isinstance(publication_ref, Mapping)
+                else None
+            )
+            if (
+                review.get("contract") != _CLEAN_PUBLIC_RELEASE_REVIEW_CONTRACT
+                or review.get("status") != "passed"
+                or review.get("review_sha256")
+                != _unsigned_sha256(review, "review_sha256")
+                or not isinstance(receipt_relative, str)
+                or not receipt_relative
+                or Path(receipt_relative).is_absolute()
+            ):
+                continue
+            reviewed_receipt = (repository_root / receipt_relative).resolve()
+            try:
+                reviewed_receipt.relative_to(repository_root)
+            except ValueError as error:
+                raise ValueError(
+                    "accepted publication receipt escaped repository"
+                ) from error
+            if (
+                not reviewed_receipt.is_file()
+                or reviewed_receipt.is_symlink()
+                or publication_ref.get("file_sha256")
+                != _file_sha256(reviewed_receipt)
+            ):
+                raise ValueError("accepted publication review drifted")
+            candidate = reviewed_receipt
+        elif candidate.name != "publication-receipt-v2.json":
+            continue
         publication = _read_json_file(
             candidate,
             "accepted publication receipt is unavailable",
@@ -396,6 +558,11 @@ def _authoritative_pointer(
             and publication.get("status") == "passed"
             and publication.get("receipt_sha256")
             == _unsigned_sha256(publication, "receipt_sha256")
+            and (
+                not isinstance(publication_ref, Mapping)
+                or publication_ref.get("receipt_sha256")
+                == publication.get("receipt_sha256")
+            )
             and isinstance(basis, Mapping)
             and basis.get("release_id") == binding.get("release_id")
             and basis.get("accepted_product_readiness_receipt_sha256")

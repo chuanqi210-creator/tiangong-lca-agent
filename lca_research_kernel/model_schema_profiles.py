@@ -21,6 +21,7 @@ from .lca_domain_kernel import DIRECT_LCA_MISSING_FIELDS
 
 RESEARCH_TURN_PROFILE = "research_turn_semantics_v1"
 RESEARCH_TURN_INTENT_PROFILE = "research_turn_intent_v2"
+RESEARCH_TURN_KNOWLEDGE_INTENT_PROFILE = "research_turn_intent_v3"
 MATERIAL_ANSWER_PROFILE = "material_answer_v2"
 PUBLIC_SOURCE_INTENT_CONTRACT = "lca_research_kernel.public_source_intent/v1"
 PUBLIC_SOURCE_INTENT_FIELDS = {
@@ -551,6 +552,53 @@ def research_initial_turn_intent_schema() -> dict:
     }
 
 
+def _domain_knowledge_ids_schema(knowledge_ids: list[str]) -> dict:
+    if (
+        not knowledge_ids
+        or len(knowledge_ids) != len(set(knowledge_ids))
+        or any(not isinstance(value, str) or not value for value in knowledge_ids)
+    ):
+        raise ValueError("research turn knowledge intent requires governed identities")
+    return {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 8,
+        "uniqueItems": True,
+        "items": {"type": "string", "enum": list(knowledge_ids)},
+    }
+
+
+def research_turn_knowledge_intent_schema(
+    prior_claim_ids: list[str],
+    knowledge_ids: list[str],
+) -> dict:
+    """One dialogue move plus a bounded L1 governed-knowledge selection."""
+
+    schema = research_turn_intent_schema(prior_claim_ids)
+    schema["properties"]["domain_knowledge_ids"] = (
+        _domain_knowledge_ids_schema(knowledge_ids)
+    )
+    schema["required"] = [
+        "dialogue_move",
+        "referent_claim_id",
+        "domain_knowledge_ids",
+    ]
+    return schema
+
+
+def research_initial_turn_knowledge_intent_schema(
+    knowledge_ids: list[str],
+) -> dict:
+    """Initial-turn dialogue move plus bounded governed-knowledge selection."""
+
+    schema = research_initial_turn_intent_schema()
+    schema["properties"]["domain_knowledge_ids"] = (
+        _domain_knowledge_ids_schema(knowledge_ids)
+    )
+    schema["required"] = ["dialogue_move", "domain_knowledge_ids"]
+    return schema
+
+
 def material_answer_v1_schema(
     selected_locator_ids: list[str],
     *,
@@ -892,6 +940,15 @@ def profile_probe_spec(profile_id: str) -> dict:
         output = {
             "dialogue_move": "deepen_explanation",
             "referent_claim_id": _PROBE_REFERENT,
+        }
+    elif profile_id == RESEARCH_TURN_KNOWLEDGE_INTENT_PROFILE:
+        output_schema = research_turn_knowledge_intent_schema(
+            [_PROBE_REFERENT], [_PROBE_KNOWLEDGE]
+        )
+        output = {
+            "dialogue_move": "deepen_explanation",
+            "referent_claim_id": _PROBE_REFERENT,
+            "domain_knowledge_ids": [_PROBE_KNOWLEDGE],
         }
     elif profile_id == MATERIAL_ANSWER_PROFILE:
         frame = {

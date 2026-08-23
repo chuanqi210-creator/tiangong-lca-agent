@@ -142,15 +142,15 @@ class ModelRuntimeConfigurationTests(unittest.TestCase):
 
         from lca_research_kernel.model_provider_catalog import canonical_sha256
         from lca_research_kernel.model_runtime import load_model_runtime_contract
-        from lca_research_kernel.research_orchestrator import ResearchOrchestrator
+        from lca_research_kernel.model_schema_profiles import (
+            generic_source_candidate_schema,
+        )
 
         contract = load_model_runtime_contract(ROOT)
         catalog = contract["provider_catalog"]
         profile = catalog["schema_profiles"]["generic_source_candidate_v1"]
         self.assertEqual(
-            canonical_sha256(
-                ResearchOrchestrator._generic_source_candidate_schema()
-            ),
+            canonical_sha256(generic_source_candidate_schema()),
             profile["schema_sha256"],
         )
         providers = {

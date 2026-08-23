@@ -25,6 +25,11 @@
       "profile_id": "research_turn_intent_v2",
       "schema_sha256": "f12b9a9152c3aedff216a87561be385d289eca87678c18e1bbf3124d4e26593a"
     },
+    "research_turn_intent_v3": {
+      "contract": "lca_research_kernel.model_schema_profile/v1",
+      "profile_id": "research_turn_intent_v3",
+      "schema_sha256": "d82aa7548b98574c6a4df5f3957f86d9e07b5386c195ff7b60fe4ec1c26c56e6"
+    },
     "research_turn_semantics_v1": {
       "contract": "lca_research_kernel.model_schema_profile/v1",
       "profile_id": "research_turn_semantics_v1",
@@ -108,6 +113,7 @@
         "generic_source_candidate_v1": false,
         "material_answer_v2": false,
         "research_turn_intent_v2": false,
+        "research_turn_intent_v3": false,
         "research_turn_semantics_v1": false,
         "context_limit_class": "provider_configured"
       },
@@ -149,6 +155,7 @@
         "generic_source_candidate_v1": true,
         "material_answer_v2": true,
         "research_turn_intent_v2": true,
+        "research_turn_intent_v3": true,
         "research_turn_semantics_v1": true,
         "context_limit_class": "provider_configured"
       },
@@ -157,44 +164,55 @@
           "schema_sha256": "eda75023eff1441311bb9b595681f017cc47cf7b2876a514ec2e0825d2144bf5",
           "probe_receipt": {
             "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/profile-receipt.json",
-            "sha256": "629055b00217a646bd8b9268852922f531cb1ed8e09c33b0da03670aa3a8f105"
+            "sha256": "b17d8af6f899edd879e00bee474c354fcdd4fa499cf7a362f689200dec6d0c05"
           },
           "independent_review": {
             "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/independent-review.json",
-            "sha256": "22d01cabfe02e510bc0dd042cdad71e739bd2dca82cd4373fd1c11f9d24b738b"
+            "sha256": "c80b5c3201787f1f2a581baa36b856e0f1628fa288e6f305046782c2a4c468e7"
           }
         },
         "material_answer_v2": {
           "schema_sha256": "f7a97863a5947d98828ee84162fce07282719a9ca2a01e55539b7ac268f3b2f7",
           "probe_receipt": {
             "path": "lca_research_kernel/contracts/public-provider-admission/material_answer_v2/profile-receipt.json",
-            "sha256": "cce6148de28561e2ea669d1445a9265f7de49e2b33ffd8a7524821447176e2b0"
+            "sha256": "162ad3c0f95329166873bee1363f67beae662e501f8ded36eefea8ec7184e1cb"
           },
           "independent_review": {
             "path": "lca_research_kernel/contracts/public-provider-admission/material_answer_v2/independent-review.json",
-            "sha256": "4ddd8f67b991b66ecadf1f53e64c52cbd3b6175a3df338d6d1830c4c1edf4076"
+            "sha256": "aa2fa7a4f82c4a0b7938fc9d18297729f820d3aeb8613b5c2505fa0d3d451cc9"
           }
         },
         "research_turn_intent_v2": {
           "schema_sha256": "f12b9a9152c3aedff216a87561be385d289eca87678c18e1bbf3124d4e26593a",
           "probe_receipt": {
             "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/profile-receipt.json",
-            "sha256": "f9f541beed4b9175fa8e153a73678a28f68ed844a5b2a64171e876aeb5a2d32c"
+            "sha256": "c1430b687873c3a0a10f4dfae8f61fddcd70676e98e74d654666b3b7cc95c2c9"
           },
           "independent_review": {
             "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/independent-review.json",
-            "sha256": "62d830735b756601cdb6d2bf6320b168700160e7c1514e73a51a09973228334f"
+            "sha256": "57dad7ced890990bd7cb5a30c1bb9cccfd0ed808603a3ebafd8599c5f150ec62"
+          }
+        },
+        "research_turn_intent_v3": {
+          "schema_sha256": "d82aa7548b98574c6a4df5f3957f86d9e07b5386c195ff7b60fe4ec1c26c56e6",
+          "probe_receipt": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v3/profile-receipt.json",
+            "sha256": "b1bbf6a29ce3beff220c04e803de4fc08c0b71e5313701881b70e3b287bbeb18"
+          },
+          "independent_review": {
+            "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v3/independent-review.json",
+            "sha256": "8eeac22e40984fed3f745a5469795e1e49ab7dbc18548422b21d31a27b3ec52a"
           }
         },
         "research_turn_semantics_v1": {
           "schema_sha256": "5f2e77043405c3060d8eb82b62b35b798ba1eecea9f3d006737f7445817f9a70",
           "probe_receipt": {
             "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_semantics_v1/profile-receipt.json",
-            "sha256": "f9ed497e0adbe96d528d5470493ac0da344b897f0754570c0a3cdad8e7a92895"
+            "sha256": "5d786cc724b615200d89c5aff332fa8c4d2f15178690e51babbe70fa491b7735"
           },
           "independent_review": {
             "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_semantics_v1/independent-review.json",
-            "sha256": "4ff03a3dad432aaa665be581f777cb145b57760b3bd0ec89482efbfe150a5bbf"
+            "sha256": "72a87f5e7051f636f3b3c8e354aa1522fa0bb57c9289b01c8fdd4220b2648dde"
           }
         }
       },
@@ -235,6 +253,7 @@
         "generic_source_candidate_v1": false,
         "material_answer_v2": false,
         "research_turn_intent_v2": false,
+        "research_turn_intent_v3": false,
         "research_turn_semantics_v1": false,
         "context_limit_class": "provider_configured"
       },
@@ -272,6 +291,7 @@
         "generic_source_candidate_v1": false,
         "material_answer_v2": false,
         "research_turn_intent_v2": false,
+        "research_turn_intent_v3": false,
         "research_turn_semantics_v1": false,
         "context_limit_class": "provider_configured"
       },

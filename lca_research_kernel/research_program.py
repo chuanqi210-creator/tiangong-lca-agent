@@ -94,6 +94,9 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 SEMANTIC_CLOSURE_CONTRACT = (
     "lca_research_kernel.research_program_semantic_closure/v1"
 )
+SEMANTIC_CLOSURE_V2_CONTRACT = (
+    "lca_research_kernel.research_program_semantic_closure/v2"
+)
 SEMANTIC_CLOSURE_FIELDS = {
     "contract",
     "source_bindings",
@@ -107,11 +110,28 @@ SEMANTIC_CLOSURE_FIELDS = {
     "missing_dependencies",
     "closure_sha256",
 }
+SEMANTIC_CLOSURE_V2_FIELDS = SEMANTIC_CLOSURE_FIELDS | {
+    "domain_knowledge"
+}
 SEMANTIC_SOURCE_BINDING_FIELDS = {
     "capability_catalog_sha256",
     "skill_registry_sha256",
     "governed_knowledge_registry_sha256",
     "domain_rule_registry_sha256",
+}
+DOMAIN_KNOWLEDGE_BINDING_FIELDS = {
+    "contract",
+    "query_sha256",
+    "slice_sha256",
+    "selected_knowledge_ids",
+    "covered_requirements",
+    "uncovered_requirements",
+    "claim_ceiling_effect",
+}
+DOMAIN_KNOWLEDGE_REQUIREMENT_FIELDS = {
+    "roles",
+    "target_object_kinds",
+    "relation_kinds",
 }
 
 
@@ -223,10 +243,17 @@ def _validate_resource_budget(value: object) -> dict:
 
 
 def validate_program_semantic_closure(value: Mapping[str, object]) -> dict:
+    contract = value.get("contract") if isinstance(value, Mapping) else None
+    expected_fields = (
+        SEMANTIC_CLOSURE_V2_FIELDS
+        if contract == SEMANTIC_CLOSURE_V2_CONTRACT
+        else SEMANTIC_CLOSURE_FIELDS
+    )
     if (
         not isinstance(value, Mapping)
-        or set(value) != SEMANTIC_CLOSURE_FIELDS
-        or value.get("contract") != SEMANTIC_CLOSURE_CONTRACT
+        or set(value) != expected_fields
+        or contract
+        not in {SEMANTIC_CLOSURE_CONTRACT, SEMANTIC_CLOSURE_V2_CONTRACT}
     ):
         raise ValueError("research program semantic closure is invalid")
     closure = deepcopy(dict(value))
@@ -278,6 +305,54 @@ def validate_program_semantic_closure(value: Mapping[str, object]) -> dict:
         set(closure["required_capability_ids"])
     ):
         raise ValueError("research program semantic capabilities are invalid")
+    knowledge_missing = []
+    if contract == SEMANTIC_CLOSURE_V2_CONTRACT:
+        binding = closure.get("domain_knowledge")
+        if not isinstance(binding, Mapping) or set(
+            binding
+        ) != DOMAIN_KNOWLEDGE_BINDING_FIELDS:
+            raise ValueError("research program domain knowledge binding is invalid")
+        for field in ("query_sha256", "slice_sha256"):
+            if not isinstance(binding.get(field), str) or HEX64.fullmatch(
+                str(binding[field])
+            ) is None:
+                raise ValueError(
+                    "research program domain knowledge binding is invalid"
+                )
+        selected_knowledge = _sorted_unique_strings(
+            binding.get("selected_knowledge_ids"),
+            message="research program domain knowledge binding is invalid",
+        )
+        if (
+            binding.get("contract")
+            != "lca_research_kernel.research_program_knowledge_binding/v1"
+            or binding.get("claim_ceiling_effect") != "cannot_raise"
+            or selected_knowledge
+            != closure["selected_governed_knowledge_ids"]
+        ):
+            raise ValueError("research program domain knowledge binding is invalid")
+        for coverage_field in (
+            "covered_requirements",
+            "uncovered_requirements",
+        ):
+            coverage = binding.get(coverage_field)
+            if not isinstance(coverage, Mapping) or set(
+                coverage
+            ) != DOMAIN_KNOWLEDGE_REQUIREMENT_FIELDS:
+                raise ValueError(
+                    "research program domain knowledge binding is invalid"
+                )
+            for requirement in DOMAIN_KNOWLEDGE_REQUIREMENT_FIELDS:
+                _sorted_unique_strings(
+                    coverage.get(requirement),
+                    message=(
+                        "research program domain knowledge binding is invalid"
+                    ),
+                )
+        knowledge_missing = [
+            "knowledge_role:" + role
+            for role in binding["uncovered_requirements"]["roles"]
+        ]
     expected_missing = sorted(
         [
             *("domain_rule:" + rule_id for rule_id in missing_rules),
@@ -288,6 +363,7 @@ def validate_program_semantic_closure(value: Mapping[str, object]) -> dict:
                     - set(closure["selected_capability_ids"])
                 )
             ),
+            *knowledge_missing,
         ]
     )
     if closure["missing_dependencies"] != expected_missing:

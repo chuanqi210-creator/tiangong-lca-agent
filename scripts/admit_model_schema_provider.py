@@ -131,9 +131,11 @@ def build_provider_admission_bundle(
         build_production_model_gateway,
         load_model_runtime_contract,
     )
-    from lca_research_kernel.research_orchestrator import ResearchOrchestrator
     from lca_research_kernel.run_trace import RunTrace
-    from lca_research_kernel.model_schema_profiles import profile_probe_spec
+    from lca_research_kernel.model_schema_profiles import (
+        generic_source_candidate_schema,
+        profile_probe_spec,
+    )
     from scripts.probe_model_providers import provider_receipt
 
     now = clock or (
@@ -179,7 +181,7 @@ def build_provider_admission_bundle(
             "sealed_reference_available": False,
             "external_effects_allowed": [],
         }
-        probe_schema = ResearchOrchestrator._generic_source_candidate_schema()
+        probe_schema = generic_source_candidate_schema()
     else:
         probe = profile_probe_spec(profile_id)
         probe_task = probe["task"]

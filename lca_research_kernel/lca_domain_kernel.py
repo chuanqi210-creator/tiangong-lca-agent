@@ -732,6 +732,72 @@ class LCADomainKernel:
             response_language=response_language,
             research_program=research_program,
         )
+        source_anchor_obligations = {
+            "direct_resolution",
+            "referent_resolution",
+            "source_value_explanation",
+            "source_boundary",
+        }
+        source_anchor_required = bool(
+            source_anchor_obligations.intersection(
+                turn_frame.get("answer_obligations") or []
+            )
+        ) or (
+            isinstance(turn_frame.get("referent"), Mapping)
+            and turn_frame["referent"].get("kind") == "accepted_claim"
+        )
+        missing_anchor_errors = {
+            "candidate_answer_absent",
+            "candidate_citation_set_drifted",
+            "claim_citation_binding_absent",
+            "scientific_claims_absent",
+        }
+        if (
+            not source_claims
+            and not source_anchor_required
+            and set(evidence_assessment["errors"]) == missing_anchor_errors
+        ):
+            bounded = any(
+                isinstance(bundle, Mapping)
+                and isinstance(bundle.get("material_revision"), Mapping)
+                and bundle["material_revision"].get("processing_status")
+                in {"partial", "needs_user"}
+                for bundle in material_bundles
+            )
+            evidence_assessment = {
+                **deepcopy(evidence_assessment),
+                "status": "passed",
+                "errors": [],
+                "claim_ceiling": "method_explanation_only",
+                "citations": [],
+                "admissible_candidate": {
+                    "status": (
+                        "formal_limited_result_accepted"
+                        if bounded
+                        else "formal_result_accepted"
+                    ),
+                    "answer": "",
+                    "bounded_conclusion": "",
+                    "claims": [],
+                    "claim_citation_bindings": [],
+                    "citation_ids": [],
+                    "scientific_source_sha256s": [],
+                    "runtime_provenance_sha256s": deepcopy(
+                        model_candidate.get("runtime_provenance_sha256s") or []
+                    ),
+                    "official_object_ids": [],
+                    "values": [],
+                    "claim_ceiling": "method_explanation_only",
+                    "citations": [],
+                    "source_basis": [],
+                    "limitations": deepcopy(
+                        model_candidate.get("limitations") or []
+                    ),
+                    "missing_facts": [],
+                    "resume_conditions": [],
+                    "computed_values": [],
+                },
+            }
         errors.extend(evidence_assessment["errors"])
         selected_locator_ids = use_decision.get(
             "selected_evidence_locator_ids", []
@@ -787,14 +853,9 @@ class LCADomainKernel:
         except ValueError:
             quality_basis = None
             errors.append("answer_quality_basis_invalid")
-        missing_anchor_errors = {
-            "candidate_answer_absent",
-            "candidate_citation_set_drifted",
-            "claim_citation_binding_absent",
-            "scientific_claims_absent",
-        }
         if (
             not source_claims
+            and source_anchor_required
             and set(errors) == missing_anchor_errors
             and quality.get("disposition") == "accept"
         ):

@@ -17,14 +17,17 @@ from .answer_quality import required_material_limitations
 from .context_assembler import ContextAssembler
 from .model_schema_profiles import (
     model_gateway_supports,
+    research_initial_turn_knowledge_intent_schema,
     research_initial_turn_intent_schema,
     research_initial_turn_semantic_schema,
+    research_turn_knowledge_intent_schema,
     research_turn_intent_schema,
     research_turn_semantic_schema,
 )
 from .project_record import ProjectRecord, canonical_sha256
 from .research_turn import (
     build_research_turn_intent_protocol,
+    build_research_turn_knowledge_intent_protocol,
     build_research_turn_semantic_protocol,
     compile_initial_research_turn_intent,
     compile_research_turn_intent,
@@ -115,10 +118,24 @@ class MaterialTurnCompiler:
         semantic_v1_enabled = model_gateway_supports(
             model_gateway, "research_turn_semantics_v1"
         )
+        intent_v3_enabled = model_gateway_supports(
+            model_gateway, "research_turn_intent_v3"
+        )
         intent_v2_enabled = model_gateway_supports(
             model_gateway, "research_turn_intent_v2"
         )
-        if semantic_v1_enabled or intent_v2_enabled:
+        governed_knowledge = (
+            GovernedLCAKnowledge.load(self.repository_root)
+            if intent_v3_enabled
+            else None
+        )
+        knowledge_catalog = (
+            governed_knowledge.intent_catalog()
+            if governed_knowledge is not None
+            else None
+        )
+        domain_knowledge_intent = None
+        if semantic_v1_enabled or intent_v2_enabled or intent_v3_enabled:
             claims = prior_result.get("claims") if prior_result is not None else []
             if prior_result is not None and (
                 not isinstance(claims, list) or not claims
@@ -159,6 +176,8 @@ class MaterialTurnCompiler:
                 prior_frame_available=prior_frame_available,
                 decision_event_sha256=decision_event_sha256,
                 intent_v2_enabled=intent_v2_enabled,
+                intent_v3_enabled=intent_v3_enabled,
+                knowledge_catalog=knowledge_catalog,
             )
             context_package = self.context_assembler.typed_package(
                 research_program=research_program,
@@ -170,11 +189,30 @@ class MaterialTurnCompiler:
                 "request_id": "research-turn-" + str(turn["turn_sha256"])[:24],
                 "task": self._semantic_task(
                     intent_v2_enabled,
+                    intent_v3_enabled,
                     initial_turn=prior_result is None,
                 ),
                 "context": context_package,
                 "output_schema": (
                     (
+                        (
+                            research_initial_turn_knowledge_intent_schema(
+                                [
+                                    row["knowledge_id"]
+                                    for row in knowledge_catalog["entries"]
+                                ]
+                            )
+                            if prior_result is None
+                            else research_turn_knowledge_intent_schema(
+                                [claim["claim_id"] for claim in prior_claims],
+                                [
+                                    row["knowledge_id"]
+                                    for row in knowledge_catalog["entries"]
+                                ],
+                            )
+                        )
+                        if intent_v3_enabled
+                        else
                         research_initial_turn_intent_schema()
                         if prior_result is None
                         else research_turn_intent_schema(
@@ -194,7 +232,9 @@ class MaterialTurnCompiler:
                 "required_capabilities": [
                     "structured_output",
                     (
-                        "research_turn_intent_v2"
+                        "research_turn_intent_v3"
+                        if intent_v3_enabled
+                        else "research_turn_intent_v2"
                         if intent_v2_enabled
                         else "research_turn_semantics_v1"
                     ),
@@ -221,7 +261,26 @@ class MaterialTurnCompiler:
             output = semantic_candidate.get("output")
             if not isinstance(output, Mapping):
                 raise ValueError("research turn semantic candidate is absent")
-            if intent_v2_enabled:
+            if intent_v3_enabled:
+                output_without_knowledge = deepcopy(dict(output))
+                selected_knowledge_ids = output_without_knowledge.pop(
+                    "domain_knowledge_ids", None
+                )
+                proposal = (
+                    compile_initial_research_turn_intent(
+                        output_without_knowledge
+                    )
+                    if prior_result is None
+                    else compile_research_turn_intent(
+                        output_without_knowledge
+                    )
+                )
+                domain_knowledge_intent = (
+                    governed_knowledge.compile_domain_intent(
+                        selected_knowledge_ids
+                    )
+                )
+            elif intent_v2_enabled:
                 proposal = (
                     compile_initial_research_turn_intent(output)
                     if prior_result is None
@@ -236,6 +295,7 @@ class MaterialTurnCompiler:
             prior_result=prior_result,
             allowed_revision_ids=list(use_decision["allowed_revision_ids"]),
             semantic_proposal=proposal,
+            domain_knowledge_intent=domain_knowledge_intent,
         )
         if required_material_limitations(
             use_decision, response_language=response_language
@@ -247,13 +307,14 @@ class MaterialTurnCompiler:
                 prior_result=prior_result,
             )
         prior_claim_slice = accepted_claim_slice(frame, prior_result)
-        governed_knowledge = self._select_knowledge(
+        knowledge_resolution = self._resolve_knowledge(
             frame, response_language=response_language
         )
+        governed_knowledge = knowledge_resolution["slice"]["entries"]
         trace.append(
             "research.run.turn.frame_compiled",
             {
-                "contract": "lca_research_kernel.research_turn_frame_observation/v2",
+                "contract": "lca_research_kernel.research_turn_frame_observation/v3",
                 "frame_sha256": frame["frame_sha256"],
                 "turn_sha256": frame["turn_sha256"],
                 "project_state_sha256": frame["project_state_sha256"],
@@ -261,6 +322,15 @@ class MaterialTurnCompiler:
                 "answer_obligations": deepcopy(frame["answer_obligations"]),
                 "required_knowledge_roles": deepcopy(
                     frame["required_knowledge_roles"]
+                ),
+                "domain_knowledge_intent_sha256": (
+                    frame.get("domain_knowledge_intent", {}).get(
+                        "intent_sha256"
+                    )
+                    if isinstance(
+                        frame.get("domain_knowledge_intent"), Mapping
+                    )
+                    else None
                 ),
                 "referent_kind": frame["referent"]["kind"],
                 "referent_identity": frame["referent"]["identity"],
@@ -270,6 +340,15 @@ class MaterialTurnCompiler:
                 "governed_knowledge_ids": [
                     row["knowledge_id"] for row in governed_knowledge
                 ],
+                "domain_knowledge_query_sha256": knowledge_resolution[
+                    "query"
+                ]["query_sha256"],
+                "domain_knowledge_slice_sha256": knowledge_resolution[
+                    "slice"
+                ]["slice_sha256"],
+                "uncovered_knowledge_requirements": deepcopy(
+                    knowledge_resolution["slice"]["uncovered_requirements"]
+                ),
                 "response_language": response_language,
                 "candidate_only": True,
                 "project_truth_effect": "none",
@@ -285,15 +364,16 @@ class MaterialTurnCompiler:
             response_language,
         )
 
-    def _select_knowledge(
+    def _resolve_knowledge(
         self, frame: Mapping[str, object], *, response_language: str
-    ) -> list[dict]:
-        selector = getattr(
-            self.semantic_context, "select_governed_knowledge", None
+    ) -> dict:
+        resolver = getattr(
+            self.semantic_context, "resolve_program_knowledge_slice", None
         )
-        if callable(selector):
-            return selector(frame, response_language=response_language)
-        return GovernedLCAKnowledge.load(self.repository_root).select(
+        if callable(resolver):
+            return resolver(frame, response_language=response_language)
+        knowledge = GovernedLCAKnowledge.load(self.repository_root)
+        return knowledge.resolve_turn_slice(
             frame, response_language=response_language
         )
 
@@ -308,9 +388,15 @@ class MaterialTurnCompiler:
         prior_frame_available: bool,
         decision_event_sha256: str,
         intent_v2_enabled: bool,
+        intent_v3_enabled: bool,
+        knowledge_catalog: Mapping[str, object] | None,
     ) -> dict:
-        return {
-            "contract": "lca_research_kernel.research_turn_semantic_context/v1",
+        context = {
+            "contract": (
+                "lca_research_kernel.research_turn_semantic_context/v2"
+                if intent_v3_enabled
+                else "lca_research_kernel.research_turn_semantic_context/v1"
+            ),
             "turn_sha256": turn.get("turn_sha256"),
             "current_text": turn.get("text"),
             "project_state_sha256": decision_event_sha256,
@@ -341,7 +427,9 @@ class MaterialTurnCompiler:
                 else build_research_turn_semantic_protocol()
             ),
             "research_turn_intent_protocol": (
-                build_research_turn_intent_protocol()
+                build_research_turn_knowledge_intent_protocol()
+                if intent_v3_enabled
+                else build_research_turn_intent_protocol()
                 if intent_v2_enabled
                 else None
             ),
@@ -366,11 +454,37 @@ class MaterialTurnCompiler:
                 "hidden_reasoning_requested": False,
             },
         }
+        if intent_v3_enabled:
+            if not isinstance(knowledge_catalog, Mapping):
+                raise ValueError("governed domain knowledge catalog is absent")
+            context["governed_domain_knowledge_catalog"] = deepcopy(
+                dict(knowledge_catalog)
+            )
+        return context
 
     @staticmethod
     def _semantic_task(
-        intent_v2_enabled: bool, *, initial_turn: bool = False
+        intent_v2_enabled: bool,
+        intent_v3_enabled: bool,
+        *,
+        initial_turn: bool = False,
     ) -> str:
+        if intent_v3_enabled:
+            referent_instruction = (
+                "The accepted Project Goal is the referent; no prior claim exists."
+                if initial_turn
+                else "Resolve one accepted referent claim."
+            )
+            return (
+                "Classify the current request as exactly one v3 dialogue move "
+                "and select the smallest sufficient set of exact IDs from the "
+                "governed domain knowledge L1 catalog. Choose by requested state "
+                "change and semantic relationships, not keywords, filenames, or "
+                "prior answer shape. Select an empty list when governed domain "
+                "knowledge is unnecessary. "
+                + referent_instruction
+                + " Do not answer, add facts, change authority, or return reasoning."
+            )
         if initial_turn and intent_v2_enabled:
             return (
                 "Classify the initial material-backed request as exactly one "

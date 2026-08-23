@@ -32,7 +32,7 @@
   },
   "governed_lca_knowledge": {
     "path": "lca_research_kernel/contracts/lca-explanation-knowledge-v2.json",
-    "sha256": "abff814fabb858d894ce3f80a08cbd656eee50be02dddbe7518f81e6bb83bbbe"
+    "sha256": "6c1dbfbd206b43adb8b051b9940c8834caddb5745d79cb5953b36c9af8bd9bdf"
   },
   "domain_rule_registry": {
     "path": "lca_research_kernel/contracts/domain-rule-registry.json",

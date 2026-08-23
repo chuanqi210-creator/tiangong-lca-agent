@@ -1,0 +1,275 @@
+{
+  "contract": "lca_research_kernel.lca_knowledge_pack/v1",
+  "pack_id": "d18-energy-material-circularity-relations",
+  "version": "2026-08-23.1",
+  "status": "active",
+  "scope": "Cross-domain LCA method relations connecting material production, energy supply, and circularity scenarios; no project facts, database completeness claims, or default allocation choices.",
+  "authority_status": "product_governed_calibration",
+  "claim_ceiling": "method_explanation_only",
+  "license_policy": "External sources are linked with minimal excerpts only; their method context cannot replace TianGong identity, accepted project evidence, or a project-specific allocation and scenario decision.",
+  "sources": [
+    {
+      "source_id": "cross-domain-openlca-input-output",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/processes/tab_inputs_outputs.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "cross-domain-openlca-validation",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/validation.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "cross-domain-openlca-allocation",
+      "source_type": "official_web",
+      "owner": "GreenDelta",
+      "locator": "https://greendelta.github.io/openLCA2-manual/allocation.html",
+      "version": "openLCA-2-manual; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["*"],
+        "times": ["*"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    },
+    {
+      "source_id": "cross-domain-ec-circular-footprint-formula",
+      "source_type": "official_web",
+      "owner": "European Commission",
+      "locator": "https://environment.ec.europa.eu/system/files/2021-12/Annexes%201%20to%202.pdf",
+      "version": "Commission-Recommendation-EU-2021-2279-annexes; accessed-2026-08-23",
+      "integrity": "not_locally_snapshotted",
+      "accessed_at": "2026-08-23",
+      "evidence_status": "external_conceptual_calibration_only",
+      "license_status": "reuse_terms_not_verified",
+      "redistribution_scope": "link_metadata_and_minimal_excerpt_only",
+      "applicability": {
+        "geographies": ["EU"],
+        "times": ["2021"],
+        "technologies": ["*"],
+        "methods": ["generic_lca"]
+      }
+    }
+  ],
+  "entries": [
+    {
+      "knowledge_id": "cross-domain:material-process-has-energy-exchange",
+      "source_kind": "MaterialProductionProcess",
+      "relation": "has_exchange",
+      "target_kind": "EnergyCarrier",
+      "statement": "A material-production process records energy carriers as quantified exchanges; the amounts and units connect the material inventory to upstream energy supply but do not identify the supplying dataset.",
+      "renderings": {
+        "en": "A material-production process records energy carriers as quantified exchanges; the amounts and units connect the material inventory to upstream energy supply but do not identify the supplying dataset.",
+        "zh-CN": "材料生产过程把能源载体记录为定量交换；数量和单位把材料清单连接到上游能源供应，但不能单独标识实际供应数据集。"
+      },
+      "knowledge_roles": ["amount", "energy_carrier", "inventory_dependency", "material_production", "unit"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-input-output"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-input-output",
+          "location": "Inputs/Outputs > Provider",
+          "support_kind": "minimal_excerpt",
+          "support_value": "In openLCA, a \"provider\" refers to the process that supplies a specific flow",
+          "support_sha256": "751ddd144765180ad703ac6d6fbf7b5de0e2ceba5f9730750f775a5a21893ec7"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:energy-carrier-provided-by-supply-dataset",
+      "source_kind": "EnergyCarrier",
+      "relation": "provided_by",
+      "target_kind": "EnergySupplyDataset",
+      "statement": "An energy-carrier exchange is linked to a specific upstream supply through its provider; changing that provider can change the connected product-system model.",
+      "renderings": {
+        "en": "An energy-carrier exchange is linked to a specific upstream supply through its provider; changing that provider can change the connected product-system model.",
+        "zh-CN": "能源载体交换通过 Provider 连接到具体的上游供应；更换 Provider 会改变所连接的产品系统模型。"
+      },
+      "knowledge_roles": ["electricity_mix", "energy_carrier", "energy_supply", "provider_linkage"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-input-output"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-input-output",
+          "location": "Inputs/Outputs > Provider",
+          "support_kind": "minimal_excerpt",
+          "support_value": "In openLCA, a \"provider\" refers to the process that supplies a specific flow",
+          "support_sha256": "751ddd144765180ad703ac6d6fbf7b5de0e2ceba5f9730750f775a5a21893ec7"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:energy-supply-has-applicability",
+      "source_kind": "EnergySupplyDataset",
+      "relation": "has_applicability",
+      "target_kind": "ApplicabilityScope",
+      "statement": "An energy-supply dataset has geographic, temporal, and technological applicability; use outside that scope requires an explicit limitation or scenario rather than an unqualified representative claim.",
+      "renderings": {
+        "en": "An energy-supply dataset has geographic, temporal, and technological applicability; use outside that scope requires an explicit limitation or scenario rather than an unqualified representative claim.",
+        "zh-CN": "能源供应数据集具有地理、时间和技术适用范围；超出该范围使用时必须给出明确限制或情景，不能作无条件的代表性声明。"
+      },
+      "knowledge_roles": ["applicability", "data_quality", "electricity_mix", "geography", "technology", "time"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-validation"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-validation",
+          "location": "Model validation > Consistency check",
+          "support_kind": "minimal_excerpt",
+          "support_value": "regional and temporal aspects are handled in a uniform way",
+          "support_sha256": "4eb14778b50decb12899af0cae4fdd65d30c168b474b44f22a28497bda70e7d2"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:recycling-requires-modeling-choice",
+      "source_kind": "RecyclingProcess",
+      "relation": "requires_modeling_choice",
+      "target_kind": "AllocationOrSystemExpansion",
+      "statement": "A recycling process that treats waste and produces recycled material is multi-output; its inventory needs an explicit allocation or system-expansion choice before burdens are assigned.",
+      "renderings": {
+        "en": "A recycling process that treats waste and produces recycled material is multi-output; its inventory needs an explicit allocation or system-expansion choice before burdens are assigned.",
+        "zh-CN": "处理废物并产出再生材料的回收过程属于多输出过程；在分配负荷前，必须明确选择分配方法或系统扩展。"
+      },
+      "knowledge_roles": ["allocation", "circularity", "recycling", "scenario_assumption", "system_expansion"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "method_explanation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-allocation"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-allocation",
+          "location": "Allocation > Allocation for Recycling",
+          "support_kind": "minimal_excerpt",
+          "support_value": "also recycling processes are multi-output processes as they treat waste and produce recycled material",
+          "support_sha256": "8893a26b083e498caaeb3801c30f608ce71c138171c70a0b68f2e078fd4c14f0"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:avoided-product-requires-substitution-provider",
+      "source_kind": "AvoidedProduct",
+      "relation": "requires_provider",
+      "target_kind": "SubstitutedProductSystem",
+      "statement": "An avoided-product credit depends on an explicit substituted product system and provider; the credit is not supported when the displaced supply is unspecified.",
+      "renderings": {
+        "en": "An avoided-product credit depends on an explicit substituted product system and provider; the credit is not supported when the displaced supply is unspecified.",
+        "zh-CN": "避免产品抵扣依赖明确的被替代产品系统及其 Provider；如果未说明被替代的供应，抵扣就缺少支持。"
+      },
+      "knowledge_roles": ["avoided_burden", "circularity", "conclusion_boundary", "provider_linkage", "substitution"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-allocation"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-allocation",
+          "location": "Allocation > System Expansion",
+          "support_kind": "minimal_excerpt",
+          "support_value": "a process providing the avoided product flow exists in the database",
+          "support_sha256": "7ab969dd235f67260e712de30504cc86fd49c6095a3f7fdd109fa7d4d67a05bc"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:circularity-result-limited-by-scenario",
+      "source_kind": "CircularityResult",
+      "relation": "limited_by",
+      "target_kind": "CircularityScenario",
+      "statement": "A circularity result is conditional on recycled content, end-of-life routing, allocation or substitution, energy recovery, and disposal assumptions; changing them can change the conclusion.",
+      "renderings": {
+        "en": "A circularity result is conditional on recycled content, end-of-life routing, allocation or substitution, energy recovery, and disposal assumptions; changing them can change the conclusion.",
+        "zh-CN": "循环性结果取决于再生含量、寿命终点去向、分配或替代、能量回收与处置假设；这些条件变化时，结论也可能改变。"
+      },
+      "knowledge_roles": ["allocation", "circularity", "conclusion_boundary", "disposal", "energy_recovery", "recycling", "system_expansion"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["EU"], "times": ["2021"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-ec-circular-footprint-formula", "cross-domain-openlca-allocation"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-ec-circular-footprint-formula",
+          "location": "Annex I > Circular Footprint Formula",
+          "support_kind": "minimal_excerpt",
+          "support_value": "The circular footprint formula (CFF) is used to model the end of life of products as well as the recycled content",
+          "support_sha256": "03f2958d5df9262b0abd2473d1de4e0fa502a611b9b4bf4a89979573b802cb23"
+        },
+        {
+          "source_id": "cross-domain-openlca-allocation",
+          "location": "Allocation > System Expansion",
+          "support_kind": "minimal_excerpt",
+          "support_value": "inventory associated with the production of a by-product is subtracted from the total inventory",
+          "support_sha256": "91914bbc706b035b5bd2a566634f9f18b6b09fd9e9dbdaf462aa18d161485548"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "cross-domain:scenario-parameter-set-controls-product-system",
+      "source_kind": "ScenarioParameterSet",
+      "relation": "controls",
+      "target_kind": "ProductSystem",
+      "statement": "Energy-mix, technology, and allocation variants should be represented as explicit, consistently applied scenarios; one scenario alone does not demonstrate robustness.",
+      "renderings": {
+        "en": "Energy-mix, technology, and allocation variants should be represented as explicit, consistently applied scenarios; one scenario alone does not demonstrate robustness.",
+        "zh-CN": "能源结构、技术和分配方法的变体应作为明确且一致应用的情景表达；单一情景本身不能证明结论稳健。"
+      },
+      "knowledge_roles": ["allocation", "conclusion_boundary", "electricity_mix", "parameter_set", "scenario", "sensitivity_analysis", "technology"],
+      "authority": "governed_lca_domain_knowledge",
+      "authority_status": "product_governed_calibration",
+      "claim_ceiling": "limitation_only",
+      "applicability": {"geographies": ["*"], "times": ["*"], "technologies": ["*"], "methods": ["generic_lca"]},
+      "upstream_source_ids": ["cross-domain-openlca-validation"],
+      "source_support": [
+        {
+          "source_id": "cross-domain-openlca-validation",
+          "location": "Model validation > Consistency check",
+          "support_kind": "minimal_excerpt",
+          "support_value": "Parameter Sets for scenario consistency",
+          "support_sha256": "d4e2c13d5dd9043580ccd7597a8e00b86cb8c95b1f349ad2ab55395ec5810ced"
+        }
+      ]
+    }
+  ]
+}

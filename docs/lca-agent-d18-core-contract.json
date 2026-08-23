@@ -65,7 +65,7 @@
       "implementation": {
         "status": "implemented_focused_verified",
         "module_path": "lca_research_kernel/research_orchestrator.py",
-        "sha256": "3cb67d55c344e445d357bd1be520343178e96435bf86163fb8f7493e1fb6ae6d",
+        "sha256": "d615181729cb2af359b50306d51fd2a5c754a8d0e0f4e176c467cd5e43c4e4b6",
         "verification_test": "tests/test_research_orchestrator.py",
         "verification_test_sha256": "78d0f1afb8dc2a819de30e02efe22da2d900877eb99894be19ab5195b72c6c14"
       }
@@ -121,7 +121,7 @@
       "implementation": {
         "status": "implemented_focused_verified",
         "module_path": "lca_research_kernel/model_gateway.py",
-        "sha256": "0298f4c492e2b09dab9a6ed370c2b88f9fca921bba1e0ebfa4175900b2b68319",
+        "sha256": "e6fd0c9d436d9830ebd4d02892eb5e6637b042fc106c7961a07d0f5745a0a7e0",
         "verification_test": "tests/test_model_gateway.py",
         "verification_test_sha256": "9a4538042c07f729fbf59b33e5a0d8af83f5beeb05c40bed28892b85191af5ce"
       }

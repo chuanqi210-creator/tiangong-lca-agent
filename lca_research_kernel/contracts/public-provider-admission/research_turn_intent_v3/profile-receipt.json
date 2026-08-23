@@ -1,0 +1,45 @@
+{
+  "contract": "lca_research_kernel.model_schema_profile_probe_receipt/v1",
+  "status": "accepted",
+  "profile_id": "research_turn_intent_v3",
+  "provider_id": "gemini",
+  "adapter_id": "gemini-production",
+  "schema_sha256": "d82aa7548b98574c6a4df5f3957f86d9e07b5386c195ff7b60fe4ec1c26c56e6",
+  "structured_output_valid": true,
+  "tool_requests": 0,
+  "external_writes": 0,
+  "scientific_result_created": false,
+  "sealed_reference_reads": 0,
+  "observed_successful_call_count": 1,
+  "actual_model": "gemini-3.6-flash",
+  "claim_ceiling": "This admits one synthetic schema route; it does not create a scientific result or prove durable quota.",
+  "raw_baseline_acceptance": {
+    "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v3/baseline-receipt.json",
+    "sha256": "64a77bb80edd9a5d2797894deb76dacf179dd956d790349d6d0484661693ee02"
+  },
+  "validated_event_refs": [
+    {
+      "event_id": "public-schema-witness-research_turn_intent_v3",
+      "event_sha256": "d1e25cf8e91a702acd816daefbaf01efc0049a3c654c8419e3a31cf476f64a7f",
+      "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v3/schema-witness.json",
+      "file_sha256": "31ab7b12ec1c9f0b482d6082c2ea4e9efc311fda02bafdd5bee779cc36ad6b1a"
+    }
+  ],
+  "public_projection": {
+    "contract": "d18.public_model_schema_profile_evidence_projection/v1",
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3",
+    "source_artifact_sha256s": {
+      "probe_receipt_sha256": "70ea1d785763dc3b01f999acbd3cbf957933536ea0ad391fed01e6132994d036",
+      "independent_review_sha256": "ea44a4527b5112f6fddcea6f42617494793acf680ef0446c0167e852ecde312c",
+      "raw_acceptance_sha256": "5d08768eaf5673173d511ef4c63b57f923cb6190cccc1700a81afec30ab5ecba",
+      "run_trace_sha256": "aae7d882b8e53057a08091e38643a372235f59efcdd63708158255f5e0dd9272"
+    },
+    "classification": "content_bound_sanitized_attestation_of_private_admission",
+    "public_reexecution_performed": false,
+    "private_evidence_published": false,
+    "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
+    "current_capacity_qualification_attested": false
+  },
+  "receipt_sha256": "243b634c976ae7e5e649a37c6d1a9787bee27373105b4ded3242318ecd3aede9"
+}

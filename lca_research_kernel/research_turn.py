@@ -10,6 +10,7 @@ from .content_identity import canonical_sha256
 
 
 FRAME_CONTRACT = "lca_research_kernel.research_turn_frame/v1"
+FRAME_CONTRACT_V2 = "lca_research_kernel.research_turn_frame/v2"
 COGNITIVE_OPERATIONS = frozenset(
     {
         "extract",
@@ -50,6 +51,16 @@ FRAME_FIELDS = {
     "ambiguities",
     "stop_condition",
     "frame_sha256",
+}
+FRAME_V2_FIELDS = FRAME_FIELDS | {"domain_knowledge_intent"}
+DOMAIN_KNOWLEDGE_INTENT_FIELDS = {
+    "contract",
+    "registry_sha256",
+    "selected_knowledge_ids",
+    "required_roles",
+    "target_object_kinds",
+    "relation_kinds",
+    "intent_sha256",
 }
 PROPOSAL_FIELDS = {
     "cognitive_operation",
@@ -275,6 +286,23 @@ def build_research_turn_intent_protocol() -> dict:
     }
 
 
+def build_research_turn_knowledge_intent_protocol() -> dict:
+    """Extend v2 with bounded selection while machines retain authority."""
+
+    protocol = build_research_turn_intent_protocol()
+    protocol["contract"] = (
+        "lca_research_kernel.research_turn_intent_protocol/v3"
+    )
+    protocol["knowledge_selection_rules"] = [
+        "select_only_ids_from_the_current_governed_catalog",
+        "select_the_smallest_relation_set_needed_by_the_current_question",
+        "select_no_domain_knowledge_when_the_catalog_is_not_needed",
+        "selection_does_not_create_a_project_fact_or_raise_claim_ceiling",
+        "do_not_return_reasoning_or_copy_source_content",
+    ]
+    return protocol
+
+
 def compile_research_turn_intent(value: Mapping[str, object]) -> dict:
     """Compile one open semantic move into closed answer obligations."""
 
@@ -412,12 +440,52 @@ def _knowledge_roles(obligations: list[str]) -> list[str]:
     )
 
 
+def _validate_domain_knowledge_intent(value: object) -> dict:
+    """Validate the content envelope; the Domain Kernel replays identities."""
+
+    if not isinstance(value, Mapping) or set(value) != (
+        DOMAIN_KNOWLEDGE_INTENT_FIELDS
+    ):
+        raise ValueError("research turn domain knowledge intent is invalid")
+    normalized = deepcopy(dict(value))
+    observed_hash = normalized.pop("intent_sha256", None)
+    if (
+        normalized.get("contract")
+        != "lca_research_kernel.domain_knowledge_intent/v1"
+        or not isinstance(normalized.get("registry_sha256"), str)
+        or HEX64.fullmatch(normalized["registry_sha256"]) is None
+        or not isinstance(observed_hash, str)
+        or HEX64.fullmatch(observed_hash) is None
+        or canonical_sha256(normalized) != observed_hash
+    ):
+        raise ValueError("research turn domain knowledge intent content drifted")
+    for field in (
+        "selected_knowledge_ids",
+        "required_roles",
+        "target_object_kinds",
+        "relation_kinds",
+    ):
+        values = normalized.get(field)
+        if (
+            not isinstance(values, list)
+            or values != sorted(values)
+            or len(values) != len(set(values))
+            or any(not isinstance(item, str) or not item for item in values)
+        ):
+            raise ValueError("research turn domain knowledge intent is invalid")
+    if len(normalized["selected_knowledge_ids"]) > 8:
+        raise ValueError("research turn domain knowledge intent is too broad")
+    normalized["intent_sha256"] = observed_hash
+    return normalized
+
+
 def compile_research_turn_frame(
     project_view: Mapping[str, object],
     *,
     prior_result: Mapping[str, object] | None,
     allowed_revision_ids: list[str],
     semantic_proposal: Mapping[str, object] | None = None,
+    domain_knowledge_intent: Mapping[str, object] | None = None,
 ) -> dict:
     """Compile one untrusted semantic proposal against accepted project state."""
 
@@ -487,7 +555,11 @@ def compile_research_turn_frame(
         }
 
     frame = {
-        "contract": FRAME_CONTRACT,
+        "contract": (
+            FRAME_CONTRACT_V2
+            if domain_knowledge_intent is not None
+            else FRAME_CONTRACT
+        ),
         "turn_sha256": turn["turn_sha256"],
         "project_state_sha256": project_state_sha256,
         "interaction_kind": "followup" if prior_sha256 is not None else "initial",
@@ -500,6 +572,10 @@ def compile_research_turn_frame(
         "ambiguities": [],
         "stop_condition": "all_obligations_satisfied_or_explicitly_bounded",
     }
+    if domain_knowledge_intent is not None:
+        frame["domain_knowledge_intent"] = _validate_domain_knowledge_intent(
+            domain_knowledge_intent
+        )
     frame["frame_sha256"] = canonical_sha256(frame)
     return validate_research_turn_frame(
         frame,
@@ -550,7 +626,10 @@ def validate_research_turn_frame(
 ) -> dict:
     """Validate a frame against the exact accepted state that authored it."""
 
-    if not isinstance(value, Mapping) or set(value) != FRAME_FIELDS:
+    if not isinstance(value, Mapping) or frozenset(value) not in {
+        frozenset(FRAME_FIELDS),
+        frozenset(FRAME_V2_FIELDS),
+    }:
         raise ValueError("research turn frame fields are unsupported")
     normalized = deepcopy(dict(value))
     observed_hash = normalized.pop("frame_sha256", None)
@@ -563,7 +642,8 @@ def validate_research_turn_frame(
     turn = _active_turn(project_view)
     prior_sha256 = _validate_prior_result(turn, prior_result)
     if (
-        normalized.get("contract") != FRAME_CONTRACT
+        normalized.get("contract")
+        not in {FRAME_CONTRACT, FRAME_CONTRACT_V2}
         or normalized.get("turn_sha256") != turn["turn_sha256"]
         or normalized.get("project_state_sha256")
         != project_view.get("last_event_sha256")
@@ -576,6 +656,17 @@ def validate_research_turn_frame(
         != "all_obligations_satisfied_or_explicitly_bounded"
     ):
         raise ValueError("research turn frame state binding drifted")
+    if normalized["contract"] == FRAME_CONTRACT:
+        if "domain_knowledge_intent" in normalized:
+            raise ValueError("research turn frame contract drifted")
+    else:
+        if "domain_knowledge_intent" not in normalized:
+            raise ValueError("research turn frame contract drifted")
+        normalized["domain_knowledge_intent"] = (
+            _validate_domain_knowledge_intent(
+                normalized["domain_knowledge_intent"]
+            )
+        )
     obligations = normalized.get("answer_obligations")
     if (
         not isinstance(obligations, list)

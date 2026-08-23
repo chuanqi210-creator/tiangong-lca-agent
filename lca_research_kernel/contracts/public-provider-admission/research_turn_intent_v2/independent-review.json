@@ -4,7 +4,7 @@
   "profile_id": "research_turn_intent_v2",
   "provider_id": "gemini",
   "schema_sha256": "f12b9a9152c3aedff216a87561be385d289eca87678c18e1bbf3124d4e26593a",
-  "probe_receipt_sha256": "352563a2b25e2b4852f0e24517b064128362a0ad40456ef603775778305e98ec",
+  "probe_receipt_sha256": "8a630fa4cf542ddfe4d92414111ce01709fa13d2b4aec63abaca49d5e6b35734",
   "p1": 0,
   "p2": 0,
   "external_effects": 0,
@@ -12,8 +12,8 @@
   "review_context": "content-bound sanitized attestation of accepted private admission; not a public real-call reexecution",
   "public_projection": {
     "contract": "d18.public_model_schema_profile_evidence_projection/v1",
-    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
-    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7",
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3",
     "source_artifact_sha256s": {
       "probe_receipt_sha256": "0ff0beddc89d6b71d5d4c0cfcee217c1ab447bdf3fd6131b3eac3549c7546138",
       "independent_review_sha256": "c0aa0df27d1ff0b1e7091719454a6401bf88cfa991b1e05be2f488fdc6502575",
@@ -26,5 +26,5 @@
     "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
     "current_capacity_qualification_attested": false
   },
-  "review_sha256": "669d13dde822ec6b6eb7c79059f57db4f551fc33c7bc3606b3d58d3664001a6f"
+  "review_sha256": "dbe813d37660bbbf1fca263d269e642dceee52f5878af01a837d6caee521be2d"
 }

@@ -15,20 +15,20 @@
   "claim_ceiling": "This admits one synthetic schema route; it does not create a scientific result or prove durable quota.",
   "raw_baseline_acceptance": {
     "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/baseline-receipt.json",
-    "sha256": "c9260863895e9de93ac8081e8b81f30695028add133b99e7e133bc0a5227f09c"
+    "sha256": "cd2baf1cb7266e3187f24ec9e4485a5eeeefe1803c6e0bc4fb840894f2166a40"
   },
   "validated_event_refs": [
     {
       "event_id": "public-schema-witness-research_turn_intent_v2",
-      "event_sha256": "787b5c42531e5297a74dfaf99ec1a8bfca42b2a244a170c8ba2e8d1cd91e3f98",
+      "event_sha256": "cd611d7d89c0bb47c7ec873822ecc3997d9dde561301d67239f3f109f7623ee7",
       "path": "lca_research_kernel/contracts/public-provider-admission/research_turn_intent_v2/schema-witness.json",
-      "file_sha256": "35e8097b0b8530c12d69dc0f3b1ea2b81d8aec1649942f44be84531203ba5f64"
+      "file_sha256": "30f1caa48719fbbb4be482fc1a82322c42386fa9a9f7ad919db6f38d2f929f94"
     }
   ],
   "public_projection": {
     "contract": "d18.public_model_schema_profile_evidence_projection/v1",
-    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
-    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7",
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3",
     "source_artifact_sha256s": {
       "probe_receipt_sha256": "0ff0beddc89d6b71d5d4c0cfcee217c1ab447bdf3fd6131b3eac3549c7546138",
       "independent_review_sha256": "c0aa0df27d1ff0b1e7091719454a6401bf88cfa991b1e05be2f488fdc6502575",
@@ -41,5 +41,5 @@
     "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
     "current_capacity_qualification_attested": false
   },
-  "receipt_sha256": "352563a2b25e2b4852f0e24517b064128362a0ad40456ef603775778305e98ec"
+  "receipt_sha256": "8a630fa4cf542ddfe4d92414111ce01709fa13d2b4aec63abaca49d5e6b35734"
 }

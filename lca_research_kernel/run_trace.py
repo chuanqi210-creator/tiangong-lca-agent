@@ -300,6 +300,33 @@ class RunTrace:
                 return deepcopy(dict(candidate))
         return None
 
+    def next_model_attempt(self, request_sha256: str, route_id: str) -> int:
+        """Return the next durable attempt number for one request route."""
+
+        if not isinstance(request_sha256, str) or not request_sha256:
+            raise ValueError("model request hash is required")
+        if not isinstance(route_id, str) or not route_id:
+            raise ValueError("model route identity is required")
+        observed = 0
+        for event in self.events():
+            if event["event_type"] not in {
+                "research.run.model.requested",
+                "research.run.model.failed",
+                "research.run.model.retry_scheduled",
+            }:
+                continue
+            payload = event["payload"]
+            attempt = payload.get("attempt")
+            if (
+                payload.get("request_sha256") == request_sha256
+                and payload.get("route_id") == route_id
+                and isinstance(attempt, int)
+                and not isinstance(attempt, bool)
+                and attempt > observed
+            ):
+                observed = attempt
+        return observed + 1
+
     def lookup_native_capability_evidence(
         self,
         *,

@@ -269,8 +269,9 @@ def project_typed_material_answer_candidate(
     *,
     locator_hashes: Mapping[str, str],
     response_language: str,
+    governed_knowledge: Sequence[Mapping[str, object]] = (),
 ) -> tuple[dict, bool]:
-    """Derive every redundant v2 answer surface from typed claims only."""
+    """Derive redundant surfaces and render governed claims from exact refs."""
 
     projected = deepcopy(dict(candidate))
     if projected.get("contract") != (
@@ -281,6 +282,19 @@ def project_typed_material_answer_candidate(
     if not isinstance(claims, list) or not claims:
         raise ValueError("typed material candidate claims are absent")
     normalized_claims = []
+    knowledge_index = {
+        row["knowledge_id"]: row
+        for row in governed_knowledge
+        if isinstance(row, Mapping)
+        and isinstance(row.get("knowledge_id"), str)
+        and isinstance(row.get("statement"), str)
+        and row.get("rendering_language") == response_language
+    }
+    expected_ceiling = {
+        "governed_method_explanation": "method_explanation_only",
+        "illustrative_non_project_example": "illustration_only",
+        "limitation": "limitation_only",
+    }
     citation_ids: list[str] = []
     bindings = []
     for claim in claims:
@@ -295,8 +309,27 @@ def project_typed_material_answer_candidate(
             if isinstance(token, str) and token:
                 text = text.replace(token, "")
         text = re.sub(r"[ \t]+([,.;:!?，。；：！？])", r"\1", text).strip()
+        claim_kind = normalized.get("claim_kind")
+        knowledge_refs = normalized.get("knowledge_refs")
         if (
-            normalized.get("claim_kind") == "illustrative_non_project_example"
+            claim_kind in expected_ceiling
+            and isinstance(knowledge_refs, list)
+            and bool(knowledge_refs)
+            and len(knowledge_refs) == len(set(knowledge_refs))
+            and all(
+                isinstance(knowledge_ref, str)
+                and knowledge_ref in knowledge_index
+                and knowledge_index[knowledge_ref].get("claim_ceiling")
+                == expected_ceiling[claim_kind]
+                for knowledge_ref in knowledge_refs
+            )
+        ):
+            text = " ".join(
+                str(knowledge_index[knowledge_ref]["statement"]).strip()
+                for knowledge_ref in knowledge_refs
+            )
+        if (
+            claim_kind == "illustrative_non_project_example"
             and text
             and not text.startswith(illustrative_example_prefix(response_language))
         ):
@@ -776,7 +809,15 @@ def evaluate_answer_quality(
             role
             for role in (row.get("knowledge_roles") or [])
             if isinstance(role, str) and role
-        }
+        }.union(
+            {"lca_concept", "lca_relationship"}
+            if row.get("claim_ceiling") == "method_explanation_only"
+            and all(
+                isinstance(row.get(field), str) and bool(row[field].strip())
+                for field in ("source_kind", "relation", "target_kind")
+            )
+            else set()
+        )
         for row in governed_knowledge
         if isinstance(row, Mapping)
         and row.get("authority") == "governed_lca_domain_knowledge"

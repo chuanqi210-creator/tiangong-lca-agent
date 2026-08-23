@@ -790,11 +790,13 @@ class ProductInterface:
         *,
         locator_hashes: Mapping[str, str] | None = None,
         response_language: str | None = None,
+        governed_knowledge: Sequence[Mapping[str, object]] = (),
     ) -> tuple[dict, bool]:
         return project_material_candidate_claims(
             candidate,
             locator_hashes=locator_hashes,
             response_language=response_language,
+            governed_knowledge=governed_knowledge,
         )
 
     def _evaluate_material_model_candidate(

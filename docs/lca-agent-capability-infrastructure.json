@@ -11,7 +11,7 @@
   "startup_binding": {
     "contract": "lca_research_kernel.agent_startup_manifest/v1",
     "pointer": "lca_research_kernel/contracts/agent-startup-manifest-v2.json",
-    "sha256": "669dff9b3e5666c48a6a7c4f51948e95d6c1920fc22ee21e876506440c875a86",
+    "sha256": "9e376da66c47b3dd86dece02ece08664a4a71f8a68ae7e840b2d8921bee5ce56",
     "bypass_policy": "fail_closed"
   },
   "catalog": {

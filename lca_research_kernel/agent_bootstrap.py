@@ -14,7 +14,7 @@ STARTUP_CONTEXT_CONTRACT = "lca_research_kernel.agent_startup_context/v1"
 PRODUCT_ID = "tiangong_native_lca_research_agent"
 CORE_OUTCOME = "auditable_lca_research_outcome_or_bounded_limitation"
 ADOPTED_STARTUP_MANIFEST_SHA256 = (
-    "669dff9b3e5666c48a6a7c4f51948e95d6c1920fc22ee21e876506440c875a86"
+    "9e376da66c47b3dd86dece02ece08664a4a71f8a68ae7e840b2d8921bee5ce56"
 )
 
 

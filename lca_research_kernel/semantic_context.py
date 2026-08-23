@@ -19,9 +19,9 @@ from .material_sources import material_revision_context_eligibility
 from .domain_rules import DomainRuleResolver
 
 
-PLAN_CONTRACT = "lca_research_kernel.semantic_context_plan/v1"
+PLAN_CONTRACT = "lca_research_kernel.semantic_context_plan/v2"
 PROGRAM_CLOSURE_CONTRACT = (
-    "lca_research_kernel.research_program_semantic_closure/v1"
+    "lca_research_kernel.research_program_semantic_closure/v2"
 )
 
 _PROGRAM_ROLE_TARGETS = (
@@ -76,6 +76,19 @@ _PROGRAM_OPERATION_TARGETS = {
     "audit": ("evidence_conclusion_audit", ["Claim", "EvidenceSpan"]),
     "research": ("data_gap_resolution", ["Assumption", "MissingDatum"]),
 }
+
+_KNOWLEDGE_ROLE_OBLIGATIONS = (
+    (frozenset({"lca_concept"}), "concept_meaning"),
+    (frozenset({"exchange", "flow", "process"}), "lca_relationship"),
+    (frozenset({"amount", "flow", "unit"}), "source_value_explanation"),
+    (frozenset({"transformation"}), "calculation_explanation"),
+    (
+        frozenset({"illustrative_application_boundary", "lca_relationship"}),
+        "illustrative_application",
+    ),
+    (frozenset({"functional_unit", "system_boundary"}), "comparison_basis"),
+    (frozenset({"evidence_limitation"}), "uncertainty_and_limit"),
+)
 
 
 def _read_json(path: Path, label: str) -> dict:
@@ -239,28 +252,34 @@ class ResearchSemanticContext:
         ):
             raise ValueError("semantic context required knowledge roles are invalid")
         required_knowledge_roles = sorted(required_knowledge_roles)
-        required_knowledge_role_set = set(required_knowledge_roles)
-        knowledge_by_id = {
-            row["knowledge_id"]: row
-            for row in self.governed_knowledge.projection_entries()
-        }
-        selected_knowledge_ids = sorted(
-            knowledge_id
-            for knowledge_id, row in knowledge_by_id.items()
-            if required_knowledge_role_set.intersection(row["knowledge_roles"])
+        knowledge_query = self.governed_knowledge.compile_query(
+            cognitive_operation=self._knowledge_operation(signature),
+            answer_obligations=self._knowledge_obligations(
+                required_knowledge_roles
+            ),
+            required_roles=required_knowledge_roles,
+            referent_refs=signature["exact_node_ids"],
+            target_object_kinds=signature["target_object_kinds"],
+            relation_kinds=[],
+            query_mode=signature["query_mode"],
+            claim_ceiling=signature["claim_ceiling"],
+            applicability={
+                "geographies": [],
+                "times": [],
+                "technologies": [],
+                "methods": ["generic_lca"],
+            },
         )
-        selected_knowledge = [
-            deepcopy(knowledge_by_id[knowledge_id])
-            for knowledge_id in selected_knowledge_ids
-        ]
-        covered_knowledge_roles = {
-            role
-            for row in selected_knowledge
-            for role in row["knowledge_roles"]
-            if role in required_knowledge_role_set
-        }
-        uncovered_knowledge_roles = sorted(
-            required_knowledge_role_set - covered_knowledge_roles
+        knowledge_slice = self.governed_knowledge.resolve_slice(
+            knowledge_query,
+            response_language="en",
+        )
+        selected_knowledge_ids = list(
+            knowledge_slice["selected_knowledge_ids"]
+        )
+        selected_knowledge = deepcopy(knowledge_slice["entries"])
+        uncovered_knowledge_roles = list(
+            knowledge_slice["uncovered_requirements"]["roles"]
         )
         skill_selection = self.skill_registry.select(signature)
         selected_skills = list(skill_selection["selected_skill_ids"])
@@ -448,6 +467,8 @@ class ResearchSemanticContext:
             "selected_capability_ids": selected_capabilities,
             "selected_skill_ids": selected_skills,
             "required_knowledge_roles": required_knowledge_roles,
+            "domain_knowledge_query": knowledge_query,
+            "domain_knowledge_slice": knowledge_slice,
             "selected_governed_knowledge_ids": selected_knowledge_ids,
             "selected_governed_knowledge": selected_knowledge,
             "skill_disclosures": disclosures,
@@ -475,6 +496,33 @@ class ResearchSemanticContext:
         plan["plan_sha256"] = canonical_sha256(plan)
         return plan
 
+    @staticmethod
+    def _knowledge_operation(signature: Mapping[str, object]) -> str:
+        requirements = signature.get("requirements")
+        requirements = requirements if isinstance(requirements, Mapping) else {}
+        artifact = str(signature.get("desired_artifact") or "")
+        if requirements.get("calculation") is True:
+            return "calculate"
+        if requirements.get("comparison") is True:
+            return "compare"
+        if "interpretation" in artifact:
+            return "interpret"
+        if "audit" in artifact or "evidence_conclusion" in artifact:
+            return "audit"
+        if "gap" in artifact or requirements.get("unknown_target") is True:
+            return "research"
+        return "explain"
+
+    @staticmethod
+    def _knowledge_obligations(required_roles: Sequence[str]) -> list[str]:
+        role_set = set(required_roles)
+        obligations = {
+            obligation
+            for trigger_roles, obligation in _KNOWLEDGE_ROLE_OBLIGATIONS
+            if role_set.intersection(trigger_roles)
+        }
+        return sorted(obligations)
+
     def compile_program_semantic_closure(
         self,
         *,
@@ -483,6 +531,8 @@ class ResearchSemanticContext:
         material_use_decision: Mapping[str, object],
         available_capabilities: Sequence[Mapping[str, object]],
         selected_governed_knowledge_ids: Sequence[str],
+        domain_knowledge_query: Mapping[str, object] | None = None,
+        domain_knowledge_slice: Mapping[str, object] | None = None,
     ) -> dict:
         """Compile the method/rule closure for one accepted material program."""
 
@@ -568,10 +618,26 @@ class ResearchSemanticContext:
         selected_capability_ids = sorted(
             set(required_capability_ids).intersection(available_ids)
         )
-        known_knowledge_ids = {
-            row["knowledge_id"]
-            for row in self.governed_knowledge.projection_entries()
-        }
+        if (domain_knowledge_query is None) != (domain_knowledge_slice is None):
+            raise ValueError("research program domain knowledge binding is incomplete")
+        if domain_knowledge_query is None:
+            domain_knowledge_slice = self.resolve_program_knowledge_slice(
+                turn_frame,
+                response_language="en",
+            )
+            domain_knowledge_query = domain_knowledge_slice["query"]
+            domain_knowledge_slice = domain_knowledge_slice["slice"]
+        else:
+            domain_knowledge_query = self.governed_knowledge.validate_query(
+                domain_knowledge_query
+            )
+            replayed_slice = self.governed_knowledge.resolve_slice(
+                domain_knowledge_query,
+                response_language="en",
+            )
+            if replayed_slice != domain_knowledge_slice:
+                raise ValueError("research program domain knowledge slice drifted")
+            domain_knowledge_slice = replayed_slice
         knowledge_ids = sorted(
             set(
                 self._string_sequence(
@@ -580,8 +646,25 @@ class ResearchSemanticContext:
                 )
             )
         )
-        if not set(knowledge_ids).issubset(known_knowledge_ids):
-            raise ValueError("research program governed knowledge is unavailable")
+        if knowledge_ids != domain_knowledge_slice["selected_knowledge_ids"]:
+            raise ValueError("research program governed knowledge selection drifted")
+        knowledge_binding = {
+            "contract": (
+                "lca_research_kernel.research_program_knowledge_binding/v1"
+            ),
+            "query_sha256": domain_knowledge_query["query_sha256"],
+            "slice_sha256": domain_knowledge_slice["slice_sha256"],
+            "selected_knowledge_ids": knowledge_ids,
+            "covered_requirements": deepcopy(
+                domain_knowledge_slice["covered_requirements"]
+            ),
+            "uncovered_requirements": deepcopy(
+                domain_knowledge_slice["uncovered_requirements"]
+            ),
+            "claim_ceiling_effect": domain_knowledge_slice[
+                "claim_ceiling_effect"
+            ],
+        }
         closure = {
             "contract": PROGRAM_CLOSURE_CONTRACT,
             "source_bindings": {
@@ -605,11 +688,23 @@ class ResearchSemanticContext:
             "required_capability_ids": required_capability_ids,
             "selected_capability_ids": selected_capability_ids,
             "selected_governed_knowledge_ids": knowledge_ids,
+            "domain_knowledge": knowledge_binding,
             "missing_dependencies": sorted(
-                "capability:" + capability_id
-                for capability_id in (
-                    set(required_capability_ids) - set(selected_capability_ids)
-                )
+                [
+                    *(
+                        "capability:" + capability_id
+                        for capability_id in (
+                            set(required_capability_ids)
+                            - set(selected_capability_ids)
+                        )
+                    ),
+                    *(
+                        "knowledge_role:" + role
+                        for role in domain_knowledge_slice[
+                            "uncovered_requirements"
+                        ]["roles"]
+                    ),
+                ]
             ),
         }
         closure["closure_sha256"] = canonical_sha256(closure)
@@ -634,7 +729,27 @@ class ResearchSemanticContext:
     ) -> list[dict]:
         """Select the same source-bound knowledge used by graph planning."""
 
-        return self.governed_knowledge.select(
+        if not isinstance(turn_frame.get("cognitive_operation"), str) or not isinstance(
+            turn_frame.get("answer_obligations"), list
+        ):
+            return self.governed_knowledge.select(
+                turn_frame,
+                response_language=response_language,
+            )
+        return self.resolve_program_knowledge_slice(
+            turn_frame,
+            response_language=response_language,
+        )["slice"]["entries"]
+
+    def resolve_program_knowledge_slice(
+        self,
+        turn_frame: Mapping[str, object],
+        *,
+        response_language: str,
+    ) -> dict:
+        """Resolve one user-turn query without exposing index implementation."""
+
+        return self.governed_knowledge.resolve_turn_slice(
             turn_frame,
             response_language=response_language,
         )

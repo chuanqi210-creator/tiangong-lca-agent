@@ -15,20 +15,20 @@
   "claim_ceiling": "This admits one synthetic schema route; it does not create a scientific result or prove durable quota.",
   "raw_baseline_acceptance": {
     "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/baseline-receipt.json",
-    "sha256": "7c15adaaea4c7f808e137f14ddc9fcee1e74a0346bfed7a7f18720d68063ddef"
+    "sha256": "d948c468cdee16798e3fe047f3db7bd837d59c6c7caa8748b9051ecdb2953141"
   },
   "validated_event_refs": [
     {
       "event_id": "public-schema-witness-generic_source_candidate_v1",
-      "event_sha256": "c8129b0a9697bf552afbb9d7726f982e152550b36f7e73cb2aeec060c5f274c7",
+      "event_sha256": "c90c58979b3e756d6e53a390f297909b7a2bd1fa538110fbcd9a2e7556a2b693",
       "path": "lca_research_kernel/contracts/public-provider-admission/generic_source_candidate_v1/schema-witness.json",
-      "file_sha256": "b44d093adfa524f7f7d9938a5038e2fc9429778bbd678a2d0f74f4778fb57283"
+      "file_sha256": "6b8007052de62197de0b7d6e075ad5d5d485c1fc395394270426414a730087b1"
     }
   ],
   "public_projection": {
     "contract": "d18.public_model_schema_profile_evidence_projection/v1",
-    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
-    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7",
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3",
     "source_artifact_sha256s": {
       "probe_receipt_sha256": "27eef184fd5368c8a11fe3fb2e62f7f3c63dd6d0a6b4f151eb1fe1c3b12ddb08",
       "independent_review_sha256": "e58794ab3046e14840bf476e4c18088b4cbf22b4dd367de61ace8cdbc4558338",
@@ -41,5 +41,5 @@
     "projection_claim_ceiling": "accepted_private_admission_baseline_not_current_provider_availability_or_capacity",
     "current_capacity_qualification_attested": false
   },
-  "receipt_sha256": "ad0f171d72b1673b1899b1d52d32ead9cd692dff5f85c65f561641b26954fe10"
+  "receipt_sha256": "31cbb15971f1bbf8f6e6d988873ca225c747f76babbfc6e7cb5658cb6addc319"
 }

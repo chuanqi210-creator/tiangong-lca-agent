@@ -338,6 +338,7 @@ def load_model_runtime_contract(root: Path) -> dict:
         != {
             "generic_source_candidate_v1",
             "research_turn_intent_v2",
+            "research_turn_intent_v3",
             "research_turn_semantics_v1",
             "material_answer_v2",
         }
@@ -383,6 +384,7 @@ def load_model_runtime_contract(root: Path) -> dict:
     for profile_id in (
         "research_turn_semantics_v1",
         "research_turn_intent_v2",
+        "research_turn_intent_v3",
         "material_answer_v2",
     ):
         if (

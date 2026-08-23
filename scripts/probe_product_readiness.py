@@ -432,6 +432,27 @@ def _find_material(
     return dict(matches[0]) if matches else None
 
 
+def _accepted_material_view(
+    opener: urllib.request.OpenerDirector,
+    frontend_url: str,
+    research_id: str,
+    material_id: str,
+) -> dict[str, Any]:
+    """Read the Project Record-overlaid material view after formal execution."""
+
+    material = _find_material(opener, frontend_url, research_id)
+    revision = material.get("current_revision") if isinstance(material, Mapping) else None
+    if (
+        not isinstance(material, Mapping)
+        or material.get("material_id") != material_id
+        or not isinstance(revision, Mapping)
+        or revision.get("scientific_status") != "accepted_project_input"
+        or revision.get("processing_status") != "ready"
+    ):
+        raise RuntimeError("Project Record did not accept the material revision")
+    return dict(material)
+
+
 def _upload_material(
     opener: urllib.request.OpenerDirector,
     frontend_url: str,
@@ -629,6 +650,22 @@ def run_material_journey(
     )
     if retry_result_status != 200 or retry_event_status != 200:
         raise RuntimeError("frontend could not verify exact material retry")
+    material = _accepted_material_view(
+        opener,
+        frontend_url,
+        research_id,
+        material_id,
+    )
+    revision = material.get("current_revision")
+    service_upload_to_ready_ms = (
+        revision.get("upload_to_ready_ms") if isinstance(revision, Mapping) else None
+    )
+    if (
+        isinstance(service_upload_to_ready_ms, bool)
+        or not isinstance(service_upload_to_ready_ms, int)
+        or service_upload_to_ready_ms < 0
+    ):
+        raise RuntimeError("material processing receipt is unavailable")
     execution = result.get("executionReceipt")
     retry_execution = retry_result.get("executionReceipt")
     project_record = execution.get("project_record") if isinstance(execution, Mapping) else {}
@@ -659,7 +696,8 @@ def run_material_journey(
         },
         "material": material,
         "material_reused": reused_material,
-        "upload_to_ready_ms": upload_to_ready_ms,
+        "upload_to_ready_ms": service_upload_to_ready_ms,
+        "probe_upload_to_ready_ms": upload_to_ready_ms,
         "request": request_body,
         "job_id": job_id,
         "statuses": statuses,
@@ -1978,6 +2016,8 @@ def main(argv: list[str] | None = None) -> int:
         if browser_observation is None:
             parser.error("missing finalize requires --browser-observation")
         browser_result = browser_observation
+        if browser_waiting_observation is not None:
+            observation["browser_waiting"] = browser_waiting_observation
         if observation.get("supply") is None:
             observation, receipt = finalize_browser_started_missing_data_journey(
                 observation,
@@ -2019,7 +2059,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(receipt, ensure_ascii=False, sort_keys=True))
             return 0 if receipt["status"] == "passed" else 1
         if (
-            args.journey not in {"official", "native"}
+            args.journey not in {"direct", "material", "official", "native"}
             or args.existing_observation is None
             or browser_observation is None
         ):
@@ -2027,13 +2067,69 @@ def main(argv: list[str] | None = None) -> int:
                 "browser finalization requires one browser-started product journey or both legacy evidence files"
             )
         observation = _read_json(args.existing_observation.resolve())
+        if args.journey == "material":
+            request = observation.get("request")
+            material = observation.get("material")
+            research_id = (
+                request.get("research_id") if isinstance(request, Mapping) else None
+            )
+            material_id = (
+                material.get("material_id") if isinstance(material, Mapping) else None
+            )
+            if not isinstance(research_id, str) or not isinstance(material_id, str):
+                raise RuntimeError("material observation identity is unavailable")
+            material_opener = _opener()
+            session_status, session = _json_request(
+                material_opener,
+                f"{args.frontend_url.rstrip('/')}/api/d18/session",
+            )
+            namespace = (
+                session.get("project_namespace")
+                if isinstance(session, Mapping)
+                else None
+            )
+            if (
+                session_status != 200
+                or session.get("authenticated") is not True
+                or not isinstance(namespace, str)
+                or not research_id.startswith(f"{namespace}-")
+            ):
+                raise RuntimeError("material observation is outside the active session")
+            observation["material"] = _accepted_material_view(
+                material_opener,
+                args.frontend_url.rstrip("/"),
+                research_id,
+                material_id,
+            )
+            revision = observation["material"].get("current_revision")
+            service_upload_to_ready_ms = (
+                revision.get("upload_to_ready_ms")
+                if isinstance(revision, Mapping)
+                else None
+            )
+            if (
+                isinstance(service_upload_to_ready_ms, bool)
+                or not isinstance(service_upload_to_ready_ms, int)
+                or service_upload_to_ready_ms < 0
+            ):
+                raise RuntimeError("material processing receipt is unavailable")
+            observation["probe_upload_to_ready_ms"] = observation.get(
+                "upload_to_ready_ms"
+            )
+            observation["upload_to_ready_ms"] = service_upload_to_ready_ms
         observation["browser_view"] = browser_observation
-        evaluator = (
-            evaluate_official_journey
-            if args.journey == "official"
-            else evaluate_native_journey
-        )
-        stem = "journey-c" if args.journey == "official" else "journey-e"
+        evaluator = {
+            "direct": evaluate_direct_journey,
+            "material": evaluate_material_journey,
+            "official": evaluate_official_journey,
+            "native": evaluate_native_journey,
+        }[args.journey]
+        stem = {
+            "direct": "journey-a",
+            "material": "journey-b",
+            "official": "journey-c",
+            "native": "journey-e",
+        }[args.journey]
         receipt = evaluator(observation)
         _write_json(output / f"{stem}-observation.json", observation)
         _write_json(output / f"{stem}-receipt.json", receipt)

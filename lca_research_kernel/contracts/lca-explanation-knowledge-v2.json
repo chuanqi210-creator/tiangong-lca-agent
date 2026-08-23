@@ -1,6 +1,18 @@
 {
   "contract": "lca_research_kernel.lca_explanation_knowledge_registry/v2",
-  "registry_id": "d18-lca-explanation-knowledge-2026-08-22",
+  "registry_id": "d18-lca-explanation-knowledge-2026-08-23",
+  "knowledge_pack_refs": [
+    {
+      "pack_id": "d18-lca-foundations-and-tidas-relations",
+      "path": "lca_research_kernel/contracts/lca-foundations-knowledge-pack-v1.json",
+      "sha256": "a266d21b10e274e3c5d6ee6750b9187fcd48ba15cea3cb8138210d9cd064ba6f"
+    },
+    {
+      "pack_id": "d18-energy-material-circularity-relations",
+      "path": "lca_research_kernel/contracts/lca-energy-material-circularity-knowledge-pack-v1.json",
+      "sha256": "62660629f1b4090d2da0f033004bcd5ef0d0949bcbe38ddd445cc56c065b5f65"
+    }
+  ],
   "entries": [
     {
       "knowledge_id": "lca-rel:process-has-exchange",

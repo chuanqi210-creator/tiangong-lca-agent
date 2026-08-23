@@ -23,6 +23,7 @@ def project_material_candidate_claims(
     *,
     locator_hashes: Mapping[str, str] | None = None,
     response_language: str | None = None,
+    governed_knowledge: Sequence[Mapping[str, object]] = (),
 ) -> tuple[dict, bool]:
     """Canonicalize redundant material-answer surfaces from typed claims."""
 
@@ -38,6 +39,7 @@ def project_material_candidate_claims(
                 projected,
                 locator_hashes=locator_hashes or {},
                 response_language=response_language or "en",
+                governed_knowledge=governed_knowledge,
             )
         except ValueError:
             return projected, False
@@ -484,6 +486,7 @@ class MaterialTurnExecutor:
             output,
             locator_hashes=locator_hashes,
             response_language=response_language,
+            governed_knowledge=governed_knowledge,
         )
         projection = {
             "contract": (

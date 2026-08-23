@@ -1,26 +1,26 @@
 {
   "accepted_product_readiness": {
-    "receipt_sha256": "a238f6e23bb43f6a5b8145fdcf346c08549648effdcca8accfb22dcd786fc5fc",
-    "release_id": "286ad3b507d60e3ff90cfa56e9b8e52d265c2b4d0903902c87af44be10c1d2b4"
+    "receipt_sha256": "c754a912909486668b2b32dd4ef568200048b90ca19a163f3daca5bf7e9a19ca",
+    "release_id": "f7f8dcbd1457a4428e57508c355d09f0899e1b44840a3122d746128bb68e2c23"
   },
   "build": {
-    "backend_tree_sha256": "cfe04969fd214866e1e7af2868a604cba4f0e08dbf9d1a6f6b53ed0f36168da2",
+    "backend_tree_sha256": "e030084fea638e03048bbd53e6f1ad164a1d2fe066353ebe71f268ef5696b2b0",
     "frontend_input_sha256": "1343dd67e3657036901477157eba2d711299dea6d9bc8b83c36641e585f1b517",
-    "runtime_release_id": "286ad3b507d60e3ff90cfa56e9b8e52d265c2b4d0903902c87af44be10c1d2b4"
+    "runtime_release_id": "f7f8dcbd1457a4428e57508c355d09f0899e1b44840a3122d746128bb68e2c23"
   },
   "contract": "public-release-manifest/v1",
   "d18_contracts": {
     "top_level_architecture_sha256": "19d59c2bc02f903e318314ae7942360820fb5b63ae0307d5c150e04c34f5f5f5"
   },
-  "manifest_sha256": "80e862974199f6cb5261e2730ac586467bc5c671a6ce713261490875294cd85c",
+  "manifest_sha256": "064ba7b7f696cd687f78f8531a48f0db3490428761551c2ec46d094fe1cd9b35",
   "private_archive": {
     "git_object_format": "sha1",
-    "source_commit": "f4ae286229fc8696a1deea2db078a1d19b260e3c",
-    "source_tree_oid": "6478a8b5174d6e80c1febc98914856e81b7393f7"
+    "source_commit": "23cc91db50a7c77c2fb62a2c17bfbbcf5fbfe96f",
+    "source_tree_oid": "feae0295da09163692c4fac366eb83ff1f4429f3"
   },
   "provider": {
-    "catalog_sha256": "8f0e21aa5ff19f0b7d3070851a70265fcf90294af0c926797ad8dbd698c1f1b8",
+    "catalog_sha256": "7b7a602399d76866985fcd76bf4ee79f497c7860c9f1cd5c2452b5042efe31ca",
     "profile_policy_sha256": "6d45ed8c7b22b7218e79af3e4344deec63bced1f5ac253297cfbb7204700ee69"
   },
-  "public_tree_sha256": "b2f621c7ddb3a8573522df87b6a9483345ad960449f9a3fe5b1b6e0b96a08a13"
+  "public_tree_sha256": "19e9432baf6faedcb19b03e64487829f5c75fe8ca1ffee5919bcc01c45c95c62"
 }

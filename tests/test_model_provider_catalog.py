@@ -231,6 +231,7 @@ class ModelProviderCatalogTests(unittest.TestCase):
             {
                 "generic_source_candidate_v1",
                 "research_turn_intent_v2",
+                "research_turn_intent_v3",
                 "research_turn_semantics_v1",
                 "material_answer_v2",
             },
@@ -238,6 +239,7 @@ class ModelProviderCatalogTests(unittest.TestCase):
         for profile_id in (
             "research_turn_semantics_v1",
             "research_turn_intent_v2",
+            "research_turn_intent_v3",
             "material_answer_v2",
         ):
             spec = profile_probe_spec(profile_id)

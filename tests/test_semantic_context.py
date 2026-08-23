@@ -154,7 +154,7 @@ class SemanticContextTests(unittest.TestCase):
             generation=9,
         )
 
-        self.assertEqual(plan["contract"], "lca_research_kernel.semantic_context_plan/v1")
+        self.assertEqual(plan["contract"], "lca_research_kernel.semantic_context_plan/v2")
         self.assertEqual(plan["selected_fact_ids"], ["provider-gap", "research-goal"])
         self.assertEqual(plan["selected_skill_ids"], ["lci-provider-linkage-and-completeness"])
         self.assertEqual(plan["skill_disclosures"][0]["level"], "L2")
@@ -168,6 +168,75 @@ class SemanticContextTests(unittest.TestCase):
         )
         self.assertNotIn("irrelevant-official-material", plan["selected_fact_ids"])
         self.assertRegex(plan["plan_sha256"], r"^[0-9a-f]{64}$")
+
+    def test_plan_binds_replayable_knowledge_query_and_slice(self):
+        explanation = deepcopy(EXPECTED_CHANGE)
+        explanation["desired_artifact"] = "generic_lca_explanation"
+        explanation["target_object_kinds"] = ["Exchange", "Process"]
+        explanation["required_evidence_roles"] = []
+        explanation["required_knowledge_roles"] = [
+            "exchange",
+            "flow",
+            "process",
+        ]
+        explanation["source_confirmation_required"] = False
+
+        comparison = deepcopy(explanation)
+        comparison["desired_artifact"] = "bounded_product_comparison"
+        comparison["target_object_kinds"] = [
+            "FunctionalUnit",
+            "ProductSystem",
+            "SystemBoundary",
+        ]
+        comparison["required_knowledge_roles"] = [
+            "functional_unit",
+            "system_boundary",
+        ]
+        comparison["comparison_required"] = True
+
+        explain_plan = self.context.plan(
+            project_view=project_view(),
+            expected_state_change=explanation,
+            available_capabilities=[],
+            context_budget=3200,
+            work_budget={"max_workers": 1, "max_model_calls": 1, "max_tool_calls": 0},
+            generation=9,
+        )
+        compare_plan = self.context.plan(
+            project_view=project_view(),
+            expected_state_change=comparison,
+            available_capabilities=[],
+            context_budget=3200,
+            work_budget={"max_workers": 1, "max_model_calls": 1, "max_tool_calls": 0},
+            generation=9,
+        )
+
+        self.assertNotEqual(
+            explain_plan["domain_knowledge_query"]["query_sha256"],
+            compare_plan["domain_knowledge_query"]["query_sha256"],
+        )
+        self.assertEqual(
+            explain_plan["domain_knowledge_slice"]["selected_knowledge_ids"],
+            explain_plan["selected_governed_knowledge_ids"],
+        )
+        self.assertEqual(
+            compare_plan["domain_knowledge_slice"]["selected_knowledge_ids"],
+            compare_plan["selected_governed_knowledge_ids"],
+        )
+        self.assertEqual(
+            compare_plan["domain_knowledge_slice"]["uncovered_requirements"],
+            {
+                "roles": [],
+                "target_object_kinds": [],
+                "relation_kinds": [],
+            },
+        )
+        self.assertEqual(
+            compare_plan["domain_knowledge_slice"]["authority_boundary"][
+                "project_truth"
+            ],
+            "project_record_only",
+        )
 
     def test_plan_selects_only_governed_knowledge_required_by_state_change(self):
         expected = deepcopy(EXPECTED_CHANGE)
@@ -229,6 +298,14 @@ class SemanticContextTests(unittest.TestCase):
         self.assertEqual(
             [(row["knowledge_id"], row["statement"]) for row in chinese],
             [
+                (
+                    "lca-rel:exchange-provided-by-provider",
+                    "Provider 链接标识由哪个过程或数据集供应该交换；未链接的交换会使供应链模型的一部分仍未解析。",
+                ),
+                (
+                    "lca-rel:exchange-references-flow",
+                    "交换是引用某个流的定量输入或输出记录；流的身份与交换的数量承担不同作用。",
+                ),
                 (
                     "lca-rel:process-has-exchange",
                     "LCA 过程通过交换与其定量输入和输出相连接。",

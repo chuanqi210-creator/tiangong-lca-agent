@@ -405,6 +405,9 @@ class AnswerTiming:
             "external_read": 0,
             "useless_retry": 0,
         }
+        recovered_retry_activity_ids = self._recovered_model_retry_activity_ids(
+            events
+        )
         for event in events:
             if event.get("event_type") != "research.run.answer.activity_recorded":
                 continue
@@ -423,7 +426,11 @@ class AnswerTiming:
             durations[kind] += int(duration)
             if kind in {"model", "tool", "external_read"}:
                 counts[kind] += 1
-            if kind == "retry" and payload.get("useful") is False:
+            if (
+                kind == "retry"
+                and payload.get("useful") is False
+                and payload.get("activity_id") not in recovered_retry_activity_ids
+            ):
                 counts["useless_retry"] += 1
         measured = sum(durations.values())
         if measured > end_elapsed:
@@ -483,6 +490,55 @@ class AnswerTiming:
         }
         receipt["receipt_sha256"] = canonical_sha256(receipt)
         return receipt
+
+    @staticmethod
+    def _recovered_model_retry_activity_ids(events: list[dict]) -> set[str]:
+        """Identify failed model attempts that a later attempt actually recovered."""
+
+        completed_after: dict[str, list[int]] = {}
+        for event in events:
+            if event.get("event_type") != "research.run.model.completed":
+                continue
+            payload = event.get("payload")
+            sequence = event.get("sequence")
+            request_id = payload.get("request_id") if isinstance(payload, Mapping) else None
+            if (
+                not isinstance(request_id, str)
+                or isinstance(sequence, bool)
+                or not isinstance(sequence, int)
+            ):
+                continue
+            completed_after.setdefault(request_id, []).append(sequence)
+
+        recovered: set[str] = set()
+        for event in events:
+            if event.get("event_type") != "research.run.model.failed":
+                continue
+            payload = event.get("payload")
+            sequence = event.get("sequence")
+            if not isinstance(payload, Mapping):
+                continue
+            request_id = payload.get("request_id")
+            route_id = payload.get("route_id")
+            attempt = payload.get("attempt")
+            retry_decision = payload.get("retry_decision")
+            if (
+                not isinstance(request_id, str)
+                or not isinstance(route_id, str)
+                or isinstance(attempt, bool)
+                or not isinstance(attempt, int)
+                or isinstance(sequence, bool)
+                or not isinstance(sequence, int)
+                or retry_decision
+                not in {"retry_same_route", "failover_non_retryable"}
+            ):
+                continue
+            if any(
+                completed_sequence > sequence
+                for completed_sequence in completed_after.get(request_id, [])
+            ):
+                recovered.add(f"{request_id}:{route_id}:{attempt}")
+        return recovered
 
     def guard_runtime_step(self, kind: str) -> dict:
         if kind not in {"model", "tool", "external_read"}:

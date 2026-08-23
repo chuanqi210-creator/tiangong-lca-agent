@@ -822,7 +822,15 @@ class ModelGateway:
             ):
                 continue
             adapter = self.adapters[adapter_id]
-            for attempt in range(1, max_attempts + 1):
+            attempt_start = (
+                trace.next_model_attempt(  # type: ignore[attr-defined]
+                    request_sha256, route_id
+                )
+                if trace is not None
+                else 1
+            )
+            for local_attempt in range(1, max_attempts + 1):
+                attempt = attempt_start + local_attempt - 1
                 self._circuit_runtime_observed.add(adapter_id)
                 attempt_request = self._request_for_attempt(normalized)
                 activity_id = (
@@ -844,10 +852,10 @@ class ModelGateway:
                     base_retry = (
                         error.retryable
                         and error.code in retryable_codes
-                        and attempt < max_attempts
+                        and local_attempt < max_attempts
                     )
                     required_wait = max(
-                        base_delay * (2 ** (attempt - 1)),
+                        base_delay * (2 ** (local_attempt - 1)),
                         (
                             error.retry_after_seconds
                             if error.retry_after_seconds is not None
@@ -1120,6 +1128,13 @@ class ModelGateway:
             stream_method = getattr(adapter, "stream", None)
             provider_profile_ref = self._provider_profile_ref(adapter_id)
             self._circuit_runtime_observed.add(adapter_id)
+            attempt_start = (
+                trace.next_model_attempt(  # type: ignore[attr-defined]
+                    request_sha256, route_id
+                )
+                if trace is not None
+                else 1
+            )
             if not callable(stream_method):
                 attempt_request = self._request_for_attempt(normalized)
                 activity_id = (
@@ -1132,7 +1147,7 @@ class ModelGateway:
                         adapter_id,
                         adapter,
                         trace=trace,
-                        attempt=1,
+                        attempt=attempt_start,
                         route_id=route_id,
                     )
                     remaining = self._remaining_seconds()
@@ -1153,7 +1168,8 @@ class ModelGateway:
                 )
                 yield {"type": "candidate_final", "candidate": candidate}
                 return
-            for attempt in range(1, max_attempts + 1):
+            for local_attempt in range(1, max_attempts + 1):
+                attempt = attempt_start + local_attempt - 1
                 emitted = False
                 final = None
                 attempt_request = self._request_for_attempt(normalized)
@@ -1223,10 +1239,10 @@ class ModelGateway:
                     base_retry = (
                         error.retryable
                         and error.code in retryable_codes
-                        and attempt < max_attempts
+                        and local_attempt < max_attempts
                     )
                     required_wait = max(
-                        base_delay * (2 ** (attempt - 1)),
+                        base_delay * (2 ** (local_attempt - 1)),
                         (
                             error.retry_after_seconds
                             if error.retry_after_seconds is not None
